@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Intall plugins.
+mkdir -vp ~/.vim/bundle
+pushd ~/.vim/bundle > /dev/null
+git clone https://github.com/altercation/vim-colors-solarized.git
+git clone https://github.com/shougo/neocomplete.vim.git
+git clone https://github.com/tpope/vim-rsi.git
+git clone https://github.com/tpope/vim-surround.git
+git clone https://github.com/tpope/vim-repeat.git
+git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/ctrlpvim/ctrlp.vim.git
+git clone https://github.com/mileszs/ack.vim.git
+git clone https://github.com/tpope/vim-fugitive.git
+git clone https://github.com/airblade/vim-gitgutter.git
+popd > /dev/null
+
+# Generate plugin helptags.
+vim -u NONE -c "set nocompatible" -c "execute pathogen#infect()" \
+    -c "Helptags" -c "q"

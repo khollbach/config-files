@@ -1,0 +1,46 @@
+# Set TERM environment variable to screen-256color when inside tmux.
+set-option -g default-terminal screen-256color
+
+# Send escape key almost right away(20 ms) when pressed.
+# Too short can cause issues.
+set-option -g escape-time 20
+
+# Use emacs-style keybindings in command-line mode.
+set-option -g status-keys emacs
+
+# Use vi-style keybindings in copy mode.
+set-option -g mode-keys vi
+
+
+
+# Change prefix key.
+unbind-key C-b
+set-option -g prefix M-a
+bind-key M-a send-prefix
+
+# Send prefix in one keypress. Good for nested sessions / ssh.
+bind-key -n M-s send-prefix
+
+# Open tmux command-line in fewer keypresses.
+bind-key -n M-\; command-prompt
+
+# Switch panes.
+bind-key -n M-k select-pane -U
+bind-key -n M-j select-pane -D
+bind-key -n M-h select-pane -L
+bind-key -n M-l select-pane -R
+
+# Resize panes.
+bind-key -n M-K resize-pane -U 5
+bind-key -n M-J resize-pane -D 5
+bind-key -n M-H resize-pane -L 5
+bind-key -n M-L resize-pane -R 5
+
+# Split window.
+bind-key j split-window
+bind-key l split-window -h
+bind-key k split-window \; swap-pane -U
+bind-key h split-window -h \; swap-pane -U
+
+# Re-bind last-window.
+bind-key M-l last-window

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+pushd ~/config-files > /dev/null
+
+# Copy config files to home dir.
+files=".profile .bashrc .bash_aliases .bash_functions
+       .tmux.conf .vimrc .inputrc"
+for file in $files; do
+    cp -v "$file" ~
+done
+
+# Use a different tmux config on CDF, since their version of tmux is old.
+if [[ "$USER" == hollbac1 ]]; then
+    cp -v .tmux.conf.cdf-version ~/.tmux.conf
+fi
+
+# Reload bashrc if you sourced this script from your shell.
+source ~/.bashrc
+
+# Reload tmux conf. Ignore failure if tmux isn't running.
+tmux source-file ~/.tmux.conf 2> /dev/null || :
+
+# Install pathogen.
+mkdir -vp ~/.vim/autoload
+cp -v pathogen.vim ~/.vim/autoload
+
+# Ensure swap and undo directories exist.
+mkdir -vp ~/.vim/swap
+mkdir -vp ~/.vim/undo
+
+# Hack to disable Vim's autoindent for latex files.
+mkdir -vp ~/.vim/indent
+echo "let b:did_indent = 1" > ~/.vim/indent/tex.vim
+
+popd > /dev/null

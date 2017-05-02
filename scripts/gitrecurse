@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Run a given shell command in the current dir if it's part of git repo,
+# and in each subdir that is the root of a git repo.
+main() {
+    local shell_command=("$@")
+
+    # Run the command if we're already inside a git repo.
+    if git status &> /dev/null; then
+        "${shell_command[@]}"
+    fi
+
+    # Try subdirs recursively.
+    recurse "${shell_command[@]}"
+}
+
+# For all subdirs of the current dir, if they are the root of a git repo,
+# run the given shell command.
+# Do the same recursively on all sub-subdirs, etc.
+recurse() {
+    local shell_command=("$@")
+
+    # Ignore hidden directories in $HOME.
+    if [[ `pwd` == ~ ]]; then
+        local subdirs=*/
+    else
+        local subdirs="*/ .*/"
+    fi
+
+    for dir in $subdirs; do
+        # Skip certain dirs.
+        local skip=false
+        local patterns='^./?$ ^../?$ ^.git/?$'
+        for pat in $patterns; do
+            if [[ "$dir" =~ $pat ]]; then skip=true; fi
+        done
+        if [[ "$skip" == true ]]; then continue; fi
+
+        pushd "$dir" > /dev/null || continue
+
+        # If this is the root of a git repo, run the command.
+        if [[ -d .git && ! -L .git ]]; then
+            echo -e "\e[00;34m`pwd`\e[m"
+            "${shell_command[@]}"
+        fi
+
+        # Recurse.
+        recurse "${shell_command[@]}"
+
+        popd > /dev/null || exit 1
+    done
+}
+
+main "$@"

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Aliases.
+alias ls="ls -vh --color=auto"
+alias la="ls -A"
+alias ll="ls -l"
+alias lla="ls -lA"
+alias grep="grep --color=auto"
+alias pag="ps aux | grep"
+alias hi="history"
+alias hig="history | grep"
+alias ltmk="latexmk -pdf -pvc"
+
+# Git shorthands.
+alias gb="git branch"
+alias gr="git remote"
+alias gco="git checkout"
+alias ga="git add"
+alias gaa="git add --all :/"
+alias gl="git log"
+alias glo="git log --oneline"
+
+# Recursive git shorthands.
+alias gs="gitrecurse git status"
+alias gss="gitrecurse git status -s"
+alias gsi="gitrecurse git status -s --ignored"
+alias gsb="gitrecurse git status -sb"
+alias gp="gitrecurse git pull"
+alias gd="gitrecurse git diff"
+alias glh="gitrecurse git --no-pager log --oneline -n 10"

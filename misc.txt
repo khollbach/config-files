@@ -1,0 +1,21 @@
+# Window manager hotkeys (using 'super' modifier key, ie Windows key):
+
+i Open terminal
+o Open browser
+
+j Minimize
+k Maximize
+h Quicktile left
+l Quicktile right
+
+y Quicktile top-left
+u Quicktile top-right
+n Quicktile bottom-left
+m Quicktile bottom-right
+
+# Terminal emulator settings:
+
+Solarized color scheme.
+DejaVu Sans Mono Book, 12-point font.
+Default window size: 86x26.
+Command to run: ~/config-files/scripts/ta
