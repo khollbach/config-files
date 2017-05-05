@@ -49,6 +49,9 @@ inoremap <expr> <tab> pumvisible() \|\| !<sid>check_space() ?
 inoremap <expr> <S-tab> pumvisible() \|\| !<sid>check_space() ?
     \ "\<C-p>" : "\<S-tab>"
 
+" Disable preview window.
+set completeopt-=preview
+
 
 
 " Additional RSI binds.
@@ -135,6 +138,9 @@ set undodir=~/.vim/undo//
 " Line numbers.
 set number
 
+" Show status bar (filename, etc) even when only one window is open.
+set laststatus=2
+
 " Show line and column number of the cursor in the status bar.
 set ruler
 
@@ -149,6 +155,9 @@ set scrolloff=3
 
 " Highlight the first match as you are typing your search.
 set incsearch
+
+" Don't highlight search matches by default.
+set nohlsearch
 
 
 
@@ -207,6 +216,9 @@ inoremap jk <esc>
 cnoremap jk <C-c>
 
 
+
+" <CR> = gg
+noremap <CR> gg
 
 " Scroll faster.
 noremap <C-y> 3<C-y>

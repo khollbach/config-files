@@ -1,21 +1,21 @@
 #!/bin/bash
 
-l() {
+function l {
     cowthink -f turkey Gobble
 }
 
 # cd and ls
-cs() {
+function cs {
     cd "$@" && ls
 }
 
 # Run evince in background and ignore stdout/stderr.
-ev() {
+function ev {
     evince "$@" &> /dev/null &
 }
 
 # Run 'git commit', optionally accept a message for the '-m' option.
-gc() {
+function gc {
     # Note that "$@" is special, and expands differently than "$foo".
     # That's why we declare "args" here.
     args=$@
@@ -34,22 +34,22 @@ gc() {
 }
 
 # gaa and gc.
-gca() {
+function gca {
     gaa && gc "$@"
 }
 
 # gc and git push.
-gcp() {
+function gcp {
     gc "$@" && git push
 }
 
 # gca and git push.
-gcap() {
+function gcap {
     gca "$@" && git push
 }
 
 # Ignore hidden directories when ack'ing from $HOME.
-ack() {
+function ack {
     if [[ `pwd` != ~ ]]; then
         command ack "$@"
         return
