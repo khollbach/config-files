@@ -105,6 +105,17 @@ noremap <leader>h :GitGutterToggle<cr>
 
 
 
+" NERD Commenter
+" No spaces.
+let g:NERDSpaceDelims = 0
+
+" <leader>f = comment
+noremap <leader>f :call NERDComment(0, "comment")<CR>
+
+" <leader>k = uncomment
+noremap <leader>k :call NERDComment(0, "uncomment")<CR>
+
+
 " -----------------------------------------------------------------------------
 " Settings
 " -----------------------------------------------------------------------------
