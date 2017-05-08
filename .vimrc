@@ -323,3 +323,7 @@ noremap <leader>N Nzz
 " Search and replace.
 nnoremap <leader>s :%s///gc<left><left><left><left>
 vnoremap <leader>s :s///gc<left><left><left><left>
+
+" Paste, fixing indentation automatically.
+noremap <leader>] ]p
+noremap <leader>} ]P
