@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Aliases.
+alias upconf=". $HOME/config-files/update_configs"
 alias ls="ls -vh --color=auto"
 alias la="ls -A"
 alias ll="ls -l"

@@ -116,6 +116,7 @@ noremap <leader>f :call NERDComment(0, "comment")<CR>
 noremap <leader>k :call NERDComment(0, "uncomment")<CR>
 
 
+
 " -----------------------------------------------------------------------------
 " Settings
 " -----------------------------------------------------------------------------
@@ -296,6 +297,9 @@ noremap <leader>u :!~/config-files/update_configs<cr>
 
 
 
+" List buffers.
+noremap <leader><TAB> :ls<CR>
+
 " Next/previous buffer.
 noremap <leader>; :bn<cr>
 noremap <leader>, :bp<cr>
@@ -327,3 +331,7 @@ vnoremap <leader>s :s///gc<left><left><left><left>
 " Paste, fixing indentation automatically.
 noremap <leader>] ]p
 noremap <leader>} ]P
+
+" Change file permissions to be executable or not.
+noremap <leader>x :!chmod +x %<CR>
+noremap <leader>X :!chmod -x %<CR>
