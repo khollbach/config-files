@@ -34,6 +34,9 @@ export GIT_EDITOR=/usr/bin/vim
 # background.
 eval `dircolors | sed "s/01/00/g"`
 
+# Lynx colors.
+export LYNX_LSS="$HOME/config-files/lynx.lss"
+
 # Load aliases, functions.
 source ~/.bash_aliases
 source ~/.bash_functions
