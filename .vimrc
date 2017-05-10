@@ -168,8 +168,8 @@ set scrolloff=3
 " Highlight the first match as you are typing your search.
 set incsearch
 
-" Don't highlight search matches by default.
-set nohlsearch
+" Highlight search matches by default.
+set hlsearch
 
 
 
