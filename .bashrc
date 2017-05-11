@@ -42,6 +42,14 @@ eval `dircolors | sed "s/01/00/g"`
 # Lynx colors.
 export LYNX_LSS="$HOME/config-files/lynx.lss"
 
+# Custom less options for man.
+export MANPAGER="less"
+# Show search matches on the fourth line from the top instead of at the top.
+MANPAGER="$MANPAGER -j4"
+# Case insensitive search (this is actually the default in man, but gets
+# disabled as soon as you specify a custom pager).
+MANPAGER="$MANPAGER -i"
+
 # Load aliases, functions.
 source ~/.bash_aliases
 source ~/.bash_functions
