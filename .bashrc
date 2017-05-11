@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Work stuff.
+if [[ -f ~/work/bashrc-snippet ]]; then
+    source ~/work/bashrc-snippet
+fi
+
 # CDF stuff.
 if [[ "$USER" == hollbac1 ]]; then
     umask 077
