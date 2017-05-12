@@ -2,7 +2,7 @@
 " Init
 " -----------------------------------------------------------------------------
 
-" Init Pathogen (plugin manager).
+" Init Pathogen.
 execute pathogen#infect()
 
 " Set leader to space.
@@ -19,7 +19,7 @@ noremap <space> <nop>
 " leave the following line commented out. Otherwise, uncomment this line.
 "let g:solarized_termcolors=256
 
-" Force vim to assume the terminal supports 256 colors.
+" Force Vim to assume the terminal supports 256 colors.
 set t_Co=256
 
 " Dark background color.
@@ -37,17 +37,17 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_ignore_case = 1
 
 " Fix the way enter interacts with neocomplete.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 
-" Use <tab> for completion.
-function! s:check_space() abort
+" Use tab for completion.
+function! s:check_space_behind() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction
-inoremap <expr> <tab> pumvisible() \|\| !<sid>check_space() ?
-    \ "\<C-n>" : "\<tab>"
-inoremap <expr> <S-tab> pumvisible() \|\| !<sid>check_space() ?
-    \ "\<C-p>" : "\<S-tab>"
+inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
+    \ "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
+    \ "\<C-p>" : "\<S-Tab>"
 
 " Disable preview window.
 set completeopt-=preview
@@ -55,27 +55,31 @@ set completeopt-=preview
 
 
 " Additional RSI binds.
-inoremap <C-u> <C-o>d^
-function! s:check_end() abort
+" These two have corner cases near the end of lines.
+function! s:at_eol() abort
     return col('.') ==# len(getline('.'))
 endfunction
-inoremap <expr> <C-k> <sid>check_end() ? "<C-o>d$" : ""
+function! s:beyond_eol() abort
+    return col('.') > len(getline('.'))
+endfunction
+inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
+inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
 
-" These shadow Vim's completion binds, but I use tab/S-tab for that anyways.
+" These shadow Vim's completion binds, but I use Tab/S-Tab for that anyways.
 inoremap <C-n> <down>
 inoremap <C-p> <up>
 
 
 
-" <leader>i = NERDTree.
-noremap <leader>i :NERDTreeToggle<cr>
+" Toggle NERDTree.
+noremap <leader>i :NERDTreeToggle<CR>
 
 
 
-" <leader>o = ctrlp.
+" Open ctrlp.
 let g:ctrlp_map = "<leader>o"
 
-" Use 'mixed mode'; search for files, buffers, and 'most-recently-used' files.
+" Use mixed mode: search for files, buffers, and 'most-recently-used' files.
 let g:ctrlp_cmd = "CtrlPMixed"
 
 " Don't include MRU files in the search results at all.
@@ -86,34 +90,34 @@ let g:ctrlp_working_path_mode = 0
 
 
 
-" <leader>a = ack.
+" ack bind.
 noremap <expr> <leader>a ":Ack "
 
 
 
 " Fugitive binds.
 noremap <expr> <leader>gg ":Git! "
-noremap <leader>gs :Gstatus<cr>
-noremap <leader>gc :Gcommit<cr>
-noremap <leader>gd :Gdiff<cr>
-noremap <leader>gb :Gblame<cr>
+noremap <leader>gs :Gstatus<CR>
+noremap <leader>gc :Gcommit<CR>
+noremap <leader>gd :Gdiff<CR>
+noremap <leader>gb :Gblame<CR>
 
 
 
 " Toggle GitGutter.
-noremap <leader>h :GitGutterToggle<cr>
+noremap <leader>H :GitGutterToggle<CR>
 
 
 
-" NERD Commenter
-" No spaces.
+" NERD Commenter.
+" No spaces after the comment character.
 let g:NERDSpaceDelims = 0
 
-" <leader>f = comment
+" Comment.
 noremap <leader>f :call NERDComment(0, "comment")<CR>
 
-" <leader>k = uncomment
-noremap <leader>k :call NERDComment(0, "uncomment")<CR>
+" Uncomment.
+noremap <leader>l :call NERDComment(0, "uncomment")<CR>
 
 
 
@@ -224,7 +228,7 @@ autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 " -----------------------------------------------------------------------------
 
 " jk = Exit insert mode or command-line mode.
-inoremap jk <esc>
+inoremap jk <Esc>
 cnoremap jk <C-c>
 
 
@@ -245,12 +249,12 @@ nnoremap gp `[v`]
 
 
 " <M-q> = Quit all windows.
-noremap <esc>q :qa<cr>
-inoremap <esc>q <C-o>:qa<cr>
+noremap <Esc>q :qa<CR>
+inoremap <Esc>q <C-o>:qa<CR>
 
 " <M-w> = Save.
-noremap <esc>w :w<cr>
-inoremap <esc>w <C-o>:w<cr>
+noremap <Esc>w :w<CR>
+inoremap <Esc>w <C-o>:w<CR>
 
 
 
@@ -267,42 +271,32 @@ noremap <C-w>h <C-w>v
 noremap <C-w>l <C-w>v<C-w>l
 
 " Resize window.
-noremap <esc><C-j> 5<C-w>+
-noremap <esc><C-k> 5<C-w>-
-noremap <esc><C-h> 5<C-w><
-noremap <esc><C-l> 5<C-w>>
+noremap <Esc><C-j> 5<C-w>+
+noremap <Esc><C-k> 5<C-w>-
+noremap <Esc><C-h> 5<C-w><
+noremap <Esc><C-l> 5<C-w>>
 
 
 
-" <leader>j = Toggle search highlighting.
-noremap <leader>j :set hlsearch! hlsearch?<cr>
+" Quit current window.
+noremap <leader>q :q<CR>
 
-" <leader>q = Quit current window.
-noremap <leader>q :q<cr>
+" Strip trailing whitespace.
+noremap <leader>w :%s/\s\+$//<CR>
 
-" <leader>w = Strip trailing whitespace.
-noremap <leader>w :%s/\s\+$//<cr>
+" Edit vimrc.
+noremap <leader>e :e ~/config-files/.vimrc<CR>
 
-" <leader>e = Edit vimrc.
-noremap <leader>e :e ~/config-files/.vimrc<cr>
+" Reload vimrc.
+noremap <leader>r :source $MYVIMRC<CR>
 
-" <leader>r = Reload vimrc.
-noremap <leader>r :source $MYVIMRC<cr>
+" Replace tabs with spaces.
+noremap <leader>t :%retab<CR>
 
-" <leader>t = Replace tabs with spaces.
-noremap <leader>t :%retab<cr>
-
-" <leader>u = Run update_configs script.
-noremap <leader>u :!~/config-files/update_configs<cr>
+" Run update_configs script.
+noremap <leader>u :!~/config-files/update_configs<CR>
 
 
-
-" List buffers.
-noremap <leader><TAB> :ls<CR>
-
-" Next/previous buffer.
-noremap <leader>; :bn<cr>
-noremap <leader>, :bp<cr>
 
 " Copy/paste to/from system clipboard.
 noremap <leader>y "+y
@@ -313,8 +307,25 @@ noremap <leader>p "+p
 noremap <leader>P "+P
 
 " Paste from the 0-register (ie yanked text only).
-noremap <leader>l "0p
-noremap <leader>L "0P
+noremap <leader>h "0p
+noremap <leader>H "0P
+
+
+
+" Disable search highlighting until the next search.
+noremap <leader>j :nohlsearch<CR>
+
+" Toggle search highlighting.
+noremap <leader>k :set hlsearch! hlsearch?<CR>
+
+
+
+" List buffers.
+noremap <leader><TAB> :ls<CR>
+
+" Next/previous buffer.
+noremap <leader>; :bn<CR>
+noremap <leader>, :bp<CR>
 
 " Case insensitive search.
 noremap <leader>/ /\c
