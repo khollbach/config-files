@@ -1,0 +1,5 @@
+# Ignore .svn directories
+--ignore-dir=.svn
+
+# Ignore .git directories
+--ignore-dir=.git
