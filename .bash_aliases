@@ -3,24 +3,23 @@
 # Aliases.
 alias upconf=". $HOME/config-files/update_configs"
 alias ls="ls -vh --color=auto"
-alias la="ls -A"
 alias ll="ls -l"
+alias la="ls -A"
 alias lla="ls -lA"
 alias lt="ls -ltr"
 alias lta="ls -ltrA"
 alias grep="grep --color=auto"
 alias pag="ps aux | grep"
-alias hi="history"
 alias hig="history | grep"
 alias ltmk="latexmk -pdf -pvc"
 
 # Git shorthands.
 alias gd="git diff --color-words"
+alias ga="git add"
+alias gaa="git add --all :/"
 alias gb="git branch"
 alias gr="git remote"
 alias gco="git checkout"
-alias ga="git add"
-alias gaa="git add --all :/"
 alias gl="git log"
 alias glo="git log --oneline"
 

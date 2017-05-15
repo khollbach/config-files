@@ -13,9 +13,6 @@ u Quicktile top-right
 n Quicktile bottom-left
 m Quicktile bottom-right
 
-; Quicktile top
-, Quicktile bottom
-
 # Terminal emulator settings:
 
 Solarized color scheme.
