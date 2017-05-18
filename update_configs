@@ -5,14 +5,9 @@ pushd ~/config-files > /dev/null
 # Copy config files to home dir.
 files=".profile .bashrc .bash_aliases .bash_functions
        .tmux.conf .vimrc .inputrc .ackrc"
-for file in $files; do
-    cp -v "$file" ~
+for f in $files; do
+    cp -v "$f" ~
 done
-
-# Use a different tmux config on CDF, since their version of tmux is old.
-if [[ "$USER" == hollbac1 ]]; then
-    cp -v .tmux.conf.cdf-version ~/.tmux.conf
-fi
 
 # Reload bashrc if you sourced this script from your shell.
 source ~/.bashrc
@@ -24,11 +19,15 @@ tmux source-file ~/.tmux.conf 2> /dev/null || :
 mkdir -vp ~/.vim/autoload
 cp -v pathogen.vim ~/.vim/autoload
 
-# Ensure swap and undo directories exist.
+# Ensure swap dir exists.
 mkdir -vp ~/.vim/swap
-# Getting weird warnings because of this on my work machine.
-# Commenting it out for now.
-#mkdir -vp ~/.vim/undo
+
+# Ensure undo dir exists.
+# My work machine's Vim gives error messages when this is enabled,
+# so don't do it there.
+if ! [ -f ~/work/bashrc-snippet ]; then
+    mkdir -vp ~/.vim/undo
+fi
 
 # Hack to disable Vim's autoindent for latex files.
 mkdir -vp ~/.vim/indent

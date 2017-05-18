@@ -15,17 +15,30 @@ noremap <space> <nop>
 " Plugin Settings
 " -----------------------------------------------------------------------------
 
-" If your terminal emulator has a 'Solarized' color scheme, use it and
-" leave the following line commented out. Otherwise, uncomment this line.
-"let g:solarized_termcolors=256
-
-" Force Vim to assume the terminal supports 256 colors.
-set t_Co=256
-
 " Dark background color.
 set background=dark
 
-" Solarized color scheme.
+"" Solarized color scheme.
+"if has("termguicolors") && &term =~# "256color" && $COLORTERM =~# "truecolor"
+    "" True colors!
+    "set termguicolors
+
+    "if &term =~# "^screen"
+        "" Send color codes that tmux can read.
+        "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    "endif
+
+    "" Fork of Solarized with true color support
+    "colorscheme solarized8_dark
+"else
+    "" Regular Solarized
+    "colorscheme solarized
+"endif
+
+" Using regular Solarized for now, the forked version's colors
+" seem to be slightly off...
+" TODO: look for another fork with true color support
 colorscheme solarized
 
 

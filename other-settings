@@ -15,7 +15,6 @@ m Quicktile bottom-right
 
 # Terminal emulator settings:
 
-Solarized color scheme.
-DejaVu Sans Mono Book, 12-point font.
-Default window size: 86x26.
-Command to run: ~/config-files/scripts/ta
+Solarized color scheme
+DejaVu Sans Mono Book, 12-point font
+Default command: tmux

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Nope.
 l() {
     cowthink -f turkey Gobble
 }
@@ -14,41 +15,72 @@ ev() {
     evince "$@" &> /dev/null &
 }
 
+
+
+## Git shorthand functions
+
 # Run 'git commit', optionally accept a message for the '-m' option.
 gc() {
-    # Note that "$@" is special, and expands differently than "$foo".
-    # That's why we declare "args" here.
-    local args
-    args=$@
+    # Flatten arguments into a single string
+    local message
+    message=$@
 
     local msg_len
-    msg_len=${#args}
+    msg_len=${#message}
 
-    if [[ "$args" == "" ]]; then
+    if [[ "$msg_len" -eq 0 ]]; then
         git commit
     elif [[ "$msg_len" -gt 50 ]]; then
         echo Commit message too long.
         echo Expected 50 chars, got "$msg_len".
         return 1
     else
-        git commit -m "$args"
+        git commit -m "$message"
     fi
 }
 
-# gaa and gc.
+# gaa and gc
 gca() {
     gaa && gc "$@"
 }
 
-# gc and git push.
+# gc and git push
 gcp() {
     gc "$@" && git push
 }
 
-# gca and git push.
+# gca and git push
 gcap() {
     gca "$@" && git push
 }
+
+
+
+# Start tmux. If a session is already running that isn't attached to, then
+# attach to that session instead of starting a new one.
+ta() {
+    sessions=$(tmux ls 2> /dev/null)
+    retval=$?
+
+    # If tmux ls fails (ie no tmux server running), start a new session.
+    if [[ $retval != 0 ]]; then
+        tmux
+        return
+    fi
+
+    unattached_sessions=$(echo "$sessions" | grep -v attached)
+
+    # If there are no unattached sessions, start a new one.
+    # Otherwise, attach to an existing one.
+    if [[ "$unattached_sessions" == "" ]]; then
+        tmux
+    else
+        session=$(echo "$unattached_sessions" | head -n 1 | cut -d ":" -f 1)
+        tmux attach -t "$session"
+    fi
+}
+
+
 
 # Ignore hidden directories when ack'ing from $HOME.
 ack() {

@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Aliases.
-alias upconf=". $HOME/config-files/update_configs"
+# Update configs alias
+alias upconf="source $HOME/config-files/update_configs"
+
+# Misc aliases
 alias ls="ls -vh --color=auto"
 alias ll="ls -l"
 alias la="ls -A"
@@ -13,7 +15,7 @@ alias pag="ps aux | grep"
 alias hig="history | grep"
 alias ltmk="latexmk -pdf -pvc"
 
-# Git shorthands.
+# Git shorthands
 alias gd="git diff --color-words"
 alias ga="git add"
 alias gaa="git add --all :/"
@@ -23,7 +25,7 @@ alias gco="git checkout"
 alias gl="git log"
 alias glo="git log --oneline"
 
-# Recursive git shorthands.
+# Recursive git shorthands
 alias gdr="gitrecurse git diff --color-words"
 alias gs="gitrecurse git status"
 alias gss="gitrecurse git status -s"

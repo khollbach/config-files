@@ -40,7 +40,7 @@ recurse() {
 
         # If this is the root of a git repo, run the command.
         if [[ -d .git && ! -L .git ]]; then
-            echo -e "\e[00;34m`pwd`\e[m"
+            echo -e "\e[0;34m`pwd`\e[m"
             "${shell_command[@]}"
         fi
 
