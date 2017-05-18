@@ -10,22 +10,17 @@ if [ "$USER" == hollbac1 ]; then
     umask 077
     mesg n
     stty erase ^?
-    export PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+    export PATH=$PATH:/usr/games
     export MAIL=/var/spool/mail/$USER
     export MAILCHECK=300
 fi
 
-# Modify path if it hasn't been done already.
-# TODO: this is brittle; make it loop through the cut output (how to?) instead
-#       of the current check.
-if [ `echo "$PATH" | cut -d : -f 1` != "$HOME/bin" ]; then
-    # Include scripts dir in path
-    export PATH=$HOME/config-files/scripts:$PATH
+# Include scripts dir in path
+export PATH=$HOME/config-files/scripts:$PATH
 
-    # Include private bin dirs in path
-    export PATH=$HOME/.local/bin:$PATH
-    export PATH=$HOME/bin:$PATH
-fi
+# Include private bin dirs in path
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 # Set prompt
 export PS1='\[\e[1;31m\]\W\$\[\e[m\] '
