@@ -15,7 +15,7 @@ noremap <space> <nop>
 " Plugin Settings
 " -----------------------------------------------------------------------------
 
-" Force Vim to assume the terminal supports least 256 colors.
+" Force Vim to assume the terminal supports 256 colors.
 set t_Co=256
 
 " Dark background color.
