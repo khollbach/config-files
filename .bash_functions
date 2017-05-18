@@ -59,6 +59,8 @@ gcap() {
 # Start tmux. If a session is already running that isn't attached to, then
 # attach to that session instead of starting a new one.
 ta() {
+    local sessions
+    local retval
     sessions=$(tmux ls 2> /dev/null)
     retval=$?
 
@@ -68,6 +70,7 @@ ta() {
         return
     fi
 
+    local unattached_sessions
     unattached_sessions=$(echo "$sessions" | grep -v attached)
 
     # If there are no unattached sessions, start a new one.
@@ -75,6 +78,7 @@ ta() {
     if [[ "$unattached_sessions" == "" ]]; then
         tmux
     else
+        local session
         session=$(echo "$unattached_sessions" | head -n 1 | cut -d ":" -f 1)
         tmux attach -t "$session"
     fi
@@ -90,7 +94,8 @@ ack() {
     fi
 
     # Get all hidden dirs, strip trailing slash, throw out '.' and '..'.
-    local dirs=`ls -d .*/`
+    local dirs
+    dirs=`ls -d .*/`
     dirs=`echo "$dirs" | sed 's!/$!!g'`
     dirs=`echo "$dirs" | grep -Ev '^.$|^..$'`
 
@@ -102,7 +107,8 @@ ack() {
 
     # Collect all these dirs in a list of options to pass to ack.
     # Wrap them in single quotes to handle special chars.
-    local options=`echo "$dirs" | sed "s/^/--ignore-directory=is:'/g" | \
+    local options
+    options=`echo "$dirs" | sed "s/^/--ignore-directory=is:'/g" | \
         sed "s/$/'/g"`
 
     # Run ack with these options.
@@ -110,7 +116,8 @@ ack() {
     # the arguments passed to us from the command line.
     # To do all this, we must eval the options but *not* the arguments.
 
-    local args=("$@")
+    local args
+    args=("$@")
     _pass_options_to_ack() {
         # Here "$@" are the options and "${args[@]}" are the arguments.
         command ack "$@" "${args[@]}"

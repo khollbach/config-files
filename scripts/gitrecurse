@@ -3,7 +3,8 @@
 # Run a given shell command in the current dir if it's part of git repo,
 # and in each subdir that is the root of a git repo.
 main() {
-    local shell_command=("$@")
+    local shell_command
+    shell_command=("$@")
 
     # Run the command if we're already inside a git repo.
     if git status &> /dev/null; then
@@ -18,19 +19,23 @@ main() {
 # run the given shell command.
 # Do the same recursively on all sub-subdirs, etc.
 recurse() {
-    local shell_command=("$@")
+    local shell_command
+    shell_command=("$@")
 
     # Ignore hidden directories in $HOME.
+    local subdirs
     if [[ `pwd` == ~ ]]; then
-        local subdirs=*/
+        subdirs=*/
     else
-        local subdirs="*/ .*/"
+        subdirs="*/ .*/"
     fi
 
     for dir in $subdirs; do
         # Skip certain dirs.
-        local skip=false
-        local patterns='^./?$ ^../?$ ^.git/?$'
+        local skip
+        skip=false
+        local patterns
+        patterns='^./?$ ^../?$ ^.git/?$'
         for pat in $patterns; do
             if [[ "$dir" =~ $pat ]]; then skip=true; fi
         done
