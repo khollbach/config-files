@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Force 256 colors
+/usr/bin/tmux -2 "$@"
