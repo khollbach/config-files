@@ -32,6 +32,12 @@ MANPAGER="$MANPAGER -j4"
 # disabled as soon as you specify a custom pager).
 MANPAGER="$MANPAGER -i"
 
+# Set LS_COLORS to use dark colors in place of light ones,
+# but only if it wasn't set already.
+if [ -z "$LS_COLORS" ]; then
+    eval `dircolors | sed s,01,00,g`
+fi
+
 # Load aliases, functions.
 source ~/.bash_aliases
 source ~/.bash_functions
