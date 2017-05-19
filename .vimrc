@@ -100,11 +100,6 @@ noremap <leader>gb :Gblame<CR>
 
 
 
-" Toggle GitGutter.
-noremap <leader>H :GitGutterToggle<CR>
-
-
-
 " NERD Commenter.
 " No spaces after the comment character.
 let g:NERDSpaceDelims = 0
