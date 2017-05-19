@@ -6,7 +6,6 @@ mkdir -vp ~/.vim/bundle
 pushd ~/.vim/bundle > /dev/null
 
 git clone https://github.com/altercation/vim-colors-solarized.git
-git clone https://github.com/lifepillar/vim-solarized8.git
 git clone https://github.com/shougo/neocomplete.vim.git
 git clone https://github.com/tpope/vim-rsi.git
 git clone https://github.com/tpope/vim-surround.git
