@@ -15,10 +15,8 @@ noremap <space> <nop>
 " Plugin Settings
 " -----------------------------------------------------------------------------
 
-" Assume all xterm/screen terminals support 256 colors.
-if &term ==# "xterm" || &term ==# "screen"
-    set t_Co=256
-endif
+" Always assume 256 color support
+set t_Co=256
 
 " Dark background color.
 set background=dark
