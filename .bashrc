@@ -16,7 +16,7 @@ if [ "$USER" == hollbac1 ]; then
 fi
 
 # Set prompt
-export PS1='\[\e[1;31m\]\W\$\[\e[m\] '
+export PS1='\[\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
 
 # Default editors
 export EDITOR=/usr/bin/vim
