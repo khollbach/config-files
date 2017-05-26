@@ -227,6 +227,12 @@ cnoremap jk <C-c>
 " <CR> = gg
 noremap <CR> gg
 
+" <Tab> = ^
+noremap <Tab> ^
+
+" \ = $
+noremap \ $
+
 " Scroll faster.
 noremap <C-y> 3<C-y>
 noremap <C-e> 3<C-e>
