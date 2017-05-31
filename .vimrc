@@ -220,7 +220,13 @@ autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 
 " jk = Exit insert mode or command-line mode.
 inoremap jk <Esc>
+inoremap Jk <Esc>
+inoremap JK <Esc>
+inoremap jK <Esc>
 cnoremap jk <C-c>
+cnoremap Jk <C-c>
+cnoremap JK <C-c>
+cnoremap jK <C-c>
 
 
 
