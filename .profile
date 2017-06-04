@@ -1,3 +1,8 @@
+# Run setxkbmap only if X is running and we're not inside tmux.
+if [ -n "$DISPLAY" ] && [ -z "$TMUX" ]; then
+    setxkbmap -option ctrl:nocaps
+fi
+
 # Source .bashrc if running bash
 if [ -n "$BASH_VERSION" ]; then
     if [ -f "$HOME/.bashrc" ]; then
