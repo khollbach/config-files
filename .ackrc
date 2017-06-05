@@ -3,3 +3,6 @@
 
 # Ignore .git directories
 --ignore-dir=.git
+
+# Ignore RELEASE_NOTES files
+--ignore-file=is:RELEASE_NOTES
