@@ -197,8 +197,8 @@ set pastetoggle=<F9>
 
 
 
-" Vertical lines at 80 and 100 chars.
-set colorcolumn=80,100
+" Vertical lines at 80, 100, and 120 chars.
+set colorcolumn=80,100,120
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
