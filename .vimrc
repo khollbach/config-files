@@ -145,6 +145,9 @@ set undodir=~/.vim/undo//
 " Line numbers.
 set number
 
+" When 'wrap' is enabled, break lines at word boundaries.
+set linebreak
+
 " Don't wrap long lines.
 set nowrap
 
@@ -194,8 +197,8 @@ set pastetoggle=<F9>
 
 
 
-" Vertical line at 80 chars.
-set colorcolumn=80
+" Vertical lines at 80 and 100 chars.
+set colorcolumn=80,100
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
@@ -254,6 +257,14 @@ nnoremap Q gqip
 
 " Select recently pasted text.
 nnoremap gp `[v`]
+
+
+
+" Toggle line numbers.
+noremap <F10> :set number! number?<CR>
+
+" Toggle word wrapping.
+noremap <F5> :set wrap! wrap?<CR>
 
 
 
