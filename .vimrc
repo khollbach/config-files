@@ -145,6 +145,12 @@ set undodir=~/.vim/undo//
 " Line numbers.
 set number
 
+" Don't wrap long lines.
+set nowrap
+
+" Don't go to the first non-blank on a line automatically when moving there.
+set nostartofline
+
 " Show status bar (filename, etc) even when only one window is open.
 set laststatus=2
 
