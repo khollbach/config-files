@@ -15,6 +15,12 @@ ev() {
     evince "$@" &> /dev/null &
 }
 
+# Time a long command and ring a bell when done.
+# (Bells show up visually in tmux.)
+bell() {
+    time "$@"; echo -en '\a'
+}
+
 
 
 ## Git shorthand functions
