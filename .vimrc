@@ -167,7 +167,7 @@ set showcmd
 set wildmenu
 
 " Start scrolling as soon as the cursor gets close to the edge of the screen.
-set scrolloff=3
+set scrolloff=5
 
 " Highlight the first match as you are typing your search.
 set incsearch
@@ -249,8 +249,8 @@ noremap <Tab> ^
 noremap \ $
 
 " Scroll faster.
-noremap <C-y> 3<C-y>
-noremap <C-e> 3<C-e>
+noremap <C-y> 5<C-y>
+noremap <C-e> 5<C-e>
 
 " Format paragraph.
 nnoremap Q gqip
