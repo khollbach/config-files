@@ -113,7 +113,7 @@ noremap <leader>u :call NERDComment(0, "uncomment")<CR>
 
 
 " EasyMotion
-map <leader>; <plug>(easymotion-prefix)
+map <leader>e <plug>(easymotion-prefix)
 
 
 
@@ -301,6 +301,9 @@ noremap <leader>H "0P
 " Quit current window.
 noremap <leader>q :q<CR>
 
+" Strip trailing whitespace
+noremap <leader>w :%s/\s\+$//<CR>
+
 " Disable search highlighting until the next search.
 noremap <leader>j :nohlsearch<CR>
 
@@ -311,8 +314,8 @@ noremap <leader>k :set hlsearch! hlsearch?<CR>
 noremap <leader><TAB> :ls<CR>
 
 " Next/previous buffer.
-noremap <leader>] :bn<CR>
-noremap <leader>[ :bp<CR>
+noremap <leader>; :bn<CR>
+noremap <leader>, :bp<CR>
 
 " Case insensitive search.
 noremap <leader>/ /\c
