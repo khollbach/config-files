@@ -33,4 +33,8 @@ fi
 mkdir -vp ~/.vim/indent
 echo "let b:did_indent = 1" > ~/.vim/indent/tex.vim
 
+# Copy init.el to .emacs.d
+mkdir -vp ~/.emacs.d
+cp -v .emacs.d/init.el ~/.emacs.d
+
 popd > /dev/null
