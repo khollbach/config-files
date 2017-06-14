@@ -10,6 +10,11 @@ cs() {
     cd "$@" && ls
 }
 
+# cd and lt
+ct() {
+    cd "$@" && lt
+}
+
 # Run evince in background and ignore stdout/stderr.
 ev() {
     evince "$@" &> /dev/null &
