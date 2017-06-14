@@ -105,10 +105,15 @@ noremap <leader>gb :Gblame<CR>
 let g:NERDSpaceDelims = 0
 
 " Comment.
-noremap <leader>f :call NERDComment(0, "comment")<CR>
+noremap <leader>c :call NERDComment(0, "comment")<CR>
 
 " Uncomment.
-noremap <leader>l :call NERDComment(0, "uncomment")<CR>
+noremap <leader>u :call NERDComment(0, "uncomment")<CR>
+
+
+
+" EasyMotion
+map <leader>; <plug>(easymotion-prefix)
 
 
 
@@ -232,6 +237,7 @@ inoremap jk <Esc>
 inoremap Jk <Esc>
 inoremap JK <Esc>
 inoremap jK <Esc>
+
 cnoremap jk <C-c>
 cnoremap Jk <C-c>
 cnoremap JK <C-c>
@@ -252,20 +258,6 @@ noremap \ $
 noremap <C-y> 5<C-y>
 noremap <C-e> 5<C-e>
 
-" Format paragraph.
-nnoremap Q gqip
-
-" Select recently pasted text.
-nnoremap gp `[v`]
-
-
-
-" Toggle line numbers.
-noremap <F10> :set number! number?<CR>
-
-" Toggle word wrapping.
-noremap <F5> :set wrap! wrap?<CR>
-
 
 
 " <M-q> = Quit all windows.
@@ -284,37 +276,11 @@ noremap <C-k> <C-w>k
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 
-" Split window.
-noremap <C-w>j <C-w>s<C-w>j
-noremap <C-w>k <C-w>s
-noremap <C-w>h <C-w>v
-noremap <C-w>l <C-w>v<C-w>l
-
 " Resize window.
 noremap <Esc><C-j> 5<C-w>+
 noremap <Esc><C-k> 5<C-w>-
 noremap <Esc><C-h> 5<C-w><
 noremap <Esc><C-l> 5<C-w>>
-
-
-
-" Quit current window.
-noremap <leader>q :q<CR>
-
-" Strip trailing whitespace.
-noremap <leader>w :%s/\s\+$//<CR>
-
-" Edit vimrc.
-noremap <leader>e :e ~/config-files/.vimrc<CR>
-
-" Reload vimrc.
-noremap <leader>r :source $MYVIMRC<CR>
-
-" Replace tabs with spaces.
-noremap <leader>t :%retab<CR>
-
-" Run update_configs script.
-noremap <leader>u :!~/config-files/update_configs<CR>
 
 
 
@@ -332,37 +298,33 @@ noremap <leader>H "0P
 
 
 
+" Quit current window.
+noremap <leader>q :q<CR>
+
 " Disable search highlighting until the next search.
 noremap <leader>j :nohlsearch<CR>
 
 " Toggle search highlighting.
 noremap <leader>k :set hlsearch! hlsearch?<CR>
 
-
-
 " List buffers.
 noremap <leader><TAB> :ls<CR>
 
 " Next/previous buffer.
-noremap <leader>; :bn<CR>
-noremap <leader>, :bp<CR>
+noremap <leader>] :bn<CR>
+noremap <leader>[ :bp<CR>
 
 " Case insensitive search.
 noremap <leader>/ /\c
 noremap <leader>? ?\c
 
-" Next/previous match, and center the screen on the cursor.
-noremap <leader>n nzz
-noremap <leader>N Nzz
-
 " Search and replace.
 nnoremap <leader>s :%s///gc<left><left><left><left>
 vnoremap <leader>s :s///gc<left><left><left><left>
 
-" Paste, fixing indentation automatically.
-noremap <leader>] ]p
-noremap <leader>} ]P
-
 " Change file permissions to be executable or not.
 noremap <leader>x :!chmod +x %<CR>
 noremap <leader>X :!chmod -x %<CR>
+
+" Select recently pasted text.
+nnoremap <leader>v `[v`]
