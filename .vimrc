@@ -153,8 +153,8 @@ set number
 " When 'wrap' is enabled, break lines at word boundaries.
 set linebreak
 
-" Don't wrap long lines.
-set nowrap
+" Wrap long lines.
+set wrap
 
 " Don't go to the first non-blank on a line automatically when moving there.
 set nostartofline
