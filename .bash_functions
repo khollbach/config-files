@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Nope.
 l() {
     cowthink -f turkey Gobble
 }
