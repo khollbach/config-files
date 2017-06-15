@@ -1,7 +1,7 @@
 # Window manager hotkeys (using 'super' modifier key, ie Windows key):
 
-i Open terminal
-o Open browser
+i Launch a terminal running tmux
+o Launch a web browser
 
 j Minimize
 k Maximize
@@ -16,5 +16,4 @@ m Quicktile bottom-right
 # Terminal emulator settings:
 
 Solarized color scheme
-DejaVu Sans Mono Book, 11 or 12 point font
-Default command: tmux
+DejaVu Sans Mono Book, 11 point font
