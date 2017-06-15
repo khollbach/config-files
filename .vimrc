@@ -113,7 +113,8 @@ noremap <leader>u :call NERDComment(0, "uncomment")<CR>
 
 
 " EasyMotion
-map <leader>e <plug>(easymotion-prefix)
+map <leader><leader> <plug>(easymotion-prefix)
+map <leader>f <plug>(easymotion-s)
 
 
 
