@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Nope.
 l() {
     cowthink -f turkey Gobble
 }
@@ -8,6 +7,11 @@ l() {
 # cd and ls
 cs() {
     cd "$@" && ls
+}
+
+# cd and lt
+ct() {
+    cd "$@" && lt
 }
 
 # Run evince in background and ignore stdout/stderr.
