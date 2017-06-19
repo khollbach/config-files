@@ -1,17 +1,22 @@
-# Window manager hotkeys (using 'super' modifier key, ie Windows key):
+# Application hotkeys
 
-i Launch a terminal running tmux
-o Launch a web browser
+super-i Launch a terminal running tmux
+super-o Launch a web browser
 
-j Minimize
-k Maximize
-h Quicktile left
-l Quicktile right
+# Window manager hotkeys
 
-y Quicktile top-left
-u Quicktile top-right
-n Quicktile bottom-left
-m Quicktile bottom-right
+super-j Minimize
+super-k Maximize
+super-h Quicktile left
+super-l Quicktile right
+
+super-y Quicktile top-left
+super-u Quicktile top-right
+super-n Quicktile bottom-left
+super-m Quicktile bottom-right
+
+alt-super-h Previous workspace
+alt-super-l Next workspace
 
 # Terminal emulator settings:
 
