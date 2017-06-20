@@ -101,6 +101,9 @@ noremap <leader>gb :Gblame<CR>
 
 
 " NERD Commenter.
+" Don't give me the default mappings.
+let g:NERDCreateDefaultMappings = 0
+
 " No spaces after the comment character.
 let g:NERDSpaceDelims = 0
 
