@@ -160,7 +160,7 @@ set linebreak
 " Wrap long lines.
 set wrap
 
-" Don't go to the first non-blank on a line automatically when moving there.
+" Don't go to the first non-blank on a line automatically when moving lines.
 set nostartofline
 
 " Show status bar (filename, etc) even when only one window is open.
