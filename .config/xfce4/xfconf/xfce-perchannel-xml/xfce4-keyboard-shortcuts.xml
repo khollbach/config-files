@@ -73,6 +73,7 @@
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Super&gt;i" type="string" value="xfce4-terminal -e tmux"/>
       <property name="&lt;Super&gt;o" type="string" value="chromium-browser"/>
+      <property name="&lt;Super&gt;e" type="string" value="emacs"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

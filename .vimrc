@@ -184,6 +184,10 @@ set incsearch
 " Highlight search matches by default.
 set hlsearch
 
+" Case insensitive by default
+noremap / /\c
+noremap ? ?\c
+
 
 
 " Autoindent.
@@ -321,9 +325,9 @@ noremap <leader><TAB> :ls<CR>
 noremap <leader>; :bn<CR>
 noremap <leader>, :bp<CR>
 
-" Case insensitive search.
-noremap <leader>/ /\c
-noremap <leader>? ?\c
+" Case-sensitive search.
+noremap <leader>/ /
+noremap <leader>? ?
 
 " Search and replace.
 nnoremap <leader>s :%s///gc<left><left><left><left>
