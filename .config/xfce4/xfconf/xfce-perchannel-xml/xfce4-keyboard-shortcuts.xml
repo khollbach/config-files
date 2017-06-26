@@ -192,8 +192,10 @@
       <property name="&lt;Super&gt;m" type="string" value="tile_down_right_key"/>
       <property name="&lt;Super&gt;k" type="string" value="maximize_window_key"/>
       <property name="&lt;Super&gt;j" type="string" value="hide_window_key"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;l" type="string" value="next_workspace_key"/>
+      <property name="&lt;Super&gt;semicolon" type="string" value="tile_up_key"/>
+      <property name="&lt;Super&gt;comma" type="string" value="tile_down_key"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;h" type="string" value="prev_workspace_key"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;l" type="string" value="next_workspace_key"/>
     </property>
   </property>
   <property name="providers" type="array">
