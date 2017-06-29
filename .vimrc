@@ -263,8 +263,8 @@ noremap <Tab> ^
 noremap \ $
 
 " Scroll faster.
-noremap <C-y> 5<C-y>
-noremap <C-e> 5<C-e>
+noremap <C-y> 3<C-y>
+noremap <C-e> 3<C-e>
 
 
 
