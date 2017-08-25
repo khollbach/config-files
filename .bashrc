@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Work stuff
-if [ -f ~/work/bashrc-snippet ]; then
-    source ~/work/bashrc-snippet
-fi
-
 # CDF stuff
 if [ "$USER" == hollbac1 ]; then
+    # Source .profile, since CDF ignores it.
+    # There's a guard in .profile to make sure it doesn't source .bashrc when on CDF,
+    # to avoid an infinite loop.
+    source ~/.profile
+
     umask 077
     mesg n
     stty erase ^?

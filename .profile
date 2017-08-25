@@ -4,7 +4,9 @@ if [ -n "$DISPLAY" ] && [ -z "$TMUX" ]; then
 fi
 
 # Source .bashrc if running bash
-if [ -n "$BASH_VERSION" ]; then
+# Skip this on CDF; .bashrc sources .profile on cdf,
+# since cdf ignores .profile, and we don't want an infinite loop.
+if [ -n "$BASH_VERSION" ] && [ "$USER" != hollbac1 ]; then
     if [ -f "$HOME/.bashrc" ]; then
         . "$HOME/.bashrc"
     fi
