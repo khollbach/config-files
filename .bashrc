@@ -3,8 +3,8 @@
 # CDF stuff
 if [ "$USER" == hollbac1 ]; then
     # Source .profile, since CDF ignores it.
-    # There's a guard in .profile to make sure it doesn't source .bashrc when on CDF,
-    # to avoid an infinite loop.
+    # There's a guard in .profile to make sure it doesn't source .bashrc when
+    # on CDF, to avoid an infinite loop.
     source ~/.profile
 
     umask 077
