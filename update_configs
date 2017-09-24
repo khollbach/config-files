@@ -37,9 +37,4 @@ echo "let b:did_indent = 1" > ~/.vim/indent/tex.vim
 mkdir -vp ~/.emacs.d
 cp -v .emacs.d/init.el ~/.emacs.d
 
-# Copy xfce keybindings
-mkdir -vp ~/.config/xfce4/xfconf/xfce-perchannel-xml
-cp -v .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml \
-    ~/.config/xfce4/xfconf/xfce-perchannel-xml
-
 popd > /dev/null
