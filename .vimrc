@@ -222,7 +222,7 @@ autocmd BufNewFile,BufRead * set formatoptions=jcrq
 
 " In .txt and .tex files, autowrap non-comment lines as well.
 autocmd BufNewFile,BufRead *.txt set formatoptions+=t
-autocmd BufNewFile,BufRead *.tex set formatoptions+=t
+"autocmd BufNewFile,BufRead *.tex set formatoptions+=t
 
 
 
