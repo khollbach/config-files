@@ -225,7 +225,7 @@ autocmd BufNewFile,BufRead *.txt set formatoptions+=t
 "autocmd BufNewFile,BufRead *.tex set formatoptions+=t
 
 " Simple and unobtrusive folding in text files.
-set foldtext='\ '
+set foldtext=''
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
 autocmd BufNewFile,BufRead *.txt normal zR
 
