@@ -229,6 +229,12 @@ set foldtext=''
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
 autocmd BufNewFile,BufRead *.txt normal zR
 
+" Two spaces indent by default for html files.
+autocmd BufNewFile,BufRead *.html
+    \ setlocal shiftwidth=2 |
+    \ setlocal tabstop=2 |
+    \ setlocal softtabstop=2
+
 
 
 " Jump to the last position when reopening a file.
