@@ -18,3 +18,6 @@ export PATH=$HOME/bin:$PATH
 
 # Include scripts dir in path
 export PATH=$HOME/config-files/scripts:$PATH
+
+# Include rust binaries in path
+export PATH=$HOME/.cargo/bin:$PATH
