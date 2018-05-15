@@ -1,7 +1,7 @@
 # Application hotkeys
 
-super-i Launch a terminal running tmux
-super-o Launch a web browser
+super-t Launch a terminal running tmux
+super-w Launch a web browser
 
 # Window manager hotkeys
 
@@ -15,8 +15,8 @@ super-u Quicktile top-right
 super-n Quicktile bottom-left
 super-m Quicktile bottom-right
 
-alt-super-h Previous workspace
-alt-super-l Next workspace
+super-i Previous workspace
+super-o Next workspace
 
 # Terminal emulator settings:
 
