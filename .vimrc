@@ -26,11 +26,11 @@ colorscheme solarized
 
 
 
-" Enable neocomplete.
-let g:neocomplete#enable_at_startup = 1
+" Enable deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " Ignore case when looking for matches.
-let g:neocomplete#enable_ignore_case = 1
+let g:deoplete#enable_ignore_case = 1
 
 " Fix the way enter interacts with neocomplete.
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
@@ -274,18 +274,18 @@ noremap <Tab> ^
 noremap \ $
 
 " Scroll faster.
-noremap <C-y> 3<C-y>
-noremap <C-e> 3<C-e>
+noremap <C-y> 5<C-y>
+noremap <C-e> 5<C-e>
 
 
 
 " <M-q> = Quit all windows.
-noremap <Esc>q :qa<CR>
-inoremap <Esc>q <C-o>:qa<CR>
+noremap <M-q> :qa<CR>
+inoremap <M-q> <C-o>:qa<CR>
 
 " <M-w> = Save.
-noremap <Esc>w :w<CR>
-inoremap <Esc>w <C-o>:w<CR>
+noremap <M-w> :w<CR>
+inoremap <M-w> <C-o>:w<CR>
 
 
 
@@ -296,10 +296,10 @@ noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 
 " Resize window.
-noremap <Esc><C-j> 5<C-w>+
-noremap <Esc><C-k> 5<C-w>-
-noremap <Esc><C-h> 5<C-w><
-noremap <Esc><C-l> 5<C-w>>
+noremap <M-C-j> 5<C-w>+
+noremap <M-C-k> 5<C-w>-
+noremap <M-C-h> 5<C-w><
+noremap <M-C-l> 5<C-w>>
 
 
 
@@ -343,6 +343,10 @@ noremap <leader>? ?
 " Search and replace.
 nnoremap <leader>s :%s///gc<left><left><left><left>
 vnoremap <leader>s :s///gc<left><left><left><left>
+
+" Count occurences (ignoring case by default)
+nnoremap <leader>n :%s/\c//gn<left><left><left><left>
+vnoremap <leader>n :s/\c//gn<left><left><left><left>
 
 " Change file permissions to be executable or not.
 noremap <leader>x :!chmod +x %<CR>

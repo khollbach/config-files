@@ -2,14 +2,14 @@
 
 pushd ~/config-files > /dev/null
 
-# Copy config files to home dir.
+# Copy dotfiles to home dir.
 files=".profile .bashrc .bash_aliases .bash_functions
        .tmux.conf .vimrc .inputrc .ackrc"
 for f in $files; do
     cp -v "$f" ~
 done
 
-# Reload bashrc if you sourced this script from your shell.
+# Reload bashrc definitions if you sourced this script from your shell.
 source ~/.bashrc
 
 # Reload tmux conf. Ignore failure if tmux isn't running.
@@ -23,18 +23,18 @@ cp -v pathogen.vim ~/.vim/autoload
 mkdir -vp ~/.vim/swap
 
 # Ensure undo dir exists.
-# My work machine's Vim gives error messages when this is enabled,
-# so don't do it there.
-if ! [ -f ~/work/bashrc-snippet ]; then
-    mkdir -vp ~/.vim/undo
-fi
+mkdir -vp ~/.vim/undo
 
-# Hack to disable Vim's autoindent for latex files.
+# Hack to disable Vim's autoindent for latex files. (It's terrible.)
 mkdir -vp ~/.vim/indent
 echo "let b:did_indent = 1" > ~/.vim/indent/tex.vim
 
 # Copy init.el to .emacs.d
 mkdir -vp ~/.emacs.d
 cp -v .emacs.d/init.el ~/.emacs.d
+
+# Neovim!
+mkdir -vp ~/.config/nvim
+cp -v .config/nvim/init.vim ~/.config/nvim
 
 popd > /dev/null

@@ -1,7 +1,9 @@
 # Application hotkeys
 
-super-t Launch a terminal running tmux
-super-w Launch a web browser
+super-i Launch a terminal running tmux
+super-o Launch a web browser
+
+super-p move-to-next-monitor (script)
 
 # Window manager hotkeys
 
@@ -15,10 +17,7 @@ super-u Quicktile top-right
 super-n Quicktile bottom-left
 super-m Quicktile bottom-right
 
-super-i Previous workspace
-super-o Next workspace
-
-# Terminal emulator settings:
+# Terminal emulator settings
 
 Solarized color scheme
-DejaVu Sans Mono Book, 11 or 12 point font
+DejaVu Sans Mono Book, 12 point font

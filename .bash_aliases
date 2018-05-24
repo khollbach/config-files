@@ -33,3 +33,18 @@ alias gsi="gitrecurse git status -s --ignored"
 alias gsb="gitrecurse git status -sb"
 alias gp="gitrecurse git pull"
 alias glh="gitrecurse git --no-pager log --oneline -n 10"
+
+
+
+## Useful C++ compiler flags
+
+cpp_flags="-pedantic -Wall -Wextra -Werror -Wno-unused"
+clang_flags="$KEVAN_CPP_FLAGS -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef"
+gcc_flags="$KEVAN_CLANG_FLAGS -Wlogical-op -Wnoexcept -Wstrict-null-sentinel"
+
+alias g++="g++ $KEVAN_GCC_FLAGS"
+alias clang++="g++ $KEVAN_CLANG_FLAGS"
+
+unset cpp_flags
+unset clang_flags
+unset gcc_flags

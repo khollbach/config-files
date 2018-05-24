@@ -1,4 +1,10 @@
-# Run setxkbmap only if X is running and we're not inside tmux.
+# Don't give others permissions to my files.
+umask 077
+
+# Only run setxkbmap if X is running and we're not inside tmux.
+# (tmux panes are always opened as a login shell, so .profile gets sourced
+# every time. It would be fine to run setxkbmap multiple times, except it's
+# pretty slow, so new panes would only show a prompt after a short delay.)
 if [ -n "$DISPLAY" ] && [ -z "$TMUX" ]; then
     setxkbmap -option ctrl:nocaps
 fi
