@@ -26,13 +26,15 @@ colorscheme solarized
 
 
 
-" Enable deoplete.
+" Enable deoplete (autocompletion).
 let g:deoplete#enable_at_startup = 1
 
-" Ignore case when looking for matches.
-let g:deoplete#enable_ignore_case = 1
+" Deoplete options.
+call deoplete#custom#option({
+\ 'ignore_case': v:true,
+\ })
 
-" Fix the way enter interacts with neocomplete.
+" Fix the way enter interacts with deoplete.
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 
 " Use tab for completion.
@@ -207,6 +209,13 @@ set softtabstop=4
 
 " Easily toggle autoindent/mappings/etc for pasting text.
 set pastetoggle=<F9>
+
+" Show tabs.
+set list
+set listchars=tab:»\ ,extends:▶,precedes:◀
+
+" Toggle line wrapping.
+noremap <F4> :set wrap!<CR>
 
 
 

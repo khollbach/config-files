@@ -15,8 +15,11 @@ if [ "$USER" == hollbac1 ]; then
     export MAILCHECK=300
 fi
 
-# Set prompt
-export PS1='\[\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
+# Set prompt.
+# \a rings a bell, which shows up visually in tmux when a command in
+# another window completes.
+# \e[0;1;38;5;9m is for orange text; \e[0m resets text effects.
+export PS1='\[\a\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
 
 # Default editors
 export EDITOR=/usr/bin/vim
