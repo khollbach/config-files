@@ -201,18 +201,20 @@ set shiftwidth=4
 " Expand tab into spaces when pressed in insert mode.
 set expandtab
 
-" Tab width = 4 spaces.
-set tabstop=4
-
 " Allow backspacing through spaces as if they were tabs.
 set softtabstop=4
 
-" Easily toggle autoindent/mappings/etc for pasting text.
-set pastetoggle=<F9>
-
-" Show tabs.
+" Show hard tabs.
 set list
 set listchars=tab:»\ ,extends:▶,precedes:◀
+
+" Hard tab width = 8 spaces. (Linux kernel style...)
+set tabstop=8
+
+
+
+" Easily toggle autoindent/mappings/etc for pasting text.
+set pastetoggle=<F9>
 
 " Toggle line wrapping.
 noremap <F4> :set wrap!<CR>
@@ -225,24 +227,34 @@ set colorcolumn=80,100,120
 " Maximum line length for various formatting-related things.
 set textwidth=79
 
+
+
 " Autowrap comments to textwidth.
 " Done on load to override plugin-file settings.
-autocmd BufNewFile,BufRead * set formatoptions=jcrq
+"autocmd BufNewFile,BufRead * set formatoptions=jcrq
 
 " In .txt and .tex files, autowrap non-comment lines as well.
-autocmd BufNewFile,BufRead *.txt set formatoptions+=t
+"autocmd BufNewFile,BufRead *.txt set formatoptions+=t
 "autocmd BufNewFile,BufRead *.tex set formatoptions+=t
+
+
 
 " Simple and unobtrusive folding in text files.
 set foldtext=''
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
 autocmd BufNewFile,BufRead *.txt normal zR
 
+
+
 " Two spaces indent by default for html files.
 autocmd BufNewFile,BufRead *.html
     \ setlocal shiftwidth=2 |
     \ setlocal tabstop=2 |
     \ setlocal softtabstop=2
+
+" Treat more things as Makefile.
+autocmd BufNewFile,BufRead make*.inc
+    \ setlocal syntax=make
 
 
 
@@ -285,6 +297,10 @@ noremap \ $
 " Scroll faster.
 noremap <C-y> 5<C-y>
 noremap <C-e> 5<C-e>
+
+" Scroll one line at a time.
+noremap <leader><C-y> <C-y>
+noremap <leader><C-e> <C-e>
 
 
 
