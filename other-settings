@@ -2,9 +2,9 @@
 
 super-i Launch a terminal running tmux
 super-o Launch a web browser
+super-p xfce4-popup-whiskermenu
 
-super-p move-to-next-monitor (script)
-super-; xfce-popup-whiskermenu
+super-; move-to-next-monitor (script)
 
 # Window manager hotkeys
 
