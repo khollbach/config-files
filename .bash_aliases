@@ -3,17 +3,24 @@
 # Update configs alias
 alias upconf="source $HOME/config-files/update_configs"
 
-# Misc aliases
+# ls
 alias ls="ls -vh --color=auto"
 alias ll="ls -l"
 alias la="ls -A"
 alias lla="ls -lA"
 alias lt="ls -ltr"
 alias lta="ls -ltrA"
+
+# Misc aliases
 alias grep="grep --color=auto"
 alias pag="ps aux | grep"
 alias hig="history | grep"
 alias ltmk="latexmk -pdf -pvc"
+
+# ack -> rg
+if [[ -f /home/khollbach/.cargo/bin/rg ]]; then
+    alias ack="rg"
+fi
 
 # Git shorthands
 alias gd="git diff --color-words"

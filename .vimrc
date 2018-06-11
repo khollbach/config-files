@@ -88,7 +88,8 @@ let g:ctrlp_working_path_mode = 0
 
 
 
-" ack bind.
+" ack/rg
+let g:ackprg = "rg --vimgrep"
 noremap <expr> <leader>a ":Ack "
 
 
