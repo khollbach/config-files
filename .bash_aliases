@@ -12,10 +12,14 @@ alias lt="ls -ltr"
 alias lta="ls -ltrA"
 
 # Misc aliases
+alias which="type"
+alias tmux="TERM=xterm-256color tmux"
+alias lmk="latexmk -pdf -pvc"
+
+# Grep
 alias grep="grep --color=auto"
 alias pag="ps aux | grep"
 alias hig="history | grep"
-alias ltmk="latexmk -pdf -pvc"
 
 # ack -> rg
 if [[ -f /home/khollbach/.cargo/bin/rg ]]; then
