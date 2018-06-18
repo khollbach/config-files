@@ -16,12 +16,8 @@ if [ "$USER" == hollbac1 ]; then
 fi
 
 # Set prompt.
-# \a rings a bell, which shows up visually in tmux when a command in
-# another tmux window completes. The bell is a little clunky, because when the
-# screen gets redrawn (eg resizing the X window) it will re-trigger the bell.
-# Haven't looked into a fix for this.
 # \e[0;1;38;5;9m is for orange text; \e[0m resets text effects.
-export PS1='\[\a\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
+export PS1='\[\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
 
 # Default editors
 export EDITOR=/usr/bin/vim

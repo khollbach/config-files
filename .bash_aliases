@@ -14,7 +14,7 @@ alias lta="ls -ltrA"
 # Misc aliases
 alias which="type"
 alias tmux="TERM=xterm-256color tmux"
-alias lmk="latexmk -pdf -pvc"
+alias ltmk="latexmk -pdf -pvc"
 
 # Grep
 alias grep="grep --color=auto"
@@ -51,7 +51,7 @@ alias glh="gitrecurse git --no-pager log --oneline -n 10"
 # Taken from: https://stackoverflow.com/a/9862800
 
 c_flags="-Wall -Wextra -pedantic -Werror -Wno-unused"
-c_flags="$c_flags -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wsign-conversion -Wstrict-overflow=5 -Wswitch-default -Wundef"
+c_flags="$c_flags -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wsign-conversion -Wstrict-overflow=5 -Wswitch-default -Wundef"
 cpp_flags="$c_flags -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual -Wsign-promo"
 gcc_cpp_flags="$cpp_flags -Wlogical-op -Wnoexcept -Wstrict-null-sentinel"
 
