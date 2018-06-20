@@ -218,7 +218,7 @@ set tabstop=8
 set pastetoggle=<F9>
 
 " Toggle line wrapping.
-noremap <F4> :set wrap!<CR>
+noremap <F4> :set wrap! wrap?<CR>
 
 
 
