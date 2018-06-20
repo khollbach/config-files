@@ -1,0 +1,2 @@
+# Ignore ctags tagfiles
+--ignore-file=is:tags

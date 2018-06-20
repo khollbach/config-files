@@ -119,7 +119,7 @@ noremap <leader>u :call NERDComment(0, "uncomment")<CR>
 
 
 " EasyMotion
-map <leader><leader> <plug>(easymotion-prefix)
+let g:EasyMotion_smartcase = 1
 map <leader>f <plug>(easymotion-s)
 
 

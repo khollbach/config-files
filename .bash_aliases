@@ -12,7 +12,7 @@ alias lt="ls -ltr"
 alias lta="ls -ltrA"
 
 # Misc aliases
-alias which="type"
+alias which="type -a"
 alias tmux="TERM=xterm-256color tmux"
 alias ltmk="latexmk -pdf -pvc"
 
@@ -22,9 +22,7 @@ alias pag="ps aux | grep"
 alias hig="history | grep"
 
 # ack -> rg
-if [[ -f /home/khollbach/.cargo/bin/rg ]]; then
-    alias ack="rg"
-fi
+alias ack="rg"
 
 # Git shorthands
 alias gd="git diff --color-words"

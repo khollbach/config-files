@@ -1,8 +1,0 @@
-# Ignore .svn directories
---ignore-dir=.svn
-
-# Ignore .git directories
---ignore-dir=.git
-
-# Ignore ctags tagfiles
---ignore-file=is:tags

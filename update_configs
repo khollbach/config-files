@@ -4,7 +4,7 @@ pushd ~/config-files > /dev/null
 
 # Copy dotfiles to home dir.
 files=".profile .bashrc .bash_aliases .bash_functions
-       .tmux.conf .vimrc .inputrc .ackrc"
+       .tmux.conf .vimrc .inputrc .ignore"
 for f in $files; do
     cp -v "$f" ~
 done
@@ -19,11 +19,8 @@ tmux source-file ~/.tmux.conf 2> /dev/null || :
 mkdir -vp ~/.vim/autoload
 cp -v pathogen.vim ~/.vim/autoload
 
-# Ensure swap dir exists.
-mkdir -vp ~/.vim/swap
-
-# Ensure undo dir exists.
-mkdir -vp ~/.vim/undo
+# Ensure swap and undo dirs exist.
+mkdir -vp ~/.vim/swap ~/.vim/undo
 
 # Hack to disable Vim's autoindent for latex files. (It's terrible.)
 mkdir -vp ~/.vim/indent
