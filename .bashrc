@@ -45,3 +45,8 @@ export LYNX_LSS=$HOME/config-files/lynx.lss
 # Load aliases, functions.
 source ~/.bash_aliases
 source ~/.bash_functions
+
+# Load work-related defs, etc.
+if [ -f ~/notes/scripts/bashrc_snippet ]; then
+    source ~/notes/scripts/bashrc_snippet
+fi
