@@ -4,7 +4,7 @@ pushd ~/config-files > /dev/null
 
 # Copy dotfiles to home dir.
 files=".profile .bashrc .bash_aliases .bash_functions
-       .tmux.conf .vimrc .inputrc .ignore"
+       .tmux.conf .vimrc .inputrc .ripgreprc"
 for f in $files; do
     cp -v "$f" ~
 done

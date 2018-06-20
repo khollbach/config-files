@@ -1,0 +1,5 @@
+# Case-insensitive unless pattern includes captial letters
+--smart-case
+
+# Ignore ctags tagfiles
+--glob=!tags

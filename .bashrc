@@ -42,6 +42,9 @@ fi
 # Lynx colors
 export LYNX_LSS=$HOME/config-files/lynx.lss
 
+# ripgrep config file
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 # Load aliases, functions.
 source ~/.bash_aliases
 source ~/.bash_functions
