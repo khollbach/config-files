@@ -289,8 +289,8 @@ cnoremap jK <C-c>
 " <CR> = gg
 noremap <CR> gg
 
-" <Tab> = ^
-noremap <Tab> ^
+" <BS> = ^
+noremap <BS> ^
 
 " \ = $
 noremap \ $
@@ -348,6 +348,9 @@ noremap <leader>q :q<CR>
 
 " Strip trailing whitespace
 noremap <leader>w :%s/\s\+$//<CR>
+
+" Reload .vimrc
+noremap <leader>r :source $MYVIMRC<CR>
 
 " Disable search highlighting until the next search.
 noremap <leader>j :nohlsearch<CR>
