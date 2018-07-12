@@ -238,7 +238,7 @@ set nojoinspaces
 " when pressing <enter> on a commented line (and don't for the 'o' command).
 " Done on load to override plugin-file settings.
 autocmd BufNewFile,BufRead *
-    \ set formatoptions-=tcowan2vblmMB1
+    \ set formatoptions-=tcowan2vblmMB1 |
     \ set formatoptions+=rqj
 
 
