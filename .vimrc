@@ -237,9 +237,7 @@ set nojoinspaces
 " Custom format options: don't autowrap; only insert comment characters
 " when pressing <enter> on a commented line (and don't for the 'o' command).
 " Done on load to override plugin-file settings.
-autocmd BufNewFile,BufRead *
-    \ set formatoptions-=tcowan2vblmMB1 |
-    \ set formatoptions+=rqj
+autocmd BufNewFile,BufRead * set formatoptions=rqj
 
 
 
