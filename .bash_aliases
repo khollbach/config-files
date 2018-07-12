@@ -21,7 +21,7 @@ alias ltmk="latexmk -pdf -pvc"
 # Grep
 alias grep="grep --color=auto"
 alias pag="ps aux | grep"
-alias hig="history | grep"
+alias hig="history | cut -c 8- | uniq | grep"
 
 # ack -> rg
 alias ack="rg"

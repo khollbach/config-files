@@ -160,8 +160,8 @@ set number
 " When 'wrap' is enabled, break lines at word boundaries.
 set linebreak
 
-" Wrap long lines.
-set wrap
+" Don't wrap long lines.
+set nowrap
 
 " Don't go to the first non-blank on a line automatically when moving lines.
 set nostartofline
@@ -228,15 +228,18 @@ set colorcolumn=80,100,120
 " Maximum line length for various formatting-related things.
 set textwidth=79
 
+" Don't add an extra space after a '.' character when joining lines.
+" Also applies to '?' and '!' characters.
+set nojoinspaces
 
 
-" Autowrap comments to textwidth.
+
+" Custom format options: don't autowrap; only insert comment characters
+" when pressing <enter> on a commented line (and don't for the 'o' command).
 " Done on load to override plugin-file settings.
-"autocmd BufNewFile,BufRead * set formatoptions=jcrq
-
-" In .txt and .tex files, autowrap non-comment lines as well.
-"autocmd BufNewFile,BufRead *.txt set formatoptions+=t
-"autocmd BufNewFile,BufRead *.tex set formatoptions+=t
+autocmd BufNewFile,BufRead *
+    \ set formatoptions-=tcowan2vblmMB1
+    \ set formatoptions+=rqj
 
 
 

@@ -1,5 +1,5 @@
 # Case-insensitive unless pattern includes captial letters
---smart-case
+#--smart-case
 
 # Ignore ctags tagfiles
 --glob=!tags

@@ -10,7 +10,7 @@
 [lctrl]>[lwin]
 
 [lalt]>[escape]
-[home]>[null]
+[home]>[lalt]
 [end]>[null]
 
 [space]>[space]
