@@ -72,6 +72,9 @@ inoremap <C-p> <up>
 " Toggle NERDTree.
 noremap <leader>i :NERDTreeToggle<CR>
 
+" The default help bind '?' conflicts with vim's search-backwards.
+let NERDTreeMapHelp = '<F1>'
+
 
 
 " Open ctrlp.
