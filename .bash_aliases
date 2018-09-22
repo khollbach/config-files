@@ -13,6 +13,7 @@ alias lta="ls -ltrA"
 
 # Misc aliases
 alias sl="sl -e"
+alias rain="rain -d 150"
 alias less="less -i -j4"
 alias which="type -a"
 alias tmux="TERM=xterm-256color tmux"

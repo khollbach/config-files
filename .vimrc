@@ -311,11 +311,15 @@ noremap <leader><C-e> <C-e>
 
 " <M-q> = Quit all windows.
 noremap <M-q> :qa<CR>
+noremap <Esc>q :qa<CR>
 inoremap <M-q> <C-o>:qa<CR>
+inoremap <Esc>q <C-o>:qa<CR>
 
 " <M-w> = Save.
 noremap <M-w> :w<CR>
+noremap <Esc>w :w<CR>
 inoremap <M-w> <C-o>:w<CR>
+inoremap <Esc>w <C-o>:w<CR>
 
 
 
