@@ -33,6 +33,9 @@ colorscheme solarized
 " See through background
 highlight Normal guibg=NONE ctermbg=NONE
 
+" No startup message
+set shortmess+=I
+
 
 
 " Enable deoplete (autocompletion).
