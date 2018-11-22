@@ -9,6 +9,12 @@ execute pathogen#infect()
 let mapleader = "\<space>"
 noremap <space> <nop>
 
+" Syntax highlighting.
+syntax on
+
+" Load plugin and indent files for known filetypes.
+filetype plugin indent on
+
 
 
 " -----------------------------------------------------------------------------
@@ -23,6 +29,9 @@ set background=dark
 
 " Solarized color scheme
 colorscheme solarized
+
+" See through background
+highlight Normal guibg=NONE ctermbg=NONE
 
 
 
@@ -130,14 +139,6 @@ map <leader>f <plug>(easymotion-s)
 " -----------------------------------------------------------------------------
 " Settings
 " -----------------------------------------------------------------------------
-
-" Syntax highlighting.
-syntax on
-
-" Load plugin and indent files for known filetypes.
-filetype plugin indent on
-
-
 
 " This wasn't the default on CDF for some reason. Caused issues with NERDTree.
 set encoding=utf-8
