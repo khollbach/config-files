@@ -5,6 +5,7 @@ super-o Launch a web browser
 super-p xfce4-popup-whiskermenu
 
 super-; move-to-next-monitor (script)
+        (this needs xdotool and wmctrl installed)
 
 # Window manager hotkeys
 
