@@ -76,8 +76,8 @@ inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
 inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
 
 " These shadow Vim's completion binds, but I use Tab/S-Tab for that anyways.
-inoremap <C-n> <down>
-inoremap <C-p> <up>
+inoremap <C-n> <C-o><down>
+inoremap <C-p> <C-o><up>
 
 
 
