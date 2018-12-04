@@ -395,3 +395,9 @@ noremap <leader>X :!chmod -x %<CR>
 
 " Select recently pasted text.
 nnoremap <leader>v `[v`]
+
+
+
+" Unmap s and S for now. I'll probably map them to 'sneak.vim' at some point.
+noremap s <nop>
+noremap S <nop>
