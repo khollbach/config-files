@@ -31,7 +31,7 @@ set background=dark
 colorscheme solarized
 
 " See through background
-highlight Normal guibg=NONE ctermbg=NONE
+"highlight Normal guibg=NONE ctermbg=NONE
 
 " No startup message
 set shortmess+=I
@@ -188,11 +188,11 @@ set wildmenu
 " Start scrolling as soon as the cursor gets close to the edge of the screen.
 set scrolloff=5
 
-" Highlight the first match as you are typing your search.
+" Show the first match as you are typing your search.
 set incsearch
 
-" Highlight search matches by default.
-set hlsearch
+" Don't highlight search matches by default.
+set nohlsearch
 
 " Case insensitive by default
 noremap / /\c
