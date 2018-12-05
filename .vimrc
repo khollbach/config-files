@@ -6,8 +6,8 @@
 execute pathogen#infect()
 
 " Set leader to space.
-let mapleader = "\<space>"
-noremap <space> <nop>
+let mapleader = "\<Space>"
+noremap <Space> <Nop>
 
 " Syntax highlighting.
 syntax on
@@ -82,7 +82,7 @@ inoremap <C-p> <C-o><up>
 
 
 " Toggle NERDTree.
-noremap <leader>i :NERDTreeToggle<CR>
+noremap <Leader>i :NERDTreeToggle<CR>
 
 " The default help bind '?' conflicts with vim's search-backwards.
 let NERDTreeMapHelp = '<F1>'
@@ -90,7 +90,7 @@ let NERDTreeMapHelp = '<F1>'
 
 
 " Open ctrlp.
-let g:ctrlp_map = "<leader>o"
+let g:ctrlp_map = "<Leader>o"
 
 " Use mixed mode: search for files, buffers, and 'most-recently-used' files.
 let g:ctrlp_cmd = "CtrlPMixed"
@@ -105,16 +105,16 @@ let g:ctrlp_working_path_mode = 0
 
 " ack/rg
 let g:ackprg = "rg --vimgrep"
-noremap <expr> <leader>a ":Ack "
+noremap <expr> <Leader>a ":Ack "
 
 
 
 " Fugitive binds.
-noremap <expr> <leader>gg ":Git! "
-noremap <leader>gs :Gstatus<CR>
-noremap <leader>gc :Gcommit<CR>
-noremap <leader>gd :Gdiff<CR>
-noremap <leader>gb :Gblame<CR>
+noremap <expr> <Leader>gg ":Git! "
+noremap <Leader>gs :Gstatus<CR>
+noremap <Leader>gc :Gcommit<CR>
+noremap <Leader>gd :Gdiff<CR>
+noremap <Leader>gb :Gblame<CR>
 
 
 
@@ -126,16 +126,16 @@ let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 0
 
 " Comment.
-noremap <leader>c :call NERDComment(0, "comment")<CR>
+noremap <Leader>c :call NERDComment(0, "comment")<CR>
 
 " Uncomment.
-noremap <leader>u :call NERDComment(0, "uncomment")<CR>
+noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
 
 
 
 " EasyMotion
 let g:EasyMotion_smartcase = 1
-map <leader>f <plug>(easymotion-s)
+map <Leader>f <plug>(easymotion-s)
 
 
 
@@ -188,7 +188,7 @@ set wildmenu
 " Start scrolling as soon as the cursor gets close to the edge of the screen.
 set scrolloff=5
 
-" Show the first match as you are typing your search.
+" Go to the first match as you are typing your search.
 set incsearch
 
 " Don't highlight search matches by default.
@@ -308,8 +308,10 @@ noremap <C-y> 5<C-y>
 noremap <C-e> 5<C-e>
 
 " Scroll one line at a time.
-noremap <leader><C-y> <C-y>
-noremap <leader><C-e> <C-e>
+noremap <M-C-y> <C-y>
+noremap <Esc><C-y> <C-y>
+noremap <M-C-e> <C-e>
+noremap <Esc><C-e> <C-e>
 
 
 
@@ -342,62 +344,62 @@ noremap <M-C-l> 5<C-w>>
 
 
 " Copy/paste to/from system clipboard.
-noremap <leader>y "+y
-noremap <leader>Y "+Y
-noremap <leader>d "+d
-noremap <leader>D "+D
-noremap <leader>p "+p
-noremap <leader>P "+P
+noremap <Leader>y "+y
+noremap <Leader>Y "+Y
+noremap <Leader>d "+d
+noremap <Leader>D "+D
+noremap <Leader>p "+p
+noremap <Leader>P "+P
 
 " Paste from the 0-register (ie yanked text only).
-noremap <leader>h "0p
-noremap <leader>H "0P
+noremap <Leader>h "0p
+noremap <Leader>H "0P
 
 
 
 " Quit current window.
-noremap <leader>q :q<CR>
+noremap <Leader>q :q<CR>
 
 " Strip trailing whitespace
-noremap <leader>w :%s/\s\+$//<CR>
+noremap <Leader>w :%s/\s\+$//<CR>
 
 " Reload .vimrc
-noremap <leader>r :source $MYVIMRC<CR>
+noremap <Leader>r :source $MYVIMRC<CR>
 
 " Disable search highlighting until the next search.
-noremap <leader>j :nohlsearch<CR>
+"noremap <Leader>j :nohlsearch<CR>
 
 " Toggle search highlighting.
-noremap <leader>k :set hlsearch! hlsearch?<CR>
+"noremap <Leader>k :set hlsearch! hlsearch?<CR>
 
 " List buffers.
-noremap <leader><TAB> :ls<CR>
+noremap <Leader><Tab> :ls<CR>
 
 " Next/previous buffer.
-noremap <leader>; :bn<CR>
-noremap <leader>, :bp<CR>
+noremap <Leader>; :bn<CR>
+noremap <Leader>, :bp<CR>
 
 " Case-sensitive search.
-noremap <leader>/ /
-noremap <leader>? ?
+noremap <Leader>/ /
+noremap <Leader>? ?
 
 " Search and replace.
-nnoremap <leader>s :%s///gc<left><left><left><left>
-vnoremap <leader>s :s///gc<left><left><left><left>
+nnoremap <Leader>s :%s///gc<left><left><left><left>
+vnoremap <Leader>s :s///gc<left><left><left><left>
 
 " Count occurences (ignoring case by default)
-nnoremap <leader>n :%s/\c//gn<left><left><left><left>
-vnoremap <leader>n :s/\c//gn<left><left><left><left>
+nnoremap <Leader>n :%s/\c//gn<left><left><left><left>
+vnoremap <Leader>n :s/\c//gn<left><left><left><left>
 
 " Change file permissions to be executable or not.
-noremap <leader>x :!chmod +x %<CR>
-noremap <leader>X :!chmod -x %<CR>
+noremap <Leader>x :!chmod +x %<CR>
+noremap <Leader>X :!chmod -x %<CR>
 
-" Select recently pasted text.
-nnoremap <leader>v `[v`]
+" Select recently pasted text (the default keybinding for this is gv).
+nnoremap <Leader>v `[v`]
 
 
 
 " Unmap s and S for now. I'll probably map them to 'sneak.vim' at some point.
-noremap s <nop>
-noremap S <nop>
+noremap s <Nop>
+noremap S <Nop>
