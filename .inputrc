@@ -1,6 +1,13 @@
 # Emacs-style keybinds.
 set editing-mode emacs
 
+# Show suggestions after pressing tab once, instead of twice.
+set show-all-if-ambiguous on
+
+# Don't show hidden files/dirs as suggestions when I
+# press tab with an empty prefix.
+set match-hidden-files off
+
 # Bind meta-p to ctrl-p, enter; ie run previous command.
 "\ep": "\C-p\n"
 
