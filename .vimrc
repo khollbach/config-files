@@ -297,6 +297,10 @@ cnoremap jK <C-c>
 " <CR> = gg
 noremap <CR> gg
 
+" <Home> = ^
+" (By default it behaves like the 0 key instead.)
+noremap <Home> ^
+
 " <BS> = ^
 noremap <BS> ^
 
@@ -355,6 +359,9 @@ noremap <Leader>P "+P
 noremap <Leader>h "0p
 noremap <Leader>H "0P
 
+" Select recently pasted text (the default keybinding for this is gv).
+nnoremap <Leader>v `[v`]
+
 
 
 " Quit current window.
@@ -394,9 +401,6 @@ vnoremap <Leader>n :s/\c//gn<left><left><left><left>
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>
 noremap <Leader>X :!chmod -x %<CR>
-
-" Select recently pasted text (the default keybinding for this is gv).
-nnoremap <Leader>v `[v`]
 
 
 
