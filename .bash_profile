@@ -7,9 +7,9 @@
 # noticibly slow, so new panes would only show a prompt after a short delay.
 # Also, having directories doubled in your PATH is just annoying.
 if [ -z "$TMUX" ] && [ -f "$HOME/.profile" ]; then
-    source .profile
+    source "$HOME/.profile"
 fi
 
 if [ -f "$HOME/.bashrc" ]; then
-    source .bashrc
+    source "$HOME/.bashrc"
 fi
