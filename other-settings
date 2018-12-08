@@ -1,11 +1,11 @@
 # Application hotkeys
 
-super-i Launch a terminal running tmux
-super-o Launch a web browser
+super-i xfce4-terminal --command tmux
+super-o firefox
 super-p xfce4-popup-whiskermenu
 
-super-; move-to-next-monitor (script)
-        (this needs xdotool and wmctrl installed)
+super-; move-to-next-monitor
+        (this is a script and needs xdotool and wmctrl installed)
 
 # Window manager hotkeys
 
@@ -22,4 +22,4 @@ super-m Quicktile bottom-right
 # Terminal emulator settings
 
 Solarized color scheme
-DejaVu Sans Mono Book, 12 point font
+DejaVu Sans Mono Book, 12 point font (17 or 25 on my laptop)
