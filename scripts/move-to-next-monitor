@@ -1,5 +1,5 @@
 #!/bin/sh
-# (Not mine, see: https://github.com/jc00ke/move-to-next-monitor)
+# (Not mine, taken from: https://github.com/jc00ke/move-to-next-monitor)
 # (You'll need to install "xdotool" and "wmctrl" through apt.)
 #
 # Move the current window to the next monitor.
