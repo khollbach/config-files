@@ -214,7 +214,9 @@ set softtabstop=4
 
 " Show hard tabs.
 set list
-set listchars=tab:»\ ,extends:▶,precedes:◀
+set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
+autocmd InsertEnter * set listchars-=trail:·
+autocmd InsertLeave * set listchars+=trail:·
 
 " Hard tab width = 8 spaces. (Linux kernel style...)
 set tabstop=8
