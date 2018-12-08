@@ -1,22 +1,61 @@
-[caps]>[bspace]
-[lshift]>[home]
-[rshift]>[end]
-[intl-\]>[null]
-[up]>[down]
-[down]>[up]
-
+# Left thumb cluster
 [bspace]>[lshift]
 [delete]>[lctrl]
 [lctrl]>[lwin]
-
 [lalt]>[escape]
 [home]>[lalt]
-[end]>[null]
+[end]>[insert]
 
+# Right thumb cluster
 [space]>[space]
 [enter]>[ralt]
 [rctrl]>[enter]
-
 [rwin]>[delete]
 [pup]>[rctrl]
 [pdown]>[rshift]
+
+[caps]>[bspace]
+[lshift]>[home]
+[rshift]>[end]
+
+# This seems heinous, I know.
+# It's because of Vim muscle memory; the up/down arrows are directly below JK.
+[up]>[down]
+[down]>[up]
+
+# The 'kpshift' map behaves as a function-modifier for the 'key-pad' layer.
+# When held, pressing keys will generate their key-pad mode mapping instead
+# of their normal mapping.
+# A quirk is that you have to map both the normal version and the key-pad
+# version of the key that you want to behave as a modifier.
+[intl-\]>[kpshift]
+[kp-insert]>[kpshift]
+
+# Invert volume buttons with print-screen/scroll-lock/pause-break,
+# so that you can change volume without being in key-pad mode
+# (or holding down 'kpshift' modifier key).
+[prtscr]>[mute]
+[scroll]>[vol-]
+[pause]>[vol+]
+[mute]>[prtscr]
+[vol+]>[scroll]
+[vol-]>[pause]
+
+# Give me function keys F1-F12 on the key-pad layer
+[kp1]>[f1]
+[kp2]>[f2]
+[kp3]>[f3]
+[kp4]>[f4]
+[kp5]>[f5]
+[kp6]>[f6]
+[kp7]>[f7]
+[kp8]>[f8]
+[kp9]>[f9]
+[numlk]>[f10]
+[kp=]>[f11]
+[kpmult]>[f12]
+
+# Also pageup/pagedown
+# (Inverted, as with up/down arrow keys)
+[kp-up]>[pdown]
+[kp-down]>[pup]
