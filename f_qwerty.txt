@@ -53,7 +53,7 @@
 [kp9]>[f9]
 [numlk]>[f10]
 [kp=]>[f11]
-[kpmult]>[f12]
+[kpdiv]>[f12]
 
 # Also pageup/pagedown
 # (Inverted, as with up/down arrow keys)
