@@ -59,3 +59,37 @@
 # (Inverted, as with up/down arrow keys)
 [kp-up]>[pdown]
 [kp-down]>[pup]
+
+# Thumb clusters, repeated for key-pad mode
+# (so that I can do, e.g., ctrl-shift-F5)
+# Left:
+[kp-bspace]>[lshift]
+[kp-delete]>[lctrl]
+[kp-lctrl]>[lwin]
+[kp-lalt]>[escape]
+[kp-home]>[lalt]
+[kp-end]>[insert]
+# Right:
+[kp0]>[space]
+[kp-enter]>[ralt]
+[kp-rctrl]>[enter]
+[kp-rwin]>[delete]
+[kp-pup]>[rctrl]
+[kp-pdown]>[rshift]
+
+# May as well repeat these too
+[kp-caps]>[bspace]
+[kp-lshift]>[home]
+[kp-rshift]>[end]
+
+# Null-out unused function-modified keys in the key-pad keywell
+[kp-6]>[null]
+[kp-y]>[null]
+[kp-h]>[null]
+[kp-n]>[null]
+[kp.]>[null]
+[kpmult]>[null]
+[kpmin]>[null]
+[kpplus]>[null]
+[kpenter1]>[null]
+[kpenter2]>[null]
