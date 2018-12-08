@@ -10,7 +10,6 @@ if [ -z "$TMUX" ] && [ -f "$HOME/.profile" ]; then
     source .profile
 fi
 
-# Source .bashrc
 if [ -f "$HOME/.bashrc" ]; then
     source .bashrc
 fi
