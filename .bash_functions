@@ -27,7 +27,7 @@ bell() {
 
 
 
-## Git shorthand functions
+# Git shorthand functions
 
 # Run 'git commit', optionally accept a message for the '-m' option.
 gc() {

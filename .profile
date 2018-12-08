@@ -6,16 +6,13 @@ umask 077
 # every time. It would be fine to run setxkbmap multiple times, except it's
 # pretty slow, so new panes would only show a prompt after a short delay.)
 if [ -n "$DISPLAY" ] && [ -z "$TMUX" ]; then
+    # Map capslock to control
     setxkbmap -option ctrl:nocaps
 fi
 
 # Source .bashrc if running bash
-# Skip this on CDF; .bashrc sources .profile on cdf,
-# since cdf ignores .profile, and we don't want an infinite loop.
-if [ -n "$BASH_VERSION" ] && [ "$USER" != hollbac1 ]; then
-    if [ -f "$HOME/.bashrc" ]; then
-        . "$HOME/.bashrc"
-    fi
+if [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
 fi
 
 # Include private bin dirs in path

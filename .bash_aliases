@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Update configs alias
+# update_configs script alias
 alias upconf="source $HOME/config-files/update_configs"
 
 # ls
@@ -46,11 +46,8 @@ alias gsb="gitrecurse git status -sb"
 alias gp="gitrecurse git pull"
 alias glh="gitrecurse git --no-pager log --oneline -n 10"
 
-
-
 # Useful C/C++ compiler flags.
 # Taken from: https://stackoverflow.com/a/9862800
-
 c_flags="-Wall -Wextra -pedantic -Werror -Wno-unused"
 c_flags="$c_flags -Wcast-align -Wcast-qual -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-include-dirs -Wredundant-decls -Wshadow -Wsign-conversion -Wstrict-overflow=5 -Wswitch-default -Wundef"
 cpp_flags="$c_flags -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual -Wsign-promo"
