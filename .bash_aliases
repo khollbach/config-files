@@ -26,6 +26,11 @@ alias hig="history | cut -c 8- | uniq | grep"
 # ack -> rg
 alias ack="rg"
 
+# Neovim, if installed.
+if command which nvim >/dev/null; then
+    alias vim="nvim"
+fi
+
 # Git shorthands
 alias gd="git diff --color-words"
 alias ga="git add"
