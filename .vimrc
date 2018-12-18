@@ -361,8 +361,8 @@ noremap <Leader>P "+P
 noremap <Leader>h "0p
 noremap <Leader>H "0P
 
-" Select recently pasted text (the default keybinding for this is gv).
-nnoremap <Leader>v `[v`]
+" Select recently pasted text. (Built-in gv selects recently selected text.)
+nnoremap gp `[v`]
 
 
 

@@ -23,3 +23,7 @@ super-m Quicktile bottom-right
 
 Solarized color scheme
 DejaVu Sans Mono Book, 12 point font (17 or 25 on my laptop)
+
+# Misc.
+
+Install xclip to enable tmux to copy to system clipboard.
