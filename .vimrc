@@ -347,6 +347,14 @@ noremap <M-C-k> 5<C-w>-
 noremap <M-C-h> 5<C-w><
 noremap <M-C-l> 5<C-w>>
 
+" Clear and redraw the screen; previously bound to <C-l>
+" This is currently a necessary bind since Nvim mangles the screen sometimes
+" when resized; e.g. when the containing terminal goes from full screen width
+" (or height) to half. The symptom is that text from other lines will appear
+" in places it shouldn't; often on the top line of the screen. This may be
+" due to an interaction with tmux.
+noremap <C-w><C-r> <C-l>
+
 
 
 " Copy/paste to/from system clipboard.
