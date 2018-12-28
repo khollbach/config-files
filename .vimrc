@@ -249,8 +249,11 @@ set linebreak
 " Don't wrap long lines.
 set nowrap
 
+" Toggle line numbers.
+noremap <F7> :set number! number?<CR>
+
 " Toggle line wrapping.
-noremap <F10> :set wrap! wrap?<CR>
+noremap <F8> :set wrap! wrap?<CR>
 
 " Easily toggle autoindent/mappings/etc for pasting text.
 set pastetoggle=<F9>
