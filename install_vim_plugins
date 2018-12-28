@@ -17,11 +17,18 @@ git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/koron/nyancat-vim.git
 git clone https://github.com/easymotion/vim-easymotion.git
+git clone https://github.com/unblevable/quick-scope.git
+git clone https://github.com/justinmk/vim-sneak.git
+git clone https://github.com/haya14busa/incsearch.vim.git
 
 popd > /dev/null
 
 
 
 # Generate plugin helptags.
-vim -u NONE -c "set nocompatible" -c "execute pathogen#infect()" \
-    -c "Helptags" -c "q"
+# TODO: this doesn't seem to be working.
+# (Is it just an issue for Nvim? Or has this never worked, even for Vim?)
+# (See also the Nvim flag `-u NORC')
+#vim -u NONE -c "set nocompatible" -c "execute pathogen#infect()" -c "Helptags" -c "q"
+#nvim -u NONE -c "set nocompatible" -c "source ~/.vim/autoload/pathogen.vim" -c "execute pathogen#infect()" -c "Helptags" -c "q"
+#nvim -u NORC -c "set nocompatible" -c "source ~/.vim/autoload/pathogen.vim" -c "execute pathogen#infect()" -c ":call pathogen#helptags()" -c "q"

@@ -2,8 +2,10 @@
 " Init
 " -----------------------------------------------------------------------------
 
-" Init Pathogen.
-execute pathogen#infect()
+" Init Pathogen (if it exists).
+if !empty(glob('~/.vim/autoload/pathogen.vim'))
+    execute pathogen#infect()
+endif
 
 " Set leader to space.
 let mapleader = "\<Space>"
@@ -20,6 +22,11 @@ filetype plugin indent on
 " -----------------------------------------------------------------------------
 " Plugin Settings
 " -----------------------------------------------------------------------------
+
+" If .vim/bundle directory exists, run this section.
+if !empty(glob('~/.vim/bundle'))
+
+
 
 " Always assume 256 color support
 set t_Co=256
@@ -47,9 +54,13 @@ call deoplete#custom#option({
 \ })
 
 " Fix the way enter interacts with deoplete.
+" If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
+" showing), then close the menu (C-y is `yes/confirm') and then insert a
+" newline.
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 
-" Use tab for completion.
+" Use tab/shift-tab for completion (if the PUM is active or if there's
+" something other than whitespace behind the cursor).
 function! s:check_space_behind() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
@@ -59,30 +70,50 @@ inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
 inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
     \ "\<C-p>" : "\<S-Tab>"
 
-" Disable preview window.
+" Disable preview window. Deoplete would sometime uses this to show
+" documentation of, e.g., python functions.
 set completeopt-=preview
 
 
 
 " Additional RSI binds.
-" These two have corner cases near the end of lines.
+
+" The following two have corner cases near the end of lines.
 function! s:at_eol() abort
     return col('.') ==# len(getline('.'))
 endfunction
+
 function! s:beyond_eol() abort
     return col('.') > len(getline('.'))
 endfunction
+
+" C-u
 inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
-inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
+
+" C-k
+if has('nvim')
+    " Nvim has a different cursor position for C-o at the end of a line
+    " compared to Vim. I consider this a bug.
+    inoremap <expr> <C-k> <sid>beyond_eol() ? "" : "<C-o>d$"
+else
+    inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
+endif
 
 " These shadow Vim's completion binds, but I use Tab/S-Tab for that anyways.
-inoremap <C-n> <C-o><down>
-inoremap <C-p> <C-o><up>
+" (If the PUM is active, close it first.)
+inoremap <expr> <C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
+inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
 
 
 
 " Toggle NERDTree.
 noremap <Leader>i :NERDTreeToggle<CR>
+
+" Go to current file in NERDTree.
+noremap <Leader>I :NERDTreeFind<CR>
+
+" Hide NERDTree after opening a file.
+let NERDTreeQuitOnOpen = 1
 
 " The default help bind '?' conflicts with vim's search-backwards.
 let NERDTreeMapHelp = '<F1>'
@@ -119,6 +150,7 @@ noremap <Leader>gb :Gblame<CR>
 
 
 " NERD Commenter.
+
 " Don't give me the default mappings.
 let g:NERDCreateDefaultMappings = 0
 
@@ -134,10 +166,57 @@ noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
 
 
 " EasyMotion
+
 let g:EasyMotion_smartcase = 1
-map <Leader>f <plug>(easymotion-s)
+
+map <Leader>f <Plug>(easymotion-s)
+
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 
+
+" quick-scope
+" Highlight only on keypress.
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+
+
+" sneak.vim
+
+" Disable highlighting of sneak matches.
+" This isn't quite the right fix, but it's pretty close.
+"hi! link Sneak Normal
+
+" Highlight matches in blue instead. Magenta was a little too much.
+hi! Sneak ctermbg=darkblue ctermfg=black guibg=darkblue guibg=black
+
+" Fix an interaction with quick-scope. The issue was that `;' would repeat the
+" last `s', even if `f' was more recently used.
+" Unfortunately this now means we can't use the same binds (`;' and `,') for
+" repeating `f' and `s'.
+noremap ; ;
+noremap , ,
+
+" Press `s' or `S' while sneaking to repeat.
+let g:sneak#s_next = 1
+
+
+
+" incsearch.vim
+" Case insensitive by default.
+map / <Plug>(incsearch-forward)\c
+map ? <Plug>(incsearch-backward)\c
+map g/ <Plug>(incsearch-stay)\c
+
+" Case-sensitive search
+map <Leader>/ <Plug>(incsearch-forward)
+map <Leader>? <Plug>(incsearch-backward)
+map <Leader>g/ <Plug>(incsearch-stay)
+
+
+
+endif
 
 " -----------------------------------------------------------------------------
 " Settings
@@ -170,6 +249,17 @@ set linebreak
 " Don't wrap long lines.
 set nowrap
 
+" Toggle line wrapping.
+noremap <F10> :set wrap! wrap?<CR>
+
+" Easily toggle autoindent/mappings/etc for pasting text.
+set pastetoggle=<F9>
+
+
+
+" Start scrolling as soon as the cursor gets close to the edge of the screen.
+set scrolloff=5
+
 " Don't go to the first non-blank on a line automatically when moving lines.
 set nostartofline
 
@@ -182,21 +272,16 @@ set ruler
 " Show visual feedback for normal mode commands requiring multiple keypresses.
 set showcmd
 
+
+
 " Show commandline completion matches in a status line.
 set wildmenu
-
-" Start scrolling as soon as the cursor gets close to the edge of the screen.
-set scrolloff=5
 
 " Go to the first match as you are typing your search.
 set incsearch
 
 " Don't highlight search matches by default.
 set nohlsearch
-
-" Case insensitive by default
-noremap / /\c
-noremap ? ?\c
 
 
 
@@ -212,22 +297,16 @@ set expandtab
 " Allow backspacing through spaces as if they were tabs.
 set softtabstop=4
 
-" Show hard tabs.
+" Show hard tabs and trailing spaces.
+" Also show indicators for text that extends past the edge of the screen.
 set list
 set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
+" Don't show trailing spaces when typing.
 autocmd InsertEnter * set listchars-=trail:·
 autocmd InsertLeave * set listchars+=trail:·
 
-" Hard tab width = 8 spaces. (Linux kernel style...)
+" Hard tab width = 8 spaces. (Linux kernel style... completely insane.)
 set tabstop=8
-
-
-
-" Easily toggle autoindent/mappings/etc for pasting text.
-set pastetoggle=<F9>
-
-" Toggle line wrapping.
-noremap <F4> :set wrap! wrap?<CR>
 
 
 
@@ -243,7 +322,7 @@ set nojoinspaces
 
 
 
-" Custom format options: don't autowrap; only insert comment characters
+" Format options: don't autowrap; only insert comment characters
 " when pressing <enter> on a commented line (and don't for the 'o' command).
 " Done on load to override plugin-file settings.
 autocmd BufNewFile,BufRead * set formatoptions=rqj
@@ -251,6 +330,7 @@ autocmd BufNewFile,BufRead * set formatoptions=rqj
 
 
 " Simple and unobtrusive folding in text files.
+" At some point I'll probably just switch to org mode for notes and todos.
 set foldtext=''
 autocmd BufNewFile,BufRead *.txt set foldmethod=indent
 autocmd BufNewFile,BufRead *.txt normal zR
@@ -347,14 +427,6 @@ noremap <M-C-k> 5<C-w>-
 noremap <M-C-h> 5<C-w><
 noremap <M-C-l> 5<C-w>>
 
-" Clear and redraw the screen; previously bound to <C-l>
-" This is currently a necessary bind since Nvim mangles the screen sometimes
-" when resized; e.g. when the containing terminal goes from full screen width
-" (or height) to half. The symptom is that text from other lines will appear
-" in places it shouldn't; often on the top line of the screen. This may be
-" due to an interaction with tmux.
-noremap <C-w><C-r> <C-l>
-
 
 
 " Copy/paste to/from system clipboard.
@@ -380,14 +452,18 @@ noremap <Leader>q :q<CR>
 " Strip trailing whitespace
 noremap <Leader>w :%s/\s\+$//<CR>
 
+" Update configs
+noremap <Leader>e :!source ~/config-files/update_configs<CR>
+
 " Reload .vimrc
 noremap <Leader>r :source $MYVIMRC<CR>
 
-" Disable search highlighting until the next search.
-"noremap <Leader>j :nohlsearch<CR>
-
-" Toggle search highlighting.
-"noremap <Leader>k :set hlsearch! hlsearch?<CR>
+" Clear and redraw the screen; usually bound to <C-l>
+" This is currently a necessary bind since Nvim mangles the screen sometimes
+" when resized; e.g. when the containing terminal goes from full screen width
+" (or height) to half. The symptom is that text from other lines will appear
+" in places it shouldn't; often on the top line of the screen.
+noremap <Leader>t <C-l>
 
 " List buffers.
 noremap <Leader><Tab> :ls<CR>
@@ -395,10 +471,6 @@ noremap <Leader><Tab> :ls<CR>
 " Next/previous buffer.
 noremap <Leader>; :bn<CR>
 noremap <Leader>, :bp<CR>
-
-" Case-sensitive search.
-noremap <Leader>/ /
-noremap <Leader>? ?
 
 " Search and replace.
 nnoremap <Leader>s :%s///gc<left><left><left><left>
@@ -415,5 +487,5 @@ noremap <Leader>X :!chmod -x %<CR>
 
 
 " Unmap s and S for now. I'll probably map them to 'sneak.vim' at some point.
-noremap s <Nop>
-noremap S <Nop>
+"noremap s <Nop>
+"noremap S <Nop>
