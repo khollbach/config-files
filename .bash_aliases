@@ -31,6 +31,9 @@ if command which nvim >/dev/null; then
     alias vim="nvim"
 fi
 
+# Emacs client
+alias emacs="emacsclient -c"
+
 # Git shorthands
 alias gd="git diff --color-words"
 alias ga="git add"

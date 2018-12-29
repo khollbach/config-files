@@ -24,8 +24,15 @@ fi
 # And thus when I log back in after, the screen won't be red-shifted, because
 # the old instance is still running but isn't affecting the current session.
 # (Manual fix is to `killall redshift; redshift &`)
-if [ -n "$DISPLAY" ] && which redshift &>/dev/null \
+if [ -n "$DISPLAY" ] && command which redshift &>/dev/null \
     && [ -z "`ps aux | grep redshift | grep -v grep`" ]; then
 
-    redshift &>/dev/null &
+    redshift &> /dev/null &
+fi
+
+# Launch an Emacs daemon for faster load times.
+# Emacs can then be started as `emacsclient -c`.
+if command which emacs > /dev/null \
+    && [ -z "`ps aux | grep emacs | grep -v grep`" ]; then
+    command emacs --daemon &> /dev/null
 fi
