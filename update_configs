@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copy dotfiles to home dir.
-rsync -rv `ls -d ~/config-files/.* | grep -v '/\.\.\?$'` ~ \
+rsync -rpv `ls -d ~/config-files/.* | grep -v '/\.\.\?$'` ~ \
     --exclude .git --exclude .gitignore
 
 # Reload bashrc definitions if you sourced this script from your shell.
