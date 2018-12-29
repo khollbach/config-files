@@ -1,10 +1,8 @@
 #!/bin/bash
 
 # Copy dotfiles to home dir.
-rsync -rv `ls -d ~/config-files/.* | grep -v '/\.\.\?$'` ~ --exclude .git
-
-# Ensure Vim swap and undo dirs exist.
-mkdir -pv ~/.vim/swap ~/.vim/undo
+rsync -rv `ls -d ~/config-files/.* | grep -v '/\.\.\?$'` ~ \
+    --exclude .git --exclude .gitignore
 
 # Reload bashrc definitions if you sourced this script from your shell.
 source ~/.bashrc
