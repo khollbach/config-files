@@ -4,7 +4,7 @@
 alias upconf="source $HOME/config-files/update_configs"
 
 # ls
-alias ls="ls -vh --color=auto"
+alias ls="ls -vhG --color=auto"
 alias ll="ls -l"
 alias la="ls -A"
 alias lla="ls -lA"
@@ -33,6 +33,9 @@ fi
 
 # Emacs client
 alias emacs="emacsclient -c"
+
+# Restart Emacs
+alias remacs="killall emacs && command emacs --daemon"
 
 # Git shorthands
 alias gd="git diff --color-words"

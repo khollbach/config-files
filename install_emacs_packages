@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Install packages.
+
+mkdir -vp ~/.emacs.d
+pushd ~/.emacs.d > /dev/null
+
+git clone https://github.com/emacs-evil/evil.git
+
+popd > /dev/null
