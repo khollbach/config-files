@@ -34,5 +34,7 @@ fi
 # Emacs can then be started as `emacsclient -c`.
 if command which emacs > /dev/null \
     && [ -z "`ps aux | grep emacs | grep -v grep`" ]; then
-    command emacs --daemon &> /dev/null
+
+    # (TODO) Disabled while I figure out my emacs configs.
+    #command emacs --daemon &> /dev/null
 fi

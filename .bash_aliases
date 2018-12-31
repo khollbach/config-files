@@ -32,7 +32,8 @@ if command which nvim >/dev/null; then
 fi
 
 # Emacs client
-alias emacs="emacsclient -c"
+# (TODO) Disabled while I figure out my configs
+#alias emacs="emacsclient -c"
 
 # Restart Emacs
 alias remacs="killall emacs && command emacs --daemon"
