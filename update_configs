@@ -4,8 +4,12 @@
 rsync -rpv `ls -d ~/config-files/.* | grep -v '/\.\.\?$'` ~ \
     --exclude .git --exclude .gitignore
 
+echo
+
 # Reload bashrc definitions if you sourced this script from your shell.
+echo source ~/.bashrc
 source ~/.bashrc
 
 # Reload tmux conf. Ignore failure if tmux isn't running.
+echo tmux source-file ~/.tmux.conf
 tmux source-file ~/.tmux.conf 2> /dev/null || :
