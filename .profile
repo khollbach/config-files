@@ -37,4 +37,5 @@ if command which emacs > /dev/null \
 
     # (TODO) Disabled while I figure out my emacs configs.
     #command emacs --daemon &> /dev/null
+    :
 fi
