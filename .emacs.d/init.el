@@ -27,25 +27,14 @@
 ;; No tabs please.
 (setq-default indent-tabs-mode nil)
 
-;
-; TODO: not working?
-;(setq _old_server-execute)
-;(defun server-execute
-;  (proc files nowait commands dontkill create-frame-func tty-name)
-;  (progn
-;    (_old_server-execute
-;      proc files nowait commands dontkill create-frame-func tty-name)
-;    (message "")))
-;
-
-;; Pause garbage collection on minibuffer setup. Supposedly helps things.
+;; Pause garbage collection on minibuffer setup. Supposedly helps performance.
 ;; See http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
-(defun my-minibuffer-setup-hook ()
-  (setq gc-cons-threshold most-positive-fixnum))
-(defun my-minibuffer-exit-hook ()
-  (setq gc-cons-threshold 800000))
-(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+;(defun my-minibuffer-setup-hook ()
+  ;(setq gc-cons-threshold most-positive-fixnum))
+;(defun my-minibuffer-exit-hook ()
+  ;(setq gc-cons-threshold 800000))
+;(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+;(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
 
 
 
@@ -53,24 +42,34 @@
 ;;; Package settings
 ;;; ---------------------------------------------------------------------------
 
-;; Package management, MELPA
-;; TODO: figure out how this works.
-;; https://melpa.org/#/getting-started
-;(require 'package)
-;(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
+;; Package management, repositories.
+(require 'package)
+(setq package-archives
+      '(("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+
+;; Fetch package listing.
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Install packages.
+(let ((packages '(evil key-chord)))
+  (dolist (p packages)
+    (unless (package-installed-p p)
+      (package-install p))))
+
+
 
 ;; Evil
-(add-to-list 'load-path "~/.emacs.d/evil")
-(require 'evil)
 (evil-mode 1)
 
-;; Note: Vim-style linear undo/redo requires the undo-tree package installed.
-;; Specifically, undo-tree.el must be in the load-path.
-;; TODO: figure out how to install this. MELPA?
+;; Vim-style linear undo/redo requires the undo-tree package installed.
+;; (Specifically, undo-tree.el must be in the load-path.)
+;; Installing through a package-manager gets this automatically; undo-tree is
+;; listed as a dependency of evil.
 
-;; jk -> ESC (relies on key-chord library).
-;; See https://www.emacswiki.org/emacs/KeyChord
-(load "~/.emacs.d/key-chord.el")
+;; jk -> ESC (relies on key-chord package).
 (setq key-chord-two-keys-delay 0.5)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-mode 1)
@@ -79,10 +78,6 @@
 ;; This way, motions like `w' and `e' work as expected.
 (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'text-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-
-;; Load packages.
-;; TODO: figure out how package management works. See the top of this section.
-;(package-initialize)
 
 ;; Reset gc-cons-threshold and file-name-handler-alist.
 )
