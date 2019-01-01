@@ -79,5 +79,21 @@
 (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'text-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
+;; normal mode C-u = page-up (Vim's C-u)
+;; insert mode C-u = backward-kill-line (Readline's C-u)
+;; M-u = universal-argument (Emacs' C-u)
+;; See https://github.com/wasamasa/dotemacs/blob/master/init.org#evil
+;; and https://www.emacswiki.org/emacs/BackwardKillLine
+(defun backward-kill-line (arg)
+  "Kill ARG lines backward."
+  (interactive "p")
+  (kill-line (- 1 arg)))
+(define-key global-map (kbd "C-u") 'backward-kill-line)
+(define-key global-map (kbd "M-u") 'universal-argument)
+(define-key universal-argument-map (kbd "C-u") nil)
+(define-key universal-argument-map (kbd "M-u") 'universal-argument-more)
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up))
+
 ;; Reset gc-cons-threshold and file-name-handler-alist.
 )
