@@ -31,9 +31,9 @@ if command which nvim >/dev/null; then
     alias vim="nvim"
 fi
 
-# Emacs client
+# Emacs client. Start a new `emacs --daemon` if none exists.
 # (TODO) Disabled while I figure out my configs
-#alias emacs="emacsclient -c"
+#alias emacs='emacsclient -a "" -c'
 
 # Restart Emacs
 alias remacs="killall emacs && command emacs --daemon"

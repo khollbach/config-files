@@ -29,13 +29,3 @@ if [ -n "$DISPLAY" ] && command which redshift &>/dev/null \
 
     redshift &> /dev/null &
 fi
-
-# Launch an Emacs daemon for faster load times.
-# Emacs can then be started as `emacsclient -c`.
-if command which emacs > /dev/null \
-    && [ -z "`ps aux | grep emacs | grep -v grep`" ]; then
-
-    # (TODO) Disabled while I figure out my emacs configs.
-    #command emacs --daemon &> /dev/null
-    :
-fi

@@ -10,6 +10,9 @@
 ;;; Misc settings
 ;;; ---------------------------------------------------------------------------
 
+;; Dark color theme.
+(load-theme 'deeper-blue)
+
 ;; Make the cursor not blink
 (blink-cursor-mode 0)
 
