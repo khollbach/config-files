@@ -18,6 +18,15 @@ alias less="less -i -j4"
 alias which="type -a"
 alias ltmk="latexmk -pdf -pvc"
 
+# `..` = `cd ..`
+# Etc.
+alias      ..="cs .."
+alias     ...="cs ../.."
+alias    ....="cs ../../.."
+alias   .....="cs ../../../.."
+alias  ......="cs ../../../../.."
+alias .......="cs ../../../../../.."
+
 # Grep
 alias grep="grep --color=auto"
 alias pag="ps aux | grep"

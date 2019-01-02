@@ -132,6 +132,11 @@ let g:ctrlp_mruf_max = 0
 " Don't try to guess a good choice of working directory.
 let g:ctrlp_working_path_mode = 0
 
+" Show me hidden files. This doesn't work well when opening ctrlp in $HOME,
+" it takes forever to index.
+" See https://github.com/kien/ctrlp.vim/issues/279
+let g:ctrlp_show_hidden = 1
+
 
 
 " ack/rg

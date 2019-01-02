@@ -27,6 +27,33 @@
 (defun display-startup-echo-area-message ()
   (message ""))
 
+;; Disable bell sounds in MS Windows.
+(setq ring-bell-function 'ignore)
+
+;; Don't clutter the current directory with backup files,
+;; prefer to save them in ~/.emacs.d/backups
+;; See https://stackoverflow.com/a/151946
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+
+;; Back up more intelligently.
+;; See https://www.emacswiki.org/emacs/BackupFiles
+(setq backup-by-copying t   ; don't clobber symlinks
+      version-control t     ; use versioned backups
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2)
+
+;; Don't lock files when you edit them.
+;; This would leave lockfiles scattered everywhere.
+;; See https://www.emacswiki.org/emacs/LockFiles
+(setq create-lockfiles nil)
+
+;; Leave my init.el alone! Save Custom configs in their own file.
+;; See http://emacsblog.org/2008/12/06/quick-tip-detaching-the-custom-file/
+;; and Emacs help for `custom-file'
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+
 ;; No tabs please.
 (setq-default indent-tabs-mode nil)
 
@@ -69,8 +96,14 @@
 
 ;; Vim-style linear undo/redo requires the undo-tree package installed.
 ;; (Specifically, undo-tree.el must be in the load-path.)
-;; Installing through a package-manager gets this automatically; undo-tree is
-;; listed as a dependency of evil.
+;; Installing Evil through a package-manager gets this automatically;
+;; undo-tree is listed as a dependency of evil.
+
+;; Visually indicate end-of-file, in a familiar style.
+(load "~/.emacs.d/vi-tilde-fringe.el")
+(require 'vi-tilde-fringe)
+(add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
+(add-hook 'text-mode-hook 'vi-tilde-fringe-mode)
 
 ;; jk -> ESC (relies on key-chord package).
 (setq key-chord-two-keys-delay 0.5)
