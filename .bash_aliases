@@ -49,6 +49,7 @@ alias remacs="killall emacs && command emacs --daemon"
 
 # Git shorthands
 alias gd="git diff --color-words"
+alias gdh="gd HEAD"
 alias ga="git add"
 alias gaa="git add --all :/"
 alias gb="git branch"
