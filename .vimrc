@@ -120,6 +120,11 @@ let NERDTreeMapHelp = '<F1>'
 
 
 
+" Toggle undotree
+noremap <Leader>U :UndotreeToggle<CR>
+
+
+
 " Open ctrlp.
 let g:ctrlp_map = "<Leader>o"
 

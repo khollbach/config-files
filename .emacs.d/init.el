@@ -10,7 +10,9 @@
 ;;; Misc settings
 ;;; ---------------------------------------------------------------------------
 
-;; Dark color theme.
+;;; Aesthetic changes.
+
+;; Dark theme.
 (load-theme 'deeper-blue)
 
 ;; Make the cursor not blink
@@ -22,10 +24,25 @@
 (tool-bar-mode 0)
 
 ;; Disable startup messages
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message "")
-(defun display-startup-echo-area-message ()
+(setq inhibit-startup-screen t) ; Splash screen
+(setq initial-scratch-message "") ; *scratch* buffer
+(defun display-startup-echo-area-message () ; Echo area / minibuffer
   (message ""))
+
+;; Show line numbers.
+(setq linum-format "%3d")
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'linum-mode)
+
+;; Visually indicate end-of-file, in a familiar style.
+(load "~/.emacs.d/vi-tilde-fringe.el")
+(require 'vi-tilde-fringe)
+(add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
+(add-hook 'text-mode-hook 'vi-tilde-fringe-mode)
+
+
+
+;;; Turn off various annoyances.
 
 ;; Disable bell sounds in MS Windows.
 (setq ring-bell-function 'ignore)
@@ -46,16 +63,26 @@
 ;; Don't lock files when you edit them.
 ;; This would leave lockfiles scattered everywhere.
 ;; See https://www.emacswiki.org/emacs/LockFiles
+;; TODO: not working, seeing #asdf# files sometimes, but not always ...
 (setq create-lockfiles nil)
 
 ;; Leave my init.el alone! Save Custom configs in their own file.
 ;; See http://emacsblog.org/2008/12/06/quick-tip-detaching-the-custom-file/
-;; and Emacs help for `custom-file'
+;; and Emacs help for `custom-file' variable.
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+
+
+;;; Misc.
+
+;; For files that do not specify a major mode, be in text-mode by default.
+(setq-default major-mode 'text-mode)
+
 ;; No tabs please.
 (setq-default indent-tabs-mode nil)
+
+
 
 ;; Pause garbage collection on minibuffer setup. Supposedly helps performance.
 ;; See http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
@@ -99,13 +126,8 @@
 ;; Installing Evil through a package-manager gets this automatically;
 ;; undo-tree is listed as a dependency of evil.
 
-;; Visually indicate end-of-file, in a familiar style.
-(load "~/.emacs.d/vi-tilde-fringe.el")
-(require 'vi-tilde-fringe)
-(add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
-(add-hook 'text-mode-hook 'vi-tilde-fringe-mode)
-
 ;; jk -> ESC (relies on key-chord package).
+;; TODO: turn this into a key sequence instead of a chord.
 (setq key-chord-two-keys-delay 0.5)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-mode 1)
@@ -120,6 +142,9 @@
 ;; M-u = universal-argument (Emacs' C-u)
 ;; See https://github.com/wasamasa/dotemacs/blob/master/init.org#evil
 ;; and https://www.emacswiki.org/emacs/BackwardKillLine
+;; TODO: see https://github.com/bling/emacs-evil-bootstrap
+;; and C-h v evil-want-<TAB>
+;; for possible alternatives.
 (defun backward-kill-line (arg)
   "Kill ARG lines backward."
   (interactive "p")
@@ -130,6 +155,9 @@
 (define-key universal-argument-map (kbd "M-u") 'universal-argument-more)
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up))
+
+;; C-e/C-y: scroll 5x faster.
+;; TODO
 
 ;; Reset gc-cons-threshold and file-name-handler-alist.
 )

@@ -18,7 +18,10 @@ alias less="less -i -j4"
 alias which="type -a"
 alias ltmk="latexmk -pdf -pvc"
 
-# `..` = `cd ..`
+# `-` = `cs -`
+alias -- -="cs -"
+
+# `..` = `cs ..`
 # Etc.
 alias      ..="cs .."
 alias     ...="cs ../.."
