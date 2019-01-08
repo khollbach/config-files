@@ -13,4 +13,5 @@ set match-hidden-files off
 
 # Bind meta-o to exit shell if last command successful.
 # Gets queued if pressed while a command is running.
+# Can be cancelled with backspace.
 "\eo": "if [ $? == 0 ]; then exit; fi\n"
