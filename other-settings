@@ -3,11 +3,13 @@
 super-i xfce4-terminal --command tmux
 super-o firefox
 super-p xfce4-popup-whiskermenu
+        (recently renamed xfce4-popup-applicationsmenu)
 
 super-' emacsclient -a "" -c
 
 super-; move-to-next-monitor
         (this is a script and needs xdotool and wmctrl installed)
+super-, move-to-next-monitor
 
 # Window manager hotkeys
 
@@ -29,3 +31,4 @@ DejaVu Sans Mono Book, 12 point font (17 or 25 on my laptop)
 # Misc.
 
 Install xclip to enable tmux to copy to system clipboard.
+Install xdotool and wmctrl for move-to-next-monitor script (see above).
