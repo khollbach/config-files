@@ -36,7 +36,8 @@ alias pag="ps aux | grep"
 alias hig="history | cut -c 8- | uniq | grep"
 
 # ack -> rg
-alias ack="rg"
+#alias ack="rg"
+alias ack="ripgrep.rg"
 
 # Neovim, if installed.
 if command which nvim >/dev/null; then
