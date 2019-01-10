@@ -38,6 +38,8 @@ source ~/.bash_aliases
 source ~/.bash_functions
 
 # Load work-related defs, etc.
-if [[ -f ~/notes/scripts/bashrc_snippet ]]; then
+if [[ `hostname` != kevan-ThinkPad-T450s
+    && -f ~/notes/scripts/bashrc_snippet ]]; then
+
     source ~/notes/scripts/bashrc_snippet
 fi
