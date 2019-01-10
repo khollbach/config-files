@@ -63,33 +63,3 @@ gcp() {
 gcap() {
     gca "$@" && git push
 }
-
-
-
-# Start tmux. If a session is already running that isn't attached to, then
-# attach to that session instead of starting a new one.
-ta() {
-    local sessions
-    local retval
-    sessions=$(tmux ls 2> /dev/null)
-    retval=$?
-
-    # If tmux ls fails (ie no tmux server running), start a new session.
-    if [[ $retval != 0 ]]; then
-        tmux
-        return
-    fi
-
-    local unattached_sessions
-    unattached_sessions=$(echo "$sessions" | grep -v attached)
-
-    # If there are no unattached sessions, start a new one.
-    # Otherwise, attach to an existing one.
-    if [[ "$unattached_sessions" == "" ]]; then
-        tmux
-    else
-        local session
-        session=$(echo "$unattached_sessions" | head -n 1 | cut -d ":" -f 1)
-        tmux attach -t "$session"
-    fi
-}
