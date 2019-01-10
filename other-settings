@@ -3,7 +3,7 @@
 super-i xfce4-terminal --command tmux
 super-o firefox
 super-p xfce4-popup-whiskermenu
-        (recently renamed xfce4-popup-applicationsmenu)
+        (sometimes called xfce4-popup-applicationsmenu)
 
 super-' emacsclient -a "" -c
 
