@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Install plugins.
-
 mkdir -vp ~/.vim/bundle
 pushd ~/.vim/bundle > /dev/null
 
+# Install plugins.
 git clone https://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/shougo/deoplete.nvim.git
 git clone https://github.com/tpope/vim-rsi.git
@@ -15,16 +14,11 @@ git clone https://github.com/ctrlpvim/ctrlp.vim.git
 git clone https://github.com/mileszs/ack.vim.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/scrooloose/nerdcommenter.git
-git clone https://github.com/koron/nyancat-vim.git
 git clone https://github.com/easymotion/vim-easymotion.git
-git clone https://github.com/unblevable/quick-scope.git
-git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/haya14busa/incsearch.vim.git
-git clone https://github.com/mbbill/undotree
+git clone https://github.com/mbbill/undotree.git
 
 popd > /dev/null
-
-
 
 # Generate plugin helptags.
 # TODO: this doesn't seem to be working.

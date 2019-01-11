@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Set prompt.
-# \e[0;1;38;5;9m is for orange text; \e[0m resets text effects.
+# Set prompt color / format.
+# \e[0;1;38;5;9m is for bold orange text; \e[0m resets text effects.
+# In the first escape sequence above, the 0 resets effects, the 1 sets bold
+# text, and the 38;5;X will give you color 0 <= X < 16 from the color palette.
 export PS1='\[\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
 
 # Default editors
@@ -26,6 +28,10 @@ MANPAGER="$MANPAGER -i"
 if [[ -z "$LS_COLORS" ]]; then
     eval `dircolors | sed s,01,00,g`
 fi
+
+# Make other-writable directory names show as black text on a green background,
+# instead of blue text against green (which is unreadable).
+export LS_COLORS="${LS_COLORS}ow=30;42:"
 
 # Lynx colors to work well with solarized terminal colors
 export LYNX_LSS=$HOME/config-files/lynx-solarized.lss

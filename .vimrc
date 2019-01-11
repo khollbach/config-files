@@ -176,40 +176,10 @@ noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
 
 
 " EasyMotion
-
-let g:EasyMotion_smartcase = 1
-
-map <Leader>f <Plug>(easymotion-s)
-
+" Better long line-wise motions, without having to count manually or use
+" relative line numbers.
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-
-
-
-" quick-scope
-" Highlight only on keypress.
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-
-
-" sneak.vim
-
-" Disable highlighting of sneak matches.
-" This isn't quite the right fix, but it's pretty close.
-"hi! link Sneak Normal
-
-" Highlight matches in blue instead. Magenta was a little too much.
-hi! Sneak ctermbg=darkblue ctermfg=black guibg=darkblue guibg=black
-
-" Fix an interaction with quick-scope. The issue was that `;' would repeat the
-" last `s', even if `f' was more recently used.
-" Unfortunately this now means we can't use the same binds (`;' and `,') for
-" repeating `f' and `s'.
-noremap ; ;
-noremap , ,
-
-" Press `s' or `S' while sneaking to repeat.
-let g:sneak#s_next = 1
 
 
 
@@ -462,15 +432,15 @@ noremap <Leader>w :%s/\s\+$//<CR>
 " Update configs
 noremap <Leader>e :!source ~/config-files/update_configs<CR>
 
-" Reload .vimrc
-noremap <Leader>r :source $MYVIMRC<CR>
-
 " Clear and redraw the screen; usually bound to <C-l>
 " This is currently a necessary bind since Nvim mangles the screen sometimes
 " when resized; e.g. when the containing terminal goes from full screen width
 " (or height) to half. The symptom is that text from other lines will appear
 " in places it shouldn't; often on the top line of the screen.
-noremap <Leader>t <C-l>
+noremap <Leader>f <C-l>
+
+" Reload .vimrc
+noremap <Leader>r :source $MYVIMRC<CR>
 
 " List buffers.
 noremap <Leader><Tab> :ls<CR>
@@ -493,6 +463,6 @@ noremap <Leader>X :!chmod -x %<CR>
 
 
 
-" Unmap s and S for now. I'll probably map them to 'sneak.vim' at some point.
-"noremap s <Nop>
-"noremap S <Nop>
+" Unmap s and S for now. I'm considering using these for 'sneak.vim'.
+noremap s <Nop>
+noremap S <Nop>
