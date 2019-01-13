@@ -1,21 +1,22 @@
 # Application hotkeys
 
-super-i xfce4-terminal --command tmux
+super-i xfce4-terminal --execute tmux_attach
 super-o firefox
 super-p xfce4-popup-whiskermenu
-        (sometimes called xfce4-popup-applicationsmenu)
+        (or xfce4-popup-applicationsmenu for xfce outside of Xubuntu)
 
-super-' emacsclient -a "" -c
+super-v xfce4-terminal --execute tmux new-session nvim
+super-e emacsclient -a "" -c
 
 super-; move-to-next-monitor
-        (this is a script and needs xdotool and wmctrl installed)
 super-, move-to-next-monitor
+        (this is a script and needs xdotool and wmctrl installed)
 
 # Window manager hotkeys
 
+super-h Quicktile left
 super-j Minimize
 super-k Maximize
-super-h Quicktile left
 super-l Quicktile right
 
 super-y Quicktile top-left
@@ -25,10 +26,13 @@ super-m Quicktile bottom-right
 
 # Terminal emulator settings
 
-Solarized color scheme
 DejaVu Sans Mono Book, 12 point font (14 or 17 or 25 on my laptop)
+Solarized color scheme
+Don't show bold text in bright colors
+Don't display borders around new windows
+Background opacity: 90 or 95%
 
 # Misc.
 
-Install xclip to enable tmux to copy to system clipboard.
+Install xclip for copying to system clipboard in tmux.
 Install xdotool and wmctrl for move-to-next-monitor script (see above).
