@@ -1,0 +1,16 @@
+#!/usr/bin/awk -f
+
+BEGIN {
+    printf "\x1b[0m";
+    for (i = 0; i < 77; i++) {
+        r = 255 - (i * 255 / 76);
+        g = i * 510 / 76;
+        b = i * 255 / 76;
+        if (g > 255) g = 510 - g;
+        printf "\x1b[48;2;%d;%d;%dm", r, g, b;
+        printf "\x1b[38;2;%d;%d;%dm", 255 - r, 255 - g, 255 - b;
+        printf i % 2 == 0 ? "/" : "\\";
+    }
+    printf "\x1b[0m";
+    printf "\n";
+}

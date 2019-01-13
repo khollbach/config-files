@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+# 0 - 15
+print "\e[0mSystem colors:\n";
+for ($color = 0; $color < 8; $color++) {
+    print "\e[48;5;${color}m  ";
+}
+print "\e[0m\n";
+for ($color = 8; $color < 16; $color++) {
+    print "\e[48;5;${color}m  ";
+}
+print "\e[0m\n\n";
+
+# 16 - 231
+print "Color cube, 6x6x6:\n";
+for ($green = 0; $green < 6; $green++) {
+    for ($red = 0; $red < 6; $red++) {
+        for ($blue = 0; $blue < 6; $blue++) {
+            $color = 16 + 36*$red + 6*$green + $blue;
+            print "\e[48;5;${color}m  ";
+        }
+        print "\e[0m ";
+    }
+    print "\n";
+}
+print "\n";
+
+# 232 - 255
+print "Grayscale ramp:\n";
+for ($color = 232; $color < 256; $color++) {
+    print "\e[48;5;${color}m  ";
+}
+print "\e[0m\n";

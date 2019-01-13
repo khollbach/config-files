@@ -2,8 +2,7 @@
 
 # Set prompt color / format.
 # \e[0;1;38;5;9m is for bold orange text; \e[0m resets text effects.
-# In the first escape sequence above, the 0 resets effects, the 1 sets bold
-# text, and the 38;5;X will give you color 0 <= X < 16 from the color palette.
+# See colors scripts for examples.
 export PS1='\[\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
 
 # Default editors
@@ -20,11 +19,8 @@ MANPAGER="$MANPAGER -j4"
 # disabled as soon as you specify a custom pager).
 MANPAGER="$MANPAGER -i"
 
-# Set LS_COLORS to use dark colors in place of light ones,
-# but only if it wasn't set already.
-# This is to play well with 'Solarized' terminal colorscheme, where the light
-# colors are replaced with various shades of greyscale for use in, e.g.,
-# Vim colorschemes.
+# Set LS_COLORS to not use any bold fonts.
+# Ignore this setting if it was already set.
 if [[ -z "$LS_COLORS" ]]; then
     eval `dircolors | sed s,01,00,g`
 fi
@@ -43,8 +39,16 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 source ~/.bash_aliases
 source ~/.bash_functions
 
+# On machines other than my laptop; e.g. when ssh'ing.
+if [[ "$HOSTNAME" != kevan-thinkpad
+    && "$HOSTNAME" != kevan-ThinkPad-T450s ]]; then
+
+    # Cyan-colored prompt
+    export PS1='\[\e[0;1;38;5;6m\]\W\$\[\e[0m\] '
+fi
+
 # Load work-related defs, etc.
-if [[ `hostname` != kevan-ThinkPad-T450s
+if [[ "$HOSTNAME" != kevan-ThinkPad-T450s
     && -f ~/notes/scripts/bashrc_snippet ]]; then
 
     source ~/notes/scripts/bashrc_snippet

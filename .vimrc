@@ -432,15 +432,15 @@ noremap <Leader>w :%s/\s\+$//<CR>
 " Update configs
 noremap <Leader>e :!source ~/config-files/update_configs<CR>
 
+" Reload .vimrc
+noremap <Leader>r :source $MYVIMRC<CR>
+
 " Clear and redraw the screen; usually bound to <C-l>
 " This is currently a necessary bind since Nvim mangles the screen sometimes
 " when resized; e.g. when the containing terminal goes from full screen width
 " (or height) to half. The symptom is that text from other lines will appear
 " in places it shouldn't; often on the top line of the screen.
 noremap <Leader>f <C-l>
-
-" Reload .vimrc
-noremap <Leader>r :source $MYVIMRC<CR>
 
 " List buffers.
 noremap <Leader><Tab> :ls<CR>

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Reset text effects
+echo -en "\e[0m"
+
+# Colors / bold.
+# Depending on the terminal emulator, bold text may appear in brighter colors.
+echo -e   "\e[30mBLACK    \e[1mDARK_GRAY"
+echo -e "\e[0;31mRED      \e[1mBRIGHT_RED"
+echo -e "\e[0;32mGREEN    \e[1mBRIGHT_GREEN"
+echo -e "\e[0;33mYELLOW   \e[1mBRIGHT_YELLOW"
+echo -e "\e[0;34mBLUE     \e[1mBRIGHT_BLUE"
+echo -e "\e[0;35mMAGENTA  \e[1mBRIGHT_MAGENTA"
+echo -e "\e[0;36mCYAN     \e[1mBRIGHT_CYAN"
+echo -e "\e[0;37mGRAY     \e[1mWHITE"
+echo -e    "\e[0mNONE     \e[1mBOLD"
+
+echo -en "\e[0m"

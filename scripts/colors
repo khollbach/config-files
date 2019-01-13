@@ -1,11 +1,10 @@
 #!/bin/bash
 
-echo -e "\e[0;30mCOLOR_BLACK      \e[1;30mCOLOR_DARK_GRAY"
-echo -e "\e[0;31mCOLOR_RED        \e[1;31mCOLOR_LIGHT_RED"
-echo -e "\e[0;32mCOLOR_GREEN      \e[1;32mCOLOR_LIGHT_GREEN"
-echo -e "\e[0;33mCOLOR_YELLOW     \e[1;33mCOLOR_LIGHT_YELLOW"
-echo -e "\e[0;34mCOLOR_BLUE       \e[1;34mCOLOR_LIGHT_BLUE"
-echo -e "\e[0;35mCOLOR_MAGENTA    \e[1;35mCOLOR_LIGHT_MAGENTA"
-echo -e "\e[0;36mCOLOR_CYAN       \e[1;36mCOLOR_LIGHT_CYAN"
-echo -e "\e[0;37mCOLOR_GRAY       \e[1;37mCOLOR_WHITE"
-echo -e "\e[0mCOLOR_NONE"
+colors_text
+echo
+cols
+echo
+colors256
+echo
+echo True color?
+colors24bit
