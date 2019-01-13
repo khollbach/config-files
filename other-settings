@@ -34,5 +34,6 @@ Background opacity: 90 or 95%
 
 # Misc.
 
+Hide desktop menu bar so maximized windows are fully full screen.
 Install xclip for copying to system clipboard in tmux.
 Install xdotool and wmctrl for move-to-next-monitor script (see above).

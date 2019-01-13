@@ -17,185 +17,182 @@ syntax on
 " Load plugin and indent files for known filetypes.
 filetype plugin indent on
 
-
-
 " -----------------------------------------------------------------------------
 " Plugin Settings
 " -----------------------------------------------------------------------------
 
-" If .vim/bundle directory exists, run this section.
-if !empty(glob('~/.vim/bundle'))
-
-
-
-" Always assume 256 color support
-set t_Co=256
+" Always assume 256-color support.
+"set t_Co=256
 
 " Dark background color.
 set background=dark
 
 " Solarized color scheme
-colorscheme solarized
+if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
+    colorscheme solarized
+endif
 
-" See through background
+" See-through background
 "highlight Normal guibg=NONE ctermbg=NONE
 
 " No startup message
 set shortmess+=I
 
+" Deoplete (autocompletion)
+if !empty(glob('~/.vim/bundle/deoplete.nvim'))
+    " Enable
+    let g:deoplete#enable_at_startup = 1
 
+    " Deoplete options.
+    call deoplete#custom#option({
+    \ 'ignore_case': v:true,
+    \ })
 
-" Enable deoplete (autocompletion).
-let g:deoplete#enable_at_startup = 1
+    " Fix the way enter interacts with deoplete.
+    " If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
+    " showing), then close the menu (C-y is `yes/confirm') and then insert a
+    " newline.
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 
-" Deoplete options.
-call deoplete#custom#option({
-\ 'ignore_case': v:true,
-\ })
+    " Use tab/shift-tab for completion (if the PUM is active or if there's
+    " something other than whitespace behind the cursor).
+    function! s:check_space_behind() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1] =~ '\s'
+    endfunction
+    inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
+        \ "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
+        \ "\<C-p>" : "\<S-Tab>"
 
-" Fix the way enter interacts with deoplete.
-" If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
-" showing), then close the menu (C-y is `yes/confirm') and then insert a
-" newline.
-inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-
-" Use tab/shift-tab for completion (if the PUM is active or if there's
-" something other than whitespace behind the cursor).
-function! s:check_space_behind() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~ '\s'
-endfunction
-inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
-    \ "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
-    \ "\<C-p>" : "\<S-Tab>"
-
-" Disable preview window. Deoplete would sometime uses this to show
-" documentation of, e.g., python functions.
-set completeopt-=preview
-
-
-
-" Additional RSI binds.
-
-" The following two have corner cases near the end of lines.
-function! s:at_eol() abort
-    return col('.') ==# len(getline('.'))
-endfunction
-
-function! s:beyond_eol() abort
-    return col('.') > len(getline('.'))
-endfunction
-
-" C-u
-inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
-
-" C-k
-if has('nvim')
-    " Nvim has a different cursor position for C-o at the end of a line
-    " compared to Vim. I consider this a bug.
-    inoremap <expr> <C-k> <sid>beyond_eol() ? "" : "<C-o>d$"
-else
-    inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
+    " Disable preview window. Deoplete would sometime uses this to show
+    " documentation of, e.g., python functions.
+    set completeopt-=preview
 endif
 
-" These shadow Vim's completion binds, but I use Tab/S-Tab for that anyways.
-" (If the PUM is active, close it first.)
-inoremap <expr> <C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
-inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
+" Additional RSI binds.
+if !empty(glob('~/.vim/bundle/vim-rsi'))
+    " The following two binds have corner cases near the end of lines,
+    " so we use functions to check for edge cases.
+    function! s:at_eol() abort
+        return col('.') ==# len(getline('.'))
+    endfunction
+    function! s:beyond_eol() abort
+        return col('.') > len(getline('.'))
+    endfunction
 
+    " C-u
+    inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
 
+    " C-k
+    if has('nvim')
+        " Nvim has a different cursor position for C-o at the end of a line
+        " compared to Vim. I consider this a bug.
+        inoremap <expr> <C-k> <sid>beyond_eol() ? "" : "<C-o>d$"
+    else
+        inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
+    endif
 
-" Toggle NERDTree.
-noremap <Leader>i :NERDTreeToggle<CR>
+    " These shadow Vim's completion binds, but I use Tab/S-Tab for that
+    " anyways.
+    " If the PUM is active, close it first.
+    inoremap <expr> <C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
+    inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
+endif
 
-" Go to current file in NERDTree.
-noremap <Leader>I :NERDTreeFind<CR>
+" NERDTree
+if !empty(glob('~/.vim/bundle/nerdtree'))
+    " Toggle NERDTree.
+    noremap <Leader>i :NERDTreeToggle<CR>
 
-" Hide NERDTree after opening a file.
-let NERDTreeQuitOnOpen = 1
+    " Go to current file in NERDTree.
+    noremap <Leader>I :NERDTreeFind<CR>
 
-" The default help bind '?' conflicts with vim's search-backwards.
-let NERDTreeMapHelp = '<F1>'
+    " Hide NERDTree after opening a file.
+    let NERDTreeQuitOnOpen = 1
 
+    " The default help bind '?' conflicts with vim's search-backwards.
+    let NERDTreeMapHelp = '<F1>'
+endif
 
+" undotree
+if !empty(glob('~/.vim/bundle/undotree'))
+    " Toggle undotree
+    noremap <Leader>U :UndotreeToggle<CR>
+endif
 
-" Toggle undotree
-noremap <Leader>U :UndotreeToggle<CR>
+" ctrlp
+if !empty(glob('~/.vim/bundle/ctrlp.vim'))
+    " Open ctrlp.
+    let g:ctrlp_map = "<Leader>o"
 
+    " Use mixed mode: search for files, buffers, and 'most-recently-used' files.
+    let g:ctrlp_cmd = "CtrlPMixed"
 
+    " Don't include MRU files in the search results at all.
+    let g:ctrlp_mruf_max = 0
 
-" Open ctrlp.
-let g:ctrlp_map = "<Leader>o"
+    " Don't try to guess a good choice of working directory.
+    let g:ctrlp_working_path_mode = 0
 
-" Use mixed mode: search for files, buffers, and 'most-recently-used' files.
-let g:ctrlp_cmd = "CtrlPMixed"
+    " Show me hidden files. This doesn't work well when opening ctrlp in $HOME,
+    " it takes forever to index.
+    " See https://github.com/kien/ctrlp.vim/issues/279
+    let g:ctrlp_show_hidden = 1
+endif
 
-" Don't include MRU files in the search results at all.
-let g:ctrlp_mruf_max = 0
-
-" Don't try to guess a good choice of working directory.
-let g:ctrlp_working_path_mode = 0
-
-" Show me hidden files. This doesn't work well when opening ctrlp in $HOME,
-" it takes forever to index.
-" See https://github.com/kien/ctrlp.vim/issues/279
-let g:ctrlp_show_hidden = 1
-
-
-
-" ack/rg
-let g:ackprg = "rg --vimgrep"
-noremap <expr> <Leader>a ":Ack "
-
-
+" ack.vim
+if !empty(glob('~/.vim/bundle/ack.vim'))
+    " ripgreg
+    let g:ackprg = "rg --vimgrep"
+    noremap <expr> <Leader>a ":Ack "
+endif
 
 " Fugitive binds.
-noremap <expr> <Leader>gg ":Git! "
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gd :Gdiff<CR>
-noremap <Leader>gb :Gblame<CR>
-
-
+if !empty(glob('~/.vim/bundle/vim-fugitive'))
+    " Toggle NERDTree.
+    noremap <Leader>i :NERDTreeToggle<CR>
+    noremap <expr> <Leader>gg ":Git! "
+    noremap <Leader>gs :Gstatus<CR>
+    noremap <Leader>gc :Gcommit<CR>
+    noremap <Leader>gd :Gdiff<CR>
+    noremap <Leader>gb :Gblame<CR>
+endif
 
 " NERD Commenter.
+if !empty(glob('~/.vim/bundle/nerdcommenter'))
+    " Don't give me the default mappings.
+    let g:NERDCreateDefaultMappings = 0
 
-" Don't give me the default mappings.
-let g:NERDCreateDefaultMappings = 0
+    " No spaces after the comment character.
+    let g:NERDSpaceDelims = 0
 
-" No spaces after the comment character.
-let g:NERDSpaceDelims = 0
+    " Comment.
+    noremap <Leader>c :call NERDComment(0, "comment")<CR>
 
-" Comment.
-noremap <Leader>c :call NERDComment(0, "comment")<CR>
-
-" Uncomment.
-noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
-
-
+    " Uncomment.
+    noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
+endif
 
 " EasyMotion
-" Better long line-wise motions, without having to count manually or use
-" relative line numbers.
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-
+if !empty(glob('~/.vim/bundle/vim-easymotion'))
+    " Better long line-wise motions, without having to count manually or use
+    " relative line numbers.
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
+endif
 
 " incsearch.vim
-" Case insensitive by default.
-map / <Plug>(incsearch-forward)\c
-map ? <Plug>(incsearch-backward)\c
-map g/ <Plug>(incsearch-stay)\c
+if !empty(glob('~/.vim/bundle/nerdtree'))
+    " Case insensitive by default.
+    map / <Plug>(incsearch-forward)\c
+    map ? <Plug>(incsearch-backward)\c
+    map g/ <Plug>(incsearch-stay)\c
 
-" Case-sensitive search
-map <Leader>/ <Plug>(incsearch-forward)
-map <Leader>? <Plug>(incsearch-backward)
-map <Leader>g/ <Plug>(incsearch-stay)
-
-
-
+    " Case-sensitive search
+    map <Leader>/ <Plug>(incsearch-forward)
+    map <Leader>? <Plug>(incsearch-backward)
+    map <Leader>g/ <Plug>(incsearch-stay)
 endif
 
 " -----------------------------------------------------------------------------
@@ -223,75 +220,11 @@ set undodir=~/.vim/undo//
 " Line numbers.
 set number
 
-" When 'wrap' is enabled, break lines at word boundaries.
-set linebreak
-
-" Don't wrap long lines.
+" Don't wrap long lines by default.
 set nowrap
 
-" Toggle line numbers.
-noremap <F7> :set number! number?<CR>
-
-" Toggle line wrapping.
-noremap <F8> :set wrap! wrap?<CR>
-
-" Easily toggle autoindent/mappings/etc for pasting text.
-set pastetoggle=<F9>
-
-
-
-" Start scrolling as soon as the cursor gets close to the edge of the screen.
-set scrolloff=5
-
-" Don't go to the first non-blank on a line automatically when moving lines.
-set nostartofline
-
-" Show status bar (filename, etc) even when only one window is open.
-set laststatus=2
-
-" Show line and column number of the cursor in the status bar.
-set ruler
-
-" Show visual feedback for normal mode commands requiring multiple keypresses.
-set showcmd
-
-
-
-" Show commandline completion matches in a status line.
-set wildmenu
-
-" Go to the first match as you are typing your search.
-set incsearch
-
-" Don't highlight search matches by default.
-set nohlsearch
-
-
-
-" Autoindent.
-set autoindent
-
-" Use 4 spaces for indent commands.
-set shiftwidth=4
-
-" Expand tab into spaces when pressed in insert mode.
-set expandtab
-
-" Allow backspacing through spaces as if they were tabs.
-set softtabstop=4
-
-" Show hard tabs and trailing spaces.
-" Also show indicators for text that extends past the edge of the screen.
-set list
-set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
-" Don't show trailing spaces when typing.
-autocmd InsertEnter * set listchars-=trail:·
-autocmd InsertLeave * set listchars+=trail:·
-
-" Hard tab width = 8 spaces. (Linux kernel style... completely insane.)
-set tabstop=8
-
-
+" When 'wrap' is enabled, break lines at word boundaries.
+set linebreak
 
 " Vertical lines at 80, 100, and 120 chars.
 set colorcolumn=80,100,120
@@ -303,34 +236,85 @@ set textwidth=79
 " Also applies to '?' and '!' characters.
 set nojoinspaces
 
-
-
-" Format options: don't autowrap; only insert comment characters
-" when pressing <enter> on a commented line (and don't for the 'o' command).
+" Format options: don't autowrap; only insert comment characters when pressing
+" enter at the end of a commented line (and don't for the 'o' command).
 " Done on load to override plugin-file settings.
 autocmd BufNewFile,BufRead * set formatoptions=rqj
 
 
 
-" Simple and unobtrusive folding in text files.
-" At some point I'll probably just switch to org mode for notes and todos.
-set foldtext=''
-autocmd BufNewFile,BufRead *.txt set foldmethod=indent
-autocmd BufNewFile,BufRead *.txt normal zR
+" Start scrolling as soon as the cursor gets close to the edge of the screen.
+set scrolloff=5
+
+" Don't automatically perform ^ after each gg, H, M, L, etc.
+set nostartofline
+
+" Go to the first match as you are typing your search.
+set incsearch
+
+" Don't highlight search matches by default.
+set nohlsearch
+
+" Show commandline completion matches above the commandline on <Tab> keypress.
+set wildmenu
+
+
+
+" Don't show status line (filename, etc) when there's only one window.
+set laststatus=1
+
+" Show line and column number of the cursor in the status line, or at the
+" bottom-right of the screen if the status line is hidden.
+" Off for now.
+set noruler
+
+" Show visual feedback for normal mode commands requiring multiple keypresses.
+" Off for now.
+set noshowcmd
+
+" Show an indicator at the bottom of the screen when you're in insert mode.
+" Off for now.
+set noshowmode
+
+" Don't show a how-to-quit message when you press <C-c> in normal mode.
+nnoremap <C-c> <Nop>
+
+
+
+" Enable autoindent.
+set autoindent
+
+" Use 4 spaces for indent commands.
+set shiftwidth=4
+
+" Expand tab into spaces when pressed in insert mode.
+set expandtab
+
+" Allow backspacing through spaces as if they were tabs.
+set softtabstop=4
+
+" Hard tab width = 8 spaces. (Linux kernel style... completely insane.)
+set tabstop=8
+
+" Show hard tabs and trailing spaces.
+" Also show indicators for text that extends past the edge of the screen.
+set list
+set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
+
+" Don't show trailing spaces when typing.
+autocmd InsertEnter * set listchars-=trail:·
+autocmd InsertLeave * set listchars+=trail:·
 
 
 
 " Two spaces indent by default for html files.
 autocmd BufNewFile,BufRead *.html
     \ setlocal shiftwidth=2 |
-    \ setlocal tabstop=2 |
     \ setlocal softtabstop=2
 
 " Treat more things as Makefile.
 autocmd BufNewFile,BufRead make*.inc
     \ setlocal syntax=make
-
-
 
 " Jump to the last position when reopening a file.
 " Don't do this for git commit messages though.
@@ -340,73 +324,83 @@ autocmd BufReadPost *
     \ endif
 autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 
-
-
 " -----------------------------------------------------------------------------
 " Mappings
 " -----------------------------------------------------------------------------
 
 " jk = Exit insert mode or command-line mode.
 inoremap jk <Esc>
-
 cnoremap jk <C-c>
-
-
 
 " <CR> = gg
 noremap <CR> gg
+
+" Scroll 5x faster.
+noremap <C-y> 5<C-y>
+noremap <C-e> 5<C-e>
+
+" Scroll one line at a time.
+if has('nvim')
+    noremap <M-C-y> <C-y>
+    noremap <M-C-e> <C-e>
+else
+    noremap <Esc><C-y> <C-y>
+    noremap <Esc><C-e> <C-e>
+endif
 
 " <Home> = ^
 " (By default it behaves like the 0 key instead.)
 noremap <Home> ^
 
-" <BS> = ^
-noremap <BS> ^
 
-" \ = $
-noremap \ $
 
-" Scroll faster.
-noremap <C-y> 5<C-y>
-noremap <C-e> 5<C-e>
+" Toggle line numbers.
+noremap <F7> :set number! number?<CR>
 
-" Scroll one line at a time.
-noremap <M-C-y> <C-y>
-noremap <Esc><C-y> <C-y>
-noremap <M-C-e> <C-e>
-noremap <Esc><C-e> <C-e>
+" Toggle line wrapping.
+noremap <F8> :set wrap! wrap?<CR>
+
+" Easily toggle autoindent/mappings/etc, for pasting text.
+set pastetoggle=<F9>
 
 
 
-" <M-q> = Quit all windows.
-noremap <M-q> :qa<CR>
-noremap <Esc>q :qa<CR>
-inoremap <M-q> <C-o>:qa<CR>
-inoremap <Esc>q <C-o>:qa<CR>
-
+" <M-q> = Quit Vim.
 " <M-w> = Save.
-noremap <M-w> :w<CR>
-noremap <Esc>w :w<CR>
-inoremap <M-w> <C-o>:w<CR>
-inoremap <Esc>w <C-o>:w<CR>
+if has('nvim')
+    noremap <M-q> :qa<CR>
+    inoremap <M-q> <C-o>:qa<CR>
+    noremap <M-w> :w<CR>
+    inoremap <M-w> <C-o>:w<CR>
+else
+    noremap <Esc>q :qa<CR>
+    inoremap <Esc>q <C-o>:qa<CR>
+    noremap <Esc>w :w<CR>
+    inoremap <Esc>w <C-o>:w<CR>
+endif
 
-
-
-" Navigate windows.
+" Navigate windows: C-hjkl
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 
-" Resize window.
-noremap <M-C-j> 5<C-w>+
-noremap <M-C-k> 5<C-w>-
-noremap <M-C-h> 5<C-w><
-noremap <M-C-l> 5<C-w>>
+" Resize current window: C-M-hjkl
+if has('nvim')
+    noremap <M-C-j> 5<C-w>+
+    noremap <M-C-k> 5<C-w>-
+    noremap <M-C-h> 5<C-w><
+    noremap <M-C-l> 5<C-w>>
+else
+    noremap <Esc><C-j> 5<C-w>+
+    noremap <Esc><C-k> 5<C-w>-
+    noremap <Esc><C-h> 5<C-w><
+    noremap <Esc><C-l> 5<C-w>>
+endif
 
 
 
-" Copy/paste to/from system clipboard.
+" Copy/cut/paste to/from system clipboard.
 noremap <Leader>y "+y
 noremap <Leader>Y "+Y
 noremap <Leader>d "+d
@@ -449,6 +443,9 @@ noremap <Leader><Tab> :ls<CR>
 noremap <Leader>; :bn<CR>
 noremap <Leader>, :bp<CR>
 
+" Toggle search highlight.
+noremap <Leader>' :set hlsearch! hlsearch?<CR>
+
 " Search and replace.
 nnoremap <Leader>s :%s///gc<left><left><left><left>
 vnoremap <Leader>s :s///gc<left><left><left><left>
@@ -460,8 +457,6 @@ vnoremap <Leader>n :s/\c//gn<left><left><left><left>
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>
 noremap <Leader>X :!chmod -x %<CR>
-
-
 
 " Unmap s and S for now. I'm considering using these for 'sneak.vim'.
 noremap s <Nop>
