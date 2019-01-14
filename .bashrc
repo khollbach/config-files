@@ -49,7 +49,7 @@ fi
 
 # Load work-related defs, etc.
 if [[ "$HOSTNAME" != kevan-ThinkPad-T450s
-    && -f ~/notes/scripts/bashrc_snippet ]]; then
+    && -f ~/notes/config/bashrc-snippet ]]; then
 
-    source ~/notes/scripts/bashrc_snippet
+    source ~/notes/config/bashrc-snippet
 fi
