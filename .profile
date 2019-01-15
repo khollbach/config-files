@@ -24,8 +24,8 @@ fi
 # And thus when I log back in after, the screen won't be red-shifted, because
 # the old instance is still running but isn't affecting the current session.
 # (Manual fix is to `killall redshift; redshift &`)
-if [ -n "$DISPLAY" ] && command which redshift &>/dev/null \
+if [ -n "$DISPLAY" ] && command which redshift > /dev/null 2>&1 \
     && [ -z "`ps aux | grep redshift | grep -v grep`" ]; then
 
-    redshift &> /dev/null &
+    redshift > /dev/null 2>&1 &
 fi
