@@ -40,8 +40,9 @@ set shortmess+=I
 
 " Deoplete (autocompletion)
 if !empty(glob('~/.vim/bundle/deoplete.nvim'))
-    " Enable
-    let g:deoplete#enable_at_startup = 1
+    " Automatic suggestions
+    " Disabled for now.
+    "let g:deoplete#enable_at_startup = 1
 
     " Deoplete options.
     call deoplete#custom#option({
