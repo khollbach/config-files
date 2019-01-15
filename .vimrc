@@ -41,13 +41,29 @@ set shortmess+=I
 " Deoplete (autocompletion)
 if !empty(glob('~/.vim/bundle/deoplete.nvim'))
     " Automatic suggestions
-    " Disabled for now.
-    "let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_at_startup = 1
 
     " Deoplete options.
     call deoplete#custom#option({
     \ 'ignore_case': v:true,
+    \ 'on_insert_enter': v:false,
     \ })
+
+    " Initially disable auto_complete.
+    " Toggle auto_complete: <F6>
+    call deoplete#custom#option('auto_complete', v:false)
+    let s:my_deoplete_enabled = 0
+    function! s:toggle_deoplete() abort
+        if s:my_deoplete_enabled
+            call deoplete#custom#option('auto_complete', v:false)
+            let s:my_deoplete_enabled = 0
+        else
+            call deoplete#custom#option('auto_complete', v:true)
+            let s:my_deoplete_enabled = 1
+        endif
+        return ""
+    endfunction
+    noremap <expr> <F6> <sid>toggle_deoplete()
 
     " Fix the way enter interacts with deoplete.
     " If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
@@ -356,12 +372,13 @@ noremap <Home> ^
 
 
 " Toggle line numbers.
-noremap <F7> :set number! number?<CR>
+noremap <F4> :set number!<CR>
 
 " Toggle line wrapping.
-noremap <F8> :set wrap! wrap?<CR>
+noremap <F5> :set wrap! wrap?<CR>
 
-" Easily toggle autoindent/mappings/etc, for pasting text.
+" Toggle autoindent/mappings/etc, for pasting text.
+noremap <F9> :set paste! paste?<CR>
 set pastetoggle=<F9>
 
 
