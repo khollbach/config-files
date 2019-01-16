@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Run a given shell command in the current dir if it's part of git repo,
+# and in each subdir that is the root of a git repo.
+# E.g., `gitrecurse git status -s`
+main() {
+    local shell_command
+    shell_command=("$@")
+
+    # Run the command if we're already inside a git repo.
+    # Note that we might not be at the topmost directory of the repo, so we
+    # don't check for existence of a .git directory or anything like that.
+    if git status &> /dev/null; then
+        "${shell_command[@]}"
+    fi
+
+    # Try subdirs recursively.
+    recurse "${shell_command[@]}"
+}
+
+# For all subdirs of the current dir, if they are the root of a git repo,
+# run the given shell command. Recurse on all subdirs.
+recurse() {
+    local shell_command
+    shell_command=("$@")
+
+    # Ignore hidden directories in $HOME.
+    local subdirs
+    if [[ `pwd` == ~ ]]; then
+        subdirs=*/
+    else
+        subdirs="*/ .*/"
+    fi
+
+    # Check all subdirs.
+    for dir in $subdirs; do
+        # Skip certain dirs.
+        local skip
+        skip=false
+        local patterns
+        patterns='^./?$ ^../?$ ^.git/?$'
+        for pat in $patterns; do
+            if [[ "$dir" =~ $pat ]]; then skip=true; fi
+        done
+        if [[ "$skip" == true ]]; then continue; fi
+
+        pushd "$dir" > /dev/null || continue
+
+        # If this is the root of a git repo,
+        # print the repo name (in blue) and then run the command.
+        # We don't want to print the same repo twice, so it's important
+        # that we are indeed at the root.
+        if [[ -d .git && ! -L .git ]]; then
+            echo -e "\e[0;34m`pwd`\e[0m"
+            "${shell_command[@]}"
+        fi
+
+        # Recurse.
+        recurse "${shell_command[@]}"
+
+        popd > /dev/null || exit 1
+    done
+}
+
+main "$@"
