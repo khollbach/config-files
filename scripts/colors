@@ -1,10 +1,10 @@
 #!/bin/bash
 
-colors_text
+colors_bold
 echo
 cols
 echo
 colors256
 echo
-echo True color?
+echo True color\?
 colors24bit
