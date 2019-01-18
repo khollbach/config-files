@@ -5,7 +5,7 @@ super-o firefox
 super-p xfce4-popup-whiskermenu
         (or xfce4-popup-applicationsmenu for xfce outside of Xubuntu)
 
-super-v xfce4-terminal --execute tmux new-session nvim
+super-v xfce4-terminal --execute tmux new-session tmux_nvim
 super-e emacsclient -a "" -c
 
 super-; move-to-next-monitor

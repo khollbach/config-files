@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -z "$TMUX" ]]; then
+    tmux new-session "$0"
+else
+    tmux set-option status off
+    nvim "$@"
+fi
