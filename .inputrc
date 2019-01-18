@@ -8,6 +8,11 @@ set show-all-if-ambiguous on
 # press tab with an empty prefix.
 set match-hidden-files off
 
+# C-t = search forward. This is bound to C-s by default, but most terminals
+# use C-s for pausing screen output, so readline will never receive the "C-s".
+# See https://superuser.com/a/610990
+"\C-t": forward-search-history
+
 # Bind meta-p to ctrl-p, enter; ie run previous command.
 "\ep": "\C-p\n"
 
