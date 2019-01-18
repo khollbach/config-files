@@ -21,8 +21,11 @@ filetype plugin indent on
 " Plugin Settings
 " -----------------------------------------------------------------------------
 
-" Always assume 256-color support.
-"set t_Co=256
+" If TERM is either of the following, assume true-color support.
+if $TERM ==# "xterm-256color" || $TERM ==# "screen-256color"
+    " TODO: this "works", but is messing up my colorscheme; why?
+    "set termguicolors
+endif
 
 " Dark background color.
 set background=dark
@@ -341,13 +344,39 @@ autocmd BufReadPost *
     \ endif
 autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 
+
+
+" Neovim terminal settings.
+if has('nvim')
+    " Make escape key behave as expected.
+    tnoremap <Esc> <C-\><C-n>
+
+    " jk = Esc
+    tnoremap jk <C-\><C-n>
+    tnoremap jK <C-\><C-n>
+    tnoremap Jk <C-\><C-n>
+    tnoremap JK <C-\><C-n>
+
+    " Line numbers off by default.
+    autocmd TermOpen * setlocal nonumber
+
+    " Start in terminal insert mode.
+    autocmd TermOpen * startinsert
+endif
+
 " -----------------------------------------------------------------------------
 " Mappings
 " -----------------------------------------------------------------------------
 
 " jk = Exit insert mode or command-line mode.
 inoremap jk <Esc>
+inoremap jK <Esc>
+inoremap Jk <Esc>
+inoremap JK <Esc>
 cnoremap jk <C-c>
+cnoremap jK <C-c>
+cnoremap Jk <C-c>
+cnoremap JK <C-c>
 
 " <CR> = gg
 noremap <CR> gg
@@ -372,7 +401,7 @@ noremap <Home> ^
 
 
 " Toggle line numbers.
-noremap <F4> :set number!<CR>
+noremap <F4> :set number! number?<CR>
 
 " Toggle line wrapping.
 noremap <F5> :set wrap! wrap?<CR>
