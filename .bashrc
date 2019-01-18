@@ -15,9 +15,14 @@ export SVN_EDITOR=/usr/bin/vim
 export MANPAGER=less
 # Show search matches on the fourth line from the top instead of at the top.
 MANPAGER="$MANPAGER -j4"
-# Case insensitive search (this is actually the default in man, but gets
-# disabled as soon as you specify a custom pager).
+# Case insensitive search (this is actually the default in man, but apparently
+# gets disabled as soon as you specify a custom pager).
 MANPAGER="$MANPAGER -i"
+
+# Custom less options for git output: do clean up screen output after exit, and
+# don't quit instantly when the output fits on one screen.
+# See https://superuser.com/a/1202694
+export GIT_PAGER="less -+X -+F"
 
 # Set LS_COLORS to not use any bold fonts.
 # Ignore this setting if it was already set.
