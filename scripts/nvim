@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -x ~/.opt/nvim-linux64/bin/nvim ]; then
+    ~/.opt/nvim-linux64/bin/nvim "$@"
+else
+    /usr/bin/nvim "$@"
+fi

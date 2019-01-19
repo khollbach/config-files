@@ -36,6 +36,11 @@ Autohide mouse pointer
 
 # Misc.
 
-Hide desktop menu bar so maximized windows are fully full screen.
 Install xclip for copying to system clipboard in tmux.
 Install xdotool and wmctrl for move-to-next-monitor script (see above).
+Install the most recent stable release of Neovim to ~/.opt
+Upgrade python3-neovim version; the following should work:
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt update
+    sudo apt install neovim
+    sudo apt upgrade
