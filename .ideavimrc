@@ -1,0 +1,14 @@
+" Yank/paste to/from system clipboard always.
+" This includes `y', `d', `c', `p', etc.
+set clipboard+=unnamedplus
+
+" Mappings
+inoremap jk <Esc>
+inoremap jK <Esc>
+inoremap Jk <Esc>
+inoremap JK <Esc>
+noremap <CR> gg
+noremap <C-y> 5<C-y>
+noremap <C-e> 5<C-e>
+noremap <Home> ^
+nnoremap gp `[v`]
