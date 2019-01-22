@@ -336,6 +336,10 @@ autocmd BufNewFile,BufRead *.html
 autocmd BufNewFile,BufRead make*.inc
     \ setlocal syntax=make
 
+" Treat TypeScript as JavaScript.
+autocmd BufNewFile,BufRead *.ts
+    \ setlocal syntax=javascript
+
 " Jump to the last position when reopening a file.
 " Don't do this for git commit messages though.
 autocmd BufReadPost *
