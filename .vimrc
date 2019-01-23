@@ -256,10 +256,10 @@ set textwidth=79
 " Also applies to '?' and '!' characters.
 set nojoinspaces
 
-" Format options: don't autowrap; only insert comment characters when pressing
-" enter at the end of a commented line (and don't for the 'o' command).
+" Format options
 " Done on load to override plugin-file settings.
-autocmd BufNewFile,BufRead * set formatoptions=rqj
+"autocmd BufNewFile,BufRead * set formatoptions+=tcl
+autocmd BufNewFile,BufRead * set formatoptions+=rqj formatoptions-=o
 
 
 
@@ -284,9 +284,11 @@ set wildmenu
 set laststatus=1
 
 " Show line and column number of the cursor in the status line, or at the
-" bottom-right of the screen if the status line is hidden.
-" Off for now.
-set noruler
+" bottom-right of the screen if the status line is hidden. Off for now.
+" Intead, show whether the current buffer has been modified.
+set ruler
+"set rulerformat=%m%=%l,%c%=%P
+set rulerformat=%=%m
 
 " Show visual feedback for normal mode commands requiring multiple keypresses.
 " Off for now.
