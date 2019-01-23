@@ -12,3 +12,6 @@ noremap <C-y> 5<C-y>
 noremap <C-e> 5<C-e>
 noremap <Home> ^
 nnoremap gp `[v`]
+
+" Settings
+set scrolloff=5
