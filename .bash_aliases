@@ -66,7 +66,7 @@ alias gs="gitrecurse git status"
 alias gss="gitrecurse git status -s"
 alias gsi="gitrecurse git status -s --ignored"
 alias gsb="gitrecurse git status -sb"
-alias gp="gitrecurse git pull"
+alias gp="gitrecurse git pull --rebase"
 alias glh="gitrecurse git --no-pager log --oneline -n 10"
 
 # Useful C/C++ compiler flags.
