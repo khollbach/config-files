@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # When on my laptop,
-if [[ "$HOSTNAME" == kevan-thinkpad
-    || "$HOSTNAME" == kevan-ThinkPad-T450s ]]; then
-
+if [[ "$HOSTNAME" == kevan-thinkpad ]]; then
     # run zoomed-in version of firefox, for high-dpi screens.
     GDK_DPI_SCALE=1.5 /usr/bin/firefox "$@"
 else

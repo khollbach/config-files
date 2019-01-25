@@ -1,5 +1,5 @@
-# Case-insensitive unless pattern includes captial letters
-#--smart-case
-
 # Ignore ctags tagfiles
 --glob=!tags
+
+# Ignore .git directories, even when --hidden is given on the command line.
+--glob=!.git

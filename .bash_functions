@@ -14,15 +14,23 @@ ct() {
     cd "$@" && lt
 }
 
+
+
 # Run evince in background and ignore stdout/stderr.
 ev() {
     evince "$@" &> /dev/null &
 }
 
 # Time a long command and ring a bell when done.
-# (Bells show up visually in tmux.)
+# (Bells show up visually in tmux when a command in another window completes.)
 bell() {
-    time "$@"; echo -en '\a'
+    # Preserve the return value.
+    local rv
+    time "$@"
+    rv=$?
+
+    echo -en '\a'
+    return $rv
 }
 
 

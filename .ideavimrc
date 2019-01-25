@@ -1,7 +1,3 @@
-" Yank/paste to/from system clipboard always.
-" This includes `y', `d', `c', `p', etc.
-set clipboard+=unnamedplus
-
 " Mappings
 inoremap jk <Esc>
 inoremap jK <Esc>
@@ -15,3 +11,6 @@ nnoremap gp `[v`]
 
 " Settings
 set scrolloff=5
+set ignorecase " I really don't like this, but `noremap / /\c` doesn't work.
+set clipboard+=unnamedplus " Yank/paste to/from system clipboard always.
+                           " This includes `y', `d', `c', `p', etc.

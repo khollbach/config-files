@@ -1,11 +1,22 @@
 #!/bin/bash
 
-# Set prompt color / format.
-# \e[0;1;38;5;9m is for bold orange text; \e[0m resets text effects.
-# See colors scripts for examples.
-export PS1='\[\e[0;1;38;5;9m\]\W\$\[\e[0m\] '
+# Prompt format.
+# \e[0;1;38;5;Xm is for bold, X-colored text; \e[0m resets text effects.
+# \a is an ASCII bell, which shows up visually in tmux when a long-running
+# command in another window completes.
+export PS1='\[\e[0;1;38;5;${MY_PROMPT_COLOR}m\]\W\$\[\e[0m\a\] '
 
-# Default editors
+# Prompt color.
+# On machines other than my laptop; e.g. when ssh'ing:
+if [[ "$HOSTNAME" != kevan-thinkpad ]]; then
+    # Cyan
+    export MY_PROMPT_COLOR=6
+else
+    # Orange
+    export MY_PROMPT_COLOR=9
+fi
+
+# Default editor for git commit messages, etc.
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export GIT_EDITOR=/usr/bin/vim
@@ -25,36 +36,19 @@ MANPAGER="$MANPAGER -i"
 export GIT_PAGER="less -+X -+F"
 
 # Set LS_COLORS to not use any bold fonts.
-# Ignore this setting if it was already set.
-if [[ -z "$LS_COLORS" ]]; then
-    eval `dircolors | sed s,01,00,g`
-fi
-
+eval `dircolors | sed s,01,00,g`
 # Make other-writable directory names show as black text on a green background,
 # instead of blue text against green (which is unreadable).
 export LS_COLORS="${LS_COLORS}ow=30;42:"
-
-# Lynx colors to work well with solarized terminal colors
-export LYNX_LSS=$HOME/config-files/lynx-solarized.lss
 
 # ripgrep config file
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Load aliases, functions.
-source ~/.bash_aliases
-source ~/.bash_functions
-
-# On machines other than my laptop; e.g. when ssh'ing.
-if [[ "$HOSTNAME" != kevan-thinkpad
-    && "$HOSTNAME" != kevan-ThinkPad-T450s ]]; then
-
-    # Cyan-colored prompt
-    export PS1='\[\e[0;1;38;5;6m\]\W\$\[\e[0m\] '
-fi
+source $HOME/.bash_aliases
+source $HOME/.bash_functions
 
 # Load work-related defs, etc.
-if [[ "$HOSTNAME" != kevan-ThinkPad-T450s
-    && -f ~/notes/config/bashrc-snippet ]]; then
-
-    source ~/notes/config/bashrc-snippet
+if [[ -f $HOME/notes/config/bashrc-snippet ]]; then
+    source $HOME/notes/config/bashrc-snippet
 fi

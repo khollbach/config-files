@@ -10,7 +10,6 @@ super-e emacsclient -a "" -c
 
 super-; move-to-next-monitor
 super-, move-to-next-monitor
-        (this is a script and needs xdotool and wmctrl installed)
 
 # Window manager hotkeys
 
@@ -37,9 +36,10 @@ Autohide mouse pointer
 # Misc.
 
 Install xclip for copying to system clipboard in tmux.
-Install xdotool and wmctrl for move-to-next-monitor script (see above).
-Install the most recent stable release of Neovim to ~/.opt
-Upgrade python3-neovim version; the following should work:
+Install xdotool and wmctrl for move-to-next-monitor script.
+Install the most recent stable release of Neovim to ~/.opt to fix screen
+drawing issues. See https://github.com/neovim/neovim/issues/8322
+Upgrade python3-neovim version, for deoplete. The following should work:
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt update
     sudo apt install neovim

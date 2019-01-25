@@ -35,9 +35,6 @@ if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
     colorscheme solarized
 endif
 
-" See-through background
-"highlight Normal guibg=NONE ctermbg=NONE
-
 " No startup message
 set shortmess+=I
 
@@ -256,9 +253,7 @@ set textwidth=79
 " Also applies to '?' and '!' characters.
 set nojoinspaces
 
-" Format options
-" Done on load to override plugin-file settings.
-"autocmd BufNewFile,BufRead * set formatoptions+=tcl
+" Text-formatting options. Done on load to override plugin-file settings.
 autocmd BufNewFile,BufRead * set formatoptions+=rqj formatoptions-=o
 
 
@@ -283,19 +278,18 @@ set wildmenu
 " Don't show status line (filename, etc) when there's only one window.
 set laststatus=1
 
-" Show line and column number of the cursor in the status line, or at the
-" bottom-right of the screen if the status line is hidden. Off for now.
-" Intead, show whether the current buffer has been modified.
+" Show certain info at the bottom-right of the screen.
+" Intead of the default information (cursor's current line/column numbers),
+" show whether the current buffer has been modified.
 set ruler
-"set rulerformat=%m%=%l,%c%=%P
 set rulerformat=%=%m
 
-" Show visual feedback for normal mode commands requiring multiple keypresses.
-" Off for now.
+" Don't give visual feedback for normal mode commands requiring multiple
+" keypresses.
 set noshowcmd
 
-" Show an indicator at the bottom of the screen when you're in insert mode.
-" Off for now.
+" Don't show an indicator in the echo area when you're in insert mode.
+" (The cursor shape already indicates that in Neovim.)
 set noshowmode
 
 " Don't show a how-to-quit message when you press <C-c> in normal mode.
@@ -366,7 +360,7 @@ if has('nvim')
     " Line numbers off by default.
     autocmd TermOpen * setlocal nonumber
 
-    " Start in terminal insert mode.
+    " Start terminal in insert mode (called "Terminal-mode" in the docs).
     autocmd TermOpen * startinsert
 endif
 
@@ -404,6 +398,14 @@ endif
 " (By default it behaves like the 0 key instead.)
 noremap <Home> ^
 
+" Select recently pasted text.
+" (Built-in gv selects recently selected text.)
+nnoremap gp `[v`]
+
+" Unmap s and S for now. I'm considering using these for 'sneak.vim'.
+noremap s <Nop>
+noremap S <Nop>
+
 
 
 " Toggle line numbers.
@@ -415,8 +417,6 @@ noremap <F5> :set wrap! wrap?<CR>
 " Toggle autoindent/mappings/etc, for pasting text.
 noremap <F9> :set paste! paste?<CR>
 set pastetoggle=<F9>
-
-
 
 " <M-q> = Quit Vim.
 " <M-w> = Save.
@@ -432,22 +432,24 @@ else
     inoremap <Esc>w <C-o>:w<CR>
 endif
 
+
+
 " Navigate windows: C-hjkl
+noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
-noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 
 " Resize current window: C-M-hjkl
 if has('nvim')
+    noremap <M-C-h> 5<C-w><
     noremap <M-C-j> 5<C-w>+
     noremap <M-C-k> 5<C-w>-
-    noremap <M-C-h> 5<C-w><
     noremap <M-C-l> 5<C-w>>
 else
+    noremap <Esc><C-h> 5<C-w><
     noremap <Esc><C-j> 5<C-w>+
     noremap <Esc><C-k> 5<C-w>-
-    noremap <Esc><C-h> 5<C-w><
     noremap <Esc><C-l> 5<C-w>>
 endif
 
@@ -465,9 +467,6 @@ noremap <Leader>P "+P
 noremap <Leader>h "0p
 noremap <Leader>H "0P
 
-" Select recently pasted text. (Built-in gv selects recently selected text.)
-nnoremap gp `[v`]
-
 
 
 " Quit current window.
@@ -483,11 +482,13 @@ noremap <Leader>e :!source ~/config-files/update_configs<CR>
 noremap <Leader>r :source $MYVIMRC<CR>
 
 " Clear and redraw the screen; usually bound to <C-l>
-" This is currently a necessary bind since Nvim mangles the screen sometimes
-" when resized; e.g. when the containing terminal goes from full screen width
-" (or height) to half. The symptom is that text from other lines will appear
-" in places it shouldn't; often on the top line of the screen.
+" This is currently a useful bind since Neovim mangles the top line of the
+" screen sometimes when resized.
+" See https://github.com/neovim/neovim/issues/8322
+" Fixed in Neovim 3.2, yay!
 noremap <Leader>f <C-l>
+
+
 
 " List buffers.
 noremap <Leader><Tab> :ls<CR>
@@ -510,7 +511,3 @@ vnoremap <Leader>n :s/\c//gn<left><left><left><left>
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>
 noremap <Leader>X :!chmod -x %<CR>
-
-" Unmap s and S for now. I'm considering using these for 'sneak.vim'.
-noremap s <Nop>
-noremap S <Nop>

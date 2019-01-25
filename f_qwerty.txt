@@ -1,3 +1,7 @@
+# Kinesis Advantage 2 on-board drive keymap
+# See https://gist.github.com/nicholasknight/181375ee15f9cb89d3c69f4cc2b63df9
+# See also the KA2 manual
+
 # Left thumb cluster
 [bspace]>[lshift]
 [delete]>[lctrl]
