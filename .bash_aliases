@@ -47,8 +47,9 @@ if command which nvim >/dev/null; then
     alias vim="nvim"
 fi
 
-# Restart Emacs
-alias remacs="killall emacs && emacs --daemon"
+# Emacs
+alias emacs="emacsclient -a '' -c"
+alias remacs="killall emacs; command emacs --daemon"
 
 
 

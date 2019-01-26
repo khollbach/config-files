@@ -2,9 +2,7 @@
 
 # Prompt format.
 # \e[0;1;38;5;Xm is for bold, X-colored text; \e[0m resets text effects.
-# \a is an ASCII bell, which shows up visually in tmux when a long-running
-# command in another window completes.
-export PS1='\[\e[0;1;38;5;${MY_PROMPT_COLOR}m\]\W\$\[\e[0m\a\] '
+export PS1='\[\e[0;1;38;5;${MY_PROMPT_COLOR}m\]\W\$\[\e[0m\] '
 
 # Prompt color.
 # On machines other than my laptop; e.g. when ssh'ing:
