@@ -44,3 +44,6 @@ Upgrade python3-neovim version, for deoplete. The following should work:
     sudo apt update
     sudo apt install neovim
     sudo apt upgrade
+If you want capslock to be control in virtual consoles, add to /etc/rc.local:
+    (dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
+and make sure the file is executable and has the header #!/bin/bash

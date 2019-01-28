@@ -2,16 +2,16 @@
 
 # Prompt format.
 # \e[0;1;38;5;Xm is for bold, X-colored text; \e[0m resets text effects.
-export PS1='\[\e[0;1;38;5;${MY_PROMPT_COLOR}m\]\W\$\[\e[0m\] '
+PS1='\[\e[0;1;38;5;${MY_PROMPT_COLOR}m\]\W\$\[\e[0m\] '
 
 # Prompt color.
 # On machines other than my laptop; e.g. when ssh'ing:
 if [[ "$HOSTNAME" != kevan-thinkpad ]]; then
     # Cyan
-    export MY_PROMPT_COLOR=6
+    MY_PROMPT_COLOR=6
 else
     # Orange
-    export MY_PROMPT_COLOR=9
+    MY_PROMPT_COLOR=9
 fi
 
 # Default editor for git commit messages, etc.

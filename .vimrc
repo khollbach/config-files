@@ -21,12 +21,6 @@ filetype plugin indent on
 " Plugin Settings
 " -----------------------------------------------------------------------------
 
-" If TERM is either of the following, assume true-color support.
-if $TERM ==# "xterm-256color" || $TERM ==# "screen-256color"
-    " TODO: this "works", but is messing up my colorscheme; why?
-    "set termguicolors
-endif
-
 " Dark background color.
 set background=dark
 
@@ -34,9 +28,6 @@ set background=dark
 if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
     colorscheme solarized
 endif
-
-" No startup message
-set shortmess+=I
 
 " Deoplete (autocompletion)
 if !empty(glob('~/.vim/bundle/deoplete.nvim'))
@@ -234,6 +225,9 @@ set undodir=~/.vim/undo//
 
 
 
+" No startup message
+set shortmess+=I
+
 " Line numbers.
 set number
 
@@ -346,8 +340,8 @@ autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 
 
 
-" Neovim terminal settings.
-if has('nvim')
+" Terminal settings
+if has('nvim') || has('terminal')
     " Make escape key behave as expected.
     tnoremap <Esc> <C-\><C-n>
 
@@ -356,7 +350,10 @@ if has('nvim')
     tnoremap jK <C-\><C-n>
     tnoremap Jk <C-\><C-n>
     tnoremap JK <C-\><C-n>
+endif
 
+" Neovim terminal settings
+if has('nvim')
     " Line numbers off by default.
     autocmd TermOpen * setlocal nonumber
 
