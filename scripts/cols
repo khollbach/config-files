@@ -1,11 +1,14 @@
-#!/bin/sh
-# Print four lines showing blocks of colors: 0-7 | 0-7bold | 8-15 | 8-15bold
-perl -CADS -lwe '
-my $block = shift || (chr(0x2588) x 4);
-for (["", 0], ["1;", 0], ["", 8], ["1;", 8]) {
-  my ($bold, $offset) = @$_;
-  my @range = map $offset + $_, 0..7;
-  printf "%s %-6s ", $bold ? "bold" : "norm", "$range[0]-$range[-1]";
-  print map("\e[${bold}38;5;${_}m$block", @range), "\e[0m"
+#!/usr/bin/perl -CADS -w
+
+my $block = shift;
+if (not defined $block) {
+    $block = chr(0x2588);
 }
-' "$@"
+$block = $block x 2;
+
+for (["", 0], ["1;", 0], ["", 8], ["1;", 8]) {
+    my ($bold, $offset) = @$_;
+    my @range = map $offset + $_, 0..7;
+    print map("\e[0;${bold}38;5;${_}m$block\e[0;${bold}48;5;${_}m  ", @range),
+        "\e[0m\n";
+}

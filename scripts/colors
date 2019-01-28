@@ -2,9 +2,6 @@
 
 colors_bold
 echo
-cols
-echo
 colors256
 echo
-echo True color\?
 colors24bit
