@@ -14,7 +14,10 @@ ct() {
     cd "$@" && lt
 }
 
-
+# Case-insensitive find alias
+fin() {
+    find . -iname "*$1*" "${@:2}"
+}
 
 # Run evince in background and ignore stdout/stderr.
 ev() {
