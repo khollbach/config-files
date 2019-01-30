@@ -276,7 +276,7 @@ set laststatus=1
 " Intead of the default information (cursor's current line/column numbers),
 " show whether the current buffer has been modified.
 set ruler
-set rulerformat=%=%m
+set rulerformat=%3(%=%m%)
 
 " Don't give visual feedback for normal mode commands requiring multiple
 " keypresses.
