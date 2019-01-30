@@ -1,0 +1,8 @@
+#command
+e noaction 5j
+^E noaction 5j
+y noaction 5k
+^Y noaction 5k
+
+#env
+LESS = -i -j4 -R

@@ -28,7 +28,6 @@ alias .......="cs ../../../../../.."
 # Misc aliases
 alias sl="sl -e"
 alias rain="rain -d 150"
-alias less="less -i -j4"
 alias which="type -a"
 alias ltmk="latexmk -pdf -pvc"
 alias ta="tmux_attach"

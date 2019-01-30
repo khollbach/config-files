@@ -14,3 +14,7 @@ source ~/.bashrc
 # Reload tmux conf. Ignore failure if tmux isn't running.
 echo tmux source-file ~/.tmux.conf
 tmux source-file ~/.tmux.conf 2> /dev/null || :
+
+# Generate .less file.
+echo lesskey ~/config-files/lesskey
+lesskey ~/config-files/lesskey
