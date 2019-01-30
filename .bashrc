@@ -1,17 +1,20 @@
 #!/bin/bash
 
-# Prompt format.
-# \e[0;1;38;5;Xm is for bold, X-colored text; \e[0m resets text effects.
-PS1='\[\e[0;1;38;5;${MY_PROMPT_COLOR}m\]\W\$\[\e[0m\] '
+# Different prompt formats.
+prompt1='\e[0;1;38;5;${prompt_color}m\W\$\e[0m '
+prompt2='\e[0;1;38;5;${prompt_color}m\w\$\e[0m '
+prompt3='\e[0m\n\u@\h:\w\n\e[1;38;5;${prompt_color}m\$\e[0m '
 
-# Prompt color.
-# On machines other than my laptop; e.g. when ssh'ing:
-if [[ "$HOSTNAME" != kevan-thinkpad ]]; then
-    # Cyan
-    MY_PROMPT_COLOR=6
+prompt_color=9 # Orange
+
+alias ps1='PS1=$prompt1'
+alias ps2='PS1=$prompt2'
+alias ps3='PS1=$prompt3'
+
+if [[ "$HOSTNAME" == kevan-thinkpad ]]; then
+    PS1=$prompt2
 else
-    # Orange
-    MY_PROMPT_COLOR=9
+    PS1=$prompt3
 fi
 
 # Default editor for git commit messages, etc.

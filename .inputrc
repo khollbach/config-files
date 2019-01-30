@@ -8,7 +8,11 @@ set show-all-if-ambiguous on
 # press tab with an empty prefix.
 set match-hidden-files off
 
+# Colorize directory names in tab completion lists.
+set colored-stats on
 
+# Colorize the common prefix of entries in tab completion lists.
+set colored-completion-prefix on
 
 # Bind meta-p to ctrl-p, enter; ie run previous command.
 "\ep": "\C-p\n"
