@@ -330,6 +330,10 @@ autocmd BufNewFile,BufRead make*.inc
 autocmd BufNewFile,BufRead *.ts
     \ setlocal syntax=javascript
 
+" Treat .sc as Scala.
+autocmd BufNewFile,BufRead *.sc
+    \ setlocal syntax=scala
+
 " Jump to the last position when reopening a file.
 " Don't do this for git commit messages though.
 autocmd BufReadPost *

@@ -35,7 +35,7 @@ Autohide mouse pointer
 
 # Misc.
 
-Install xclip for copying to system clipboard in tmux.
+Install xclip for tmux / system-clipboard integration.
 Install xdotool and wmctrl for move-to-next-monitor script.
 Install the most recent stable release of Neovim to ~/.opt to fix screen
 drawing issues. See https://github.com/neovim/neovim/issues/8322
