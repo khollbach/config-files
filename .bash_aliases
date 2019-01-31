@@ -3,7 +3,7 @@
 # update_configs script alias
 alias upconf="source $HOME/config-files/update_configs"
 
-# ls
+# ls aliases
 alias ls="ls -vhG --color=auto"
 alias ll="ls -l"
 alias la="ls -A"
@@ -23,8 +23,6 @@ alias   .....="cs ../../../.."
 alias  ......="cs ../../../../.."
 alias .......="cs ../../../../../.."
 
-
-
 # Misc aliases
 alias sl="sl -e"
 alias rain="rain -d 150"
@@ -33,7 +31,7 @@ alias ltmk="latexmk -pdf -pvc"
 alias ta="tmux_attach"
 alias fn="find . -name"
 
-# Grep
+# Grep shorthands
 alias grep="grep --color=auto"
 alias pag="ps aux | grep"
 alias hig="history | cut -c 8- | uniq | grep"
@@ -49,8 +47,6 @@ fi
 # Emacs
 alias emacs="emacsclient -a '' -c"
 alias remacs="killall emacs; command emacs --daemon"
-
-
 
 # Git shorthands
 alias gd="git diff --color-words"
