@@ -1,20 +1,31 @@
 #!/bin/bash
 
-# Different prompt formats.
-prompt1='\e[0;1;38;5;${prompt_color}m\W\$\e[0m '
-prompt2='\e[0;1;38;5;${prompt_color}m\w\$\e[0m '
-prompt3='\e[0m\n\u@\h:\w\n\e[1;38;5;${prompt_color}m\$\e[0m '
+function prompt_command {
+    local rv=$?
+
+    # Add line breaks if pwd is longer than 50 chars.
+    local newline
+    local w=$(dirs +0)
+    if [ ${#w} -gt 50 ] || [ ${#prompt_contents} -gt 2 ]; then
+        newline="\n"
+    else
+        newline=""
+    fi
+
+    local color='\[\e[1;38;5;'"$prompt_color"'m\]'
+    local reset='\[\e[0m\]'
+    PS1="$reset$newline"
+    PS1="$PS1$color$prompt_contents$reset$newline"
+    PS1="$PS1$color"'\$'"$reset "
+}
+PROMPT_COMMAND=prompt_command
 
 prompt_color=9 # Orange
 
-alias ps1='PS1=$prompt1'
-alias ps2='PS1=$prompt2'
-alias ps3='PS1=$prompt3'
-
 if [[ "$HOSTNAME" == kevan-thinkpad ]]; then
-    PS1=$prompt2
+    prompt_contents='\w'
 else
-    PS1=$prompt3
+    prompt_contents='\u@\h:\w'
 fi
 
 # Default editor for git commit messages, etc.
