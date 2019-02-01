@@ -30,6 +30,8 @@ alias which="type -a"
 alias ltmk="latexmk -pdf -pvc"
 alias ta="tmux_attach"
 alias fn="find . -name"
+alias u="unbuffer "
+alias b="unbuffer -p "
 
 # Grep shorthands
 alias grep="grep --color=auto"
