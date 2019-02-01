@@ -247,7 +247,8 @@ set textwidth=79
 " Also applies to '?' and '!' characters.
 set nojoinspaces
 
-" Text-formatting options. Done on load to override plugin-file settings.
+" Text-formatting options. Some done on load to override plugin-file settings.
+set formatoptions-=tc
 autocmd BufNewFile,BufRead * set formatoptions+=rqj formatoptions-=o
 
 
