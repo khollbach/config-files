@@ -30,7 +30,7 @@ if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
 endif
 
 " Deoplete (autocompletion)
-if !empty(glob('~/.vim/bundle/deoplete.nvim'))
+if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     " Automatic suggestions
     let g:deoplete#enable_at_startup = 1
 

@@ -38,6 +38,9 @@ export LS_COLORS="${LS_COLORS}ow=30;42:"
 # ripgrep config file
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
+# Git commit messages, etc.
+export VISUAL=/usr/bin/vim
+
 # Load aliases, functions.
 source "$HOME/.bash_aliases"
 source "$HOME/.bash_functions"

@@ -4,10 +4,11 @@
 if command -v rsync >/dev/null; then
     # If -a is given on the commandline, omit the -u flag to rsync.
     rsync $([ "$1" == -a ] && printf "" || printf "%s" "-u") -rpv \
-        $(ls -d ~/config-files/.* | grep -v '/\.\.\?$') ~ \
+        ~/config-files/.[!.]* ~ \
         --exclude .git --exclude .gitignore
 else
-    cp -v ~/config-files/.* ~
+    cp -v ~/config-files/.[!.]* ~ 2>/dev/null
+    cp -rv ~/config-files/{.config,.docker,.emacs.d,.vim} ~
 fi
 
 echo
