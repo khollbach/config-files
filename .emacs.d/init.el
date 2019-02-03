@@ -41,6 +41,11 @@
 ;; Disable bell sounds in MS Windows.
 (setq ring-bell-function 'ignore)
 
+;; Open with current directory of ~ on Windows, instead of the dir containing
+;; the Emacs binary.
+(when (eq system-type 'windows-nt)
+  (setq default-directory "~/"))
+
 ;; Don't clutter the current directory with backup files,
 ;; prefer to save them in ~/.emacs.d/backups
 ;; See https://stackoverflow.com/a/151946
