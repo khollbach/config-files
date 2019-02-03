@@ -28,14 +28,9 @@ else
     prompt_contents='\u@\h:\w'
 fi
 
-# Default editor for git commit messages, etc.
-export EDITOR=/usr/bin/vim
-export VISUAL=/usr/bin/vim
-export GIT_EDITOR=/usr/bin/vim
-export SVN_EDITOR=/usr/bin/vim
-
 # Set LS_COLORS to not use any bold fonts.
 eval `dircolors | sed s,01,00,g`
+
 # Make other-writable directory names show as black text on a green background,
 # instead of blue text against green (which is unreadable).
 export LS_COLORS="${LS_COLORS}ow=30;42:"
@@ -44,10 +39,10 @@ export LS_COLORS="${LS_COLORS}ow=30;42:"
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Load aliases, functions.
-source $HOME/.bash_aliases
-source $HOME/.bash_functions
+source "$HOME/.bash_aliases"
+source "$HOME/.bash_functions"
 
 # Load work-related defs, etc.
-if [[ -f $HOME/notes/config/bashrc-snippet ]]; then
-    source $HOME/notes/config/bashrc-snippet
+if [[ -f "$HOME/notes/config/bashrc-snippet" ]]; then
+    source "$HOME/notes/config/bashrc-snippet"
 fi

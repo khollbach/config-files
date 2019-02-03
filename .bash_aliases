@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # update_configs script alias
-alias upconf="source $HOME/config-files/update_configs"
+alias upconf="source ~/config-files/update_configs"
 
 # ls aliases
 alias ls="ls -vhG --color=auto"
@@ -42,7 +42,7 @@ alias hig="history | cut -c 8- | uniq | grep"
 alias ack="ripgrep.rg"
 
 # Neovim, if installed.
-if command which nvim >/dev/null; then
+if command -v nvim >/dev/null; then
     alias vim="nvim"
 fi
 
@@ -51,7 +51,7 @@ alias emacs="emacsclient -a '' -c"
 alias remacs="killall emacs; command emacs --daemon"
 
 # Git shorthands
-alias gd="git diff --color-words"
+alias gd="git diff"
 alias gdh="gd HEAD"
 alias gdhh="gd HEAD^"
 alias gdhhh="gd HEAD^^"

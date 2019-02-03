@@ -34,12 +34,6 @@
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'text-mode-hook 'linum-mode)
 
-;; Visually indicate end-of-file, in a familiar style.
-(load "~/.emacs.d/vi-tilde-fringe.el")
-(require 'vi-tilde-fringe)
-(add-hook 'prog-mode-hook 'vi-tilde-fringe-mode)
-(add-hook 'text-mode-hook 'vi-tilde-fringe-mode)
-
 
 
 ;;; Turn off various annoyances.
@@ -92,8 +86,6 @@
   ;(setq gc-cons-threshold 800000))
 ;(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
 ;(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
-
-
 
 ;;; ---------------------------------------------------------------------------
 ;;; Package settings

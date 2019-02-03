@@ -25,13 +25,14 @@ super-m Quicktile bottom-right
 
 # Terminal emulator settings
 
-DejaVu Sans Mono Book, 12 point font (14 or 17 or 25 on my laptop)
+DejaVu Sans Mono Book, 12 point font
+  * On my laptop, 14 (80 chars x2), 17 (120 chars), or 25 (80 chars)
 Solarized color scheme
 Don't show bold text in bright colors
 Don't display borders around new windows
-Background opacity: 90 or 95%
 Hide scrollbar
 Autohide mouse pointer
+Background opacity: 95%
 
 # Misc.
 
@@ -43,7 +44,8 @@ Upgrade python3-neovim version, for deoplete. The following should work:
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt update
     sudo apt install neovim
-    sudo apt upgrade
 If you want capslock to be control in virtual consoles, add to /etc/rc.local:
     (dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
 and make sure the file is executable and has the header #!/bin/bash
+On Windows, set system env var HOME to "C:\Users\$USERNAME" so Emacs can find
+your configs.

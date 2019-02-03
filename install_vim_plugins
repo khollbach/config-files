@@ -1,7 +1,9 @@
 #!/bin/bash
 
 mkdir -pv ~/.vim/bundle
-pushd ~/.vim/bundle > /dev/null
+
+echo cd ~/.vim/bundle
+cd ~/.vim/bundle
 
 # Install plugins.
 git clone https://github.com/altercation/vim-colors-solarized.git
@@ -17,5 +19,3 @@ git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/easymotion/vim-easymotion.git
 git clone https://github.com/haya14busa/incsearch.vim.git
 git clone https://github.com/mbbill/undotree.git
-
-popd > /dev/null

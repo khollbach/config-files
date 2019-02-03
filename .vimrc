@@ -223,6 +223,9 @@ set directory=~/.vim/swap//,.
 set undofile
 set undodir=~/.vim/undo//
 
+" Don't flash the screen (or beep) in Windows
+set t_vb=
+
 
 
 " No startup message

@@ -1,10 +1,15 @@
 #!/bin/bash
 
 # Copy dotfiles to home dir.
-# If -a is given on the commandline, omit the -u flag to rsync.
-rsync $([ "$1" == -a ] && printf "" || printf "%s" "-u") -rpv \
-    $(ls -d ~/config-files/.* | grep -v '/\.\.\?$') ~ \
-    --exclude .git --exclude .gitignore
+if command -v rsync >/dev/null; then
+    # If -a is given on the commandline, omit the -u flag to rsync.
+    rsync $([ "$1" == -a ] && printf "" || printf "%s" "-u") -rpv \
+        $(ls -d ~/config-files/.* | grep -v '/\.\.\?$') ~ \
+        --exclude .git --exclude .gitignore
+else
+    cp -v ~/config-files/.* ~
+fi
+
 echo
 
 # Reload bashrc definitions if you sourced this script from your shell.
