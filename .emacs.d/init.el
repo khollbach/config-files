@@ -30,7 +30,7 @@
   (message ""))
 
 ;; Show line numbers.
-(setq linum-format "%3d")
+(setq linum-format "%3d ")
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'text-mode-hook 'linum-mode)
 
@@ -46,23 +46,18 @@
 (when (eq system-type 'windows-nt)
   (setq default-directory "~/"))
 
-;; Don't clutter the current directory with backup files,
-;; prefer to save them in ~/.emacs.d/backups
+;; Don't clutter the current directory with backup files;
+;; prefer to save them in `~/.emacs.d/backups`.
+;; And use saner defaults for backups.
 ;; See https://stackoverflow.com/a/151946
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-
-;; Back up more intelligently.
-;; See https://www.emacswiki.org/emacs/BackupFiles
-(setq backup-by-copying t   ; don't clobber symlinks
-      version-control t     ; use versioned backups
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
+      backup-by-copying t
+      version-control t
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2)
 
-;; Don't lock files when you edit them.
-;; This would leave lockfiles scattered everywhere.
-;; See https://www.emacswiki.org/emacs/LockFiles
-;; TODO: not working, seeing #asdf# files sometimes, but not always ...
+;; Don't create `.#asdf` files in the current directory.
 (setq create-lockfiles nil)
 
 ;; Leave my init.el alone! Save Custom configs in their own file.
@@ -81,8 +76,6 @@
 ;; No tabs please.
 (setq-default indent-tabs-mode nil)
 
-
-
 ;; Pause garbage collection on minibuffer setup. Supposedly helps performance.
 ;; See http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
 ;(defun my-minibuffer-setup-hook ()
@@ -96,65 +89,69 @@
 ;;; Package settings
 ;;; ---------------------------------------------------------------------------
 
-;; Package management, repositories.
+;; Configure package manager
 (require 'package)
 (setq package-archives
-      '(("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")))
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")
+        ("melpa" . "http://melpa.org/packages/")
+        ("melpa-stable" . "http://stable.melpa.org/packages/")))
+(setq package-archive-priorities '(("melpa-stable" . 1)))
 (package-initialize)
-
-;; Fetch package listing.
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Install packages.
-(let ((packages '(evil key-chord)))
-  (dolist (p packages)
-    (unless (package-installed-p p)
-      (package-install p))))
+;; use-package
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
 
-
+;; key-chord
+(use-package key-chord)
 
 ;; Evil
-(evil-mode 1)
+(use-package evil
+  :demand
+  :after key-chord
+  :config
 
-;; Vim-style linear undo/redo requires the undo-tree package installed.
-;; (Specifically, undo-tree.el must be in the load-path.)
-;; Installing Evil through a package-manager gets this automatically;
-;; undo-tree is listed as a dependency of evil.
+  ;; Enable Evil
+  (evil-mode 1)
 
-;; jk -> ESC (relies on key-chord package).
-;; TODO: turn this into a key sequence instead of a chord.
-(setq key-chord-two-keys-delay 0.5)
-(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-(key-chord-mode 1)
+  ;; jk -> ESC (relies on key-chord package).
+  ;; TODO: turn this into a key sequence instead of a chord.
+  (setq key-chord-two-keys-delay 0.5)
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-mode 1)
 
-;; Make Emacs treat underscore as a word character, as in Vim.
-;; This way, motions like `w' and `e' work as expected.
-(add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-(add-hook 'text-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  ;; Make Emacs treat underscore as a word character, as in Vim.
+  ;; This way, motions like `w' and `e' work as expected.
+  (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  (add-hook 'text-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
-;; normal mode C-u = page-up (Vim's C-u)
-;; insert mode C-u = backward-kill-line (Readline's C-u)
-;; M-u = universal-argument (Emacs' C-u)
-;; See https://github.com/wasamasa/dotemacs/blob/master/init.org#evil
-;; and https://www.emacswiki.org/emacs/BackwardKillLine
-;; TODO: see https://github.com/bling/emacs-evil-bootstrap
-;; and C-h v evil-want-<TAB>
-;; for possible alternatives.
-(defun backward-kill-line (arg)
-  "Kill ARG lines backward."
-  (interactive "p")
-  (kill-line (- 1 arg)))
-(define-key global-map (kbd "C-u") 'backward-kill-line)
-(define-key global-map (kbd "M-u") 'universal-argument)
-(define-key universal-argument-map (kbd "C-u") nil)
-(define-key universal-argument-map (kbd "M-u") 'universal-argument-more)
-(with-eval-after-load 'evil-maps
-  (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up))
+  ;; normal mode C-u = page-up (Vim's C-u)
+  ;; insert mode C-u = backward-kill-line (Readline's C-u)
+  ;; M-u = universal-argument (Emacs' C-u)
+  ;; See https://github.com/wasamasa/dotemacs/blob/master/init.org#evil
+  ;; and https://www.emacswiki.org/emacs/BackwardKillLine
+  ;; TODO: see https://github.com/bling/emacs-evil-bootstrap
+  ;; and C-h v evil-want-<TAB>
+  ;; for possible alternatives.
+  (defun backward-kill-line (arg)
+    "Kill ARG lines backward."
+    (interactive "p")
+    (kill-line (- 1 arg)))
+  (define-key global-map (kbd "C-u") 'backward-kill-line)
+  (define-key global-map (kbd "M-u") 'universal-argument)
+  (define-key universal-argument-map (kbd "C-u") nil)
+  (define-key universal-argument-map (kbd "M-u") 'universal-argument-more)
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up))
 
-;; C-e/C-y: scroll 5x faster.
-;; TODO
+  ;; C-e/C-y: scroll 5x faster.
+  ;; TODO
+)
 
 ;; Reset gc-cons-threshold and file-name-handler-alist.
 )
