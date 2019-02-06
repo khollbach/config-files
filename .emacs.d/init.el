@@ -108,36 +108,40 @@
 (setq use-package-always-ensure t)
 
 ;; key-chord
-(use-package key-chord)
+(use-package key-chord
+  :config
+  (key-chord-mode 1)
+  (setq key-chord-two-keys-delay 0.5)
+)
 
 ;; Evil
 (use-package evil
   :demand
   :after key-chord
-  :config
+  :init
+  (setq evil-want-C-u-scroll t)
 
-  ;; Enable Evil
+  :config
   (evil-mode 1)
+
+  ;; Make "insert mode" feel like emacs, i.e. give me RSI.
+  ;; See https://stackoverflow.com/a/28985130/10994269
+  (setq evil-insert-state-map (make-sparse-keymap))
+  (define-key evil-insert-state-map (kbd "<escape>") 'evil-normal-state)
 
   ;; jk -> ESC (relies on key-chord package).
   ;; TODO: turn this into a key sequence instead of a chord.
-  (setq key-chord-two-keys-delay 0.5)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-  (key-chord-mode 1)
 
   ;; Make Emacs treat underscore as a word character, as in Vim.
   ;; This way, motions like `w' and `e' work as expected.
   (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (add-hook 'text-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
-  ;; normal mode C-u = page-up (Vim's C-u)
   ;; insert mode C-u = backward-kill-line (Readline's C-u)
   ;; M-u = universal-argument (Emacs' C-u)
   ;; See https://github.com/wasamasa/dotemacs/blob/master/init.org#evil
   ;; and https://www.emacswiki.org/emacs/BackwardKillLine
-  ;; TODO: see https://github.com/bling/emacs-evil-bootstrap
-  ;; and C-h v evil-want-<TAB>
-  ;; for possible alternatives.
   (defun backward-kill-line (arg)
     "Kill ARG lines backward."
     (interactive "p")
@@ -146,11 +150,12 @@
   (define-key global-map (kbd "M-u") 'universal-argument)
   (define-key universal-argument-map (kbd "C-u") nil)
   (define-key universal-argument-map (kbd "M-u") 'universal-argument-more)
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up))
 
   ;; C-e/C-y: scroll 5x faster.
   ;; TODO
+  ;(with-eval-after-load 'evil-maps
+    ;(define-key evil-motion-state-map (kbd "C-e") 'evil-scroll-line-down)
+    ;(define-key evil-motion-state-map (kbd "C-y") 'evil-scroll-line-up))
 )
 
 ;; Scala syntax highlighting (and a bunch of other stuff I don't use)
