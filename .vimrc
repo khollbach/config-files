@@ -240,8 +240,8 @@ set nowrap
 " When 'wrap' is enabled, break lines at word boundaries.
 set linebreak
 
-" Vertical lines at 80, 100, and 120 chars.
-set colorcolumn=80,100,120
+" Vertical lines after 80, 100, and 120 chars.
+set colorcolumn=81,101,121
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
