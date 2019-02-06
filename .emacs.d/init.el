@@ -153,5 +153,8 @@
   ;; TODO
 )
 
+;; Scala syntax highlighting (and a bunch of other stuff I don't use)
+(use-package ensime)
+
 ;; Reset gc-cons-threshold and file-name-handler-alist.
 )
