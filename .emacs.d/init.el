@@ -34,6 +34,12 @@
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'text-mode-hook 'linum-mode)
 
+;; Column number in mode line
+(setq column-number-mode t)
+
+;; Set font, size
+(set-default-font "DejaVu Sans Mono 14")
+
 
 
 ;;; Turn off various annoyances.
@@ -160,6 +166,14 @@
 
 ;; Scala syntax highlighting (and a bunch of other stuff I don't use)
 (use-package ensime)
+
+(use-package fill-column-indicator
+  :init
+  (setq fci-rule-column 80)
+  :config
+  (add-hook 'prog-mode-hook 'fci-mode)
+  (add-hook 'text-mode-hook 'fci-mode)
+)
 
 ;; Reset gc-cons-threshold and file-name-handler-alist.
 )
