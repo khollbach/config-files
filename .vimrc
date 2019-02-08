@@ -281,11 +281,16 @@ set laststatus=1
 " show the filename, and whether the current buffer has been modified.
 set ruler
 " We use this function instead of %t, since %t shows "[No Name]" when there's
-" no buffer name.
+" no buffer name. Also this allows us to truncate from the right instead of
+" from the left.
 function! My_bufname()
-    return expand('%:t')
+    let filename = expand('%:t')
+    if strlen(filename) > 35
+        let filename = filename[0:33] . ">"
+    endif
+    return filename
 endfunction
-set rulerformat=%30(%=%{My_bufname()}%)%4(%m%)
+set rulerformat=%39(%35(%{My_bufname()}%)%4(%m%)%)
 
 " Don't give visual feedback for normal mode commands requiring multiple
 " keypresses.
