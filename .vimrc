@@ -278,9 +278,14 @@ set laststatus=1
 
 " Show certain info at the bottom-right of the screen.
 " Intead of the default information (cursor's current line/column numbers),
-" show whether the current buffer has been modified.
+" show the filename, and whether the current buffer has been modified.
 set ruler
-set rulerformat=%3(%=%m%)
+" We use this function instead of %t, since %t shows "[No Name]" when there's
+" no buffer name.
+function! My_bufname()
+    return expand('%:t')
+endfunction
+set rulerformat=%30(%=%{My_bufname()}%)%4(%m%)
 
 " Don't give visual feedback for normal mode commands requiring multiple
 " keypresses.
