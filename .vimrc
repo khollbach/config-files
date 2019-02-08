@@ -430,16 +430,19 @@ set pastetoggle=<F9>
 
 " <M-q> = Quit Vim.
 " <M-w> = Save.
+" <M-p> = Execute last command.
 if has('nvim')
     noremap <M-q> :qa<CR>
     inoremap <M-q> <C-o>:qa<CR>
     noremap <M-w> :w<CR>
     inoremap <M-w> <C-o>:w<CR>
+    noremap <M-p> :<Up><CR>
 else
     noremap <Esc>q :qa<CR>
     inoremap <Esc>q <C-o>:qa<CR>
     noremap <Esc>w :w<CR>
     inoremap <Esc>w <C-o>:w<CR>
+    noremap <Esc>p :<Up><CR>
 endif
 
 
