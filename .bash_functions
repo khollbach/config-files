@@ -10,27 +10,6 @@ function ct {
     cd "$@" && lt
 }
 
-# Pager: Make a program think it's writing to a tty (to get colored output,
-# etc), but redirect the output to less.
-# Requires the package `expect` installed for the `unbuffer` command.
-# If you want to pass arguments to less this way, you can do, e.g.:
-#   LESS=-S l ack somestring
-#   LESS='-F -X' l ack somestring
-# TODO: the above actually doesn't work when LESS is already defined in a
-#       .lesskey #env ... :(  Fix / workaround = ???
-function l {
-    unbuffer "$@" | less
-}
-
-# Allow alias expansion within its arguments.
-alias l="l "
-
-# Temporary workaround for the issue of `LESS=asdf less ...` not working when
-# .lesskey already specifies a value for LESS.
-function l-S {
-    unbuffer "$@" | less -S
-}
-
 # Case-insensitive `find` alias
 function fin {
     find . -iname "*$1*" "${@:2}"
@@ -48,12 +27,11 @@ function bell {
     local rv
     time "$@"
     rv=$?
-
     echo -en '\a'
     return $rv
 }
 
-# Git shorthand functions
+# Git shorthands
 
 # Run 'git commit', optionally accept a message for the '-m' option.
 function gc {
