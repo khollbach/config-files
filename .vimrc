@@ -41,20 +41,22 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     \ })
 
     " Initially disable auto_complete.
-    " Toggle auto_complete: <F6>
+    " Toggle auto_complete: <F9>
     call deoplete#custom#option('auto_complete', v:false)
     let s:my_deoplete_enabled = 0
     function! s:toggle_deoplete() abort
         if s:my_deoplete_enabled
+            echo '  deoplete'
             call deoplete#custom#option('auto_complete', v:false)
             let s:my_deoplete_enabled = 0
         else
+            echo 'nodeoplete'
             call deoplete#custom#option('auto_complete', v:true)
             let s:my_deoplete_enabled = 1
         endif
         return ""
     endfunction
-    noremap <expr> <F6> <sid>toggle_deoplete()
+    noremap <expr> <F9> <sid>toggle_deoplete()
 
     " Fix the way enter interacts with deoplete.
     " If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
@@ -283,7 +285,7 @@ set ruler
 " We use this function instead of %t, since %t shows "[No Name]" when there's
 " no buffer name. Also this allows us to truncate from the right instead of
 " from the left.
-function! My_bufname()
+function! My_bufname() abort
     let filename = expand('%:t')
     if strlen(filename) > 35
         let filename = filename[0:33] . ">"
@@ -423,15 +425,15 @@ noremap S <Nop>
 
 
 
-" Toggle line numbers.
-noremap <F4> :set number! number?<CR>
-
 " Toggle line wrapping.
-noremap <F5> :set wrap! wrap?<CR>
+noremap <F4> :set wrap! wrap?<CR>
+
+" Toggle line numbers.
+noremap <F5> :set number! number?<CR>
 
 " Toggle autoindent/mappings/etc, for pasting text.
-noremap <F9> :set paste! paste?<CR>
-set pastetoggle=<F9>
+noremap <F6> :set paste! paste?<CR>
+set pastetoggle=<F6>
 
 " <M-q> = Quit Vim.
 " <M-w> = Save.
