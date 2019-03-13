@@ -431,9 +431,29 @@ noremap <F4> :set wrap! wrap?<CR>
 " Toggle line numbers.
 noremap <F5> :set number! number?<CR>
 
+" Toggle colorcolumn
+function! s:toggle_colorcolumn() abort
+    if &colorcolumn !=# ""
+        let s:colorcolumn_previous_value = &colorcolumn
+        set colorcolumn=
+        set colorcolumn?
+    else
+        let &colorcolumn=s:colorcolumn_previous_value
+        set colorcolumn?
+    endif
+
+    " Need to redraw here to get the effect right away.
+    redraw
+
+    return ""
+endfunction
+noremap <expr> <F6> <sid>toggle_colorcolumn()
+
 " Toggle autoindent/mappings/etc, for pasting text.
-noremap <F6> :set paste! paste?<CR>
-set pastetoggle=<F6>
+noremap <F7> :set paste! paste?<CR>
+set pastetoggle=<F7>
+
+
 
 " <M-q> = Quit Vim.
 " <M-w> = Save.

@@ -3,7 +3,7 @@
 function prompt_command {
     local rv=$?
 
-    # Add line breaks if pwd is longer than 50 chars.
+    # Add line break if pwd is longer than 50 chars.
     local newline
     local w=$(dirs +0)
     if [ ${#w} -gt 50 ] || [ ${#prompt_contents} -gt 2 ]; then
@@ -14,8 +14,7 @@ function prompt_command {
 
     local color='\[\e[1;38;5;'"$prompt_color"'m\]'
     local reset='\[\e[0m\]'
-    PS1="$reset$newline"
-    PS1="$PS1$color$prompt_contents$reset$newline"
+    PS1="$reset$color$prompt_contents$reset$newline"
     PS1="$PS1$color"'\$'"$reset "
 }
 PROMPT_COMMAND=prompt_command
