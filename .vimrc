@@ -551,3 +551,12 @@ vnoremap <Leader>n :s/\c//gn<left><left><left><left>
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>
 noremap <Leader>X :!chmod -x %<CR>
+
+" -----------------------------------------------------------------------------
+" Misc
+" -----------------------------------------------------------------------------
+
+" Work-related settings / defs / etc
+if filereadable(glob("~/notes/config/nvimrc-snippet"))
+    source ~/notes/config/nvimrc-snippet
+endif
