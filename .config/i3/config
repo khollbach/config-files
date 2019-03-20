@@ -22,6 +22,9 @@ new_window pixel
 # Use Mouse+$Win to drag floating windows to their wanted position
 floating_modifier $Win
 
+# Lock the screen
+bindsym Control+$Alt+Delete exec "i3lock -c 000000"
+
 # start a terminal
 bindsym $Win+Return exec "xfce4-terminal --execute tmux_attach"
 
