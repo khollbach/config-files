@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Don't give others permissions to my files.
-umask 077
-
 # Include private bin dirs in path
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH

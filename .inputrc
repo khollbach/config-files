@@ -21,8 +21,3 @@ set colored-completion-prefix on
 # Gets queued if pressed while a command is running.
 # Can be cancelled with backspace.
 "\eo": "if [ $? -eq 0 ]; then exit; else false; fi\n"
-
-# C-t = search forward. This is bound to C-s by default, but most terminals
-# use C-s for pausing screen output, so readline will never receive the "C-s".
-# See https://superuser.com/a/610990
-"\C-t": forward-search-history

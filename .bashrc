@@ -40,6 +40,9 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # Git commit messages, etc.
 export VISUAL=/usr/bin/vim
 
+# Unmap C-s from freezing tty output, so that it can be used for i-search.
+stty -ixon
+
 # Load aliases, functions.
 source "$HOME/.bash_aliases"
 source "$HOME/.bash_functions"
