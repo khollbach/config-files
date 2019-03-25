@@ -12,6 +12,9 @@ font pango:DejaVu Sans Mono 8
 # Still shows when stacked / tabbed.
 new_window pixel
 
+# Don't show borders when there is only one window on the screen.
+hide_edge_borders smart
+
 # Use $Alt+Mouse to drag floating windows to their wanted position
 floating_modifier $Alt
 
