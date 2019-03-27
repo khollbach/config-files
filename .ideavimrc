@@ -10,6 +10,18 @@ noremap <Home> ^
 noremap <Space> <Nop>
 nnoremap gp `[v`]
 
+" TODO: test that the following work
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <Space>h "0p
+noremap <Space>H "0P
+noremap <Space>w :w<CR>
+noremap <Space>' :set hlsearch! hlsearch?<CR>
+
+
+
 " Settings
 set scrolloff=5
 set ignorecase " I really don't like this, but `noremap / /\c` doesn't work.

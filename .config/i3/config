@@ -18,13 +18,22 @@ hide_edge_borders smart
 # Use $Alt+Mouse to drag floating windows to their wanted position
 floating_modifier $Alt
 
+# Don't pull my mouse around when switching windows.
+mouse_warping none
+
+# Don't focus things on mouse-over.
+focus_follows_mouse no
+
 # Lock the screen
-bindsym Control+$Alt+delete exec "i3lock -c 000000"
+bindsym Control+$Alt+Delete exec "i3lock -c 000000"
 
-# Start a terminal
-bindsym $Win+Return exec xfce4-terminal
+# Start a terminal + tmux
+bindsym $Win+Return exec "xfce4-terminal --execute tmux"
 
-# Start tmux in a terminal
+# Start just a terminal
+bindsym $Win+$Alt+t exec xfce4-terminal
+
+# Start tmux in a terminal, attaching to a detached session if any exist.
 bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
 
 # Start firefox
@@ -32,6 +41,9 @@ bindsym $Win+o exec firefox
 
 # Start dmenu (a program launcher)
 bindsym $Win+p exec dmenu_run
+
+# Take a screenshot
+bindsym Print exec xfce4-screenshooter
 
 # Kill focused window
 bindsym $Win+$Alt+q kill
@@ -123,9 +135,9 @@ mode "resize" {
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # Back to normal: Enter, Escape, or Space
-        bindsym return mode "default"
-        bindsym escape mode "default"
+        # Back to normal: Enter, Escape, or space
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
         bindsym space mode "default"
 }
 
