@@ -10,15 +10,18 @@ noremap <Home> ^
 noremap <Space> <Nop>
 nnoremap gp `[v`]
 
-" TODO: test that the following work
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <Space>h "0p
+" This bind is buggy for me: it correctly pastes but then acts as if an extra
+" `H` command was sent, and moves the cursor to the top of the screen.
 noremap <Space>H "0P
+" (IntelliJ trims whitespace upon `:w`)
 noremap <Space>w :w<CR>
-noremap <Space>' :set hlsearch! hlsearch?<CR>
+noremap <Space>' :set hlsearch!<CR>
+noremap <Space>q :q<CR>
 
 
 
