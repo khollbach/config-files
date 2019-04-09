@@ -27,11 +27,8 @@ focus_follows_mouse no
 # Lock the screen
 bindsym Control+$Alt+Delete exec "i3lock -c 000000"
 
-# Start a terminal + tmux
-bindsym $Win+Return exec "xfce4-terminal --execute tmux"
-
-# Start just a terminal
-bindsym $Win+$Alt+t exec xfce4-terminal
+# Start a terminal
+bindsym $Win+Return exec xfce4-terminal
 
 # Start tmux in a terminal, attaching to a detached session if any exist.
 bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
@@ -53,18 +50,22 @@ bindsym $Win+h focus left
 bindsym $Win+j focus down
 bindsym $Win+k focus up
 bindsym $Win+l focus right
+bindsym $Win+comma focus output left
+bindsym $Win+semicolon focus output right
 
 # Move focused window
 bindsym $Win+$Alt+h move left
 bindsym $Win+$Alt+j move down
 bindsym $Win+$Alt+k move up
 bindsym $Win+$Alt+l move right
-
-# Split in horizontal orientation
-bindsym $Win+semicolon split h
+bindsym $Win+$Alt+comma move output left; focus output left
+bindsym $Win+$Alt+semicolon move output right; focus output right
 
 # Split in vertical orientation
 bindsym $Win+v split v
+
+# Split in horizontal orientation
+bindsym $Win+c split h
 
 # Enter fullscreen mode for the focused container
 bindsym $Win+f fullscreen toggle
@@ -99,16 +100,16 @@ bindsym $Win+9 workspace 9
 bindsym $Win+0 workspace 10
 
 # Move focused container to workspace
-bindsym $Win+$Alt+1 move container to workspace 1
-bindsym $Win+$Alt+2 move container to workspace 2
-bindsym $Win+$Alt+3 move container to workspace 3
-bindsym $Win+$Alt+4 move container to workspace 4
-bindsym $Win+$Alt+5 move container to workspace 5
-bindsym $Win+$Alt+6 move container to workspace 6
-bindsym $Win+$Alt+7 move container to workspace 7
-bindsym $Win+$Alt+8 move container to workspace 8
-bindsym $Win+$Alt+9 move container to workspace 9
-bindsym $Win+$Alt+0 move container to workspace 10
+bindsym $Win+$Alt+1 move container to workspace 1; workspace 1
+bindsym $Win+$Alt+2 move container to workspace 2; workspace 2
+bindsym $Win+$Alt+3 move container to workspace 3; workspace 3
+bindsym $Win+$Alt+4 move container to workspace 4; workspace 4
+bindsym $Win+$Alt+5 move container to workspace 5; workspace 5
+bindsym $Win+$Alt+6 move container to workspace 6; workspace 6
+bindsym $Win+$Alt+7 move container to workspace 7; workspace 7
+bindsym $Win+$Alt+8 move container to workspace 8; workspace 8
+bindsym $Win+$Alt+9 move container to workspace 9; workspace 9
+bindsym $Win+$Alt+0 move container to workspace 10; workspace 10
 
 # Reload the configuration file
 bindsym $Win+$Alt+c reload
