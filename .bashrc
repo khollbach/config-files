@@ -21,7 +21,7 @@ PROMPT_COMMAND=prompt_command
 
 prompt_color=9 # Orange
 
-if [[ "$HOSTNAME" == kevan-thinkpad ]]; then
+if [[ "$HOSTNAME" =~ kevan-* ]]; then
     prompt_contents='\w'
 else
     prompt_contents='\u@\h:\w'

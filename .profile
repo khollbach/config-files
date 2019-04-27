@@ -17,6 +17,13 @@ export PATH=$HOME/.opt/nvim-linux64/bin:$PATH
 if [ -n "$DISPLAY" ] && command -v setxkbmap >/dev/null; then
     # Map capslock to control
     setxkbmap -option ctrl:nocaps
+
+    # Swap alt and super on Mac keyboard, since they're backwards.
+    if [ "$HOSTNAME" == kevan-MacBook ] &&
+        [ -f "$HOME/config-files/mac-swap-alt-super.xmodmap" ]; then
+
+        xmodmap "$HOME/config-files/mac-swap-alt-super.xmodmap"
+    fi
 fi
 
 # Start redshift if it isn't already running.

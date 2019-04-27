@@ -29,7 +29,6 @@ DejaVu Sans Mono Book, 12 point font
   * On my laptop, 14 (80 chars x2), 17 (120 chars), or 25 (80 chars)
 Solarized color scheme
 Don't show bold text in bright colors
-Don't display borders around new windows
 Hide scrollbar
 Autohide mouse pointer
 
@@ -37,12 +36,11 @@ Autohide mouse pointer
 
 Install xclip for tmux / system-clipboard integration.
 Install xdotool and wmctrl for move-to-next-monitor script.
-Install the most recent stable release of Neovim to ~/.opt to fix screen
-drawing issues. See https://github.com/neovim/neovim/issues/8322
-Upgrade python3-neovim version, for deoplete. The following should work:
+Upgrade Neovim to fix screen drawing issues. https://github.com/neovim/neovim/issues/8322
+> The following should work:
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt update
-    sudo apt install neovim
+    sudo apt install neovim  # Or `sudo apt upgrade` if already installed
 If you want capslock to be control in virtual consoles, add to /etc/rc.local:
     (dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
 and make sure the file is executable and has the header #!/bin/bash
