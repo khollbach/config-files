@@ -358,14 +358,6 @@ autocmd BufReadPost *
     \ endif
 autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 
-" Simple folding of text files.
-" The downside is that you can't create manual folds in this mode.
-" TODO: make this only trigger on files that don't have a filetype (i.e.
-" &filetype = empty string) Maybe using aug / (autogroup?) ?
-"set foldtext=''
-autocmd BufNewFile,BufRead * set foldmethod=indent
-autocmd BufNewFile,BufRead * normal zR
-
 
 
 " Terminal settings
