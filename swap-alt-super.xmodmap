@@ -1,3 +1,6 @@
+! This swaps alt ('meta') with 'super' (windows key).
+! Useful since these two keys are physically swapped on Mac keyboards.
+
 ! Remap keys. Format: physical-keycode = logical-key
 keycode 64 = Super_L
 keycode 133 = Alt_L
