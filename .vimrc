@@ -362,7 +362,8 @@ autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 " https://stackoverflow.com/a/30552423
 augroup lowercase_todo
     au!
-    au Syntax * syn keyword LowercaseTodo contained todo containedin=.*Comment
+    au Syntax * syn keyword LowercaseTodo contained todo
+        \ containedin=.*Comment,vimCommentTitle,cCommentL
 augroup END
 hi def link LowercaseTodo Todo
 
