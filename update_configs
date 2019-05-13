@@ -14,8 +14,11 @@ fi
 echo
 
 # Reload bashrc definitions if you sourced this script from your shell.
-echo source ~/.bashrc
-source ~/.bashrc
+# (Only do so if the current shell is 'interactive' [-i option])
+if [[ $- == *i* ]]; then
+    echo source ~/.bashrc
+    source ~/.bashrc
+fi
 
 # Reload tmux conf. Ignore failure if tmux isn't running.
 echo tmux source-file ~/.tmux.conf
