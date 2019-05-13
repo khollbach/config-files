@@ -358,6 +358,14 @@ autocmd BufReadPost *
     \ endif
 autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 
+" Highlight lowercase "todo" in comments as well as "TODO".
+" https://stackoverflow.com/a/30552423
+augroup lowercase_todo
+    au!
+    au Syntax * syn keyword LowercaseTodo contained todo containedin=.*Comment
+augroup END
+hi def link LowercaseTodo Todo
+
 
 
 " Terminal settings
