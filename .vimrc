@@ -184,14 +184,6 @@ if !empty(glob('~/.vim/bundle/nerdcommenter'))
     noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
 endif
 
-" EasyMotion
-if !empty(glob('~/.vim/bundle/vim-easymotion'))
-    " Better long line-wise motions, without having to count manually or use
-    " relative line numbers.
-    map <Leader>j <Plug>(easymotion-j)
-    map <Leader>k <Plug>(easymotion-k)
-endif
-
 " incsearch.vim
 if !empty(glob('~/.vim/bundle/nerdtree'))
     " Case insensitive by default.
