@@ -38,7 +38,9 @@
 (setq column-number-mode t)
 
 ;; Set font, size
-(set-default-font "DejaVu Sans Mono 14")
+;; todo: doesn't work on windows (since the font isn't installed)
+;;  -> set it up to fall back on some default when this is the case.
+;(set-default-font "DejaVu Sans Mono 14")
 
 
 
@@ -163,9 +165,6 @@
     ;(define-key evil-motion-state-map (kbd "C-e") 'evil-scroll-line-down)
     ;(define-key evil-motion-state-map (kbd "C-y") 'evil-scroll-line-up))
 )
-
-;; Scala syntax highlighting (and a bunch of other stuff I don't use)
-(use-package ensime)
 
 (use-package fill-column-indicator
   :init
