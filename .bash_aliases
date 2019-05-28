@@ -34,6 +34,9 @@ alias f="fin"
 alias u="unbuffer "
 alias b="unbuffer -p "
 alias amm="amm --no-remote-logging"
+if command -v rlwrap >/dev/null; then
+    alias ocaml="rlwrap ocaml"
+fi
 
 # Grep shorthands
 alias grep="grep --color=auto"
