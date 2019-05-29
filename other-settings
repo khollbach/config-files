@@ -25,8 +25,9 @@ super-m Quicktile bottom-right
 
 # Terminal emulator settings
 
-DejaVu Sans Mono Book, 12 point font
-  * On my laptop, 14 (80 chars x2), 17 (120 chars), or 25 (80 chars)
+DejaVu Sans Mono Book 25 point font, or (on 1920x1080p screens):
+  14pt (173x46 chars), 19 (127x35), 22 (106x30),
+  25 (95x27), 27 (87x25), 29 (83x23), 30 (79x22)
 Solarized color scheme
 Don't show bold text in bright colors
 Hide scrollbar

@@ -226,7 +226,7 @@ set t_vb=
 set shortmess+=I
 
 " Line numbers.
-set number
+set nonumber
 
 " Don't wrap long lines by default.
 set nowrap
