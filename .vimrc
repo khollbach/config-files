@@ -29,47 +29,36 @@ if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
     colorscheme solarized
 endif
 
-if !empty(glob('~/.vim/bundle/vim-sneak'))
-    " Disable highlighting for `s` and `S` motions.
-    " Only half-works: when sneaks are repeated with `;` or `,` you still get
-    " highlighting. This isn't the worst thing, but I'd like to fix it
-    " eventually.
-    " (Note: the suggested way of disabling highlighting in the docs doesn't
-    " work: it un-colors all matches even if they were colored before by syntax
-    " highlighting.)
-    autocmd User SneakLeave call sneak#cancel()
-
-    " todo: disable jumping across lines
-endif
-
 " Deoplete (autocompletion)
 if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
-    " Automatic suggestions
     let g:deoplete#enable_at_startup = 1
 
-    " Deoplete options.
+    " Options.
     call deoplete#custom#option({
     \ 'ignore_case': v:true,
     \ 'on_insert_enter': v:false,
     \ })
 
     " Initially disable auto_complete.
-    " Toggle auto_complete: <F9>
     call deoplete#custom#option('auto_complete', v:false)
     let s:my_deoplete_enabled = 0
+
+    " Toggle auto_complete: <F9>
+    noremap <expr> <F9> <sid>toggle_deoplete()
     function! s:toggle_deoplete() abort
         if s:my_deoplete_enabled
-            echo '  deoplete'
+            " Disable
+            echo 'nodeoplete'
             call deoplete#custom#option('auto_complete', v:false)
             let s:my_deoplete_enabled = 0
         else
-            echo 'nodeoplete'
+            " Enable
+            echo '  deoplete'
             call deoplete#custom#option('auto_complete', v:true)
             let s:my_deoplete_enabled = 1
         endif
         return ""
     endfunction
-    noremap <expr> <F9> <sid>toggle_deoplete()
 
     " Fix the way enter interacts with deoplete.
     " If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
@@ -79,35 +68,38 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
 
     " Use tab/shift-tab for completion (if the PUM is active or if there's
     " something other than whitespace behind the cursor).
-    function! s:check_space_behind() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1] =~ '\s'
-    endfunction
     inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
         \ "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
         \ "\<C-p>" : "\<S-Tab>"
+    function! s:check_space_behind() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1] =~ '\s'
+    endfunction
 
     " Disable preview window. Deoplete would sometime uses this to show
     " documentation of, e.g., python functions.
     set completeopt-=preview
 endif
 
+if !empty(glob('~/.vim/bundle/vim-sneak'))
+    " Accept `s` and `S` in operator-pending mode.
+    " Note that this conflicts with surround.vim's default binds,
+    " which I've changed to z/Z.
+    omap s <Plug>Sneak_s
+    omap S <Plug>Sneak_S
+    xmap S <Plug>Sneak_S
+
+    " Disable highlighting of matches.
+    autocmd User SneakLeave highlight clear Sneak
+
+    " todo: disable jumping across lines
+endif
+
 " Additional RSI binds.
 if !empty(glob('~/.vim/bundle/vim-rsi'))
-    " The following two binds have corner cases near the end of lines,
-    " so we use functions to check for edge cases.
-    function! s:at_eol() abort
-        return col('.') ==# len(getline('.'))
-    endfunction
-    function! s:beyond_eol() abort
-        return col('.') > len(getline('.'))
-    endfunction
-
-    " C-u
+    " The following two binds have corner cases near the end of lines.
     inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
-
-    " C-k
     if has('nvim')
         " Nvim has a different cursor position for C-o at the end of a line
         " compared to Vim. I consider this a bug.
@@ -116,6 +108,14 @@ if !empty(glob('~/.vim/bundle/vim-rsi'))
         inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
     endif
 
+    function! s:at_eol() abort
+        return col('.') ==# len(getline('.'))
+    endfunction
+    function! s:beyond_eol() abort
+        return col('.') > len(getline('.'))
+    endfunction
+
+
     " These shadow Vim's completion binds, but I use Tab/S-Tab for that
     " anyways.
     " If the PUM is active, close it first.
@@ -123,25 +123,52 @@ if !empty(glob('~/.vim/bundle/vim-rsi'))
     inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
 endif
 
-" NERDTree
-if !empty(glob('~/.vim/bundle/nerdtree'))
-    " Toggle NERDTree.
-    noremap <Leader>i :NERDTreeToggle<CR>
+" zurround.vim
+if !empty(glob('~/.vim/bundle/vim-surround'))
+    let g:surround_no_mappings = 1
 
-    " Go to current file in NERDTree.
-    noremap <Leader>I :NERDTreeFind<CR>
-
-    " Hide NERDTree after opening a file.
-    let NERDTreeQuitOnOpen = 1
-
-    " The default help bind '?' conflicts with vim's search-backwards.
-    let NERDTreeMapHelp = '<F1>'
+    " Use z/Z instead of s/S, since I use s for sneak.vim motions.
+    nmap dz  <Plug>Dsurround
+    nmap cz  <Plug>Csurround
+    nmap cZ  <Plug>CSurround
+    nmap yz  <Plug>Ysurround
+    nmap yZ  <Plug>YSurround
+    nmap yzz <Plug>Yssurround
+    nmap yZz <Plug>YSsurround
+    nmap yZZ <Plug>YSsurround
+    xmap z   <Plug>VSurround
+    xmap gz  <Plug>VgSurround
 endif
 
-" undotree
-if !empty(glob('~/.vim/bundle/undotree'))
-    " Toggle undotree
-    noremap <Leader>U :UndotreeToggle<CR>
+" Fugitive binds.
+if !empty(glob('~/.vim/bundle/vim-fugitive'))
+    " Toggle NERDTree.
+    noremap <Leader>i :NERDTreeToggle<CR>
+    noremap <expr> <Leader>gg ":Git! "
+    noremap <Leader>gs :Gstatus<CR>
+    noremap <Leader>gc :Gcommit<CR>
+    noremap <Leader>gd :Gdiff<CR>
+    noremap <Leader>gb :Gblame<CR>
+endif
+
+" incsearch.vim
+if !empty(glob('~/.vim/bundle/incsearch.vim'))
+    " Case insensitive by default.
+    map / <Plug>(incsearch-forward)\c
+    map ? <Plug>(incsearch-backward)\c
+    map g/ <Plug>(incsearch-stay)\c
+
+    " Case-sensitive search
+    map <Leader>/ <Plug>(incsearch-forward)
+    map <Leader>? <Plug>(incsearch-backward)
+    map <Leader>g/ <Plug>(incsearch-stay)
+endif
+
+" ack.vim
+if !empty(glob('~/.vim/bundle/ack.vim'))
+    " ripgreg
+    let g:ackprg = "rg --vimgrep"
+    noremap <expr> <Leader>a ":Ack "
 endif
 
 " ctrlp
@@ -164,24 +191,6 @@ if !empty(glob('~/.vim/bundle/ctrlp.vim'))
     let g:ctrlp_show_hidden = 1
 endif
 
-" ack.vim
-if !empty(glob('~/.vim/bundle/ack.vim'))
-    " ripgreg
-    let g:ackprg = "rg --vimgrep"
-    noremap <expr> <Leader>a ":Ack "
-endif
-
-" Fugitive binds.
-if !empty(glob('~/.vim/bundle/vim-fugitive'))
-    " Toggle NERDTree.
-    noremap <Leader>i :NERDTreeToggle<CR>
-    noremap <expr> <Leader>gg ":Git! "
-    noremap <Leader>gs :Gstatus<CR>
-    noremap <Leader>gc :Gcommit<CR>
-    noremap <Leader>gd :Gdiff<CR>
-    noremap <Leader>gb :Gblame<CR>
-endif
-
 " NERD Commenter.
 if !empty(glob('~/.vim/bundle/nerdcommenter'))
     " Don't give me the default mappings.
@@ -197,17 +206,25 @@ if !empty(glob('~/.vim/bundle/nerdcommenter'))
     noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
 endif
 
-" incsearch.vim
+" NERDTree
 if !empty(glob('~/.vim/bundle/nerdtree'))
-    " Case insensitive by default.
-    map / <Plug>(incsearch-forward)\c
-    map ? <Plug>(incsearch-backward)\c
-    map g/ <Plug>(incsearch-stay)\c
+    " Toggle NERDTree.
+    noremap <Leader>i :NERDTreeToggle<CR>
 
-    " Case-sensitive search
-    map <Leader>/ <Plug>(incsearch-forward)
-    map <Leader>? <Plug>(incsearch-backward)
-    map <Leader>g/ <Plug>(incsearch-stay)
+    " Go to current file in NERDTree.
+    noremap <Leader>I :NERDTreeFind<CR>
+
+    " Hide NERDTree after opening a file.
+    let NERDTreeQuitOnOpen = 1
+
+    " The default help bind '?' conflicts with vim's search-backwards.
+    let NERDTreeMapHelp = '<F1>'
+endif
+
+" undotree
+if !empty(glob('~/.vim/bundle/undotree'))
+    " Toggle undotree
+    noremap <Leader>U :UndotreeToggle<CR>
 endif
 
 " -----------------------------------------------------------------------------
@@ -287,6 +304,7 @@ set laststatus=1
 " Intead of the default information (cursor's current line/column numbers),
 " show the filename, and whether the current buffer has been modified.
 set ruler
+set rulerformat=%39(%=%{My_bufname()}%4(%m%)%)
 " We use this function instead of the %t rulerformat/statusline builtin,
 " since that one shows "[No Name]" when there's no buffer name.
 " Also, this allows us to truncate from the right instead of from the left.
@@ -297,7 +315,6 @@ function! My_bufname() abort
     endif
     return filename
 endfunction
-set rulerformat=%39(%=%{My_bufname()}%4(%m%)%)
 
 " Don't give visual feedback for normal mode commands requiring multiple
 " keypresses.
@@ -366,8 +383,8 @@ autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
 " Highlight lowercase "todo" in comments as well as "TODO".
 " https://stackoverflow.com/a/30552423
 augroup lowercase_todo
-    au!
-    au Syntax * syn keyword LowercaseTodo contained todo
+    autocmd!
+    autocmd Syntax * syn keyword LowercaseTodo contained todo
         \ containedin=.*Comment,vimCommentTitle,cCommentL
 augroup END
 hi def link LowercaseTodo Todo
@@ -442,6 +459,7 @@ noremap <F4> :set wrap! wrap?<CR>
 noremap <F5> :set number! number?<CR>
 
 " Toggle colorcolumn
+noremap <expr> <F6> <sid>toggle_colorcolumn()
 function! s:toggle_colorcolumn() abort
     if &colorcolumn !=# ""
         let s:colorcolumn_previous_value = &colorcolumn
@@ -457,7 +475,6 @@ function! s:toggle_colorcolumn() abort
 
     return ""
 endfunction
-noremap <expr> <F6> <sid>toggle_colorcolumn()
 
 " Toggle autoindent/mappings/etc, for pasting text.
 noremap <F7> :set paste! paste?<CR>
@@ -530,13 +547,6 @@ noremap <Leader>e :!source ~/config-files/update_configs<CR>
 
 " Reload .vimrc
 noremap <Leader>r :source $MYVIMRC<CR>
-
-" Clear and redraw the screen; usually bound to <C-l>
-" This is currently a useful bind since Neovim mangles the top line of the
-" screen sometimes when resized.
-" See https://github.com/neovim/neovim/issues/8322
-" Fixed in Neovim 3.2, yay!
-noremap <Leader>f <C-l>
 
 
 
