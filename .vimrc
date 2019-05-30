@@ -92,8 +92,6 @@ if !empty(glob('~/.vim/bundle/vim-sneak'))
 
     " Disable highlighting of matches.
     autocmd User SneakLeave highlight clear Sneak
-
-    " todo: disable jumping across lines
 endif
 
 " Additional RSI binds.
@@ -571,12 +569,3 @@ vnoremap <Leader>n :s/\c//gn<left><left><left><left>
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>
 noremap <Leader>X :!chmod -x %<CR>
-
-" -----------------------------------------------------------------------------
-" Misc
-" -----------------------------------------------------------------------------
-
-" Work-related settings / defs / etc
-if filereadable(glob("~/notes/config/nvimrc-snippet"))
-    source ~/notes/config/nvimrc-snippet
-endif

@@ -46,8 +46,3 @@ stty -ixon
 # Load aliases, functions.
 source "$HOME/.bash_aliases"
 source "$HOME/.bash_functions"
-
-# Load work-related defs, etc.
-if [[ -f "$HOME/notes/config/bashrc-snippet" ]]; then
-    source "$HOME/notes/config/bashrc-snippet"
-fi
