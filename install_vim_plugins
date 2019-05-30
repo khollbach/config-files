@@ -7,6 +7,7 @@ cd ~/.vim/bundle
 
 # Install plugins.
 git clone https://github.com/altercation/vim-colors-solarized.git
+git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/shougo/deoplete.nvim.git
 git clone https://github.com/tpope/vim-rsi.git
 git clone https://github.com/tpope/vim-surround.git

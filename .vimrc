@@ -29,6 +29,19 @@ if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
     colorscheme solarized
 endif
 
+if !empty(glob('~/.vim/bundle/vim-sneak'))
+    " Disable highlighting for `s` and `S` motions.
+    " Only half-works: when sneaks are repeated with `;` or `,` you still get
+    " highlighting. This isn't the worst thing, but I'd like to fix it
+    " eventually.
+    " (Note: the suggested way of disabling highlighting in the docs doesn't
+    " work: it un-colors all matches even if they were colored before by syntax
+    " highlighting.)
+    autocmd User SneakLeave call sneak#cancel()
+
+    " todo: disable jumping across lines
+endif
+
 " Deoplete (autocompletion)
 if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     " Automatic suggestions
@@ -419,10 +432,6 @@ noremap <Home> ^
 " Select recently pasted text.
 " (Built-in gv selects recently selected text.)
 nnoremap gp `[v`]
-
-" Unmap s and S for now. I'm considering using these for 'sneak.vim'.
-noremap s <Nop>
-noremap S <Nop>
 
 
 
