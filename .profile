@@ -20,9 +20,9 @@ if [ -n "$DISPLAY" ] && command -v setxkbmap >/dev/null; then
 
     # Swap alt and super on Mac keyboard, since they're backwards.
     if [ "$HOSTNAME" == kevan-MacBook ] &&
-        [ -f "$HOME/config-files/mac-swap-alt-super.xmodmap" ]; then
+        [ -f "$HOME/config-files/swap-alt-super.xmodmap" ]; then
 
-        xmodmap "$HOME/config-files/mac-swap-alt-super.xmodmap"
+        xmodmap "$HOME/config-files/swap-alt-super.xmodmap"
     fi
 fi
 
