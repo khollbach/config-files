@@ -302,16 +302,24 @@ set laststatus=1
 " Intead of the default information (cursor's current line/column numbers),
 " show the filename, and whether the current buffer has been modified.
 set ruler
-set rulerformat=%39(%=%{My_bufname()}%4(%m%)%)
+set rulerformat=%39(%=%{My_bufname()}%3(%m%)%)
 " We use this function instead of the %t rulerformat/statusline builtin,
 " since that one shows "[No Name]" when there's no buffer name.
 " Also, this allows us to truncate from the right instead of from the left.
 function! My_bufname() abort
     let filename = expand('%:t')
+
+    " If the filename is too long, display the first 34 chars of it.
     if strlen(filename) > 35
         let filename = filename[0:33] . ">"
     endif
-    return filename
+
+    " We want one space between the filename and the 'modified' indicator.
+    " We would have put this space in the 'rulerformat' string, except that
+    " this way if the file is named something numeric like "0123", Vim won't
+    " try to be clever and format it as "123" instead, since we return "0123 "
+    " from the %{ } block.
+    return filename . " "
 endfunction
 
 " Don't give visual feedback for normal mode commands requiring multiple
