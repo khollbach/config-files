@@ -47,3 +47,4 @@ If you want capslock to be control in virtual consoles, add to /etc/rc.local:
 and make sure the file is executable and has the header #!/bin/bash
 On Windows, set system env var HOME to "C:\Users\$USERNAME" so Emacs can find
 your configs.
+Install redshift.

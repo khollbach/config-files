@@ -68,6 +68,9 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
 
     " Use tab/shift-tab for completion (if the PUM is active or if there's
     " something other than whitespace behind the cursor).
+    " todo: instead of checking if there's whitespace behind, you should check
+    "   if there's a 'word' character behind (ie alpha/num/underscore).
+    "   Vim probably has a builtin way to check for this, maybe just '\w' regex.
     inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
         \ "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
