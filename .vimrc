@@ -71,13 +71,16 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     " todo: instead of checking if there's whitespace behind, you should check
     "   if there's a 'word' character behind (ie alpha/num/underscore).
     "   Vim probably has a builtin way to check for this, maybe just '\w' regex.
-    inoremap <expr> <Tab> pumvisible() \|\| !<sid>check_space_behind() ?
+    inoremap <expr> <Tab> pumvisible() \|\| <sid>check_word_behind() ?
         \ "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() \|\| !<sid>check_space_behind() ?
+    inoremap <expr> <S-Tab> pumvisible() \|\| <sid>check_word_behind() ?
         \ "\<C-p>" : "\<S-Tab>"
-    function! s:check_space_behind() abort
+
+    " Check if the character immediately to the left of the cursor is a
+    " "word-character", ie [0-9A-Za-z_]. False if at the beginning of the line.
+    function! s:check_word_behind() abort
         let col = col('.') - 1
-        return !col || getline('.')[col - 1] =~ '\s'
+        return col > 0 && getline('.')[col - 1] =~ '\w'
     endfunction
 
     " Disable preview window. Deoplete would sometime uses this to show
