@@ -67,10 +67,7 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 
     " Use tab/shift-tab for completion (if the PUM is active or if there's
-    " something other than whitespace behind the cursor).
-    " todo: instead of checking if there's whitespace behind, you should check
-    "   if there's a 'word' character behind (ie alpha/num/underscore).
-    "   Vim probably has a builtin way to check for this, maybe just '\w' regex.
+    " a word-character behind the cursor).
     inoremap <expr> <Tab> pumvisible() \|\| <sid>check_word_behind() ?
         \ "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() \|\| <sid>check_word_behind() ?
@@ -102,7 +99,7 @@ endif
 
 " Additional RSI binds.
 if !empty(glob('~/.vim/bundle/vim-rsi'))
-    " The following two binds have corner cases near the end of lines.
+    " <C-u> and <C-k> have corner cases near the end of lines.
     inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
     if has('nvim')
         " Nvim has a different cursor position for C-o at the end of a line
@@ -119,12 +116,20 @@ if !empty(glob('~/.vim/bundle/vim-rsi'))
         return col('.') > len(getline('.'))
     endfunction
 
-
-    " These shadow Vim's completion binds, but I use Tab/S-Tab for that
-    " anyways.
-    " If the PUM is active, close it first.
+    " <C-n> and <C-p> shadow Vim's completion binds, but I use Tab/S-Tab for
+    " that anyways.
+    " If the PUM is active, we close it first.
     inoremap <expr> <C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
     inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
+
+    " <C-y> = put recent
+    " <M-y> = put yanked
+    inoremap <C-y> <C-r>"
+    if has('nvim')
+        inoremap <M-y> <C-r>0
+    else
+        inoremap <Esc>y <C-r>0
+    endif
 endif
 
 " zurround.vim
