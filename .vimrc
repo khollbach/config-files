@@ -292,7 +292,8 @@ autocmd BufNewFile,BufRead * set formatoptions+=rqj formatoptions-=o
 " Start scrolling as soon as the cursor gets close to the edge of the screen.
 set scrolloff=5
 
-" Don't automatically perform ^ after each gg, H, M, L, etc.
+" Don't automatically perform ^ after each C-U, C-D, C-B, C-F, H, M, L, etc.
+" Basically, leave my cursor in the current column when scrolling around.
 set nostartofline
 
 " Go to the first match as you are typing your search.
