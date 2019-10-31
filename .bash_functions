@@ -35,7 +35,9 @@ function bell {
     return $rv
 }
 
-# Git shorthands
+
+
+# Git shorthands:
 
 # Run 'git commit', optionally accept a message for the '-m' option.
 function gc {

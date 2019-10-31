@@ -1,12 +1,16 @@
 #!/bin/bash
 
+# This script sets the prompt, $PS1. It runs every time a prompt is printed.
 function prompt_command {
-    local rv=$?
+    # Reset the terminal title after running any program, since it seems many
+    # programs set it and then forget to clean it up when they exit.
+    echo -ne "\e]0;\a"
 
-    # Add line break if pwd is longer than 50 chars.
+    # Add a line break only if pwd is longer than 48 chars, or if
+    # $prompt_contents is anything more than '\w'.
     local newline
     local w=$(dirs +0)
-    if [ ${#w} -gt 50 ] || [ ${#prompt_contents} -gt 2 ]; then
+    if [ ${#w} -gt 48 ] || [ "$prompt_contents" != '\w' ]; then
         newline="\n"
     else
         newline=""
@@ -19,13 +23,16 @@ function prompt_command {
 }
 PROMPT_COMMAND=prompt_command
 
-prompt_color=9 # Orange
+prompt_color=9  # Bright orange :)
 
+# Concise prompt on my machines, verbose one elsewhere.
 if [[ "$HOSTNAME" =~ kevan-* ]]; then
     prompt_contents='\w'
 else
     prompt_contents='\u@\h:\w'
 fi
+
+
 
 # Set LS_COLORS to not use any bold fonts.
 eval `dircolors | sed s,01,00,g`
@@ -42,6 +49,38 @@ export VISUAL=/usr/bin/vim
 
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon
+
+
+
+# Set the terminal title when opening man pages.
+function man {
+    title_wrapper man "$@"
+}
+function title_wrapper {
+    local cmd=$1
+    shift
+    local args=("$@")
+
+    local title
+    while [[ -n "$1" ]]; do
+        # If the arg starts with anything but `-`, use it as the title.
+        # This isn't perfect, but it's good enough.
+        if [[ "$1" =~ ^[^-] ]]; then
+            title=$1
+            break
+        fi
+
+        shift
+    done
+
+    if [[ -n "$title" ]]; then
+        echo -ne "\e]0;$title\a"
+    fi
+
+    command "$cmd" "${args[@]}"
+}
+
+
 
 # Load aliases, functions.
 source "$HOME/.bash_aliases"

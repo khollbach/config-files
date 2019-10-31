@@ -285,7 +285,8 @@ set nojoinspaces
 
 " Text-formatting options. Some done on load to override plugin-file settings.
 set formatoptions-=tc
-autocmd BufNewFile,BufRead * set formatoptions+=rqj formatoptions-=o
+autocmd BufNewFile,BufRead,BufAdd,BufFilePost *
+    \ set formatoptions+=rqj formatoptions-=o
 
 
 
@@ -307,31 +308,65 @@ set wildmenu
 
 
 
+" Set the "terminal title", which may be read by terminal emulators to decide
+" on a window name. In my case, tmux is configured to show the terminal title
+" for each open window.
+set title
+
+" The terminal title will be the current file name (but not the path).
+"set titlestring=%t
+
+" We use %{expand("%t")} instead of just %t, since expand won't output
+" "[No Name]" for new buffers.
+" Unfortunately Vim won't let titlestring have the value "0" (which I actually
+" use as a file name; don't ask), and it will display an empty string instead.
+" It will also try to format numbers cleverly, so e.g. "001" becomes "1". :(
+set titlestring=%{expand(\"%:t\")}
+
 " Don't show status line (filename, etc) when there's only one window.
 set laststatus=1
 
 " Show certain info at the bottom-right of the screen.
 " Intead of the default information (cursor's current line/column numbers),
-" show the filename, and whether the current buffer has been modified.
+" we'll show the filename, and whether the current buffer has been modified.
 set ruler
-set rulerformat=%39(%=%{My_bufname()}%3(%m%)%)
-" We use this function instead of the %t rulerformat/statusline builtin,
-" since that one shows "[No Name]" when there's no buffer name.
-" Also, this allows us to truncate from the right instead of from the left.
-function! My_bufname() abort
-    let filename = expand('%:t')
 
-    " If the filename is too long, display the first 34 chars of it.
-    if strlen(filename) > 35
-        let filename = filename[0:33] . ">"
+" 36 (total width) = 32 (filename) + 1 (space) + 3 (modified)
+"set rulerformat=%36(%=%t\ %3(%m%)%)
+
+" Instead of the above, we update the rulerformat width dynamically when the
+" current buffer name changes. This way we're not wasting space in the "echo
+" area". It's too bad Vim doesn't do this for us automatically. :(
+" This doesn't play that nicely with multiple windows though, since rulerformat
+" is a global setting with no window-local (or buffer-local) value. :(
+autocmd BufEnter,BufAdd,BufFilePost *
+    \ let &rulerformat =
+    \ "%" . (strlen(Percent_t()) + 3) . "(%=%{Percent_t()}%3(%m%)%)"
+
+" We use this function instead of %t in rulerformat, since this won't show
+" "[No Name]" when there's no open file. Also, this allows us to truncate from
+" the right instead of from the left.
+"
+" This function returns one additional space at the end of the filename, if it
+" exists; this is a hack to get around automatic number formatting.
+function! Percent_t() abort
+    let filename = expand("%:t")
+
+    " If the filename is too long, display the first 31 chars of it, and ">".
+    if strlen(filename) > 32
+        let filename = filename[0:30] . ">"
     endif
 
     " We want one space between the filename and the 'modified' indicator.
     " We would have put this space in the 'rulerformat' string, except that
     " this way if the file is named something numeric like "0123", Vim won't
     " try to be clever and format it as "123" instead, since we return "0123 "
-    " from the %{ } block.
-    return filename . " "
+    " from the %{ } block. Terrible hack, I know.
+    if strlen(filename) > 0
+        let filename = filename . " "
+    endif
+
+    return filename
 endfunction
 
 " Don't give visual feedback for normal mode commands requiring multiple
@@ -373,39 +408,63 @@ autocmd InsertLeave * set listchars+=trail:·
 
 
 
-" Two spaces indent by default for html files.
-autocmd BufNewFile,BufRead *.html
-    \ setlocal shiftwidth=2 |
-    \ setlocal softtabstop=2
+" Syntax highlighting, etc, for different file extensions.
+augroup filetype_settings
+    autocmd!
 
-" Treat more things as Makefile.
-autocmd BufNewFile,BufRead make*.inc
-    \ setlocal syntax=make
+    " Cheat-sheet:
+    "   BufNewFile
+    "       open new file
+    "   BufRead
+    "       open existing file
+    "   BufAdd (don't use BufNew; see the docs for gotchas)
+    "       write file from a new buffer
+    "   BufFilePost
+    "       rename file
+    " I'm pretty sure these are all the ways for a filename to change.
+    " For completeness, there's also:
+    "   BufEnter (which subsumes BufNewFile and BufRead, but not the others)
+    "       switching between existing buffers, or creating a new one
 
-" Treat TypeScript as JavaScript.
-autocmd BufNewFile,BufRead *.ts
-    \ setlocal syntax=javascript
+    " Two spaces indent for html files.
+    autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.html
+        \ setlocal shiftwidth=2 |
+        \ setlocal softtabstop=2
 
-" Treat .sc as Scala.
-autocmd BufNewFile,BufRead *.sc
-    \ setlocal syntax=scala
+    " Treat .sc as Scala.
+    autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.sc
+        \ setlocal syntax=scala
+
+    " Treat TypeScript as JavaScript.
+    autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.ts
+        \ setlocal syntax=javascript
+
+    " Treat more things as Makefile.
+    autocmd BufNewFile,BufRead,BufAdd,BufFilePost make*.inc
+        \ setlocal syntax=make
+augroup END
 
 " Jump to the last position when reopening a file.
-" Don't do this for git commit messages though.
-autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-        \ exe "normal! g`\"" |
-    \ endif
-autocmd BufReadPost COMMIT_EDITMSG exe "normal! gg"
+augroup reopen_file
+    autocmd!
+    autocmd BufRead *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \ exe "normal! g`\"" |
+        \ endif
+
+    " Don't do this for git commit messages though (since you're not really
+    " re-opening anything, but the filename/path just happens to be the same).
+    autocmd BufRead COMMIT_EDITMSG exe "normal! gg"
+augroup END
 
 " Highlight lowercase "todo" in comments as well as "TODO".
 " https://stackoverflow.com/a/30552423
 augroup lowercase_todo
     autocmd!
-    autocmd Syntax * syn keyword LowercaseTodo contained todo
+    autocmd Syntax * syntax keyword LowercaseTodo contained todo
         \ containedin=.*Comment,vimCommentTitle,cCommentL
 augroup END
-hi def link LowercaseTodo Todo
+highlight def link LowercaseTodo Todo
 
 
 
@@ -470,11 +529,11 @@ nnoremap gp `[v`]
 
 
 
-" Toggle line wrapping.
-noremap <F4> :set wrap! wrap?<CR>
-
 " Toggle line numbers.
-noremap <F5> :set number! number?<CR>
+noremap <F4> :set number! number?<CR>
+
+" Toggle line wrapping.
+noremap <F5> :set wrap! wrap?<CR>
 
 " Toggle colorcolumn
 noremap <expr> <F6> <sid>toggle_colorcolumn()
