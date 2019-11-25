@@ -23,13 +23,14 @@ filetype plugin indent on
 
 " Dark background color.
 set background=dark
+"set background=light
 
 " Solarized color scheme
 if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
     colorscheme solarized
 endif
 
-" Deoplete (autocompletion)
+" Deoplete (auto-completion)
 if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     let g:deoplete#enable_at_startup = 1
 
@@ -39,12 +40,13 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     \ 'on_insert_enter': v:false,
     \ })
 
-    " Initially disable auto_complete.
+    " Initially disable deoplete.
     call deoplete#custom#option('auto_complete', v:false)
     let s:my_deoplete_enabled = 0
 
-    " Toggle auto_complete: <F9>
+    " Toggle deoplete: <F9>
     noremap <expr> <F9> <sid>toggle_deoplete()
+    inoremap <expr> <F9> <sid>toggle_deoplete()
     function! s:toggle_deoplete() abort
         if s:my_deoplete_enabled
             " Disable
@@ -61,17 +63,43 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
     endfunction
 
     " Fix the way enter interacts with deoplete.
-    " If the `pop-up-menu' is visible (ie, if autocomplete suggestions are
-    " showing), then close the menu (C-y is `yes/confirm') and then insert a
-    " newline.
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+    " If the 'pop-up-menu' is visible (i.e., if autocomplete suggestions are
+    " showing), close it then insert a newline.
+    inoremap <expr> <CR> <sid>enter_fn()
+    function! s:enter_fn() abort
+        if pumvisible()
+            " <C-y> confirms the current selection.
+            return "\<C-y>\<CR>"
+        else
+            return "\<CR>"
+        endif
+    endfunction
 
-    " Use tab/shift-tab for completion (if the PUM is active or if there's
-    " a word-character behind the cursor).
-    inoremap <expr> <Tab> pumvisible() \|\| <sid>check_word_behind() ?
-        \ "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() \|\| <sid>check_word_behind() ?
-        \ "\<C-p>" : "\<S-Tab>"
+    " Use tab/shift-tab for completion.
+    " Happens only if the PUM is active or if there's a word-character behind
+    " the cursor; otherwise tab is just indentation.
+    inoremap <silent><expr> <Tab> <sid>tab_fn()
+    inoremap <silent><expr> <S-Tab> <sid>s_tab_fn()
+
+    function! s:tab_fn() abort
+        if pumvisible() || s:check_word_behind()
+            " Next suggestion.
+            return "\<C-n>"
+        else
+            " Indent.
+            return "\<Tab>"
+        endif
+    endfunction
+
+    function! s:s_tab_fn() abort
+        if pumvisible() || s:check_word_behind()
+            " Previous suggestion.
+            return "\<C-p>"
+        else
+            " Indent.
+            return "\<S-Tab>"
+        endif
+    endfunction
 
     " Check if the character immediately to the left of the cursor is a
     " "word-character", ie [0-9A-Za-z_]. False if at the beginning of the line.
@@ -275,6 +303,10 @@ set linebreak
 
 " Vertical lines after 80, 100, and 120 chars.
 set colorcolumn=81,101,121
+"set colorcolumn=
+
+" Don't show the tildes after the last line in the file.
+"highlight EndOfBuffer ctermfg=bg
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
@@ -316,11 +348,10 @@ set title
 " The terminal title will be the current file name (but not the path).
 "set titlestring=%t
 
-" We use %{expand("%t")} instead of just %t, since expand won't output
-" "[No Name]" for new buffers.
-" Unfortunately Vim won't let titlestring have the value "0" (which I actually
-" use as a file name; don't ask), and it will display an empty string instead.
-" It will also try to format numbers cleverly, so e.g. "001" becomes "1". :(
+" We use %{expand("%:t")} instead of just %t as above, since expand won't
+" output "[No Name]" for new buffers.
+" Unfortunately, in %{ } blocks, Vim will try format numbers cleverly, so e.g.
+" the filename "001" becomes "1". I don't see an easy way to fix that here.
 set titlestring=%{expand(\"%:t\")}
 
 " Don't show status line (filename, etc) when there's only one window.
@@ -522,6 +553,7 @@ endif
 " <Home> = ^
 " (By default it behaves like the 0 key instead.)
 noremap <Home> ^
+inoremap <Home> <C-o>^
 
 " Select recently pasted text.
 " (Built-in gv selects recently selected text.)
@@ -531,21 +563,26 @@ nnoremap gp `[v`]
 
 " Toggle line numbers.
 noremap <F4> :set number! number?<CR>
+inoremap <F4> <C-o>:set number! number?<CR>
 
 " Toggle line wrapping.
 noremap <F5> :set wrap! wrap?<CR>
+inoremap <F5> <C-o>:set wrap! wrap?<CR>
 
 " Toggle colorcolumn
 noremap <expr> <F6> <sid>toggle_colorcolumn()
+inoremap <expr> <F6> <sid>toggle_colorcolumn()
 function! s:toggle_colorcolumn() abort
     if &colorcolumn !=# ""
+        " Remember the old value, and clear colorcolumn.
         let s:colorcolumn_previous_value = &colorcolumn
         set colorcolumn=
-        set colorcolumn?
-    else
-        let &colorcolumn=s:colorcolumn_previous_value
-        set colorcolumn?
+    elseif exists("s:colorcolumn_previous_value")
+        " If &cc is empty, reset to the old value, if one exists.
+        let &colorcolumn = s:colorcolumn_previous_value
     endif
+
+    set colorcolumn?
 
     " Need to redraw here to get the effect right away.
     redraw

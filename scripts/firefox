@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# When on my laptop,
 if [[ "$HOSTNAME" == kevan-thinkpad ]]; then
-    # run zoomed-in version of firefox, for high-dpi screens.
-    GDK_DPI_SCALE=1.5 /usr/bin/firefox "$@"
+    # When on my laptop, run a zoomed-in version of firefox, for high-dpi
+    # screens.
+    GDK_DPI_SCALE=1.5 exec /usr/bin/firefox "$@"
 else
-    /usr/bin/firefox "$@"
+    exec /usr/bin/firefox "$@"
 fi

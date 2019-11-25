@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# If not inside a tmux session, re-run from inside one.
 if [[ -z "$TMUX" ]]; then
-    tmux new-session "$0" "$@"
-else
-    tmux set-option status off
-    nvim "$@"
+    exec tmux new-session "$0" "$@"
 fi
+
+# Start Nvim.
+# The :hi command hides the tildes usually displayed at end-of-file.
+tmux set-option status off
+exec nvim -c "set cc= | hi EndOfBuffer ctermfg=bg" "$@"

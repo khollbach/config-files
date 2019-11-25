@@ -23,7 +23,8 @@ function prompt_command {
 }
 PROMPT_COMMAND=prompt_command
 
-prompt_color=9  # Bright orange :)
+#prompt_color=9  # Bright orange :)
+prompt_color=5  # Pink!
 
 # Concise prompt on my machines, verbose one elsewhere.
 if [[ "$HOSTNAME" =~ kevan-* ]]; then
