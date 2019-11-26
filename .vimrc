@@ -306,7 +306,8 @@ set colorcolumn=81,101,121
 "set colorcolumn=
 
 " Don't show the tildes after the last line in the file.
-"highlight EndOfBuffer ctermfg=bg
+" Note the trailing space.
+"set fillchars=eob:\ 
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
