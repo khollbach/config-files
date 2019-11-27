@@ -489,12 +489,17 @@ augroup reopen_file
     autocmd BufRead COMMIT_EDITMSG exe "normal! gg"
 augroup END
 
-" Highlight lowercase "todo" in comments as well as "TODO".
+" Highlight lowercase "todo" in comments as well as uppercase "TODO".
 " https://stackoverflow.com/a/30552423
 augroup lowercase_todo
     autocmd!
+
+    " I don't just match against `.*Comment.*` here because that would match
+    " things like vimCommentString, rustCommentLineDocError, etc, etc.
     autocmd Syntax * syntax keyword LowercaseTodo contained todo
-        \ containedin=.*Comment,vimCommentTitle,cCommentL
+        \ containedin=.*Comment
+        \,vimCommentTitle,cCommentL
+        \,rustCommentLine,rustCommentBlock
 augroup END
 highlight def link LowercaseTodo Todo
 
