@@ -57,6 +57,8 @@ stty -ixon
 function man {
     title_wrapper man "$@"
 }
+
+# Run a command, but set the terminal title to the first non-flag argument.
 function title_wrapper {
     local cmd=$1
     shift
@@ -74,6 +76,7 @@ function title_wrapper {
         shift
     done
 
+    # Set the terminal title
     if [[ -n "$title" ]]; then
         echo -ne "\e]0;$title\a"
     fi

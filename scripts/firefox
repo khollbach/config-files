@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "$HOSTNAME" == kevan-thinkpad ]]; then
+if [[ "$HOSTNAME" == kevan-thinkpad && -z "$GDK_DPI_SCALE" ]]; then
     # When on my laptop, run a zoomed-in version of firefox, for high-dpi
     # screens.
     GDK_DPI_SCALE=1.5 exec /usr/bin/firefox "$@"
