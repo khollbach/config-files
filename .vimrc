@@ -22,8 +22,12 @@ filetype plugin indent on
 " -----------------------------------------------------------------------------
 
 " Dark background color.
-set background=dark
-"set background=light
+"set background=dark
+set background=light
+
+" TODO: get Solarized to use brightgreen instead of brightyellow for dark grey
+" text when in 'light' mode. Temporary workaround: edit terminal emulator
+" colors.
 
 " Solarized color scheme
 if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
@@ -329,6 +333,10 @@ set scrolloff=5
 " Don't automatically perform ^ after each C-U, C-D, C-B, C-F, H, M, L, etc.
 " Basically, leave my cursor in the current column when scrolling around.
 set nostartofline
+
+" Show number of matches (and current position therin) when searching.
+" Available starting in Vim 8.1.1270 and Nvim 0.4.0
+set shortmess-=S
 
 " Go to the first match as you are typing your search.
 set incsearch

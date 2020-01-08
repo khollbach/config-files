@@ -10,9 +10,6 @@ export PATH=$HOME/config-files/scripts:$PATH
 # Rust binaries
 export PATH=$HOME/.cargo/bin:$PATH
 
-# Neovim
-export PATH=$HOME/.opt/nvim-linux64/bin:$PATH
-
 # setxkbmap will only work if X is running.
 if [ -n "$DISPLAY" ] && command -v setxkbmap >/dev/null; then
     # Map capslock to control

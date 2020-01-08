@@ -6,6 +6,5 @@ if [[ -z "$TMUX" ]]; then
 fi
 
 # Start Nvim.
-# The :hi command hides the tildes usually displayed at end-of-file.
 tmux set-option status off
-exec nvim -c "set cc= fcs=eob:\ " "$@"
+exec nvim -c 'set wrap cc= fcs=eob:\ ' "$@"
