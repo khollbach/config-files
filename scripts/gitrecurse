@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# If run from $HOME, run the given shell command in each direct subdirectory
-# of $HOME that is a git repository. Otherwise, simply run the given shell
-# command in $PWD.
+# If the current directory is a git repo, run the given shell command.
+# Otherwise, run it in *each* direct subdirectory that is a git repo.
 #
-# This script is called `gitrecurse' for historical reasons, it doesn't recurse
+# This script is called `gitrecurse` for historical reasons, it doesn't recurse
 # into sub-sub-dirs anymore for performance reasons.
 #
 # Sample usage:
@@ -14,24 +13,36 @@
 # $ gitrecurse git pull
 # ...
 main() {
-    local shell_command
-    shell_command=("$@")
+    local shell_command=("$@")
 
-    if [[ "$PWD" == "$HOME" ]]; then
+    if git status &>/dev/null; then
+        "${shell_command[@]}"
+    else
+        local any_successes
+
+        # For every subdir.
         for dir in */; do
-            pushd "$dir" > /dev/null || continue
+            # (Weird edge case: empty glob.)
+            if [[ "$dir" == "*/" ]]; then break; fi
 
-            # If this is the root of a git repo, print the repo name (in blue)
-            # and then run the command.
-            if [[ -d .git && ! -L .git ]]; then
+            pushd "$dir" >/dev/null || continue
+
+            # If this is the root of a git repo, print the repo name (in
+            # blue) and then run the command.
+            if [[ -d .git ]]; then
                 echo -e "\e[0;34m$PWD\e[0m"
                 "${shell_command[@]}"
+
+                any_successes=yes
             fi
 
-            popd > /dev/null || exit 1
+            popd >/dev/null || exit 1
         done
-    else
-        "${shell_command[@]}"
+
+        if [[ -z "$any_successes" ]]; then
+            echo "$PWD isn't a git repository, and neither are any immediate subdirectories."
+            exit 1
+        fi
     fi
 }
 
