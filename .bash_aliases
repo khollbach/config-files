@@ -14,8 +14,7 @@ alias lta="ls -ltrA"
 # `-` = `cs -`
 alias -- -="cs -"
 
-# `..` = `cs ..`
-# Etc.
+# `..` = `cs ..`, etc...
 alias      ..="cs .."
 alias     ...="cs ../.."
 alias    ....="cs ../../.."
@@ -23,26 +22,32 @@ alias   .....="cs ../../../.."
 alias  ......="cs ../../../../.."
 alias .......="cs ../../../../../.."
 
-# Misc aliases
-alias sl="sl -e"
-alias rain="rain -d 150"
-alias which="type -a"
-alias ltmk="latexmk -pdf -pvc"
-alias ta="tmux_attach"
-alias fn="find . -name"
+# Save a lot of typing.
+alias pag="ps aux | grep"
+alias hig="history | cut -c 8- | uniq | grep"  # I mostly use C-r now.
 alias f="fin"
+alias fn="find . -name"
+alias a="ack"
 alias ai="ack -i"
-alias u="unbuffer "
-alias b="unbuffer -p "
+alias t="bell"
+alias p="python3"
+alias v="vim"
+alias ltmk="latexmk -pdf -pvc"
+
+# Make these more user-friendly.
+alias which="type -a"
+alias grep="grep --color=auto"
 alias amm="amm --no-remote-logging"
 if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
 
-# Grep shorthands
-alias grep="grep --color=auto"
-alias pag="ps aux | grep"
-alias hig="history | cut -c 8- | uniq | grep"
+# Misc.
+alias u="unbuffer "
+alias b="unbuffer -p "
+alias sl="sl -e"
+alias LS="LS -e"
+alias rain="rain -d 150"
 
 # ack -> rg
 alias ack="ripgrep.rg"
@@ -57,6 +62,7 @@ alias emacs="emacsclient -a '' -c"
 alias remacs="killall emacs; command emacs --daemon"
 
 # Git shorthands
+alias gsh="git show"
 alias gd="git diff"
 alias gdh="gd HEAD"
 alias gdhh="gd HEAD^"
@@ -70,6 +76,9 @@ alias gr="git remote"
 alias gco="git checkout"
 alias gl="git log"
 alias glo="git log --oneline"
+alias gst="git stash"
+alias gsp="git stash pop"
+alias gsl="git stash list"
 
 # Recursive git shorthands
 alias gs="gitrecurse git status"

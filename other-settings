@@ -2,8 +2,16 @@
 
 super-i xfce4-terminal --execute tmux_attach
 super-o firefox
+        (or chromium)
 super-p xfce4-popup-whiskermenu
-        (or xfce4-popup-applicationsmenu for xfce outside of Xubuntu)
+        (If you started with plain xfce, and not Xubuntu, you'll have to swap
+         out the existing start menu for the whiskermenu by right-clicking on
+         some stuff.)
+
+super-w exo-open --launch WebBrowser
+super-f exo-open --launch FileManager
+super-t exo-open --launch TerminalEmulator
+        (Run exo-preferred-applications (it's a gui) to change any of these.)
 
 super-v xfce4-terminal --execute tmux new-session tmux_nvim
 super-e emacsclient -a "" -c
@@ -25,26 +33,32 @@ super-m Quicktile bottom-right
 
 # Terminal emulator settings
 
-DejaVu Sans Mono Book 25 point font, or (on 1920x1080p screens):
-  14pt (173x46 chars), 19 (127x35), 22 (106x30),
-  25 (95x27), 27 (87x25), 29 (83x23), 30 (79x22)
-Solarized color scheme
-Don't show bold text in bright colors
 Hide scrollbar
+DejaVu Sans Mono Book 22 point font, or on 1920x1080 screens:
+    14pt (=173x46 chars), 19 (127x35), 22 (106x30), 25 (95x27)
+Transparent background, 85% opacity
+Don't display menubar in new windows
+Solarized color scheme (light or dark)
+Don't show bold text in bright colors
+Disable menu shortcut keys
 Autohide mouse pointer
+Automatically copy selection to clipboard
 
 # Misc.
 
-Install xclip for tmux / system-clipboard integration.
+Install xfce4 if it's not already.
+Install redshift-gtk.
+Install xclip for system-clipboard integration with tmux and nvim.
 Install xdotool and wmctrl for move-to-next-monitor script.
-Upgrade Neovim to fix screen drawing issues. https://github.com/neovim/neovim/issues/8322
-> The following should work:
-    sudo add-apt-repository ppa:neovim-ppa/stable
-    sudo apt update
-    sudo apt install neovim  # Or `sudo apt upgrade` if already installed
-If you want capslock to be control in virtual consoles, add to /etc/rc.local:
-    (dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
-and make sure the file is executable and has the header #!/bin/bash
+Install the latest stable release of Neovim.
+Install `pynvim` via pip3 to get certain nvim plugins to work.
+
+If you want passwordless sudo, append this to /etc/sudoers:
+ALL»    ALL=(ALL) NOPASSWD: ALL
+
+If you want capslock to be control in virtual consoles, add this line:
+(dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
+to /etc/rc.local and make it executable with the header #!/bin/bash
+
 On Windows, set system env var HOME to "C:\Users\$USERNAME" so Emacs can find
 your configs.
-Install redshift.
