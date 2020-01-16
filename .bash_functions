@@ -5,11 +5,6 @@ function cs {
     cd "$@" && ls
 }
 
-# cd and lt
-function ct {
-    cd "$@" && lt
-}
-
 # Case-insensitive `find` alias
 function fin {
     find . -iname "*$1*" "${@:2}"

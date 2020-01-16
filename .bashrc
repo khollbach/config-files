@@ -27,7 +27,7 @@ PROMPT_COMMAND=prompt_command
 prompt_color=5  # Pink!
 
 # Concise prompt on my machines, verbose one elsewhere.
-if [[ "$HOSTNAME" =~ kevan-* ]]; then
+if [[ "$HOSTNAME" =~ kevan-|-lt ]]; then
     prompt_contents='\w'
 else
     prompt_contents='\u@\h:\w'
@@ -46,7 +46,12 @@ export LS_COLORS="${LS_COLORS}ow=30;42:"
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Git commit messages, etc.
-export VISUAL=/usr/bin/vim
+export VISUAL=$(
+    if command -v nvim >/dev/null; then
+        command -v nvim
+    else
+        command -v vim
+    fi)
 
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon
