@@ -1,59 +1,31 @@
-# i3 config file (v4)
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+## Keybinds
 
 set $Win Mod4
 set $Alt Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:DejaVu Sans Mono 8
-
-# Don't show window titlebars by default.
-# Still shows when stacked / tabbed.
-new_window pixel
-
-# Don't show borders when there is only one window on the screen.
-hide_edge_borders smart
-
-# Use $Alt+Mouse to drag floating windows to their wanted position
-floating_modifier $Alt
-
-# Don't pull my mouse around when switching windows.
-mouse_warping none
-
-# Don't focus things on mouse-over.
-focus_follows_mouse no
-
-# Lock the screen
-bindsym Control+$Alt+Delete exec "i3lock -c 000000"
-
-# Start a terminal
-bindsym $Win+Return exec xfce4-terminal
-
-# Start tmux in a terminal, attaching to a detached session if any exist.
-bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
-
-# Start firefox
-bindsym $Win+o exec firefox
-
-# Start dmenu (a program launcher)
-bindsym $Win+p exec dmenu_run
-
-# Take a screenshot
+# Applications.
+bindsym Control+$Alt+Delete exec xflock4
 bindsym Print exec xfce4-screenshooter
+bindsym $Win+Return exec xfce4-terminal
+bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
+bindsym $Win+o exec chromium
+bindsym $Win+p exec xfce4-popup-whiskermenu
+bindsym $Win+u exec "xfce4-terminal --execute tmux new-session tmux_nvim"
+bindsym $Win+y exec "xfce4-terminal --execute tmux new-session ranger"
+bindsym $Win+m exec "emacsclient -a '' -c"
+bindsym $Win+n exec thunar
 
-# Kill focused window
-bindsym $Win+$Alt+q kill
 
-# Change focus
+
+# Change focus.
 bindsym $Win+h focus left
 bindsym $Win+j focus down
 bindsym $Win+k focus up
 bindsym $Win+l focus right
-bindsym $Win+comma focus output left
-bindsym $Win+semicolon focus output right
+bindsym $Win+comma focus output left  # Switch focus across screens
+bindsym $Win+semicolon focus output right  # ""
 
-# Move focused window
+# Move focused window.
 bindsym $Win+$Alt+h move left
 bindsym $Win+$Alt+j move down
 bindsym $Win+$Alt+k move up
@@ -61,33 +33,7 @@ bindsym $Win+$Alt+l move right
 bindsym $Win+$Alt+comma move output left; focus output left
 bindsym $Win+$Alt+semicolon move output right; focus output right
 
-# Split in vertical orientation
-bindsym $Win+v split v
-
-# Split in horizontal orientation
-bindsym $Win+c split h
-
-# Enter fullscreen mode for the focused container
-bindsym $Win+f fullscreen toggle
-
-# Change container layout (stacked, tabbed, toggle split)
-bindsym $Win+s layout stacking
-bindsym $Win+w layout tabbed
-bindsym $Win+e layout toggle split
-
-# Toggle tiling / floating
-bindsym $Win+$Alt+space floating toggle
-
-# Change focus between tiling / floating windows
-bindsym $Win+space focus mode_toggle
-
-# Focus the parent container
-bindsym $Win+a focus parent
-
-# Focus the child container
-bindsym $Win+d focus child
-
-# Switch to workspace
+# Switch to workspace.
 bindsym $Win+1 workspace 1
 bindsym $Win+2 workspace 2
 bindsym $Win+3 workspace 3
@@ -99,55 +45,104 @@ bindsym $Win+8 workspace 8
 bindsym $Win+9 workspace 9
 bindsym $Win+0 workspace 10
 
-# Move focused container to workspace
-bindsym $Win+$Alt+1 move container to workspace 1; workspace 1
-bindsym $Win+$Alt+2 move container to workspace 2; workspace 2
-bindsym $Win+$Alt+3 move container to workspace 3; workspace 3
-bindsym $Win+$Alt+4 move container to workspace 4; workspace 4
-bindsym $Win+$Alt+5 move container to workspace 5; workspace 5
-bindsym $Win+$Alt+6 move container to workspace 6; workspace 6
-bindsym $Win+$Alt+7 move container to workspace 7; workspace 7
-bindsym $Win+$Alt+8 move container to workspace 8; workspace 8
-bindsym $Win+$Alt+9 move container to workspace 9; workspace 9
-bindsym $Win+$Alt+0 move container to workspace 10; workspace 10
+# Move focused window to workspace.
+bindsym $Win+$Alt+1 move workspace 1; workspace 1
+bindsym $Win+$Alt+2 move workspace 2; workspace 2
+bindsym $Win+$Alt+3 move workspace 3; workspace 3
+bindsym $Win+$Alt+4 move workspace 4; workspace 4
+bindsym $Win+$Alt+5 move workspace 5; workspace 5
+bindsym $Win+$Alt+6 move workspace 6; workspace 6
+bindsym $Win+$Alt+7 move workspace 7; workspace 7
+bindsym $Win+$Alt+8 move workspace 8; workspace 8
+bindsym $Win+$Alt+9 move workspace 9; workspace 9
+bindsym $Win+$Alt+0 move workspace 10; workspace 10
 
-# Reload the configuration file
-bindsym $Win+$Alt+c reload
 
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+
+# Kill focused window.
+bindsym $Win+$Alt+q kill
+
+# Fullscreen the focused window.
+bindsym $Win+f fullscreen toggle
+
+# Change split mode (vertical / horizontal).
+bindsym $Win+v split v
+bindsym $Win+g split h
+
+# Change container layout: stacked / tabbed / (vertical/horizontal split).
+# TODO: these binds suck.
+bindsym $Win+s layout stacking
+bindsym $Win+w layout tabbed
+bindsym $Win+e layout toggle split
+
+# Toggle tiling / floating for the current window.
+bindsym $Win+$Alt+space floating toggle
+
+# Change focus between the tiling and floating window layers.
+bindsym $Win+space focus mode_toggle
+
+# Focus parent container.
+bindsym $Win+a focus parent
+
+# Focus child container.
+bindsym $Win+q focus child
+
+
+
+# Restart i3 inplace to see update configs, etc.
 bindsym $Win+$Alt+r restart
 
-# Restart i3bar to reload ~/.config/i3status/config
-bindsym $Win+$Alt+b exec "killall i3bar; i3bar --bar_id=status-bar &"
-
-# Exit i3 (logs you out of your X session)
+# Exit i3. Logs you out of your X session unless you're using i3 as part of a
+# separate desktop environment.
 bindsym $Win+$Alt+e exec "i3-msg exit"
 
-# Resize window (you can also use the mouse for that)
+
+
+# Resize-window mode.
+# (You can also just use the mouse! Alt + right-mouse-drag resizes windows.)
+bindsym $Win+r mode "resize"
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # Left: shrink the focused window’s width.
+    # Right: grow the focused window’s width.
+    # Up: shrink the focused window’s height.
+    # Down: grow the focused window’s height.
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # Back to normal: Enter, Escape, or space
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym space mode "default"
+    # Back to normal mode: q, Escape, or space
+    bindsym q mode "default"
+    bindsym space mode "default"   # These *must* be lowercase `space`, and
+    bindsym Escape mode "default"  # Uppercase `Escape` respectively, o/w
+                                   # they will fail silently :/
 }
 
-bindsym $Win+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+
+## Settings
+
+# Don't show window titlebars by default. Still shows when stacked or tabbed.
+new_window pixel
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:DejaVu Sans Mono 14
+
+# Don't show borders when there is only one window on the screen.
+hide_edge_borders smart
+
+# Use Alt + left-mouse to drag floating windows to their wanted position.
+floating_modifier $Alt
+
+# Leave my mouse alone!
+focus_follows_mouse no  # Don't focus things on mouse-over.
+mouse_warping none  # Don't pull my mouse around when switching windows.
+
+# Start i3bar. Shows workspaces, plus some system info from i3status, if
+# available.
 bar {
-        id status-bar
+    id status-bar
 
-        status_command i3status
+    status_command i3status
 }

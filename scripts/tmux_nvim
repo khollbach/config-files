@@ -5,6 +5,8 @@ if [[ -z "$TMUX" ]]; then
     exec tmux new-session "$0" "$@"
 fi
 
-# Start Nvim.
+# Hide the status bar.
 tmux set-option status off
+
+# Start nvim, with less clutter.
 exec nvim -c 'set wrap cc= fcs=eob:\ ' "$@"

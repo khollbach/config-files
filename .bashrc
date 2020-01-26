@@ -94,3 +94,6 @@ function title_wrapper {
 # Load aliases, functions.
 source "$HOME/.bash_aliases"
 source "$HOME/.bash_functions"
+
+# Work-related defs, etc.
+[ -f "$HOME/notes/work/bashrc" ] && source "$HOME/notes/work/bashrc"
