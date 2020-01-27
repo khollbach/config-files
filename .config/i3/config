@@ -34,6 +34,7 @@ bindsym $Win+$Alt+comma move output left; focus output left
 bindsym $Win+$Alt+semicolon move output right; focus output right
 
 # Switch to workspace.
+bindsym $Win+grave workspace 0
 bindsym $Win+1 workspace 1
 bindsym $Win+2 workspace 2
 bindsym $Win+3 workspace 3
@@ -46,6 +47,7 @@ bindsym $Win+9 workspace 9
 bindsym $Win+0 workspace 10
 
 # Move focused window to workspace.
+bindsym $Win+$Alt+grave move workspace 0; workspace 0
 bindsym $Win+$Alt+1 move workspace 1; workspace 1
 bindsym $Win+$Alt+2 move workspace 2; workspace 2
 bindsym $Win+$Alt+3 move workspace 3; workspace 3
@@ -60,6 +62,9 @@ bindsym $Win+$Alt+0 move workspace 10; workspace 10
 # Send focused window away temporarily.
 bindsym $Win+minus move scratchpad
 bindsym $Win+equal scratchpad show
+
+# Start on workspace 1.
+exec --no-startup-id i3-msg "workspace 1"
 
 
 
