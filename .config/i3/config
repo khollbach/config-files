@@ -99,9 +99,9 @@ bindsym $Win+q focus child
 # Restart i3 inplace to see updated configs, bar, etc.
 bindsym $Win+$Alt+r restart
 
-# Exit i3. Logs you out of your X session unless you're using i3 as part of a
-# separate desktop environment.
-bindsym $Win+$Alt+e exec --no-startup-id "i3-msg exit"
+# Exit i3 and logout of the X session.
+#bindsym $Win+$Alt+e exec --no-startup-id "i3-msg exit"
+bindsym $Win+$Alt+e exec --no-startup-id xfce4-session-logout
 
 
 
