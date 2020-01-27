@@ -52,6 +52,7 @@ export VISUAL=$(
     else
         command -v vim
     fi)
+export EDITOR=$VISUAL
 
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon

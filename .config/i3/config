@@ -4,26 +4,26 @@ set $Win Mod4
 set $Alt Mod1
 
 # Applications.
-bindsym Control+$Alt+Delete exec xflock4
+bindsym Control+$Alt+Delete exec --no-startup-id "i3lock -c 000000"
+#bindsym Control+$Alt+Delete exec --no-startup-id xflock4
 bindsym Print exec xfce4-screenshooter
 bindsym $Win+Return exec xfce4-terminal
 bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
 bindsym $Win+o exec chromium
-bindsym $Win+p exec xfce4-popup-whiskermenu
+bindsym $Win+p exec --no-startup-id xfce4-popup-whiskermenu
 bindsym $Win+u exec "xfce4-terminal --execute tmux new-session tmux_nvim"
 bindsym $Win+y exec "xfce4-terminal --execute tmux new-session ranger"
 bindsym $Win+m exec "emacsclient -a '' -c"
 bindsym $Win+n exec thunar
-
-
 
 # Change focus.
 bindsym $Win+h focus left
 bindsym $Win+j focus down
 bindsym $Win+k focus up
 bindsym $Win+l focus right
-bindsym $Win+comma focus output left  # Switch focus across screens
-bindsym $Win+semicolon focus output right  # ""
+# Switch focus across screens
+bindsym $Win+comma focus output left
+bindsym $Win+semicolon focus output right
 
 # Move focused window.
 bindsym $Win+$Alt+h move left
@@ -70,7 +70,7 @@ bindsym $Win+v split v
 bindsym $Win+g split h
 
 # Change container layout: stacked / tabbed / (vertical/horizontal split).
-# TODO: these binds suck.
+# TBH, these binds kinda suck.
 bindsym $Win+s layout stacking
 bindsym $Win+w layout tabbed
 bindsym $Win+e layout toggle split
@@ -94,7 +94,7 @@ bindsym $Win+$Alt+r restart
 
 # Exit i3. Logs you out of your X session unless you're using i3 as part of a
 # separate desktop environment.
-bindsym $Win+$Alt+e exec "i3-msg exit"
+bindsym $Win+$Alt+e exec --no-startup-id "i3-msg exit"
 
 
 
@@ -113,9 +113,10 @@ mode "resize" {
 
     # Back to normal mode: q, Escape, or space
     bindsym q mode "default"
-    bindsym space mode "default"   # These *must* be lowercase `space`, and
-    bindsym Escape mode "default"  # Uppercase `Escape` respectively, o/w
-                                   # they will fail silently :/
+    bindsym Escape mode "default"
+    bindsym space mode "default"
+    # Note: these *must* be lowercase `space`, and Uppercase `Escape`
+    # respectively, otherwise they will fail silently :/
 }
 
 
@@ -125,9 +126,8 @@ mode "resize" {
 # Don't show window titlebars by default. Still shows when stacked or tabbed.
 new_window pixel
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:DejaVu Sans Mono 14
+# Font for window titles.
+font pango:DejaVu Sans Mono 12
 
 # Don't show borders when there is only one window on the screen.
 hide_edge_borders smart
@@ -143,6 +143,10 @@ mouse_warping none  # Don't pull my mouse around when switching windows.
 # available.
 bar {
     id status-bar
-
+    font pango:DejaVu Sans Mono 14
+    mode dock  # `dock` = shown; `invisible` = hidden.
     status_command i3status
 }
+
+# Toggle i3bar.
+bindsym $Win+apostrophe exec --no-startup-id i3bar-toggle
