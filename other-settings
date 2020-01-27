@@ -3,7 +3,7 @@
 i3
 xfce4
 xfce4-goodies
-redshift-gtk
+redshift-gtk  # And set it to autostart.
 xclip  # For system-clipboard integration with tmux and nvim.
 
 # Misc.

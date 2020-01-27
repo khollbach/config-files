@@ -1,8 +1,8 @@
 # Search hidden files and directories by default.
 --hidden
 
-# Ignore ctags tagfiles.
+# Ignore ctags tagfiles, .git directories, etc.
 --glob=!tags
-
-# Ignore .git directories.
 --glob=!.git
+--glob=!.svn
+--glob=!.hg

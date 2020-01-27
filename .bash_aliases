@@ -32,6 +32,7 @@ alias ai="ack -i"
 alias t="bell"
 alias p="python3"
 alias v="vim"
+alias l="less"
 alias ltmk="latexmk -pdf -pvc"
 
 # Make these more user-friendly.
