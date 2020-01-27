@@ -118,12 +118,13 @@ mode "resize" {
     bindsym k resize shrink height 10 px or 10 ppt
     bindsym l resize grow width 10 px or 10 ppt
 
-    # Back to normal mode: q, Escape, or space
+    # Back to normal mode: q, Enter, Escape, or space
     bindsym q mode "default"
+    bindsym Return mode "default"
     bindsym Escape mode "default"
     bindsym space mode "default"
-    # Note: these *must* be lowercase `space`, and Uppercase `Escape`
-    # respectively, otherwise they will fail silently :/
+    # Note: these *must* be Uppercase `Return`, `Escape` and lowercase `space`,
+    # otherwise they will fail silently :/
 }
 
 

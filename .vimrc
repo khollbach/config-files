@@ -22,8 +22,8 @@ filetype plugin indent on
 " -----------------------------------------------------------------------------
 
 " Dark background color.
-"set background=dark
-set background=light
+set background=dark
+"set background=light
 
 " TODO: get Solarized to use brightgreen instead of brightyellow for dark grey
 " text when in 'light' mode. Temporary workaround: edit terminal emulator
