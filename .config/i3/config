@@ -4,8 +4,8 @@ set $Win Mod4
 set $Alt Mod1
 
 # Applications.
-bindsym Control+$Alt+Delete exec --no-startup-id "i3lock -c 000000"
-#bindsym Control+$Alt+Delete exec --no-startup-id xflock4
+#bindsym Control+$Alt+Delete exec --no-startup-id "i3lock -c 000000"
+bindsym Control+$Alt+Delete exec --no-startup-id xflock4
 bindsym Print exec xfce4-screenshooter
 bindsym $Win+Return exec xfce4-terminal
 bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
@@ -57,6 +57,10 @@ bindsym $Win+$Alt+8 move workspace 8; workspace 8
 bindsym $Win+$Alt+9 move workspace 9; workspace 9
 bindsym $Win+$Alt+0 move workspace 10; workspace 10
 
+# Send focused window away temporarily.
+bindsym $Win+minus move scratchpad
+bindsym $Win+equal scratchpad show
+
 
 
 # Kill focused window.
@@ -87,9 +91,7 @@ bindsym $Win+a focus parent
 # Focus child container.
 bindsym $Win+q focus child
 
-
-
-# Restart i3 inplace to see update configs, etc.
+# Restart i3 inplace to see updated configs, bar, etc.
 bindsym $Win+$Alt+r restart
 
 # Exit i3. Logs you out of your X session unless you're using i3 as part of a
@@ -139,14 +141,18 @@ floating_modifier $Alt
 focus_follows_mouse no  # Don't focus things on mouse-over.
 mouse_warping none  # Don't pull my mouse around when switching windows.
 
-# Start i3bar. Shows workspaces, plus some system info from i3status, if
-# available.
-bar {
-    id status-bar
-    font pango:DejaVu Sans Mono 14
-    mode dock  # `dock` = shown; `invisible` = hidden.
-    status_command i3status
-}
 
-# Toggle i3bar.
-bindsym $Win+apostrophe exec --no-startup-id i3bar-toggle
+
+## Status bar
+
+# Using xfce4-panel instead of i3bar for now.
+## Start i3bar. Shows workspaces, plus some system info from i3status, if
+## available.
+#bar {
+    #id status-bar
+    #font pango:DejaVu Sans Mono 14
+    #mode invisible  # `dock` = shown; `invisible` = hidden.
+    #status_command i3status
+#}
+## Toggle i3bar.
+#bindsym $Win+apostrophe exec --no-startup-id i3bar-toggle

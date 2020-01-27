@@ -1,14 +1,21 @@
 #!/bin/sh
 
-# Include private bin dirs in path
+# Include private bin dirs in path.
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
-
-# Include scripts dir in path
+# Include scripts dir in path.
 export PATH=$HOME/config-files/scripts:$PATH
-
-# Rust binaries
+# Include rust binaries in path.
 export PATH=$HOME/.cargo/bin:$PATH
+
+# Set default editor for git commit messages, ranger, etc.
+export VISUAL=$(
+    if command -v nvim >/dev/null; then
+        command -v nvim
+    else
+        command -v vim
+    fi)
+export EDITOR=$VISUAL
 
 # setxkbmap will only work if X is running.
 if [ -n "$DISPLAY" ] && command -v setxkbmap >/dev/null; then

@@ -1,37 +1,30 @@
-# Application hotkeys
+# Aptitude packages. `sudo apt install $PKG_NAME`.
 
-super-i xfce4-terminal --execute tmux_attach
-super-o firefox
-        (or chromium)
-super-p xfce4-popup-whiskermenu
-        (If you started with plain xfce, and not Xubuntu, you'll have to swap
-         out the existing start menu for the whiskermenu by right-clicking on
-         some stuff.)
+i3
+xfce4
+xfce4-goodies
+redshift-gtk
+xclip  # For system-clipboard integration with tmux and nvim.
 
-super-w exo-open --launch WebBrowser
-super-f exo-open --launch FileManager
-super-t exo-open --launch TerminalEmulator
-        (Run exo-preferred-applications (it's a gui) to change any of these.)
+# Misc.
 
-super-v xfce4-terminal --execute tmux new-session tmux_nvim
-super-e emacsclient -a "" -c
+To combine i3 with xfce, see this guide:
+https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
 
-super-; move-to-next-monitor
-super-, move-to-next-monitor
+Install the latest stable release of Neovim.
+Install `pynvim` via pip3 to get certain nvim plugins to work properly.
 
-# Window manager hotkeys
+If you want passwordless sudo, append this to /etc/sudoers:
+ALL»    ALL=(ALL) NOPASSWD: ALL
 
-super-h Quicktile left
-super-j Minimize
-super-k Maximize
-super-l Quicktile right
+If you want capslock to be control in virtual consoles, add this line:
+(dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
+to /etc/rc.local and make it executable with the header #!/bin/bash
 
-super-y Quicktile top-left
-super-u Quicktile top-right
-super-n Quicktile bottom-left
-super-m Quicktile bottom-right
+On Windows, set system env var HOME to "C:\Users\$USERNAME" so Emacs can find
+your configs.
 
-# Terminal emulator settings
+# xfce4-terminal settings.
 
 Hide scrollbar
 DejaVu Sans Mono Book 22 point font, or on 1920x1080 screens:
@@ -43,22 +36,3 @@ Don't show bold text in bright colors
 Disable menu shortcut keys
 Autohide mouse pointer
 Automatically copy selection to clipboard
-
-# Misc.
-
-Install xfce4 if it's not already.
-Install redshift-gtk.
-Install xclip for system-clipboard integration with tmux and nvim.
-Install xdotool and wmctrl for move-to-next-monitor script.
-Install the latest stable release of Neovim.
-Install `pynvim` via pip3 to get certain nvim plugins to work.
-
-If you want passwordless sudo, append this to /etc/sudoers:
-ALL»    ALL=(ALL) NOPASSWD: ALL
-
-If you want capslock to be control in virtual consoles, add this line:
-(dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
-to /etc/rc.local and make it executable with the header #!/bin/bash
-
-On Windows, set system env var HOME to "C:\Users\$USERNAME" so Emacs can find
-your configs.

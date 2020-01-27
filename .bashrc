@@ -45,15 +45,6 @@ export LS_COLORS="${LS_COLORS}ow=30;42:"
 # ripgrep config file
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
-# Git commit messages, etc.
-export VISUAL=$(
-    if command -v nvim >/dev/null; then
-        command -v nvim
-    else
-        command -v vim
-    fi)
-export EDITOR=$VISUAL
-
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon
 
