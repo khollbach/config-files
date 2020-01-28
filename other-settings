@@ -5,6 +5,7 @@ xfce4
 xfce4-goodies
 redshift-gtk  # And set it to autostart.
 xclip  # For system-clipboard integration with tmux and nvim.
+ranger
 
 # Misc.
 
