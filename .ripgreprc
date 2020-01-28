@@ -1,3 +1,7 @@
+# Color filenames in the output as purple instead of magenta, to be more easily
+# distinguishable from my prompt when I'm scrolling back through the output.
+--colors=path:fg:13
+
 # Search hidden files and directories by default.
 --hidden
 
