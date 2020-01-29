@@ -4,12 +4,12 @@
 alias upconf="source ~/config-files/update_configs"
 
 # ls aliases
-alias ls="ls -vhG --color=auto"
+alias ls="ls -vh --color=auto"
 alias la="ls -A"
-alias ll="ls -l"
-alias lla="ls -lA"
-alias lt="ls -ltr"
-alias lta="ls -ltrA"
+alias ll="ls -lG"
+alias lla="ll -lA"
+alias lt="ll -tr"
+alias lta="lt -A"
 
 # `-` = `cs -`
 alias -- -="cs -"
