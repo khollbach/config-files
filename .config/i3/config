@@ -94,7 +94,7 @@ bindsym $Win+space focus mode_toggle
 bindsym $Win+a focus parent
 
 # Focus child container.
-bindsym $Win+q focus child
+bindsym $Win+d focus child
 
 # Restart i3 inplace to see updated configs, bar, etc.
 bindsym $Win+$Alt+r restart
