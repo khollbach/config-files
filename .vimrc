@@ -686,6 +686,9 @@ noremap <Leader>e :!source ~/config-files/update_configs<CR>
 " Reload .vimrc
 noremap <Leader>r :source $MYVIMRC<CR>
 
+" Edit .vimrc
+noremap <Leader>v :e ~/config-files/.vimrc<CR>
+
 
 
 " List buffers.

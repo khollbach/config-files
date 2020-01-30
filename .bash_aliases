@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# update_configs script alias
-alias upconf="source ~/config-files/update_configs"
+# Edit / update configs.
+alias co="c ~/config-files"
+alias u="source ~/config-files/update_configs"
 
 # ls aliases
 alias ls="ls -vh --color=auto"
@@ -11,46 +12,16 @@ alias lla="ll -lA"
 alias lt="ll -tr"
 alias lta="lt -A"
 
-# `-` = `cs -`
-alias -- -="cs -"
+# `-` = `c -`
+alias -- -="c -"
 
-# `..` = `cs ..`, etc...
-alias      ..="cs .."
-alias     ...="cs ../.."
-alias    ....="cs ../../.."
-alias   .....="cs ../../../.."
-alias  ......="cs ../../../../.."
-alias .......="cs ../../../../../.."
-
-# Save a lot of typing.
-alias pag="ps aux | grep"
-alias hig="history | cut -c 8- | uniq | grep"  # I mostly use C-r now.
-alias f="fin"
-alias fn="find . -name"
-alias a="ack"
-alias ai="ack -i"
-alias t="my_time"
-alias p="python3"
-alias v="vim"
-alias l="less"
-alias r="ranger"
-alias g="git"
-alias ltmk="latexmk -pdf -pvc"
-
-# Make these more user-friendly.
-alias which="type -a"
-alias grep="grep --color=auto"
-alias amm="amm --no-remote-logging"
-if command -v rlwrap >/dev/null; then
-    alias ocaml="rlwrap ocaml"
-fi
-
-# Misc.
-alias u="unbuffer "
-alias b="unbuffer -p "
-alias sl="sl -e"
-alias LS="LS -e"
-alias rain="rain -d 150"
+# `..` = `c ..`, etc...
+alias      ..="c .."
+alias     ...="c ../.."
+alias    ....="c ../../.."
+alias   .....="c ../../../.."
+alias  ......="c ../../../../.."
+alias .......="c ../../../../../.."
 
 # ack -> rg
 alias ack="ripgrep.rg"
@@ -60,33 +31,70 @@ if command -v nvim >/dev/null; then
     alias vim="nvim"
 fi
 
+# Save a lot of typing.
+alias c="_cs"
+alias a="ack"
+alias ai="ack -i"
+alias f="my_find"  # TODO: implement these in terms of `rg` so you can take
+alias fn="find . -name"  # advantage of ignoring node_modules, .git, etc.
+alias t="my_time"
+alias p="python3"
+alias v="nvim"
+alias l="less"
+alias r="ranger"
+alias ltmk="latexmk -pdf -pvc"
+alias pag="ps aux | grep"
+alias hig="history | cut -c 8- | uniq | grep"  # I mostly use C-r now.
+
+# Unlearn muscle memory.
+alias cs="sl"
+alias vi="sl"
+alias vim="sl"
+alias git="sl"
+
+# Make these more user-friendly.
+alias which="type -a"
+alias grep="grep --color=auto"
+alias amm="amm --no-remote-logging"
+if command -v rlwrap >/dev/null; then
+    alias ocaml="rlwrap ocaml"
+fi
+
 # Emacs
 alias emacs="emacsclient -a '' -c"
 alias remacs="killall emacs; command emacs --daemon"
 
-# Git shorthands
-alias gsh="git show"
-alias gd="git diff"
+# Misc.
+#alias sl="sl -e"
+#alias LS="LS -e"
+alias rain="rain -d 150"
+
+# Git shorthands.
+# Sadly this form breaks commandline autocompletion. TODO: fix it somehow.
+# Try one of the suggestions here:
+# https://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases
+alias g="command git"
+
+alias gs="g s"
+alias gss="sl"  # CHOO-CHOO!
+alias gsi="g si"
+alias gp="g p"
+alias gf="g f"
+alias gl="g l"
+
+alias gh="g h"
+alias gd="g d"
+alias gll="g ll"
+alias glo="g lo"
+alias ga="g a"
+alias gaa="g aa"
+alias gco="g co"
+alias gb="g b"
+alias gr="g r"
+alias gst="g stash"
+
 alias gdh="gd HEAD"
 alias gdhh="gd HEAD^"
 alias gdhhh="gd HEAD^^"
 alias gdhhhh="gd HEAD^^^"
 alias gdhhhhh="gd HEAD^^^^"
-alias ga="git add"
-alias gaa="git add --all :/"
-alias gb="git --no-pager branch"
-alias gr="git remote"
-alias gco="git checkout"
-alias gl="git log"
-alias glo="git log --oneline"
-alias gst="git stash"
-alias gsp="git stash pop"
-alias gsl="git stash list"
-
-# Recursive git shorthands
-alias gs="gitrecurse git status"
-alias gss="gs -sb"
-alias gsi="gss --ignored"
-alias gp="gitrecurse git pull --rebase"
-alias gf="gitrecurse git fetch"
-alias glh="gitrecurse git --no-pager log --oneline -n 10"

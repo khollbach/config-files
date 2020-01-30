@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # cd and ls
-function cs {
+function _cs {
     cd "$@" && ls
 }
 
 # Case-insensitive `find` alias
-function fin {
+function my_find {
     find . -iname "*$1*" "${@:2}"
 }
 
@@ -53,13 +53,13 @@ function gc {
     msg_len=${#message}
 
     if [[ "$msg_len" -eq 0 ]]; then
-        git commit
+        command git commit
     elif [[ "$msg_len" -gt 50 ]]; then
         echo Commit message too long.
         echo Expected 50 chars, got "$msg_len".
         return 1
     else
-        git commit -m "$message"
+        command git commit -m "$message"
     fi
 }
 
@@ -70,10 +70,10 @@ function gca {
 
 # commit and push
 function gcp {
-    gc "$@" && git push
+    gc "$@" && command git push
 }
 
 # add all, commit, push
 function gcap {
-    gca "$@" && git push
+    gca "$@" && command git push
 }

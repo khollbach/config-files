@@ -27,7 +27,7 @@ PROMPT_COMMAND=prompt_command
 prompt_color=5  # Pink!
 
 # Concise prompt on my machines, verbose one elsewhere.
-if [[ "$HOSTNAME" =~ kevan-|-lt ]]; then
+if [[ "$HOSTNAME" =~ kevan-|-lt|-dt ]]; then
     prompt_contents='\w'
 else
     prompt_contents='\u@\h:\w'
