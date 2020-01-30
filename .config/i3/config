@@ -132,7 +132,7 @@ mode "resize" {
 ## Settings
 
 # Don't show window titlebars by default. Still shows when stacked or tabbed.
-new_window pixel
+new_window pixel 2
 
 # Font for window titles.
 font pango:DejaVu Sans Mono 12
@@ -162,3 +162,6 @@ mouse_warping none  # Don't pull my mouse around when switching windows.
 #}
 ## Toggle i3bar.
 #bindsym $Win+apostrophe exec --no-startup-id i3bar-toggle
+
+# Notification manager.
+exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd

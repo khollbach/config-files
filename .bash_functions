@@ -16,17 +16,26 @@ function ev {
 }
 
 # Time a long command and ring a bell when done.
-# (Bells show up visually in tmux when a command in another window completes.)
-function bell {
+function my_time {
+    # When did I start?
     date
     echo
 
-    # Preserve the return value.
+    # Run and preserve the return value.
     local rv
     time "$@"
     rv=$?
 
+    # Ring a bell (which shows up visually in tmux), and trigger a system
+    # notification (desktop popup).
     echo -en '\a'
+    local command=$@  # Flatten arg array into string.
+    if [[ "$rv" == 0 ]]; then
+        notify-send "Command finished" "$command" -i dialog-information
+    else
+        notify-send "Command failed: error $rv" "$command" -i dialog-error
+    fi
+
     return $rv
 }
 

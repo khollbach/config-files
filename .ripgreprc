@@ -10,3 +10,4 @@
 --glob=!.git
 --glob=!.svn
 --glob=!.hg
+--glob=!node_modules

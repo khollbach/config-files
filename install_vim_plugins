@@ -5,7 +5,7 @@ mkdir -pv ~/.vim/bundle
 echo cd ~/.vim/bundle
 cd ~/.vim/bundle
 
-# Install plugins.
+# Download plugins.
 git clone https://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/shougo/deoplete.nvim.git
 git clone https://github.com/justinmk/vim-sneak.git
@@ -19,3 +19,14 @@ git clone https://github.com/ctrlpvim/ctrlp.vim.git
 git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/mbbill/undotree.git
+
+# https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+    grep '"tag_name":' |                                            # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
+}
+git clone https://github.com/fatih/vim-go.git &&
+    cd vim-go &&
+    git checkout $(get_latest_release fatih/vim-go) 2>/dev/null ||
+    echo Error getting latest release of fatih/vim-go

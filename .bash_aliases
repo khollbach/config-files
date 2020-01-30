@@ -29,10 +29,12 @@ alias f="fin"
 alias fn="find . -name"
 alias a="ack"
 alias ai="ack -i"
-alias t="bell"
+alias t="my_time"
 alias p="python3"
 alias v="vim"
 alias l="less"
+alias r="ranger"
+alias g="git"
 alias ltmk="latexmk -pdf -pvc"
 
 # Make these more user-friendly.

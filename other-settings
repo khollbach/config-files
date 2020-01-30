@@ -3,9 +3,10 @@
 i3
 xfce4
 xfce4-goodies
-redshift-gtk  # And set it to autostart.
+redshift-gtk  # (And set it to autostart!)
 xclip  # For system-clipboard integration with tmux and nvim.
 ranger
+highlight  # For syntax highlighting in ranger.
 
 # Misc.
 
@@ -14,6 +15,7 @@ https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
 
 Install the latest stable release of Neovim.
 Install `pynvim` via pip3 to get certain nvim plugins to work properly.
+To get syntax highlighting in ranger, run `ranger --copy-config=scope` once.
 
 If you want passwordless sudo, append this to /etc/sudoers:
 ALL»    ALL=(ALL) NOPASSWD: ALL

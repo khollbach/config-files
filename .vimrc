@@ -306,8 +306,8 @@ set nowrap
 set linebreak
 
 " Vertical lines after 80, 100, and 120 chars.
-set colorcolumn=81,101,121
-"set colorcolumn=
+"set colorcolumn=81,101,121  " TODO: work uses (arbitrarily?) long lines...
+set colorcolumn=
 
 " Don't show the tildes after the last line in the file.
 " Note the trailing space.
@@ -435,11 +435,12 @@ set expandtab
 set softtabstop=4
 
 " Hard tab width = 8 spaces. (Linux kernel style... completely insane.)
-set tabstop=8
+"set tabstop=8  " TODO: work uses hard tabs, so I'll have to do something about this.
+set tabstop=4
 
 " Show hard tabs and trailing spaces.
 " Also show indicators for text that extends past the edge of the screen.
-set list
+"set list  " TODO: work uses hard tabs, so I'll have to do something about this.
 set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
 
 " Don't show trailing spaces when typing.
@@ -478,6 +479,10 @@ augroup filetype_settings
     " Treat TypeScript as JavaScript.
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.ts
         \ setlocal syntax=javascript
+
+    " Avro is JSON.
+    autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.avsc
+        \ setlocal syntax=json
 
     " Treat more things as Makefile.
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost make*.inc
@@ -661,6 +666,11 @@ noremap <Leader>P "+P
 " Paste from the 0-register (ie yanked text only).
 noremap <Leader>h "0p
 noremap <Leader>H "0P
+
+
+
+" Clear currently highlighted search.
+noremap <Leader>j :nohlsearch<CR>
 
 
 
