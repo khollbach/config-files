@@ -1,10 +1,10 @@
 [alias]
     rec = !gitrecurse git
-    s = rec status -sb
-    si = s --ignored
-    p = rec pull --rebase
-    f = rec fetch
-    l = rec --no-pager log --oneline -n 10
+    s = !gitrecurse git status -sb
+    si = !gitrecurse git status -sb --ignored
+    p = !gitrecurse git pull --rebase
+    f = !gitrecurse git fetch
+    l = !gitrecurse git --no-pager log --oneline -n 10
 
     h = show
     d = diff
