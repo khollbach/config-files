@@ -311,7 +311,7 @@ set colorcolumn=81,101,121  " TODO: work uses (arbitrarily?) long lines...
 
 " Don't show the tildes after the last line in the file.
 " Note the trailing space.
-"set fillchars=eob:\ 
+set fillchars=eob:\ 
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
