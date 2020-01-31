@@ -1,36 +1,54 @@
 #!/bin/bash
 
+# https://stackoverflow.com/questions/15883416/adding-git-branch-on-the-bash-command-prompt
+parse_git_branch() {
+    command git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
 # This script sets the prompt, $PS1. It runs every time a prompt is printed.
 function prompt_command {
     # Reset the terminal title after running any program, since it seems many
     # programs set it and then forget to clean it up when they exit.
     echo -ne "\e]0;\a"
 
+    local color='\[\e[1;38;5;'"$prompt_color"'m\]'  # bold, colorful
+    local green='\[\e[38;5;2m\]'  # green
+    local reset='\[\e[0m\]'
+
     # Add a line break only if pwd is longer than 48 chars, or if
     # $prompt_contents is anything more than '\w'.
-    local newline
+    local newline=""
     local w=$(dirs +0)
     if [ ${#w} -gt 48 ] || [ "$prompt_contents" != '\w' ]; then
         newline="\n"
-    else
-        newline=""
     fi
 
-    local color='\[\e[1;38;5;'"$prompt_color"'m\]'
-    local reset='\[\e[0m\]'
-    PS1="$reset$color$prompt_contents$reset$newline"
+    # Show the current git branch if you're in a git repo and you've checked
+    # out anything other than master.
+    local git_branch=$(parse_git_branch)
+    if [ -n "$git_branch" ] && [ "$git_branch" != '(master)' ]; then
+        git_branch=" $green$git_branch$reset"
+        newline="\n"
+    else
+        git_branch=""
+    fi
+
+    # Set the prompt.
+    PS1="$reset$color$prompt_contents$reset$git_branch$newline"
     PS1="$PS1$color"'\$'"$reset "
 }
 PROMPT_COMMAND=prompt_command
 
-#prompt_color=9  # Bright orange :)
-prompt_color=5  # Pink!
-
 # Concise prompt on my machines, verbose one elsewhere.
-if [[ "$HOSTNAME" =~ kevan-|-lt|-dt ]]; then
+if [[ "$HOSTNAME" =~ kevan-|-dt ]]; then
     prompt_contents='\w'
+    prompt_color=5  # Pink!
+elif [[ "$HOSTNAME" =~ -lt ]]; then
+    prompt_contents='\w'
+    prompt_color=6  # Cyan
 else
     prompt_contents='\u@\h:\w'
+    prompt_color=9  # Bright orange :)
 fi
 
 
