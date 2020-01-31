@@ -442,6 +442,8 @@ set tabstop=4
 " Also show indicators for text that extends past the edge of the screen.
 set list
 " TODO: work uses hard tabs, so I'll have to do something with this.
+"       Update: it's a golang thing, so I'll add golang specific settings
+"           to deal with it (TODO)
 set listchars=tab:\ \ ,extends:▶,precedes:◀,trail:·
 
 " Don't show trailing spaces when typing.
