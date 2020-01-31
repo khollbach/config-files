@@ -34,7 +34,6 @@ bindsym $Win+$Alt+comma move output left; focus output left
 bindsym $Win+$Alt+semicolon move output right; focus output right
 
 # Switch to workspace.
-bindsym $Win+grave workspace 0
 bindsym $Win+1 workspace 1
 bindsym $Win+2 workspace 2
 bindsym $Win+3 workspace 3
@@ -47,7 +46,6 @@ bindsym $Win+9 workspace 9
 bindsym $Win+0 workspace 10
 
 # Move focused window to workspace.
-bindsym $Win+$Alt+grave move workspace 0; workspace 0
 bindsym $Win+$Alt+1 move workspace 1; workspace 1
 bindsym $Win+$Alt+2 move workspace 2; workspace 2
 bindsym $Win+$Alt+3 move workspace 3; workspace 3
@@ -79,7 +77,6 @@ bindsym $Win+v split v
 bindsym $Win+g split h
 
 # Change container layout: stacked / tabbed / (vertical/horizontal split).
-# TBH, these binds kinda suck.
 bindsym $Win+s layout stacking
 bindsym $Win+w layout tabbed
 bindsym $Win+e layout toggle split
@@ -90,11 +87,11 @@ bindsym $Win+$Alt+space floating toggle
 # Change focus between the tiling and floating window layers.
 bindsym $Win+space focus mode_toggle
 
-# Focus parent container.
+# Focus parent/child container.
 bindsym $Win+a focus parent
-
-# Focus child container.
 bindsym $Win+d focus child
+
+
 
 # Restart i3 inplace to see updated configs, bar, etc.
 bindsym $Win+$Alt+r restart
