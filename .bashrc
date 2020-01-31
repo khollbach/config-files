@@ -48,6 +48,14 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon
 
+# Filter duplicates out of history.
+# Also, if you precede a command with a space, it won't appear in history.
+# This is good for passwords on the commandline (which shouldn't happen).
+export HISTCONTROL=ignoreboth
+
+# Don't leave .pyc files or __pycache__ dirs lying around.
+export PYTHONDONTWRITEBYTECODE=1
+
 
 
 # Set the terminal title when opening man pages.

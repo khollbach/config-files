@@ -39,8 +39,8 @@ alias f="my_find"  # TODO: implement these in terms of `rg` so you can take
 alias fn="find . -name"  # advantage of ignoring node_modules, .git, etc.
 alias t="my_time"
 alias p="python3"
-alias v="nvim"
-alias l="less"
+alias v="command nvim"
+alias l="command less"
 alias r="ranger"
 alias ltmk="latexmk -pdf -pvc"
 alias pag="ps aux | grep"
@@ -51,6 +51,7 @@ alias cs="sl"
 alias vi="sl"
 alias vim="sl"
 alias git="sl"
+alias less="sl"
 
 # Make these more user-friendly.
 alias which="type -a"
@@ -59,6 +60,7 @@ alias amm="amm --no-remote-logging"
 if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
+alias jq="jq -C ."  # Colors always, identity filter.
 
 # Emacs
 alias emacs="emacsclient -a '' -c"

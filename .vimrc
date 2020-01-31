@@ -299,15 +299,15 @@ set shortmess+=I
 " Line numbers.
 set nonumber
 
-" Don't wrap long lines by default.
-set nowrap
+" Wrap long lines by default.
+set wrap
 
 " When 'wrap' is enabled, break lines at word boundaries.
 set linebreak
 
 " Vertical lines after 80, 100, and 120 chars.
-"set colorcolumn=81,101,121  " TODO: work uses (arbitrarily?) long lines...
-set colorcolumn=
+set colorcolumn=81,101,121  " TODO: work uses (arbitrarily?) long lines...
+"set colorcolumn=
 
 " Don't show the tildes after the last line in the file.
 " Note the trailing space.
@@ -341,8 +341,8 @@ set shortmess-=S
 " Go to the first match as you are typing your search.
 set incsearch
 
-" Don't highlight search matches by default.
-set nohlsearch
+" Highlight search matches by default.
+set hlsearch
 
 " Show commandline completion matches above the commandline on <Tab> keypress.
 set wildmenu
@@ -440,8 +440,9 @@ set tabstop=4
 
 " Show hard tabs and trailing spaces.
 " Also show indicators for text that extends past the edge of the screen.
-"set list  " TODO: work uses hard tabs, so I'll have to do something about this.
-set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
+set list
+" TODO: work uses hard tabs, so I'll have to do something with this.
+set listchars=tab:\ \ ,extends:▶,precedes:◀,trail:·
 
 " Don't show trailing spaces when typing.
 autocmd InsertEnter * set listchars-=trail:·
@@ -578,6 +579,13 @@ inoremap <Home> <C-o>^
 " (Built-in gv selects recently selected text.)
 nnoremap gp `[v`]
 
+" C-] shows filename.
+" TODO: make this only show filename when it jumps to a new file.
+" Done on load to override vim-go plugin. (todo: find a better way.)
+" TODO: this isn't working.
+autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.go
+    \ noremap <C-]> :GoDef<CR>:f<CR>
+
 
 
 " Toggle line numbers.
@@ -608,6 +616,9 @@ function! s:toggle_colorcolumn() abort
 
     return ""
 endfunction
+" TODO: this is somehow messing with the 'ruler'...
+"call s:toggle_colorcolumn()
+set cc=
 
 " Toggle autoindent/mappings/etc, for pasting text.
 noremap <F7> :set paste! paste?<CR>

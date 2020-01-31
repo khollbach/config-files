@@ -132,7 +132,7 @@ mode "resize" {
 ## Settings
 
 # Don't show window titlebars by default. Still shows when stacked or tabbed.
-new_window pixel 2
+new_window pixel 3
 
 # Font for window titles.
 font pango:DejaVu Sans Mono 12
