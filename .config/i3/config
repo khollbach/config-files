@@ -91,6 +91,12 @@ bindsym $Win+space focus mode_toggle
 bindsym $Win+a focus parent
 bindsym $Win+d focus child
 
+# "Zoom" -- aka fullscreen an enclosing split-container, without the app
+# (usually Chrome) thinking it's fullscreen-ed. This way you can still see the
+# search bar. It's a bit of a hack; and the split-container gets left behind.
+# https://www.reddit.com/r/i3wm/comments/ed5qmw/full_screen_on_chrome_no_url_bar/
+bindsym $Win+z split v; focus parent; fullscreen toggle; focus child
+
 
 
 # Restart i3 inplace to see updated configs, bar, etc.

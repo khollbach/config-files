@@ -311,6 +311,7 @@ set colorcolumn=81,101,121  " TODO: work uses (arbitrarily?) long lines...
 
 " Don't show the tildes after the last line in the file.
 " Note the trailing space.
+" TODO: Doesn't work on Vim 8.0 for me. Add a guard.
 set fillchars=eob:\ 
 
 " Maximum line length for various formatting-related things.
