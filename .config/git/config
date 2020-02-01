@@ -1,26 +1,26 @@
 [alias]
     rec = !gitrecurse git
+
+    # These have shorthands in .bash_aliases
     s = !gitrecurse git status -sb
     si = !gitrecurse git status -sb --ignored
     p = !gitrecurse git pull --rebase
     f = !gitrecurse git fetch
     l = !gitrecurse git --no-pager log --oneline -n 10
+    d = diff
 
     h = show
-    d = diff
-    ll = log
-    lo = log --oneline
     a = add
     aa = add --all :/
+    c = commit
+    pu = push
+    cl = clone
     co = checkout
+    ll = log
+    lo = log --oneline
+    st = stash
     b = !git --no-pager branch
     r = remote
-    st = stash
-
-    # Note that this is a little different from the bash alias `gc`.
-    c = commit
-
-    pu = push
 
     unstage = reset HEAD --
     last = !git --no-pager log -1 HEAD

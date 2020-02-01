@@ -52,6 +52,8 @@ alias vi="sl"
 alias vim="sl"
 alias git="sl"
 alias less="sl"
+alias gss="sl"
+alias glh="sl"
 
 # Make these more user-friendly.
 alias which="type -a"
@@ -72,28 +74,15 @@ alias remacs="killall emacs; command emacs --daemon"
 alias rain="rain -d 150"
 
 # Git shorthands.
-# Sadly this form breaks commandline autocompletion. TODO: fix it somehow.
-# Try one of the suggestions here:
+# Sadly this form breaks commandline autocompletion.
+# TODO: fix it somehow. Try one of the suggestions here:
 # https://unix.stackexchange.com/questions/4219/how-do-i-get-bash-completion-for-command-aliases
 alias g="command git"
 
 alias gs="g s"
-alias gss="sl"  # CHOO-CHOO!
-alias gsi="g si"
-alias gp="g p"
-alias gf="g f"
 alias gl="g l"
-alias glh="sl"
-
-alias gh="g h"
 alias gd="g d"
-alias gll="g ll"
-alias glo="g lo"
-alias ga="g a"
-alias gaa="g aa"
-alias gco="g co"
-alias gb="g b"
-alias gr="g r"
+
 alias gst="g st"
 alias gsp="g st pop"
 alias gsl="g st list"

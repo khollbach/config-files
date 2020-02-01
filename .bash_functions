@@ -63,17 +63,17 @@ function gc {
     fi
 }
 
-# add all and commit
+# "commit all"
 function gca {
-    gaa && gc "$@"
+    command git add --all :/ && gc "$@"
 }
 
-# commit and push
+# "commit push"
 function gcp {
     gc "$@" && command git push
 }
 
-# add all, commit, push
+# "commit all push"
 function gcap {
     gca "$@" && command git push
 }
