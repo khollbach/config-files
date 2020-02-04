@@ -7,6 +7,7 @@ redshift-gtk  # (And set it to autostart!)
 xclip  # For system-clipboard integration with tmux and nvim.
 ranger
 highlight  # For syntax highlighting in ranger.
+tldr
 
 # Misc.
 
@@ -32,7 +33,6 @@ your configs.
 Hide scrollbar
 DejaVu Sans Mono Book 22 point font, or on 1920x1080 screens:
     14pt (=173x46 chars), 19 (127x35), 22 (106x30), 27 (87x25)
-Transparent background, 85% opacity
 Don't display menubar in new windows
 Solarized color scheme (light or dark)
 Don't show bold text in bright colors

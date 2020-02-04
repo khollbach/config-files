@@ -54,6 +54,11 @@ alias git="sl"
 alias less="sl"
 alias gss="sl"
 alias glh="sl"
+alias gp="sl"
+alias gf="sl"
+alias gco="sl"
+alias ga="sl"
+alias gaa="sl"
 
 # Make these more user-friendly.
 alias which="type -a"
