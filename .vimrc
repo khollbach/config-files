@@ -296,8 +296,32 @@ set t_vb=
 " No startup message
 set shortmess+=I
 
+" Don't show the tildes after the last line in the file.
+" Doesn't work on Vim 8.0 for me; I haven't looked into why.
+if has('nvim')
+    " Note the trailing space.
+    set fillchars=eob:\ 
+endif
+
+" Don't give visual feedback for normal mode commands requiring multiple
+" keypresses.
+set noshowcmd
+
+" Don't show an indicator in the echo area when you're in insert mode.
+" (The cursor shape already indicates that in Neovim.)
+set noshowmode
+
+" Don't show a how-to-quit message when you press <C-c> in normal mode.
+nnoremap <C-c> <Nop>
+
+
+
 " Line numbers.
 set number
+
+" Toggle line numbers.
+noremap <F4> :set number! number?<CR>
+inoremap <F4> <C-o>:set number! number?<CR>
 
 " Wrap long lines by default.
 set wrap
@@ -305,14 +329,35 @@ set wrap
 " When 'wrap' is enabled, break lines at word boundaries.
 set linebreak
 
-" Vertical lines after 80, 100, and 120 chars.
-set colorcolumn=81,101,121  " TODO: work uses (arbitrarily?) long lines...
-"set colorcolumn=
+" Toggle line wrapping.
+noremap <F5> :set wrap! wrap?<CR>
+inoremap <F5> <C-o>:set wrap! wrap?<CR>
 
-" Don't show the tildes after the last line in the file.
-" Note the trailing space.
-" TODO: Doesn't work on Vim 8.0 for me. Add a guard.
-set fillchars=eob:\ 
+" No vertical lines after 80, 100, and 120 chars.
+"set colorcolumn=81,101,121
+set colorcolumn=
+
+" Toggle colorcolumn
+noremap <expr> <F6> <sid>toggle_colorcolumn()
+inoremap <expr> <F6> <sid>toggle_colorcolumn()
+function! s:toggle_colorcolumn() abort
+    if &colorcolumn !=# ""
+        set colorcolumn=
+    else
+        set colorcolumn=81,101,121
+    endif
+    set colorcolumn?
+
+    " Need to redraw here to get the effect right away.
+    redraw
+    return ""
+endfunction
+
+" Toggle autoindent/mappings/etc, for pasting text.
+noremap <F7> :set paste! paste?<CR>
+set pastetoggle=<F7>
+
+
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
@@ -335,15 +380,15 @@ set scrolloff=5
 " Basically, leave my cursor in the current column when scrolling around.
 set nostartofline
 
-" Show number of matches (and current position therin) when searching.
-" Available starting in Vim 8.1.1270 and Nvim 0.4.0
-set shortmess-=S
-
 " Go to the first match as you are typing your search.
 set incsearch
 
 " Highlight search matches by default.
 set hlsearch
+
+" Show number of matches (and current position therin) when searching.
+" Available starting in Vim 8.1.1270 and Nvim 0.4.0
+set shortmess-=S
 
 " Show commandline completion matches above the commandline on <Tab> keypress.
 set wildmenu
@@ -356,70 +401,95 @@ set wildmenu
 set title
 
 " The terminal title will be the current file name (but not the path).
-"set titlestring=%t
-
-" We use %{expand("%:t")} instead of just %t as above, since expand won't
-" output "[No Name]" for new buffers.
-" Unfortunately, in %{ } blocks, Vim will try format numbers cleverly, so e.g.
-" the filename "001" becomes "1". I don't see an easy way to fix that here.
+" We use %{expand("%:t")} instead of just %t here, since expand won't output
+" "[No Name]" for new buffers. Unfortunately, in %{ } blocks, Vim will try
+" format numbers cleverly, so e.g. the filename "001" becomes "1". I don't see
+" an easy way to fix that here.
 set titlestring=%{expand(\"%:t\")}
 
-" Don't show status line (filename, etc) when there's only one window.
-set laststatus=1
+" Show status line (filename, etc) when there's only one window.
+set laststatus=2
 
-" Show certain info at the bottom-right of the screen.
-" Intead of the default information (cursor's current line/column numbers),
-" we'll show the filename, and whether the current buffer has been modified.
-set ruler
-
-" 36 (total width) = 32 (filename) + 1 (space) + 3 (modified)
-"set rulerformat=%36(%=%t\ %3(%m%)%)
-
-" Instead of the above, we update the rulerformat width dynamically when the
-" current buffer name changes. This way we're not wasting space in the "echo
-" area". It's too bad Vim doesn't do this for us automatically. :(
-" This doesn't play that nicely with multiple windows though, since rulerformat
-" is a global setting with no window-local (or buffer-local) value. :(
-autocmd BufEnter,BufAdd,BufFilePost *
-    \ let &rulerformat =
-    \ "%" . (strlen(Percent_t()) + 3) . "(%=%{Percent_t()}%3(%m%)%)"
-
-" We use this function instead of %t in rulerformat, since this won't show
-" "[No Name]" when there's no open file. Also, this allows us to truncate from
-" the right instead of from the left.
-"
-" This function returns one additional space at the end of the filename, if it
-" exists; this is a hack to get around automatic number formatting.
-function! Percent_t() abort
-    let filename = expand("%:t")
-
-    " If the filename is too long, display the first 31 chars of it, and ">".
-    if strlen(filename) > 32
-        let filename = filename[0:30] . ">"
+" Change status line color.
+highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
+highlight! StatusLineNC ctermbg=0 ctermfg=11 cterm=none
+highlight! StatusLineTrailing ctermbg=8 ctermfg=12
+function! StatusLine()
+    if expand("%:t") ==# ""
+        return '%#StatusLineTrailing#'
+    else
+        return ' %f %#StatusLineTrailing#%=%h%w%r%m '
     endif
-
-    " We want one space between the filename and the 'modified' indicator.
-    " We would have put this space in the 'rulerformat' string, except that
-    " this way if the file is named something numeric like "0123", Vim won't
-    " try to be clever and format it as "123" instead, since we return "0123 "
-    " from the %{ } block. Terrible hack, I know.
-    if strlen(filename) > 0
-        let filename = filename . " "
-    endif
-
-    return filename
 endfunction
+set statusline=%!StatusLine()
 
-" Don't give visual feedback for normal mode commands requiring multiple
-" keypresses.
-set noshowcmd
+"" Toggle showing status line.
+"" TODO: implement and test this.
+"noremap <expr> <Leader>' <sid>toggle_laststatus()
+"function! s:toggle_laststatus() abort
+    "if &laststatus ==# 2
+        "set laststatus=1
+    "else
+        "set laststatus=2
+    "endif
 
-" Don't show an indicator in the echo area when you're in insert mode.
-" (The cursor shape already indicates that in Neovim.)
-set noshowmode
+    "" Need to redraw here to get the effect right away.
+    "mode
 
-" Don't show a how-to-quit message when you press <C-c> in normal mode.
-nnoremap <C-c> <Nop>
+    "return ""
+"endfunction
+
+" Just show whether the current file is modified, for now.
+" TODO: later, implement a toggle between "regular" mode with
+" line numbers and full file-path showing, vs "quiet" mode
+" without most of these things, and with the filename in the
+" ruler. Or just at least be able to toggle between
+" statusline/ruler modes with, say `<leader>'`.
+set ruler
+set rulerformat=%=%h%w%r%m
+
+"" Show certain info at the bottom-right of the screen.
+"" Intead of the default information (cursor's current line/column numbers),
+"" we'll show the filename, and whether the current buffer has been modified.
+"set ruler
+
+"" 36 (total width) = 32 (filename) + 1 (space) + 3 (modified)
+""set rulerformat=%36(%=%t\ %3(%m%)%)
+
+"" Instead of the above, we update the rulerformat width dynamically when the
+"" current buffer name changes. This way we're not wasting space in the "echo
+"" area". It's too bad Vim doesn't do this for us automatically. :(
+"" This doesn't play that nicely with multiple windows though, since rulerformat
+"" is a global setting with no window-local (or buffer-local) value. :(
+"autocmd BufEnter,BufAdd,BufFilePost *
+    "\ let &rulerformat =
+    "\ "%" . (strlen(Percent_t()) + 3) . "(%=%{Percent_t()}%3(%m%)%)"
+
+"" We use this function instead of %t in rulerformat, since this won't show
+"" "[No Name]" when there's no open file. Also, this allows us to truncate from
+"" the right instead of from the left.
+""
+"" This function returns one additional space at the end of the filename, if it
+"" exists; this is a hack to get around automatic number formatting.
+"function! Percent_t() abort
+    "let filename = expand("%:t")
+
+    "" If the filename is too long, display the first 31 chars of it, and ">".
+    "if strlen(filename) > 32
+        "let filename = filename[0:30] . ">"
+    "endif
+
+    "" We want one space between the filename and the 'modified' indicator.
+    "" We would have put this space in the 'rulerformat' string, except that
+    "" this way if the file is named something numeric like "0123", Vim won't
+    "" try to be clever and format it as "123" instead, since we return "0123 "
+    "" from the %{ } block. Terrible hack, I know.
+    "if strlen(filename) > 0
+        "let filename = filename . " "
+    "endif
+
+    "return filename
+"endfunction
 
 
 
@@ -435,16 +505,13 @@ set expandtab
 " Allow backspacing through spaces as if they were tabs.
 set softtabstop=4
 
-" Hard tab width = 8 spaces. (Linux kernel style... completely insane.)
-"set tabstop=8  " TODO: work uses hard tabs, so I'll have to do something about this.
+" Hard tab width.
 set tabstop=4
 
 " Show hard tabs and trailing spaces.
 " Also show indicators for text that extends past the edge of the screen.
 set list
-" TODO: work uses hard tabs, so I'll have to do something with this.
-"       Update: it's a golang thing, so I'll add golang specific settings
-"           to deal with it (TODO)
+" TODO: Get tabs to show visually, but only in languages other than go.
 set listchars=tab:\ \ ,extends:▶,precedes:◀,trail:·
 
 " Don't show trailing spaces when typing.
@@ -582,50 +649,11 @@ inoremap <Home> <C-o>^
 " (Built-in gv selects recently selected text.)
 nnoremap gp `[v`]
 
-" C-] shows filename.
-" TODO: make this only show filename when it jumps to a new file.
-" Done on load to override vim-go plugin. (todo: find a better way.)
-" TODO: this isn't working.
-autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.go
-    \ noremap <C-]> :GoDef<CR>:f<CR>
-
-
-
-" Toggle line numbers.
-noremap <F4> :set number! number?<CR>
-inoremap <F4> <C-o>:set number! number?<CR>
-
-" Toggle line wrapping.
-noremap <F5> :set wrap! wrap?<CR>
-inoremap <F5> <C-o>:set wrap! wrap?<CR>
-
-" Toggle colorcolumn
-noremap <expr> <F6> <sid>toggle_colorcolumn()
-inoremap <expr> <F6> <sid>toggle_colorcolumn()
-function! s:toggle_colorcolumn() abort
-    if &colorcolumn !=# ""
-        " Remember the old value, and clear colorcolumn.
-        let s:colorcolumn_previous_value = &colorcolumn
-        set colorcolumn=
-    elseif exists("s:colorcolumn_previous_value")
-        " If &cc is empty, reset to the old value, if one exists.
-        let &colorcolumn = s:colorcolumn_previous_value
-    endif
-
-    set colorcolumn?
-
-    " Need to redraw here to get the effect right away.
-    redraw
-
-    return ""
-endfunction
-" TODO: this is somehow messing with the 'ruler'...
-"call s:toggle_colorcolumn()
-set cc=
-
-" Toggle autoindent/mappings/etc, for pasting text.
-noremap <F7> :set paste! paste?<CR>
-set pastetoggle=<F7>
+" TODO: C-] shows filename (C-g), but only when it jumps to a new file.
+" Done on load to override vim-go plugin. (Find a better way!)
+" (NOTE: this isn't working at all rn.)
+"autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.go
+    "\ noremap <C-]> :GoDef<CR>:f<CR>
 
 
 
@@ -686,6 +714,9 @@ noremap <Leader>H "0P
 " Clear currently highlighted search.
 noremap <Leader>j :nohlsearch<CR>
 
+" Toggle search highlight.
+noremap <Leader>k :set hlsearch! hlsearch?<CR>
+
 
 
 " Quit current window.
@@ -711,9 +742,6 @@ noremap <Leader><Tab> :ls<CR>
 " Next/previous buffer.
 noremap <Leader>; :bn<CR>
 noremap <Leader>, :bp<CR>
-
-" Toggle search highlight.
-noremap <Leader>' :set hlsearch! hlsearch?<CR>
 
 " Search and replace.
 nnoremap <Leader>s :%s///gc<left><left><left><left>

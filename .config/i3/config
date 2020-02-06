@@ -143,6 +143,11 @@ font pango:DejaVu Sans Mono 12
 # Don't show borders when there is only one window on the screen.
 hide_edge_borders smart
 
+# Don't wrap around the screen when selecting windows to the left/right, etc.
+# TODO: this option isn't available until i3 version 4.15. Uncomment this when
+# ubuntu upgrades it's version.
+#focus_wrapping no
+
 # Use Alt + left-mouse to drag floating windows to their wanted position.
 floating_modifier $Alt
 
