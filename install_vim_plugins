@@ -5,6 +5,15 @@ mkdir -pv ~/.vim/bundle
 echo cd ~/.vim/bundle
 cd ~/.vim/bundle
 
+# TODO: get this to work.
+git clone https://github.com/junegunn/fzf.vim
+
+# TODO:
+# Try out fzf instead of ctrlp.
+# Look into ale (and maybe later syntastic).
+# Try out tagbar or taglist. (<leader>t)
+# Try out vim-plug (or another plugin manager).
+
 # Download plugins.
 git clone https://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/shougo/deoplete.nvim.git
@@ -19,6 +28,7 @@ git clone https://github.com/ctrlpvim/ctrlp.vim.git
 git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/mbbill/undotree.git
+git clone https://github.com/airblade/vim-gitgutter
 
 # https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
 get_latest_release() {

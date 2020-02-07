@@ -89,8 +89,8 @@ alias gl="g l"
 alias gd="g d"
 
 alias gst="g st"
-alias gsp="g st pop"
-alias gsl="g st list"
+alias gsp="g sp"
+alias gsl="g sl"
 
 alias gdh="gd HEAD"
 alias gdhh="gd HEAD^"

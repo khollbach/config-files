@@ -109,6 +109,9 @@ function title_wrapper {
 
 
 
+# Get fzf to work.
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Load aliases, functions.
 source "$HOME/.bash_aliases"
 source "$HOME/.bash_functions"

@@ -1,0 +1,10 @@
+Why does the main split's filename disappear when I'm focusing the quickfix list?
+
+Consider making a tmux bind for "Break pane into new session"
+
+Vim: nowrap in :Ack
+- :Ack workflow in general..
+
+Consider aliasing(?) git diff to ignore $gulp/.generated/
+gd -- . ':!.generated'
+https://stackoverflow.com/a/29374503
