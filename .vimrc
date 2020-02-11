@@ -192,6 +192,31 @@ if !empty(glob('~/.vim/bundle/vim-fugitive'))
     noremap <Leader>gb :Gblame<CR>
 endif
 
+if !empty(glob('~/.vim/bundle/vim-gitgutter'))
+    " Disable gitgutter's default maps, since it would map things like
+    " `<leader>hp`, which would cause my own `<leader>h` mapping to be sticky
+    " while waiting to see if was going to press `p` or not.
+    let g:gitgutter_map_keys = 0
+
+    " Causes gitgutter to update every 100ms instead of every 4 seconds.
+    " Recommended by the project's readme.
+    set updatetime=100
+
+    nmap ]c <Plug>(GitGutterNextHunk)
+    nmap [c <Plug>(GitGutterPrevHunk)
+
+    nmap ghs <Plug>(GitGutterStageHunk)
+    nmap ghu <Plug>(GitGutterUndoHunk)
+    nmap ghp <Plug>(GitGutterPreviewHunk)
+
+    " TODO: get the number of lines added/edited/deleted to show up in the
+    " status bar; e.g.:
+    " [ ~/config-files/.vimrc ] [+] +16 -2
+    " Where the above are colored green and red respectively. These should each
+    " show up only when they're nonzero. Can probably be done pretty easily.
+    " See "Status line" in https://github.com/airblade/vim-gitgutter
+endif
+
 " incsearch.vim
 if !empty(glob('~/.vim/bundle/incsearch.vim'))
     " Case insensitive by default.
@@ -300,7 +325,7 @@ set shortmess+=I
 " Doesn't work on Vim 8.0 for me; I haven't looked into why.
 if has('nvim')
     " Note the trailing space.
-    set fillchars=eob:\ 
+    set fillchars+=eob:\ 
 endif
 
 " Don't give visual feedback for normal mode commands requiring multiple
@@ -412,16 +437,20 @@ set laststatus=2
 
 " Change status line color.
 highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
-highlight! StatusLineNC ctermbg=0 ctermfg=11 cterm=none
+highlight! StatusLineNC ctermbg=0 ctermfg=12 cterm=none
+" This last highlight group is made-up by me.
 highlight! StatusLineTrailing ctermbg=8 ctermfg=12
 function! StatusLine()
-    if expand("%:t") ==# ""
-        return '%#StatusLineTrailing#'
+    if expand("%:t") !=# ""
+        return ' %f %#StatusLineTrailing# %h%w%r%m'
     else
-        return ' %f %#StatusLineTrailing#%=%h%w%r%m '
+        return '%#StatusLineTrailing#%=%h%w%r%m '
     endif
 endfunction
 set statusline=%!StatusLine()
+
+" Hide the vertical bar between splits.
+highlight! VertSplit ctermfg=8 ctermbg=8
 
 "" Toggle showing status line.
 "" TODO: implement and test this.
