@@ -17,8 +17,8 @@
     ll = log
     lo = log --oneline
     st = stash
-    sp = st pop
-    sl = st list
+    sp = stash pop
+    sl = stash list
     b = !git --no-pager branch
     r = remote
 

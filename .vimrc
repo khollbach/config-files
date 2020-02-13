@@ -183,8 +183,6 @@ endif
 
 " Fugitive binds.
 if !empty(glob('~/.vim/bundle/vim-fugitive'))
-    " Toggle NERDTree.
-    noremap <Leader>i :NERDTreeToggle<CR>
     noremap <expr> <Leader>gg ":Git! "
     noremap <Leader>gs :Gstatus<CR>
     noremap <Leader>gc :Gcommit<CR>
@@ -262,14 +260,15 @@ if !empty(glob('~/.vim/bundle/nerdcommenter'))
     " Don't give me the default mappings.
     let g:NERDCreateDefaultMappings = 0
 
-    " No spaces after the comment character.
+    " No spaces after the comment character(s).
+    " Doesn't work for python files, even if I
+    "   set commentstring=#%s
+    " I'm not sure why.
     let g:NERDSpaceDelims = 0
 
-    " Comment.
-    noremap <Leader>c :call NERDComment(0, "comment")<CR>
-
-    " Uncomment.
-    noremap <Leader>u :call NERDComment(0, "uncomment")<CR>
+    " Comment / uncomment.
+    map <Leader>c <plug>NERDCommenterComment
+    map <Leader>u <plug>NERDCommenterUncomment
 endif
 
 " NERDTree
