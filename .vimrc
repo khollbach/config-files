@@ -118,6 +118,9 @@ if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
 endif
 
 if !empty(glob('~/.vim/bundle/vim-sneak'))
+    " Respect Vim's ignorecase and smartcase settings.
+    let g:sneak#use_ic_scs = 1
+
     " Accept `s` and `S` in operator-pending mode.
     " Note that this conflicts with surround.vim's default binds,
     " which I've changed to z/Z.
@@ -210,15 +213,12 @@ endif
 
 " incsearch.vim
 if !empty(glob('~/.vim/bundle/incsearch.vim'))
-    " Case insensitive by default.
-    map / <Plug>(incsearch-forward)\c
-    map ? <Plug>(incsearch-backward)\c
-    map g/ <Plug>(incsearch-stay)\c
+    map / <Plug>(incsearch-forward)
+    map ? <Plug>(incsearch-backward)
 
     " Case-sensitive search
-    map <Leader>/ <Plug>(incsearch-forward)
-    map <Leader>? <Plug>(incsearch-backward)
-    map <Leader>g/ <Plug>(incsearch-stay)
+    map <Leader>/ <Plug>(incsearch-forward)\C
+    map <Leader>? <Plug>(incsearch-backward)\C
 endif
 
 " ack.vim
@@ -396,6 +396,12 @@ set scrolloff=5
 " Don't automatically perform ^ after each C-U, C-D, C-B, C-F, H, M, L, etc.
 " Basically, leave my cursor in the current column when scrolling around.
 set nostartofline
+
+" Case insensitive search.
+set ignorecase
+
+" (Unless you typed a capital letter in your search.)
+set smartcase
 
 " Go to the first match as you are typing your search.
 set incsearch
@@ -816,13 +822,9 @@ noremap <Leader><Tab> :ls<CR>
 noremap <Leader>; :bn<CR>
 noremap <Leader>, :bp<CR>
 
-" Search and replace.
-nnoremap <Leader>s :%s///gc<left><left><left><left>
-vnoremap <Leader>s :s///gc<left><left><left><left>
-
-" Count occurences (ignoring case by default)
-nnoremap <Leader>n :%s/\c//gn<left><left><left><left>
-vnoremap <Leader>n :s/\c//gn<left><left><left><left>
+" Search and replace (case sensitive, please!)
+nnoremap <Leader>s :%s/\C//gc<left><left><left><left>
+vnoremap <Leader>s :s/\C//gc<left><left><left><left>
 
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>
