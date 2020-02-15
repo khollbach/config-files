@@ -206,13 +206,6 @@ if !empty(glob('~/.vim/bundle/vim-gitgutter'))
     nmap ghs <Plug>(GitGutterStageHunk)
     nmap ghu <Plug>(GitGutterUndoHunk)
     nmap ghp <Plug>(GitGutterPreviewHunk)
-
-    " TODO: get the number of lines added/edited/deleted to show up in the
-    " status bar; e.g.:
-    " [ ~/config-files/.vimrc ] [+] +16 -2
-    " Where the above are colored green and red respectively. These should each
-    " show up only when they're nonzero. Can probably be done pretty easily.
-    " See "Status line" in https://github.com/airblade/vim-gitgutter
 endif
 
 " incsearch.vim
@@ -434,16 +427,68 @@ set titlestring=%{expand(\"%:t\")}
 " Show status line (filename, etc) when there's only one window.
 set laststatus=2
 
+" Get the number of lines added/edited/deleted to show up in the status bar.
+if !empty(glob('~/.vim/bundle/vim-gitgutter'))
+    highlight! GSAdded ctermfg=2
+    highlight! GSModified ctermfg=3
+    highlight! GSRemoved ctermfg=1
+    function! GitStatus()
+        let result = ''
+        let result = result . '%#GSAdded#' . '%( %{GSAdd()}%)'
+        let result = result . '%#GSModified#' . '%( %{GSMod()}%)'
+        let result = result . '%#GSRemoved#' . '%( %{GSRem()}%)'
+        let result = result . '%#StatuslineTrailing#'
+        return result
+    endfunction
+
+    " These each need to be expanded in '%{FuncName()}' blocks, otherwise they
+    " will have the current window's info even if they're being rendered in
+    " another window. And since '%#HiGroup#' elements need to appear in the
+    " statusline, and *not* in %{} blocks, we're forced to awkardly break the
+    " following up into their own separate functions just to get them to
+    " highlight as different colors.
+    function! GSAdd()
+        let [a,m,r] = GitGutterGetHunkSummary()
+        if a !=# 0
+            return '+' . a
+        else
+            return ''
+        endif
+    endfunction
+    function! GSMod()
+        let [a,m,r] = GitGutterGetHunkSummary()
+        if m !=# 0
+            return '~' . m
+        else
+            return ''
+        endif
+    endfunction
+    function! GSRem()
+        let [a,m,r] = GitGutterGetHunkSummary()
+        if r !=# 0
+            return '-' . r
+        else
+            return ''
+        endif
+    endfunction
+else
+    function! GitStatus()
+        return ''
+    endfunction
+endif
+
 " Change status line color.
 highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
 highlight! StatusLineNC ctermbg=0 ctermfg=12 cterm=none
+
 " This last highlight group is made-up by me.
 highlight! StatusLineTrailing ctermbg=8 ctermfg=12
+
 function! StatusLine()
     if expand("%:t") !=# ""
-        return ' %f %#StatusLineTrailing# %h%w%r%m'
+        return ' %f %#StatusLineTrailing#%( %h%w%r%m%)' . GitStatus()
     else
-        return '%#StatusLineTrailing#%=%h%w%r%m '
+        return '%#StatusLineTrailing#%=%(%h%w%r%m %)'
     endif
 endfunction
 set statusline=%!StatusLine()
