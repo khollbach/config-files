@@ -2,173 +2,45 @@
 " Init
 " -----------------------------------------------------------------------------
 
-" Init Pathogen (if it exists).
-if !empty(glob('~/.vim/autoload/pathogen.vim'))
-    execute pathogen#infect()
-endif
+" Enable syntax highlighting.
+syntax on
+
+" Automatically detect known filetypes.
+filetype plugin indent on
 
 " Set leader to space.
 let mapleader = "\<Space>"
 noremap <Space> <Nop>
-
-" Syntax highlighting.
-syntax on
-
-" Load plugin and indent files for known filetypes.
-filetype plugin indent on
+noremap <Space><Space> <Nop>
 
 " -----------------------------------------------------------------------------
-" Plugin Settings
+" Plugins
 " -----------------------------------------------------------------------------
 
-" Dark background color.
-set background=dark
-"set background=light
+function! PluginExists(name) abort
+    return !empty(glob('~/.vim/pack/plugins/start/' . a:name . '/'))
+endfunction
 
-" TODO: get Solarized to use brightgreen instead of brightyellow for dark grey
-" text when in 'light' mode. Temporary workaround: edit terminal emulator
-" colors.
-
-" Solarized color scheme
-if !empty(glob('~/.vim/bundle/vim-colors-solarized'))
+if PluginExists('vim-colors-solarized')
+    set background=dark
     colorscheme solarized
 endif
 
-" Deoplete (auto-completion)
-if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
-    let g:deoplete#enable_at_startup = 1
-
-    " Options.
-    call deoplete#custom#option({
-    \ 'ignore_case': v:true,
-    \ 'on_insert_enter': v:false,
-    \ })
-
-    " Initially disable deoplete.
-    call deoplete#custom#option('auto_complete', v:false)
-    let s:my_deoplete_enabled = 0
-
-    " Toggle deoplete: <F9>
-    noremap <expr> <F9> <sid>toggle_deoplete()
-    inoremap <expr> <F9> <sid>toggle_deoplete()
-    function! s:toggle_deoplete() abort
-        if s:my_deoplete_enabled
-            " Disable
-            echo 'nodeoplete'
-            call deoplete#custom#option('auto_complete', v:false)
-            let s:my_deoplete_enabled = 0
-        else
-            " Enable
-            echo '  deoplete'
-            call deoplete#custom#option('auto_complete', v:true)
-            let s:my_deoplete_enabled = 1
-        endif
-        return ""
-    endfunction
-
-    " Fix the way enter interacts with deoplete.
-    " If the 'pop-up-menu' is visible (i.e., if autocomplete suggestions are
-    " showing), close it then insert a newline.
-    inoremap <expr> <CR> <sid>enter_fn()
-    function! s:enter_fn() abort
-        if pumvisible()
-            " <C-y> confirms the current selection.
-            return "\<C-y>\<CR>"
-        else
-            return "\<CR>"
-        endif
-    endfunction
-
-    " Use tab/shift-tab for completion.
-    " Happens only if the PUM is active or if there's a word-character behind
-    " the cursor; otherwise tab is just indentation.
-    inoremap <silent><expr> <Tab> <sid>tab_fn()
-    inoremap <silent><expr> <S-Tab> <sid>s_tab_fn()
-
-    function! s:tab_fn() abort
-        if pumvisible() || s:check_word_behind()
-            " Next suggestion.
-            return "\<C-n>"
-        else
-            " Indent.
-            return "\<Tab>"
-        endif
-    endfunction
-
-    function! s:s_tab_fn() abort
-        if pumvisible() || s:check_word_behind()
-            " Previous suggestion.
-            return "\<C-p>"
-        else
-            " Indent.
-            return "\<S-Tab>"
-        endif
-    endfunction
-
-    " Check if the character immediately to the left of the cursor is a
-    " "word-character", ie [0-9A-Za-z_]. False if at the beginning of the line.
-    function! s:check_word_behind() abort
-        let col = col('.') - 1
-        return col > 0 && getline('.')[col - 1] =~ '\w'
-    endfunction
-
-    " Disable preview window. Deoplete would sometime uses this to show
-    " documentation of, e.g., python functions.
-    set completeopt-=preview
-endif
-
-if !empty(glob('~/.vim/bundle/vim-sneak'))
+if PluginExists('vim-sneak')
     " Respect Vim's ignorecase and smartcase settings.
     let g:sneak#use_ic_scs = 1
 
-    " Accept `s` and `S` in operator-pending mode.
-    " Note that this conflicts with surround.vim's default binds,
-    " which I've changed to z/Z.
+    " Don't highlight matches.
+    autocmd User SneakLeave highlight clear Sneak
+
+    " Accept `s` and `S` in operator-pending mode. Note that this conflicts
+    " with surround.vim's default binds, which I've changed to z/Z.
     omap s <Plug>Sneak_s
     omap S <Plug>Sneak_S
     xmap S <Plug>Sneak_S
-
-    " Disable highlighting of matches.
-    autocmd User SneakLeave highlight clear Sneak
 endif
 
-" Additional RSI binds.
-if !empty(glob('~/.vim/bundle/vim-rsi'))
-    " <C-u> and <C-k> have corner cases near the end of lines.
-    inoremap <expr> <C-u> <sid>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
-    if has('nvim')
-        " Nvim has a different cursor position for C-o at the end of a line
-        " compared to Vim. I consider this a bug.
-        inoremap <expr> <C-k> <sid>beyond_eol() ? "" : "<C-o>d$"
-    else
-        inoremap <expr> <C-k> <sid>at_eol() ? "" : "<C-o>d$"
-    endif
-
-    function! s:at_eol() abort
-        return col('.') ==# len(getline('.'))
-    endfunction
-    function! s:beyond_eol() abort
-        return col('.') > len(getline('.'))
-    endfunction
-
-    " <C-n> and <C-p> shadow Vim's completion binds, but I use Tab/S-Tab for
-    " that anyways.
-    " If the PUM is active, we close it first.
-    inoremap <expr> <C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
-    inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
-
-    " <C-y> = put recent
-    " <M-y> = put yanked
-    inoremap <C-y> <C-r>"
-    if has('nvim')
-        inoremap <M-y> <C-r>0
-    else
-        inoremap <Esc>y <C-r>0
-    endif
-endif
-
-" zurround.vim
-if !empty(glob('~/.vim/bundle/vim-surround'))
+if PluginExists('vim-surround')
     let g:surround_no_mappings = 1
 
     " Use z/Z instead of s/S, since I use s for sneak.vim motions.
@@ -184,24 +56,62 @@ if !empty(glob('~/.vim/bundle/vim-surround'))
     xmap gz  <Plug>VgSurround
 endif
 
-" Fugitive binds.
-if !empty(glob('~/.vim/bundle/vim-fugitive'))
-    noremap <expr> <Leader>gg ":Git! "
-    noremap <Leader>gs :Gstatus<CR>
-    noremap <Leader>gc :Gcommit<CR>
-    noremap <Leader>gd :Gdiff<CR>
-    noremap <Leader>gb :Gblame<CR>
+if PluginExists('vim-rsi')
+    " <C-y> = put recent
+    " <M-y> = put yanked
+    inoremap <C-y> <C-r>"
+    if has('nvim')
+        inoremap <M-y> <C-r>0
+    else
+        inoremap <Esc>y <C-r>0
+    endif
+
+    " <C-n> and <C-p> shadow Vim's completion binds, but I use Tab/S-Tab for
+    " that anyways. If the PUM is active, we close it first.
+    inoremap <expr> <C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
+    inoremap <expr> <C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
+
+    " <C-u> and <C-k> have corner cases near the end of lines.
+    inoremap <expr> <C-u> <SID>beyond_eol() ? "<C-o>d0<C-o>x" : "<C-o>d0"
+    if has('nvim')
+        " Nvim seems to have a different cursor position for C-o at end of line
+        " compared to Vim. It's probably a bug.
+        inoremap <expr> <C-k> <SID>beyond_eol() ? "" : "<C-o>d$"
+    else
+        inoremap <expr> <C-k> <SID>at_eol() ? "" : "<C-o>d$"
+    endif
+
+    function! s:at_eol() abort
+        return col('.') ==# len(getline('.'))
+    endfunction
+
+    function! s:beyond_eol() abort
+        return col('.') > len(getline('.'))
+    endfunction
 endif
 
-if !empty(glob('~/.vim/bundle/vim-gitgutter'))
-    " Disable gitgutter's default maps, since it would map things like
-    " `<leader>hp`, which would cause my own `<leader>h` mapping to be sticky
-    " while waiting to see if was going to press `p` or not.
-    let g:gitgutter_map_keys = 0
+if PluginExists('vim-fugitive')
+    noremap <Leader>gs :Gstatus<CR>
+    noremap <Leader>gd :Gdiffsplit<CR>
+    noremap <Leader>gc :Gcommit<CR>
+    noremap <Leader>gm :Gmerge<CR>
+    noremap <Leader>gr :Grebase<CR>
+    noremap <Leader>gu :Gpush<CR>
+    noremap <Leader>gf :Gfetch<CR>
+    noremap <Leader>gp :Gpull<CR>
+    noremap <Leader>gb :Gblame<CR>
+    noremap <Leader>gl :Gclog<CR>
+    noremap <expr> <Leader>gg ":Ggrep "
+endif
 
-    " Causes gitgutter to update every 100ms instead of every 4 seconds.
-    " Recommended by the project's readme.
+if PluginExists('vim-gitgutter')
+    " Update the gutter every 100ms instead of every 4 seconds.
     set updatetime=100
+
+    " Disable the default maps, since it would map things like `<leader>hp`,
+    " which would cause my own `<leader>h` mapping to be sticky while waiting
+    " to see if I was going to press `p` or not.
+    let g:gitgutter_map_keys = 0
 
     nmap ]c <Plug>(GitGutterNextHunk)
     nmap [c <Plug>(GitGutterPrevHunk)
@@ -211,25 +121,74 @@ if !empty(glob('~/.vim/bundle/vim-gitgutter'))
     nmap ghp <Plug>(GitGutterPreviewHunk)
 endif
 
-" incsearch.vim
-if !empty(glob('~/.vim/bundle/incsearch.vim'))
+if PluginExists('incsearch.vim')
+    " Afaict, the only feature these mappings have over vanilla `/` is
+    " highlighting search matches as you are typing *even when* 'hlsearch' is
+    " off. It's pretty nice though, not gonna lie.
     map / <Plug>(incsearch-forward)
     map ? <Plug>(incsearch-backward)
 
-    " Case-sensitive search
+    " Case-sensitive search.
     map <Leader>/ <Plug>(incsearch-forward)\C
     map <Leader>? <Plug>(incsearch-backward)\C
 endif
 
-" ack.vim
-if !empty(glob('~/.vim/bundle/ack.vim'))
-    " ripgreg
+if PluginExists('ack.vim')
     let g:ackprg = "rg --vimgrep"
+
     noremap <expr> <Leader>a ":Ack "
 endif
 
-" ctrlp
-if !empty(glob('~/.vim/bundle/ctrlp.vim'))
+if PluginExists('nerdcommenter')
+    let g:NERDCreateDefaultMappings = 0
+
+    map <Leader>c <plug>NERDCommenterComment
+    map <Leader>u <plug>NERDCommenterUncomment
+
+    " No spaces after the comment character(s). Doesn't work for python files,
+    " even if I use `set commentstring=#%s`. I'm not sure why.
+    let g:NERDSpaceDelims = 0
+endif
+
+if PluginExists('nerdtree')
+    noremap <Leader>i :NERDTreeToggle<CR>
+    noremap <Leader>I :NERDTreeFind<CR>
+
+    let NERDTreeQuitOnOpen = 1
+
+    " Otherwise it's bound to `?`, which shadows search-backwards.
+    let NERDTreeMapHelp = '<F1>'
+endif
+
+if PluginExists('undotree')
+    noremap <Leader>U :UndotreeToggle<CR>
+endif
+
+if PluginExists('context.vim')
+    " Disabled for now; it's not exactly pretty. Maybe it's useful though.
+    let g:context_enabled = 0
+
+    " Without the following, <C-y> and <C-e> are line-by-line, instead of 5 at
+    " a time as per my custom mappings. This fixes it, but I'm not sure why. I
+    " just disabled context.vim's default mappings, and then re-added them.
+    let g:context_add_mappings = 0
+    nnoremap <silent>        <C-Y> <C-Y>:call context#update('C-Y')<CR>
+    nnoremap <silent>        zz     zzzz:call context#update('zz')<CR>
+    nnoremap <silent>        zb     zbzb:call context#update('zb')<CR>
+    nnoremap <silent> <expr> <C-E>            context#mapping#ce()
+    nnoremap <silent> <expr> zt               context#mapping#zt()
+    nnoremap <silent> <expr> k                context#mapping#k()
+    nnoremap <silent> <expr> H                context#mapping#h()
+endif
+
+if PluginExists('goyo.vim')
+    " OMG this is beautiful.
+    " TODO: fix the way <leader>q interacts with goyo-mode.
+    noremap <silent> <Leader>f :Goyo<CR>:echo ''<CR>
+endif
+
+"if PluginExists('ctrlp.vim')
+if 0
     " Open ctrlp.
     let g:ctrlp_map = "<Leader>o"
 
@@ -248,56 +207,52 @@ if !empty(glob('~/.vim/bundle/ctrlp.vim'))
     let g:ctrlp_show_hidden = 1
 endif
 
-" NERD Commenter.
-if !empty(glob('~/.vim/bundle/nerdcommenter'))
-    " Don't give me the default mappings.
-    let g:NERDCreateDefaultMappings = 0
+"if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
+if 0
+    let g:deoplete#enable_at_startup = 1
 
-    " No spaces after the comment character(s).
-    " Doesn't work for python files, even if I
-    "   set commentstring=#%s
-    " I'm not sure why.
-    let g:NERDSpaceDelims = 0
+    call deoplete#custom#option({
+    \ 'on_insert_enter': v:false,
+    \ })
 
-    " Comment / uncomment.
-    map <Leader>c <plug>NERDCommenterComment
-    map <Leader>u <plug>NERDCommenterUncomment
-endif
+    " Initially disabled.
+    call deoplete#custom#option('auto_complete', v:false)
+    let s:my_deoplete_enabled = 0
 
-" NERDTree
-if !empty(glob('~/.vim/bundle/nerdtree'))
-    " Toggle NERDTree.
-    noremap <Leader>i :NERDTreeToggle<CR>
+    " Toggle deoplete.
+    noremap <expr> <F9> <SID>toggle_deoplete()
+    inoremap <expr> <F9> <SID>toggle_deoplete()
+    function! s:toggle_deoplete() abort
+        if s:my_deoplete_enabled
+            " Disable
+            echo 'nodeoplete'
+            call deoplete#custom#option('auto_complete', v:false)
+            let s:my_deoplete_enabled = 0
+        else
+            " Enable
+            echo '  deoplete'
+            call deoplete#custom#option('auto_complete', v:true)
+            let s:my_deoplete_enabled = 1
+        endif
+        return ""
+    endfunction
 
-    " Go to current file in NERDTree.
-    noremap <Leader>I :NERDTreeFind<CR>
+    " Fix the way enter interacts with deoplete.
+    " If the 'pop-up-menu' is visible (i.e., if autocomplete suggestions are
+    " showing), close it then insert a newline.
+    inoremap <expr> <CR> <SID>enter_fn()
+    function! s:enter_fn() abort
+        if pumvisible()
+            " <C-y> confirms the current selection.
+            return "\<C-y>\<CR>"
+        else
+            return "\<CR>"
+        endif
+    endfunction
 
-    " Hide NERDTree after opening a file.
-    let NERDTreeQuitOnOpen = 1
-
-    " The default help bind '?' conflicts with vim's search-backwards.
-    let NERDTreeMapHelp = '<F1>'
-endif
-
-" undotree
-if !empty(glob('~/.vim/bundle/undotree'))
-    " Toggle undotree
-    noremap <Leader>U :UndotreeToggle<CR>
-endif
-
-if !empty(glob('~/.vim/bundle/context.vim'))
-    " This fixes 5<C-Y> and 5<C-E> issues, but I'm not sure why.
-    " I just disabled the default mappings, and then re-added them as listed in
-    " the readme here:
-    "   https://github.com/wellle/context.vim
-    let g:context_add_mappings = 0
-    nnoremap <silent>        <C-Y> <C-Y>:call context#update('C-Y')<CR>
-    nnoremap <silent>        zz     zzzz:call context#update('zz')<CR>
-    nnoremap <silent>        zb     zbzb:call context#update('zb')<CR>
-    nnoremap <silent> <expr> <C-E>            context#mapping#ce()
-    nnoremap <silent> <expr> zt               context#mapping#zt()
-    nnoremap <silent> <expr> k                context#mapping#k()
-    nnoremap <silent> <expr> H                context#mapping#h()
+    " Disable preview window. Deoplete would sometime uses this to show
+    " documentation of, e.g., python functions.
+    set completeopt-=preview
 endif
 
 " -----------------------------------------------------------------------------
@@ -322,6 +277,9 @@ set undodir=~/.vim/undo//
 
 " Don't flash the screen (or beep) in Windows
 set t_vb=
+
+" Show commandline completion matches above the commandline on <Tab> keypress.
+set wildmenu
 
 
 
@@ -352,8 +310,13 @@ nnoremap <C-c> <Nop>
 set number
 
 " Toggle line numbers.
-noremap <F4> :set number! number?<CR>
-inoremap <F4> <C-o>:set number! number?<CR>
+if PluginExists('vim-gitgutter')
+    noremap <F4> :GitGutterSignsToggle<CR>:set number! number?<CR>
+    inoremap <F4> <C-o>:GitGutterSignsToggle<CR><C-o>:set number! number?<CR>
+else
+    noremap <F4> :set number! number?<CR>
+    inoremap <F4> <C-o>:set number! number?<CR>
+endif
 
 " Wrap long lines by default.
 set wrap
@@ -365,13 +328,13 @@ set linebreak
 noremap <F5> :set wrap! wrap?<CR>
 inoremap <F5> <C-o>:set wrap! wrap?<CR>
 
-" No vertical lines after 80, 100, and 120 chars.
+" Vertical lines after 80, 100, and 120 chars.
 "set colorcolumn=81,101,121
 set colorcolumn=
 
 " Toggle colorcolumn
-noremap <expr> <F6> <sid>toggle_colorcolumn()
-inoremap <expr> <F6> <sid>toggle_colorcolumn()
+noremap <expr> <F6> <SID>toggle_colorcolumn()
+inoremap <expr> <F6> <SID>toggle_colorcolumn()
 function! s:toggle_colorcolumn() abort
     if &colorcolumn !=# ""
         set colorcolumn=
@@ -408,7 +371,7 @@ autocmd BufNewFile,BufRead,BufAdd,BufFilePost *
 " Start scrolling as soon as the cursor gets close to the edge of the screen.
 set scrolloff=5
 
-" Don't automatically perform ^ after each C-U, C-D, C-B, C-F, H, M, L, etc.
+" Don't automatically perform ^ after each C-u, C-d, C-b, C-f, H, M, L, etc.
 " Basically, leave my cursor in the current column when scrolling around.
 set nostartofline
 
@@ -428,9 +391,6 @@ set hlsearch
 " Available starting in Vim 8.1.1270 and Nvim 0.4.0
 set shortmess-=S
 
-" Show commandline completion matches above the commandline on <Tab> keypress.
-set wildmenu
-
 
 
 " Set the "terminal title", which may be read by terminal emulators to decide
@@ -445,11 +405,46 @@ set title
 " an easy way to fix that here.
 set titlestring=%{expand(\"%:t\")}
 
-" Show status line (filename, etc) when there's only one window.
+" Show status line (filename, etc) even when there's only one window.
 set laststatus=2
 
+" Hide the vertical bar between splits. TODO: get a better fix for this.
+highlight! VertSplit ctermfg=8 ctermbg=8
+
+" Toggle the status line.
+noremap <expr> <Leader>' <SID>toggle_laststatus()
+function! s:toggle_laststatus() abort
+    if &laststatus ==# 2
+        set laststatus=1
+    else
+        set laststatus=2
+    endif
+
+    " Need to redraw here to get the effect right away.
+    mode
+    return ""
+endfunction
+
+" Change status line color.
+highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
+highlight! StatusLineNC ctermbg=0 ctermfg=12 cterm=none
+
+" This last highlight group is made-up by me.
+highlight! StatusLineTrailing ctermbg=8 ctermfg=12
+
+function! StatusLine()
+    if expand("%:t") !=# ""
+        return ' %f %#StatusLineTrailing#%( %h%w%r%m%)' . GitStatus()
+    else
+        return '%#StatusLineTrailing#%=%(%h%w%r%m %)'
+    endif
+endfunction
+set statusline=%!StatusLine()
+
+
+
 " Get the number of lines added/edited/deleted to show up in the status bar.
-if !empty(glob('~/.vim/bundle/vim-gitgutter'))
+if PluginExists('vim-gitgutter')
     highlight! GSAdded ctermfg=2
     highlight! GSModified ctermfg=3
     highlight! GSRemoved ctermfg=1
@@ -498,57 +493,15 @@ else
     endfunction
 endif
 
-" Change status line color.
-highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
-highlight! StatusLineNC ctermbg=0 ctermfg=12 cterm=none
 
-" This last highlight group is made-up by me.
-highlight! StatusLineTrailing ctermbg=8 ctermfg=12
 
-function! StatusLine()
-    if expand("%:t") !=# ""
-        return ' %f %#StatusLineTrailing#%( %h%w%r%m%)' . GitStatus()
-    else
-        return '%#StatusLineTrailing#%=%(%h%w%r%m %)'
-    endif
-endfunction
-set statusline=%!StatusLine()
-
-" Hide the vertical bar between splits.
-highlight! VertSplit ctermfg=8 ctermbg=8
-
-"" Toggle showing status line.
-"" TODO: implement and test this.
-"noremap <expr> <Leader>' <sid>toggle_laststatus()
-"function! s:toggle_laststatus() abort
-    "if &laststatus ==# 2
-        "set laststatus=1
-    "else
-        "set laststatus=2
-    "endif
-
-    "" Need to redraw here to get the effect right away.
-    "mode
-
-    "return ""
-"endfunction
-
-" Just show whether the current file is modified, for now.
-" TODO: later, implement a toggle between "regular" mode with
-" line numbers and full file-path showing, vs "quiet" mode
-" without most of these things, and with the filename in the
-" ruler. Or just at least be able to toggle between
-" statusline/ruler modes with, say `<leader>'`.
+" Show certain info at the bottom-right of the screen. This only appears when
+" the statusline is hidden.
 set ruler
-set rulerformat=%=%h%w%r%m
 
-"" Show certain info at the bottom-right of the screen.
-"" Intead of the default information (cursor's current line/column numbers),
-"" we'll show the filename, and whether the current buffer has been modified.
-"set ruler
-
-"" 36 (total width) = 32 (filename) + 1 (space) + 3 (modified)
-""set rulerformat=%36(%=%t\ %3(%m%)%)
+" Show the current filename, and whether the current buffer has been modified.
+" 36 (total width) = 32 (filename) + 1 (space) + 3 (modified)
+set rulerformat=%36(%=%{PercentT()}%3(%m%)%)
 
 "" Instead of the above, we update the rulerformat width dynamically when the
 "" current buffer name changes. This way we're not wasting space in the "echo
@@ -559,31 +512,31 @@ set rulerformat=%=%h%w%r%m
     "\ let &rulerformat =
     "\ "%" . (strlen(Percent_t()) + 3) . "(%=%{Percent_t()}%3(%m%)%)"
 
-"" We use this function instead of %t in rulerformat, since this won't show
-"" "[No Name]" when there's no open file. Also, this allows us to truncate from
-"" the right instead of from the left.
-""
-"" This function returns one additional space at the end of the filename, if it
-"" exists; this is a hack to get around automatic number formatting.
-"function! Percent_t() abort
-    "let filename = expand("%:t")
+" We use this function instead of %t in rulerformat, since this won't show
+" "[No Name]" when there's no open file. Also, this allows us to truncate from
+" the right instead of from the left.
+"
+" This function returns one additional space at the end of the filename, if it
+" exists; this is a hack to get around automatic number formatting.
+function! PercentT() abort
+    let filename = expand("%:t")
 
-    "" If the filename is too long, display the first 31 chars of it, and ">".
-    "if strlen(filename) > 32
-        "let filename = filename[0:30] . ">"
-    "endif
+    " If the filename is too long, display the first 31 chars of it, and ">".
+    if strlen(filename) > 32
+        let filename = filename[0:30] . ">"
+    endif
 
-    "" We want one space between the filename and the 'modified' indicator.
-    "" We would have put this space in the 'rulerformat' string, except that
-    "" this way if the file is named something numeric like "0123", Vim won't
-    "" try to be clever and format it as "123" instead, since we return "0123 "
-    "" from the %{ } block. Terrible hack, I know.
-    "if strlen(filename) > 0
-        "let filename = filename . " "
-    "endif
+    " We want one space between the filename and the 'modified' indicator.
+    " We would have put this space in the 'rulerformat' string, except that
+    " this way if the file is named something numeric like "0123", Vim won't
+    " try to be clever and format it as "123" instead, since we return "0123 "
+    " from the %{ } block. Terrible hack, I know.
+    if strlen(filename) > 0
+        let filename = filename . " "
+    endif
 
-    "return filename
-"endfunction
+    return filename
+endfunction
 
 
 
@@ -627,9 +580,9 @@ augroup filetype_settings
     "       write file from a new buffer
     "   BufFilePost
     "       rename file
-    " I'm pretty sure these are all the ways for a filename to change.
+    " I'm pretty sure these cover all the ways for a filename to change.
     " For completeness, there's also:
-    "   BufEnter (which subsumes BufNewFile and BufRead, but not the others)
+    "   BufEnter (which strictly subsumes BufNewFile and BufRead)
     "       switching between existing buffers, or creating a new one
 
     " Two spaces indent for html files.
@@ -645,7 +598,7 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.ts
         \ setlocal syntax=javascript
 
-    " Avro is JSON.
+    " Avro schemas are JSON.
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.avsc
         \ setlocal syntax=json
 
@@ -653,6 +606,8 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost make*.inc
         \ setlocal syntax=make
 augroup END
+
+
 
 " Jump to the last position when reopening a file.
 augroup reopen_file
@@ -666,6 +621,8 @@ augroup reopen_file
     " re-opening anything, but the filename/path just happens to be the same).
     autocmd BufRead COMMIT_EDITMSG exe "normal! gg"
 augroup END
+
+
 
 " Highlight lowercase "todo" in comments as well as uppercase "TODO".
 " https://stackoverflow.com/a/30552423
@@ -708,7 +665,7 @@ endif
 " Mappings
 " -----------------------------------------------------------------------------
 
-" jk = Exit insert mode or command-line mode.
+" Exit insert mode or command-line mode.
 inoremap jk <Esc>
 inoremap jK <Esc>
 inoremap Jk <Esc>
@@ -718,65 +675,83 @@ cnoremap jK <C-c>
 cnoremap Jk <C-c>
 cnoremap JK <C-c>
 
-" <CR> = gg
+" 123<CR> takes you to line 123.
 noremap <CR> gg
 
 " Scroll 5x faster.
 noremap <C-y> 5<C-y>
 noremap <C-e> 5<C-e>
 
-" Scroll one line at a time.
-if has('nvim')
-    noremap <M-C-y> <C-y>
-    noremap <M-C-e> <C-e>
-else
-    noremap <Esc><C-y> <C-y>
-    noremap <Esc><C-e> <C-e>
-endif
-
-" <Home> = ^
-" (By default it behaves like the 0 key instead.)
+" Go to the first non-blank character, instead of the actual start of line.
 noremap <Home> ^
 inoremap <Home> <C-o>^
 
-" Select recently pasted text.
-" (Built-in gv selects recently selected text.)
+" Select recently pasted text. (Built-in) gv selects recently selected text.
 nnoremap gp `[v`]
 
-" TODO: C-] shows filename (C-g), but only when it jumps to a new file.
-" Done on load to override vim-go plugin. (Find a better way!)
-" (NOTE: this isn't working at all rn.)
-"autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.go
-    "\ noremap <C-]> :GoDef<CR>:f<CR>
-
-
-
-" <M-q> = Quit Vim.
-" <M-w> = Save.
-" <M-p> = Execute last command.
 if has('nvim')
-    noremap <M-q> :qa<CR>
-    inoremap <M-q> <C-o>:qa<CR>
+    " Save.
     noremap <M-w> :w<CR>
     inoremap <M-w> <C-o>:w<CR>
+
+    " Quit.
+    noremap <M-q> :qa<CR>
+    inoremap <M-q> <C-o>:qa<CR>
+
+    " Execute last command.
     noremap <M-p> :<Up><CR>
 else
-    noremap <Esc>q :qa<CR>
-    inoremap <Esc>q <C-o>:qa<CR>
     noremap <Esc>w :w<CR>
     inoremap <Esc>w <C-o>:w<CR>
+
+    noremap <Esc>q :qa<CR>
+    inoremap <Esc>q <C-o>:qa<CR>
+
     noremap <Esc>p :<Up><CR>
 endif
 
+" Use tab/shift-tab for completion. Happens only if the PUM is active or if
+" there's a word-character behind the cursor; otherwise tab is just
+" indentation.
+inoremap <silent><expr> <Tab> <SID>tab_fn()
+inoremap <silent><expr> <S-Tab> <SID>s_tab_fn()
+
+function! s:tab_fn() abort
+    if pumvisible() || s:check_word_behind()
+        " Next suggestion.
+        return "\<C-n>"
+    else
+        " Indent.
+        return "\<Tab>"
+    endif
+endfunction
+
+function! s:s_tab_fn() abort
+    if pumvisible() || s:check_word_behind()
+        " Previous suggestion.
+        return "\<C-p>"
+    else
+        " Indent.
+        return "\<S-Tab>"
+    endif
+endfunction
+
+" Check if the character immediately to the left of the cursor is a
+" "word-character", ie [0-9A-Za-z_]. False if at the beginning of the line.
+function! s:check_word_behind() abort
+    let col = col('.') - 1
+    return col > 0 && getline('.')[col - 1] =~ '\w'
+endfunction
 
 
-" Navigate windows: C-hjkl
+
+" Navigate windows with C-hjkl.
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Resize current window: C-M-hjkl
+" Resize current window with C-M-hjkl.
 if has('nvim')
     noremap <M-C-h> 5<C-w><
     noremap <M-C-j> 5<C-w>+
@@ -799,36 +774,33 @@ noremap <Leader>D "+D
 noremap <Leader>p "+p
 noremap <Leader>P "+P
 
-" Paste from the 0-register (ie yanked text only).
+" Paste from 0-register (yanked text only).
 noremap <Leader>h "0p
 noremap <Leader>H "0P
 
-
-
-" Clear currently highlighted search.
+" :noh
 noremap <Leader>j :nohlsearch<CR>
-
-" Toggle search highlight.
 noremap <Leader>k :set hlsearch! hlsearch?<CR>
 
-
-
-" Quit current window.
+" Close current window.
 noremap <Leader>q :q<CR>
 
-" Strip trailing whitespace
-noremap <Leader>w :%s/\s\+$//<CR>
+" Search and replace (case sensitive, please!)
+nnoremap <Leader>s :%s/\C//gc<left><left><left><left>
+vnoremap <Leader>s :s/\C//gc<left><left><left><left>
 
-" Update configs
-noremap <Leader>e :!source ~/config-files/update_configs<CR>
-
-" Reload .vimrc
-noremap <Leader>r :source $MYVIMRC<CR>
-
-" Edit .vimrc
+" Edit `.vimrc`.
 noremap <Leader>v :e ~/config-files/.vimrc<CR>
 
+" Update configs.
+noremap <Leader>e :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
 
+" Strip trailing whitespace.
+noremap <Leader>w :%s/\s\+$//<CR>
+
+" Change file permissions to be executable or not.
+noremap <Leader>x :!chmod +x %<CR>
+noremap <Leader>X :!chmod -x %<CR>
 
 " List buffers.
 noremap <Leader><Tab> :ls<CR>
@@ -836,11 +808,3 @@ noremap <Leader><Tab> :ls<CR>
 " Next/previous buffer.
 noremap <Leader>; :bn<CR>
 noremap <Leader>, :bp<CR>
-
-" Search and replace (case sensitive, please!)
-nnoremap <Leader>s :%s/\C//gc<left><left><left><left>
-vnoremap <Leader>s :s/\C//gc<left><left><left><left>
-
-" Change file permissions to be executable or not.
-noremap <Leader>x :!chmod +x %<CR>
-noremap <Leader>X :!chmod -x %<CR>

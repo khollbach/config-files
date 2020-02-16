@@ -1,3 +1,39 @@
+Vim plugins to try:
+
+LSP support:
+    ale and coc
+
+tagbar
+
+Completion (if not good enough via ale/coc/vim-go etc):
+    YouCompleteMe
+
+LSP?
+    syntastic
+
+ctrlp vs fzf, vim-fzf ???
+
+ag.vim vs ack.vim vs etc etc...
+    (vs :grep ???? see also :Ggrep)
+
+---
+
+# TODO: get this to work.
+#git clone https://github.com/junegunn/fzf.vim
+
+# TODO:
+# Try out fzf instead of ctrlp.
+# Look into ale (and maybe later syntastic).
+# Try out tagbar or taglist. (<leader>t)
+# Try out vim-plug (or another plugin manager).
+
+---
+
+TODO: clean up deoplete section of vimrc, and either
+debug deoplete, or get a new completion plugin.
+
+---
+
 Why does the main split's filename disappear when I'm focusing the quickfix list?
 
 Consider making a tmux bind for "Break pane into new session"

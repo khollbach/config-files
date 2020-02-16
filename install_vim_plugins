@@ -1,35 +1,33 @@
 #!/bin/bash
 
-mkdir -pv ~/.vim/bundle
+echo rm -rf ~/.vim/bundle
+rm -rf ~/.vim/bundle
 
-echo cd ~/.vim/bundle
-cd ~/.vim/bundle
+plugins_dir=~/.vim/pack/plugins/start
+mkdir -pv "$plugins_dir"
+echo cd "$plugins_dir"
+cd "$plugins_dir"
 
-# TODO: get this to work.
-git clone https://github.com/junegunn/fzf.vim
-
-# TODO:
-# Try out fzf instead of ctrlp.
-# Look into ale (and maybe later syntastic).
-# Try out tagbar or taglist. (<leader>t)
-# Try out vim-plug (or another plugin manager).
-
-# Download plugins.
-git clone https://github.com/altercation/vim-colors-solarized.git
-git clone https://github.com/shougo/deoplete.nvim.git
-git clone https://github.com/justinmk/vim-sneak.git
-git clone https://github.com/tpope/vim-rsi.git
-git clone https://github.com/tpope/vim-surround.git
-git clone https://github.com/tpope/vim-repeat.git
-git clone https://github.com/tpope/vim-fugitive.git
-git clone https://github.com/haya14busa/incsearch.vim.git
-git clone https://github.com/mileszs/ack.vim.git
-git clone https://github.com/ctrlpvim/ctrlp.vim.git
-git clone https://github.com/scrooloose/nerdcommenter.git
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/mbbill/undotree.git
-git clone https://github.com/airblade/vim-gitgutter.git
-git clone https://github.com/wellle/context.vim.git
+plugins='
+altercation/vim-colors-solarized
+justinmk/vim-sneak
+tpope/vim-sensible
+tpope/vim-surround
+tpope/vim-repeat
+tpope/vim-rsi
+tpope/vim-fugitive
+airblade/vim-gitgutter
+haya14busa/incsearch.vim
+mileszs/ack.vim
+scrooloose/nerdcommenter
+scrooloose/nerdtree
+mbbill/undotree
+wellle/context.vim
+junegunn/goyo.vim
+'
+for p in $plugins; do
+    git clone https://github.com/"$p".git
+done
 
 # https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
 get_latest_release() {
@@ -37,7 +35,7 @@ get_latest_release() {
     grep '"tag_name":' |                                            # Get tag line
     sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
+
 git clone https://github.com/fatih/vim-go.git &&
     cd vim-go &&
-    git checkout $(get_latest_release fatih/vim-go) 2>/dev/null ||
-    echo Error getting latest release of fatih/vim-go
+    git checkout $(get_latest_release fatih/vim-go) 2>/dev/null
