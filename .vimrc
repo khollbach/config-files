@@ -285,6 +285,21 @@ if !empty(glob('~/.vim/bundle/undotree'))
     noremap <Leader>U :UndotreeToggle<CR>
 endif
 
+if !empty(glob('~/.vim/bundle/context.vim'))
+    " This fixes 5<C-Y> and 5<C-E> issues, but I'm not sure why.
+    " I just disabled the default mappings, and then re-added them as listed in
+    " the readme here:
+    "   https://github.com/wellle/context.vim
+    let g:context_add_mappings = 0
+    nnoremap <silent>        <C-Y> <C-Y>:call context#update('C-Y')<CR>
+    nnoremap <silent>        zz     zzzz:call context#update('zz')<CR>
+    nnoremap <silent>        zb     zbzb:call context#update('zb')<CR>
+    nnoremap <silent> <expr> <C-E>            context#mapping#ce()
+    nnoremap <silent> <expr> zt               context#mapping#zt()
+    nnoremap <silent> <expr> k                context#mapping#k()
+    nnoremap <silent> <expr> H                context#mapping#h()
+endif
+
 " -----------------------------------------------------------------------------
 " Settings
 " -----------------------------------------------------------------------------

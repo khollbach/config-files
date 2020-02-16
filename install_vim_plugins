@@ -28,7 +28,8 @@ git clone https://github.com/ctrlpvim/ctrlp.vim.git
 git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/mbbill/undotree.git
-git clone https://github.com/airblade/vim-gitgutter
+git clone https://github.com/airblade/vim-gitgutter.git
+git clone https://github.com/wellle/context.vim.git
 
 # https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
 get_latest_release() {
