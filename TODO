@@ -1,3 +1,19 @@
+High-prio: <leader>d <leader>p isn't working correctly to paste across these vims: session 30 windows 1 and 2. But I can only reproduce it here, and not elsewhere. What gives?
+
+Workflow: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard)
+
+---
+
+wfxr/forgit
+
+fzf
+
+diff-so-fancy
+
+bat (?)
+
+---
+
 Vim plugins to try:
 
 LSP support:
@@ -41,6 +57,5 @@ Consider making a tmux bind for "Break pane into new session"
 Vim: nowrap in :Ack
 - :Ack workflow in general..
 
-Consider aliasing(?) git diff to ignore $gulp/.generated/
-gd -- . ':!.generated'
-https://stackoverflow.com/a/29374503
+Goyo plugin hides cursor when its over a trailing whitespace (or any tab
+character) in normal mode. No big deal, but maybe there's a quick fix.

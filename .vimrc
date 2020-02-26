@@ -600,7 +600,11 @@ augroup filetype_settings
 
     " Avro schemas are JSON.
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost *.avsc
-        \ setlocal syntax=json
+        \ setlocal syntax=json |
+        \ setlocal shiftwidth=2 |
+        \ setlocal softtabstop=2 |
+        \ setlocal foldmethod=indent |
+        \ normal zR
 
     " Treat more things as Makefile.
     autocmd BufNewFile,BufRead,BufAdd,BufFilePost make*.inc
@@ -779,7 +783,7 @@ noremap <Leader>h "0p
 noremap <Leader>H "0P
 
 " :noh
-noremap <Leader>j :nohlsearch<CR>
+noremap <Leader>j :nohlsearch<CR>:echo<CR>
 noremap <Leader>k :set hlsearch! hlsearch?<CR>
 
 " Close current window.
@@ -796,7 +800,7 @@ noremap <Leader>v :e ~/config-files/.vimrc<CR>
 noremap <Leader>e :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
 
 " Strip trailing whitespace.
-noremap <Leader>w :%s/\s\+$//<CR>
+noremap <silent> <Leader>w :%s/\s\+$//<CR>:noh<CR>
 
 " Change file permissions to be executable or not.
 noremap <Leader>x :!chmod +x %<CR>

@@ -11,8 +11,7 @@ bindsym $Win+Return exec xfce4-terminal
 bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
 bindsym $Win+o exec "exo-open --launch WebBrowser"
 bindsym $Win+p exec --no-startup-id xfce4-popup-whiskermenu
-bindsym $Win+u exec "xfce4-terminal --execute tmux new-session tmux_nvim"
-bindsym $Win+y exec "xfce4-terminal --execute tmux new-session ranger"
+bindsym $Win+u exec "google-chrome"
 bindsym $Win+m exec "emacsclient -a '' -c"
 bindsym $Win+n exec thunar
 

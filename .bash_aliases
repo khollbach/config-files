@@ -44,7 +44,8 @@ alias l="command less"
 alias r='RANGER_ORIGINAL_PWD=$PWD ranger'
 alias ltmk="latexmk -pdf -pvc"
 alias pag="ps aux | grep"
-alias hig="history | cut -c 8- | uniq | grep"  # I mostly use C-r now.
+alias jq-vim="jq . | v -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
+alias jv=jq-vim
 
 # Unlearn muscle memory.
 alias cs="sl"
@@ -62,7 +63,6 @@ alias amm="amm --no-remote-logging"
 if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
-alias jq="jq -C ."  # Colors always, identity filter.
 
 # Emacs
 alias emacs="emacsclient -a '' -c"
