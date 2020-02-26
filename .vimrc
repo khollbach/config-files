@@ -415,8 +415,12 @@ set title
 " an easy way to fix that here.
 set titlestring=%{expand(\"%:t\")}
 
-" Show status line (filename, etc) even when there's only one window.
-set laststatus=2
+" Show status line (filename, etc) even when there's only one window. There's a
+" very strange nvim bug where unless I do this on load it resets to the
+" original value of 2 some time after loading my vimrc. Interestingly, if I
+" load my vimrc with `nvim -u vimrc-name` then the setting change sticks. Also
+" if I do *either* of `nvim {-c,--cmd} 'set ls=1'`, that works too. *shrug*.
+autocmd VimEnter * set laststatus=2
 
 " Hide the vertical bar between splits. TODO: get a better fix for this.
 highlight! VertSplit ctermfg=8 ctermbg=8
