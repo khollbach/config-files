@@ -1,18 +1,24 @@
-High-prio: <leader>d <leader>p isn't working correctly to paste across these vims: session 30 windows 1 and 2. But I can only reproduce it here, and not elsewhere. What gives?
-
-Workflow: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard)
+tmux keybind: Alt-shift-X
+  - Break window into new terminal.
+    - This means creating a new session,  ] -> Unless these have their own tmux command ???
+      moving the window to that session,  ]
+      then opening a new terminal attached to that session.
 
 ---
 
 wfxr/forgit
-
-fzf
-
 diff-so-fancy
 
 bat (?)
 
 ---
+
+See vb-suggest
+
+Pick an fzf chdir keybind.
+
+Look at this line in TJ's vimrc:
+    nnoremap <leader>m :MRU<CR>
 
 Vim plugins to try:
 
@@ -50,6 +56,8 @@ debug deoplete, or get a new completion plugin.
 
 ---
 
+Workflow: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard)
+
 Why does the main split's filename disappear when I'm focusing the quickfix list?
 
 Consider making a tmux bind for "Break pane into new session"
@@ -57,5 +65,27 @@ Consider making a tmux bind for "Break pane into new session"
 Vim: nowrap in :Ack
 - :Ack workflow in general..
 
+Fix the way <leader>q interacts with goyo-mode.
+
 Goyo plugin hides cursor when its over a trailing whitespace (or any tab
 character) in normal mode. No big deal, but maybe there's a quick fix.
+
+Check out TJ's dotfiles to look for other goodies.
+
+---
+
+Some guy from #vim on slack, re: preview window for fzf find:
+" junegunn/fzf.vim
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>g :Rg<Space>
+nnoremap <Leader>j :BTags<CR>
+nnoremap <Leader>a :Buffers<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:false } }

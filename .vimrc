@@ -182,9 +182,19 @@ if PluginExists('context.vim')
 endif
 
 if PluginExists('goyo.vim')
-    " OMG this is beautiful.
-    " TODO: fix the way <leader>q interacts with goyo-mode.
     noremap <silent> <Leader>f :Goyo<CR>:echo ''<CR>
+endif
+
+if PluginExists('fzf.vim') && PluginExists('fzf.vim')
+    " Display fzf in a popup window instead.
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:true } }
+
+    noremap <leader>o :Files<CR>
+    noremap <leader>b :Buffers<CR>
+    noremap <leader>t :Tags<CR>
+
+    " todo
+    "nnoremap <leader>m :MRU<CR>
 endif
 
 "if PluginExists('ctrlp.vim')

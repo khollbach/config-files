@@ -24,7 +24,11 @@ scrooloose/nerdtree
 mbbill/undotree
 wellle/context.vim
 junegunn/goyo.vim
+sheerun/vim-polyglot
+junegunn/fzf.vim
+junegunn/fzf
 '
+
 for p in $plugins; do
     git clone https://github.com/"$p".git
 done

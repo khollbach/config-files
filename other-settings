@@ -17,8 +17,7 @@ https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
 Install the latest stable release of Neovim.
 Install `pynvim` via pip3 to get certain nvim plugins to work properly.
 
-# TODO: get fzf vim to work.
-Install fzf via:
+Install fzf, via:
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
