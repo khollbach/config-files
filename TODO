@@ -6,6 +6,22 @@ THRU RIPGREP !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ---
 
+Install, set-up, and add to ./other-settings:
+fd-find
+bat
+diff-so-fancy
+wfxr/forgit
+
+---
+
+Try to improve the UX of ack from vim, it low-key sucks.
+- At the very least, nowrap in the quickfix window.
+- Consider re-thinking the workflow in general.
+Maybe there's a way to integrate fzf, or get previews or something.
+This is possibly related to the go-to-uses usecase (which is high priority).
+
+---
+
 tmux keybind: Alt-shift-X
   - Break window into new terminal.
     - This means creating a new session,  ] -> Unless these have their own tmux command ???
@@ -14,71 +30,47 @@ tmux keybind: Alt-shift-X
 
 ---
 
-wfxr/forgit
-diff-so-fancy
-
-bat (?)
-
----
-
-See vb-suggest
-
-Pick an fzf chdir keybind.
-
 Look at this line in TJ's vimrc:
     nnoremap <leader>m :MRU<CR>
 
+---
+
 Vim plugins to try:
 
+tagbar (`<leader> t`?)
+
 LSP support:
-    ale and coc
+    ale
+        " v suggested
+        let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
+        let g:ale_fixers = {'go': ['goimports']}
+        let g:ale_go_gometalinter_options = '--fast'
+        let g:terraform_align=1
+        let g:go_def_mode='gopls'
+        let g:go_info_mode='gopls'
+        let g:ale_fix_on_save = 1
+        let g:go_fmt_command = "goimports"
+    Ale seems pretty good, also TJ has some good setup options for it.
 
-Ale seems pretty good, also TJ has some good setup options for it.
-
-tagbar
+Further LSP support: coc
 
 Completion (if not good enough via ale/coc/vim-go etc):
-    YouCompleteMe
+    YouCompleteMe ?
+    Deoplete ?
 
-LSP?
-    syntastic
-
-ctrlp vs fzf, vim-fzf ???
-
-ag.vim vs ack.vim vs etc etc...
-    (vs :grep ???? see also :Ggrep)
+Clean up deoplete section of vimrc, and either debug deoplete, or get a new
+completion plugin.
 
 ---
 
-# TODO: get this to work.
-#git clone https://github.com/junegunn/fzf.vim
-
-# TODO:
-# Try out fzf instead of ctrlp.
-# Look into ale (and maybe later syntastic).
-# Try out tagbar or taglist. (<leader>t)
-# Try out vim-plug (or another plugin manager).
-
----
-
-TODO: clean up deoplete section of vimrc, and either
-debug deoplete, or get a new completion plugin.
-
----
+Check out TJ's dotfiles to look for other goodies.
 
 Why does the main split's filename disappear when I'm focusing the quickfix list?
-
-Consider making a tmux bind for "Break pane into new session"
-
-Vim: nowrap in :Ack
-- :Ack workflow in general..
 
 Fix the way <leader>q interacts with goyo-mode.
 
 Goyo plugin hides cursor when its over a trailing whitespace (or any tab
 character) in normal mode. No big deal, but maybe there's a quick fix.
-
-Check out TJ's dotfiles to look for other goodies.
 
 ---
 
@@ -98,9 +90,7 @@ nnoremap <Leader>j :BTags<CR>
 nnoremap <Leader>a :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:false } }
 
----
-
-" config for indentline
+" TJ's config for indentline
 Plug 'yggdroot/indentline'
 let g:indentLine_color_term = 239
 let g:indentLine_char='┊'

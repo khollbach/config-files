@@ -9,6 +9,13 @@ ranger
 highlight  # For syntax highlighting in ranger.
 tldr
 
+# Install a few commandline utils via cargo:
+
+ripgrep
+fd-find
+bat
+hexyl
+
 # Misc.
 
 To combine i3 with xfce, see this guide:
