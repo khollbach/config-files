@@ -1,3 +1,11 @@
+Workflow: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard)
+IMPORTANT: GET THIS TO WORK ASAP, AND GET IT IN YOUR FZF POPUP WINDOW WITH PREVIEWS AND EVERYTHING
+THRU RIPGREP !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+^^^^^ DO NOT WORK ON ANYTHING ELSE BEFORE DOING THE ABOVE !!!!!!! ^^^^^^^ !^ !^!^@#*!^@*!***! !!!!1
+
+---
+
 tmux keybind: Alt-shift-X
   - Break window into new terminal.
     - This means creating a new session,  ] -> Unless these have their own tmux command ???
@@ -24,6 +32,8 @@ Vim plugins to try:
 
 LSP support:
     ale and coc
+
+Ale seems pretty good, also TJ has some good setup options for it.
 
 tagbar
 
@@ -56,8 +66,6 @@ debug deoplete, or get a new completion plugin.
 
 ---
 
-Workflow: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard)
-
 Why does the main split's filename disappear when I'm focusing the quickfix list?
 
 Consider making a tmux bind for "Break pane into new session"
@@ -89,3 +97,11 @@ nnoremap <Leader>g :Rg<Space>
 nnoremap <Leader>j :BTags<CR>
 nnoremap <Leader>a :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:false } }
+
+---
+
+" config for indentline
+Plug 'yggdroot/indentline'
+let g:indentLine_color_term = 239
+let g:indentLine_char='┊'
+let g:indentLine_fileTypeExclude = ['markdown', 'json']
