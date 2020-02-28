@@ -11,6 +11,10 @@ Install, set-up, and add to ./other-settings:
 
 ---
 
+Could probably update the fzf reverse-i-search commandline feature to run on the first enter press (since the chdir feature has that functionality). Then you'll need a separate keybind to edit the command before running, but you could just use C-t or something for that.
+
+---
+
 Try to improve the UX of ack from vim, it low-key sucks.
 - At the very least, nowrap in the quickfix window.
 - Consider re-thinking the workflow in general.
