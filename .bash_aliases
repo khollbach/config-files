@@ -23,8 +23,8 @@ alias   .....="c ../../../.."
 alias  ......="c ../../../../.."
 alias .......="c ../../../../../.."
 
-# ack -> rg
-alias ack="ripgrep.rg"
+alias ack="rg"
+alias cat="bat"
 
 # Neovim, if installed.
 if command -v nvim >/dev/null; then
@@ -35,8 +35,7 @@ fi
 alias c="_cs"
 alias a="ack"
 alias ai="ack -i"
-alias f="my_find"  # TODO: implement these in terms of `rg` so you can take
-alias fn="find . -name"  # advantage of ignoring node_modules, .git, etc.
+alias f="fd"
 alias t="my_time"
 alias p="python3"
 alias v="command nvim"
@@ -46,6 +45,7 @@ alias ltmk="latexmk -pdf -pvc"
 alias pag="ps aux | grep"
 alias jq-vim="jq . | v -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
 alias jv=jq-vim
+alias ub=unbuffer
 
 # Unlearn muscle memory.
 alias cs="sl"
@@ -100,6 +100,7 @@ alias gsp="g sp"
 alias gsl="g sl"
 alias gb="g b"
 alias gr="g r"
+alias gcb="g cb"
 
 alias gdh="gd HEAD"
 alias gdhh="gd HEAD^"

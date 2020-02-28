@@ -7,10 +7,7 @@ THRU RIPGREP !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ---
 
 Install, set-up, and add to ./other-settings:
-fd-find
-bat
-diff-so-fancy
-wfxr/forgit
+    wfxr/forgit
 
 ---
 
@@ -19,6 +16,10 @@ Try to improve the UX of ack from vim, it low-key sucks.
 - Consider re-thinking the workflow in general.
 Maybe there's a way to integrate fzf, or get previews or something.
 This is possibly related to the go-to-uses usecase (which is high priority).
+
+---
+
+Short: get <C-c> to discard numbers. So when you type 93<C-c>83<CR> you get taken to line 83 and not line 9383 (ie the end of the file).
 
 ---
 
@@ -35,9 +36,18 @@ Look at this line in TJ's vimrc:
 
 ---
 
-Vim plugins to try:
+Think of a way to easily toggle between light theme and dark theme in xfce4-terminal/Vim/tmux etc.
+- for glare / outdoors / mood
+- Could possibly just be a short script that does a bunch of `sed`s. I see nothing especially wrong with this.
+- Note that the d-s-f git configs should change too: colors 52 and 22 are red/green "highlights" (pale background colors) that only look good on a dark terminal bg.
 
-tagbar (`<leader> t`?)
+---
+
+    Vim plugins to try:
+    ===================
+
+tag management?
+- e.g., easytags?
 
 LSP support:
     ale
@@ -95,3 +105,7 @@ Plug 'yggdroot/indentline'
 let g:indentLine_color_term = 239
 let g:indentLine_char='┊'
 let g:indentLine_fileTypeExclude = ['markdown', 'json']
+
+---
+
+See trello for more.

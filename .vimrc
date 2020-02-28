@@ -197,6 +197,10 @@ if PluginExists('fzf.vim') && PluginExists('fzf.vim')
     "nnoremap <leader>m :MRU<CR>
 endif
 
+if PluginExists('tagbar')
+    noremap <leader>\ :TagbarToggle<CR>
+endif
+
 "if PluginExists('ctrlp.vim')
 if 0
     " Open ctrlp.

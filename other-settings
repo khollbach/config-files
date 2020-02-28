@@ -8,8 +8,9 @@ xclip  # For system-clipboard integration with tmux and nvim.
 ranger
 highlight  # For syntax highlighting in ranger.
 tldr
+unbuffer
 
-# Install a few commandline utils via cargo:
+# Install a few commandline utils via `cargo install $PKG`:
 
 ripgrep
 fd-find
@@ -27,6 +28,10 @@ Install `pynvim` via pip3 to get certain nvim plugins to work properly.
 Install fzf, via:
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+
+Similarly, for diff-so-fancy:
+git clone --depth 1 https://github.com/so-fancy/diff-so-fancy.git ~/.d-s-f
+ln -s ~/.d-s-f/diff-so-fancy ~/bin/diff-so-fancy
 
 If you want passwordless sudo, append this to /etc/sudoers:
 ALL»    ALL=(ALL) NOPASSWD: ALL

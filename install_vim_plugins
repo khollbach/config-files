@@ -27,6 +27,7 @@ junegunn/goyo.vim
 sheerun/vim-polyglot
 junegunn/fzf.vim
 junegunn/fzf
+majutsushi/tagbar
 '
 
 for p in $plugins; do

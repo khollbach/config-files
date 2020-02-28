@@ -22,8 +22,27 @@
     sl = stash list
     b = !git --no-pager branch
     r = remote
+    cb = current-branch
 
     unstage = reset HEAD --
     last = !git --no-pager log -1 HEAD
-
     clean-ignored = clean -X
+    current-branch = rev-parse --abbrev-ref HEAD
+
+# diff-so-fancy
+[core]
+	pager = diff-so-fancy | less --tabs=4
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

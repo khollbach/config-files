@@ -5,11 +5,6 @@ function _cs {
     cd "$@" && ls
 }
 
-# Case-insensitive `find` alias
-function my_find {
-    find . -iname "*$1*" "${@:2}"
-}
-
 # Run evince in background and ignore stdout/stderr.
 function ev {
     evince "$@" &> /dev/null &
