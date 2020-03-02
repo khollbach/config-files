@@ -112,4 +112,6 @@ let g:indentLine_fileTypeExclude = ['markdown', 'json']
 
 ---
 
+Debug complete-alias + git. See todos in `.bash_aliases`.
+
 See trello for more.
