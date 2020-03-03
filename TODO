@@ -53,7 +53,7 @@ Think of a way to easily toggle between light theme and dark theme in xfce4-term
 tag management?
 - e.g., easytags?
 
-LSP support:
+LSP (language server protocol) support:
     ale
         " v suggested
         let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
@@ -65,6 +65,7 @@ LSP support:
         let g:ale_fix_on_save = 1
         let g:go_fmt_command = "goimports"
     Ale seems pretty good, also TJ has some good setup options for it.
+    Also, checkout for python as well as go.
 
 Further LSP support: coc
 
@@ -114,4 +115,16 @@ let g:indentLine_fileTypeExclude = ['markdown', 'json']
 
 Debug complete-alias + git. See todos in `.bash_aliases`.
 
-See trello for more.
+Build the code and run go-imports on save.
+- does this already happen?
+- what's go-imports?
+
+Look at vim-go instructions.
+
+Could find a way to get your config files to have any directory name, so you can rename them at work
+- Maybe part of update configs will involve setting the name somewhere or something? This might be a little tricky, and you might have to replace the text in profile, etc.
+- Or else could you avoiding mentioning `config-files` by name in .profile and stuff by symlinking a bin folder somewhere? Think over the options.
+
+Why does my xfce+i3 take so long to load xfce4-panel?
+- I can start terminals right away, but the panel takes forever. I never had this problem with vanilla xfce4.
+- Happens at work too.
