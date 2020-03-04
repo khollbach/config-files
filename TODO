@@ -27,11 +27,14 @@ Short: get <C-c> to discard numbers. So when you type 93<C-c>83<CR> you get take
 
 ---
 
-tmux keybind: Alt-shift-X
-  - Break window into new terminal.
-    - This means creating a new session,  ] -> Unless these have their own tmux command ???
-      moving the window to that session,  ]
-      then opening a new terminal attached to that session.
+tmux keybinds: alt-shift-, and alt-shift-;
+- Swap current window with next/prev window.
+
+tmux keybind: alt-shift-X
+- Break window into new terminal.
+  - This means creating a new session,  ] -> Unless these have their own tmux command ???
+    moving the window to that session,  ]
+    then opening a new terminal attached to that session.
 
 ---
 
@@ -40,10 +43,9 @@ Look at this line in TJ's vimrc:
 
 ---
 
-Think of a way to easily toggle between light theme and dark theme in xfce4-terminal/Vim/tmux etc.
+Think of a way to easily toggle between light theme and dark theme in xfce4-terminal/Vim/tmux/d-s-f etc.
 - for glare / outdoors / mood
 - Could possibly just be a short script that does a bunch of `sed`s. I see nothing especially wrong with this.
-- Note that the d-s-f git configs should change too: colors 52 and 22 are red/green "highlights" (pale background colors) that only look good on a dark terminal bg.
 
 ---
 
@@ -70,17 +72,15 @@ LSP (language server protocol) support:
 Further LSP support: coc
 
 Completion (if not good enough via ale/coc/vim-go etc):
-    YouCompleteMe ?
-    Deoplete ?
-
-Clean up deoplete section of vimrc, and either debug deoplete, or get a new
-completion plugin.
+- YouCompleteMe ?
+- Deoplete ?
+  - Clean up deoplete section of vimrc, and either debug deoplete, or get a new completion plugin.
 
 ---
 
 Check out TJ's dotfiles to look for other goodies.
 
-Why does the main split's filename disappear when I'm focusing the quickfix list?
+Vim: why does the main split's filename disappear when I'm focusing the quickfix list?
 
 Fix the way <leader>q interacts with goyo-mode.
 
