@@ -36,13 +36,13 @@
     ui = true
 [color "diff-highlight"]
     oldNormal = red bold
-    oldHighlight = red bold 52
+    oldHighlight = red bold 52  # >>> int('100', 6) + 16
     newNormal = green bold
-    newHighlight = green bold 22
+    newHighlight = green bold 22  # >>> int('010', 6) + 16
 
     # For light terminal backgrounds.
-    #oldHighlight = red bold 224
-    #newHighlight  = green bold 194
+    #oldHighlight = red bold 224  # >>> int('544', 6) + 16
+    #newHighlight  = green bold 194  # >>> int('454', 6) + 16
 [color "diff"]
     meta = yellow
     frag = magenta bold
