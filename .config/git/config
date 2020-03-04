@@ -39,6 +39,10 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+
+	# For light terminal backgrounds.
+	oldHighlight = red bold 224
+	newHighlight  = green bold 194
 [color "diff"]
 	meta = yellow
 	frag = magenta bold
