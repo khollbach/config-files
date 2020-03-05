@@ -42,7 +42,8 @@
 
     # For light terminal backgrounds.
     #oldHighlight = red bold 224  # >>> int('544', 6) + 16
-    #newHighlight  = green bold 194  # >>> int('454', 6) + 16
+    #newHighlight = green bold 194  # >>> int('454', 6) + 16
+>>>>>>> Start implementing toggle-colors
 [color "diff"]
     meta = yellow
     frag = magenta bold

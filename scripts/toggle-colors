@@ -1,0 +1,44 @@
+#!/bin/bash
+
+cfg=~/config-files
+
+isDark() {
+    # TODO
+    false
+}
+
+darkToLight() {
+    # Vim
+    sed -i -E 's,^(\s*set background=)dark$,\1light,g;
+               s,^(autocmd VimEnter \* set laststatus)=2$,\1=1,g' \
+        "$cfg/.vimrc"
+
+    # tmux
+    sed -i -E 's,^(\s*)#(set .* fg=.*)$,\1\2,g' "$cfg/.tmux.conf"
+
+    # diff-so-fancy
+    sed -i -E 's,^(\s*)#((?:old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
+}
+
+lightToDark() {
+    # Vim
+    sed -i -E 's,^(\s*set background=)light$,\1dark,g;
+               s,^(autocmd VimEnter \* set laststatus)=1$,\1=2,g' \
+        "$cfg/.vimrc"
+
+    # tmux (using Perl instead of sed, as per https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string)
+    # TODO: why isn't this working? Try it in https://regexr.com/
+    local pattern='^(\s*)(set -g \S+ fg=\S+)$\n'
+    perl -0777 -pi -e 's,'"$pattern$pattern$pattern"',\1#\2\n\3#\4\n\5#\6\n,gm' "$cfg/.tmux.conf"
+
+    # diff-so-fancy
+    sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194))$,\1#\2,g' "$cfg/.config/git/config"
+}
+
+if isDark; then
+    darkToLight
+else
+    lightToDark
+fi
+
+"$cfg/update_configs"

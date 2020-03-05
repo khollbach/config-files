@@ -11,6 +11,8 @@ Install, set-up, and add to ./other-settings:
 
 ---
 
+Figure out how to get the fzf commandline to use a different highlight color for light backgrounds.
+
 Could probably update the fzf reverse-i-search commandline feature to run on the first enter press (since the chdir feature has that functionality). Then you'll need a separate keybind to edit the command before running, but you could just use C-t or something for that.
 
 ---
