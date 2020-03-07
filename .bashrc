@@ -67,9 +67,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 stty -ixon
 
 # Filter duplicates out of history.
-# Also, if you precede a command with a space, it won't appear in history.
-# This is good for passwords on the commandline (which shouldn't happen).
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoredups
 
 # Don't leave .pyc files or __pycache__ dirs lying around.
 export PYTHONDONTWRITEBYTECODE=1

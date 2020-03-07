@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# Toggle colors between light and dark. Done via hardcoded sed commands, so
+# it's pretty brittle.
+
 cfg=~/config-files
 
 isDark() {
-    # TODO
-    false
+    grep -q -E '^\s*set background=dark$' "$cfg/.vimrc"
 }
 
 darkToLight() {
@@ -14,10 +16,12 @@ darkToLight() {
         "$cfg/.vimrc"
 
     # tmux
+    # Uncomment "set ... fg" lines.
     sed -i -E 's,^(\s*)#(set .* fg=.*)$,\1\2,g' "$cfg/.tmux.conf"
 
     # diff-so-fancy
-    sed -i -E 's,^(\s*)#((?:old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
+    # Uncomment "(new|old)Highlight" lines.
+    sed -i -E 's,^(\s*)#((old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
 }
 
 lightToDark() {
@@ -27,12 +31,13 @@ lightToDark() {
         "$cfg/.vimrc"
 
     # tmux (using Perl instead of sed, as per https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string)
-    # TODO: why isn't this working? Try it in https://regexr.com/
-    local pattern='^(\s*)(set -g \S+ fg=\S+)$\n'
-    perl -0777 -pi -e 's,'"$pattern$pattern$pattern"',\1#\2\n\3#\4\n\5#\6\n,gm' "$cfg/.tmux.conf"
+    # Comment out three specific lines.
+    local pattern='(\s*)(set -g \S+ fg=\S+)\n'
+    perl -0 -pi -e 's/(# Light grey[^\n]*)\n'"$pattern$pattern$pattern"'/\1\n\2#\3\n\4#\5\n\6#\7\n/gm' "$cfg/.tmux.conf"
 
     # diff-so-fancy
-    sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194))$,\1#\2,g' "$cfg/.config/git/config"
+    # Comment out "(new|old)Highlight" lines corresponding to light theme.
+    sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194) .*)$,\1#\2,g' "$cfg/.config/git/config"
 }
 
 if isDark; then
