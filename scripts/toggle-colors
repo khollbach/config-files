@@ -3,6 +3,8 @@
 # Toggle colors between light and dark. Done via hardcoded sed commands, so
 # it's pretty brittle.
 
+# TODO: add switching xfce4-terminal colors.
+
 cfg=~/config-files
 
 isDark() {
