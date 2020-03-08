@@ -201,6 +201,17 @@ if PluginExists('tagbar')
     noremap <leader>\ :TagbarToggle<CR>
 endif
 
+if PluginExists("tabular")
+    " Align on `=`
+    nmap <Leader>= :Tabularize /=<CR>
+    vmap <Leader>= :Tabularize /=<CR>
+
+    " Align on `: `
+    " See https://devhints.io/tabular
+    nmap <Leader>- :Tabularize /:\ \zs/l0l1<CR>
+    vmap <Leader>- :Tabularize /:\ \zs/l0l1<CR>
+endif
+
 "if PluginExists('ctrlp.vim')
 if 0
     " Open ctrlp.
