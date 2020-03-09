@@ -241,9 +241,16 @@ if PluginExists("ale")
     " Tell me which linter gave the feedback.
     let g:ale_echo_msg_format = '[%linter%] %s'
 
-    " Run goimports on save.
-    let g:ale_fixers = {'go': ['goimports']}
+    " Run goimports, rustfmt on save.
+    let g:ale_fixers = {
+    \ 'go': ['goimports'],
+    \ 'rust': ['rustfmt'],
+    \ }
     let g:ale_fix_on_save = 1
+
+    " Go to next/previous error.
+    nmap - <Plug>(ale_next)
+    nmap = <Plug>(ale_previous)
 endif
 
 if PluginExists("vim-go")
