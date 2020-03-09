@@ -14,6 +14,7 @@ isDark() {
 darkToLight() {
     # Vim
     sed -i -E 's,^(\s*set background=)dark$,\1light,g;
+               s,^(set laststatus)=2$,\1=1,g;
                s,^(autocmd VimEnter \* set laststatus)=2$,\1=1,g' \
         "$cfg/.vimrc"
 
@@ -24,11 +25,19 @@ darkToLight() {
     # diff-so-fancy
     # Uncomment "(new|old)Highlight" lines.
     sed -i -E 's,^(\s*)#((old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
+
+    # xfce4-terminal
+    sed -i -E 's,^(ColorForeground)=.*$,\1=#073642,g;
+               s,^(ColorBackground)=.*$,\1=#fdf6e3,g;
+               s,^(ColorCursor)=.*$,\1=#073642,g;
+               s,^(ColorBold)=.*$,\1=#073642,g' \
+        ~/.config/xfce4/terminal/terminalrc
 }
 
 lightToDark() {
     # Vim
     sed -i -E 's,^(\s*set background=)light$,\1dark,g;
+               s,^(set laststatus)=1$,\1=2,g;
                s,^(autocmd VimEnter \* set laststatus)=1$,\1=2,g' \
         "$cfg/.vimrc"
 
@@ -40,6 +49,13 @@ lightToDark() {
     # diff-so-fancy
     # Comment out "(new|old)Highlight" lines corresponding to light theme.
     sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194) .*)$,\1#\2,g' "$cfg/.config/git/config"
+
+    # xfce4-terminal
+    sed -i -E 's,^(ColorForeground)=.*$,\1=#839496,g;
+               s,^(ColorBackground)=.*$,\1=#002b36,g;
+               s,^(ColorCursor)=.*$,\1=#93a1a1,g;
+               s,^(ColorBold)=.*$,\1=#93a1a1,g' \
+        ~/.config/xfce4/terminal/terminalrc
 }
 
 if isDark; then

@@ -452,6 +452,7 @@ set titlestring=%{expand(\"%:t\")}
 " original value of 2 some time after loading my vimrc. Interestingly, if I
 " load my vimrc with `nvim -u vimrc-name` then the setting change sticks. Also
 " if I do *either* of `nvim {-c,--cmd} 'set ls=1'`, that works too. *shrug*.
+set laststatus=2
 autocmd VimEnter * set laststatus=2
 
 " Hide the vertical bar between splits. TODO: get a better fix for this.
@@ -844,6 +845,9 @@ noremap <Leader>v :e ~/config-files/.vimrc<CR>
 
 " Update configs.
 noremap <Leader>e :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
+
+" Reverse colors.
+noremap <silent> <Leader>r :!toggle-colors<CR>:source $MYVIMRC<CR>
 
 " Strip trailing whitespace.
 noremap <silent> <Leader>w :%s/\s\+$//<CR>:noh<CR>
