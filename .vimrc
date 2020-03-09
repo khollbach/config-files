@@ -306,6 +306,14 @@ set t_vb=
 " Show commandline completion matches above the commandline on <Tab> keypress.
 set wildmenu
 
+" Reload file from disk if it changes (as long as there's no edit conflict).
+" See https://unix.stackexchange.com/a/383044
+set autoread
+autocmd FocusGained,BufEnter,CursorHold *
+    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
 
 
 " No startup message

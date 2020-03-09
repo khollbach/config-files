@@ -105,12 +105,6 @@ nnoremap <Leader>j :BTags<CR>
 nnoremap <Leader>a :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:false } }
 
-" TJ's config for indentline
-Plug 'yggdroot/indentline'
-let g:indentLine_color_term = 239
-let g:indentLine_char='┊'
-let g:indentLine_fileTypeExclude = ['markdown', 'json']
-
 ---
 
 Debug complete-alias + git. See todos in `.bash_aliases`.
