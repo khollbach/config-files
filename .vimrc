@@ -133,12 +133,6 @@ if PluginExists('incsearch.vim')
     map <Leader>? <Plug>(incsearch-backward)\C
 endif
 
-if PluginExists('ack.vim')
-    let g:ackprg = "rg --vimgrep"
-
-    noremap <expr> <Leader>a ":Ack "
-endif
-
 if PluginExists('nerdcommenter')
     let g:NERDCreateDefaultMappings = 0
 
@@ -187,14 +181,22 @@ endif
 
 if PluginExists('fzf.vim') && PluginExists('fzf.vim')
     " Display fzf in a popup window instead.
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:true } }
+    " See https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581481211
+    let g:fzf_layout = {
+        \ 'window': {
+            \'width': 0.9,
+            \ 'height': 0.6,
+            \ 'highlight': 'Todo',
+            \ 'border': 'rounded' } }
 
-    noremap <leader>o :Files<CR>
-    noremap <leader>b :Buffers<CR>
-    noremap <leader>t :Tags<CR>
+    " Search for files / tags.
+    nnoremap <leader>o :Files<CR>
+    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>t :Tags<CR>
+    nnoremap <leader>m :History<CR>
 
-    " todo
-    "nnoremap <leader>m :MRU<CR>
+    " Better version of ack.vim
+    nnoremap <expr> <leader>a ":Rg "
 endif
 
 if PluginExists('tagbar')
@@ -310,9 +312,13 @@ set wildmenu
 " See https://unix.stackexchange.com/a/383044
 set autoread
 autocmd FocusGained,BufEnter,CursorHold *
-    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' |
+    \ checktime |
+    \ endif
 autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+    \ echohl WarningMsg |
+    \ echo "File changed on disk. Buffer reloaded." |
+    \ echohl None
 
 
 
@@ -334,8 +340,11 @@ set noshowcmd
 " (The cursor shape already indicates that in Neovim.)
 set noshowmode
 
-" Don't show a how-to-quit message when you press <C-c> in normal mode.
-nnoremap <C-c> <Nop>
+" Don't show a how-to-quit message when you press <C-c> in normal mode. This
+" would be mapped to <Nop> except that I want to be able to discard numeric
+" arguments with <C-c>. E.g. if I type 93<C-c>83gg I'll be taken to line 83 and
+" not line 9383.
+nnoremap <C-c> <Esc>
 
 
 

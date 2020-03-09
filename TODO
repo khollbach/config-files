@@ -1,13 +1,6 @@
-Workflow: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard)
-IMPORTANT: GET THIS TO WORK ASAP, AND GET IT IN YOUR FZF POPUP WINDOW WITH PREVIEWS AND EVERYTHING
-THRU RIPGREP !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-^^^^^ DO NOT WORK ON ANYTHING ELSE BEFORE DOING THE ABOVE !!!!!!! ^^^^^^^ !^ !^!^@#*!^@*!***! !!!!1
-
----
-
-Install, set-up, and add to ./other-settings:
-    wfxr/forgit
+Important use case: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard). Could maybe be done in an fzf popup window with filename:lineno + a preview of the file? Using ripgrep somehow?
+- Figure out what you need, and look for possible solutions.
+- Could use the keybind 'K' for go-to-uses
 
 ---
 
@@ -17,17 +10,8 @@ Could probably update the fzf reverse-i-search commandline feature to run on the
 
 Figure out how to get the fzf commandline to use a different highlight color for light backgrounds.
 
----
-
-Try to improve the UX of ack from vim, it low-key sucks.
-- At the very least, nowrap in the quickfix window.
-- Consider re-thinking the workflow in general.
-Maybe there's a way to integrate fzf, or get previews or something.
-This is possibly related to the go-to-uses usecase (which is high priority).
-
----
-
-Short: get <C-c> to discard numbers. So when you type 93<C-c>83<CR> you get taken to line 83 and not line 9383 (ie the end of the file).
+Install, set-up, and add to ./other-settings:
+    wfxr/forgit
 
 ---
 
@@ -122,3 +106,6 @@ Could find a way to get your config files to have any directory name, so you can
 Why does my xfce+i3 take so long to load xfce4-panel?
 - I can start terminals right away, but the panel takes forever. I never had this problem with vanilla xfce4.
 - Happens at work too.
+
+Make vim open files as read-only always by default, and then upon any command that would modify the file, lock the file as being written to (by unsetting readonly). This would solve the problem of opening a file just to look at (or even jumping to a defn in a file and then jumping back) in a vim session, then trying to actually *edit* that file later in another vim session (while the first session is still open). Really, this should just work in the obvious way.
+- This seems super obvious, so maybe there's already a plugin for this?

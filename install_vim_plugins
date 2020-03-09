@@ -18,7 +18,6 @@ tpope/vim-rsi
 tpope/vim-fugitive
 airblade/vim-gitgutter
 haya14busa/incsearch.vim
-mileszs/ack.vim
 scrooloose/nerdcommenter
 scrooloose/nerdtree
 mbbill/undotree
