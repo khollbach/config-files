@@ -113,8 +113,8 @@ if PluginExists('vim-gitgutter')
     " to see if I was going to press `p` or not.
     let g:gitgutter_map_keys = 0
 
-    nmap ]c <Plug>(GitGutterNextHunk)
-    nmap [c <Plug>(GitGutterPrevHunk)
+    nmap <C-n> <Plug>(GitGutterNextHunk)zz
+    nmap <C-p> <Plug>(GitGutterPrevHunk)zz
 
     nmap ghs <Plug>(GitGutterStageHunk)
     nmap ghu <Plug>(GitGutterUndoHunk)
@@ -214,39 +214,77 @@ if PluginExists("tabular")
     vmap <Leader>- :Tabularize /:\ \zs/l0l1<CR>
 endif
 
-"if PluginExists('ctrlp.vim')
-if 0
-    " Open ctrlp.
-    let g:ctrlp_map = "<Leader>o"
+if PluginExists("ale")
+    " If I'm opening a file just to read it, I don't want distractions. To
+    " manually trigger linters on an unchanged file, enter and exit insert
+    " mode. (Or save the file, which also triggers fixers.)
+    let g:ale_lint_on_enter = 0
 
-    " Use mixed mode: search for files, buffers, and 'most-recently-used' files.
-    let g:ctrlp_cmd = "CtrlPMixed"
+    " When linters are active, always show the sign column, so the text doesn't
+    " shift left and right when errors appear/disappear.
+    let g:ale_sign_column_always = 1
 
-    " Don't include MRU files in the search results at all.
-    let g:ctrlp_mruf_max = 0
+    " Slightly less aggressive markers in the sign column.
+    let g:ale_sign_error = ' .'
+    let g:ale_sign_warning = ' .'
+    hi! ALEErrorSign ctermfg=1 ctermbg=0
+    hi! ALEWarningSign ctermfg=3 ctermbg=0
 
-    " Don't try to guess a good choice of working directory.
-    let g:ctrlp_working_path_mode = 0
+    " Prefer gitgutter signs to ale ones. Ideally we could just show both
+    " side-by-side...
+    " https://www.reddit.com/r/neovim/comments/f04fao/my_biggest_vimneovim_wish_single_width_sign_column/
+    if PluginExists("vim-gitgutter")
+        let g:gitgutter_sign_priority = 35
+        let g:ale_sign_priority = 30
+    endif
 
-    " Show me hidden files. This doesn't work well when opening ctrlp in $HOME,
-    " it takes forever to index.
-    " See https://github.com/kien/ctrlp.vim/issues/279
-    let g:ctrlp_show_hidden = 1
+    " Tell me which linter gave the feedback.
+    let g:ale_echo_msg_format = '[%linter%] %s'
+
+    " Run goimports on save.
+    let g:ale_fixers = {'go': ['goimports']}
+    let g:ale_fix_on_save = 1
 endif
 
-"if has('nvim') && !empty(glob('~/.vim/bundle/deoplete.nvim'))
-if 0
+if PluginExists("vim-go")
+    " Don't show a dump of gofmt errors in the quickfix list when I save a file
+    " with syntax errors.
+    let g:go_fmt_fail_silently = 1
+endif
+
+" TODO: I want to have fuzzy completion the same way deoplete works, but I want
+" it to be hidden by default until I press tab. Then, upon doing so, it should
+" be able narrow the possible matches according to the characters I type. Maybe
+" YCM could do something like this?
+if PluginExists('deoplete.nvim')
     let g:deoplete#enable_at_startup = 1
 
-    call deoplete#custom#option({
-    \ 'on_insert_enter': v:false,
+    " For why settings are after load, see https://github.com/Shougo/deoplete.nvim/issues/766
+
+    " This prevents the PUM from activating immediately upon entering insert
+    " mode, which I found unintuitive.
+    autocmd VimEnter * call deoplete#custom#option('on_insert_enter', v:false)
+
+    " Use ALE completion suggestions as well as standard deoplete sources.
+    autocmd VimEnter * call deoplete#custom#option('sources', {
+    \ '_': ['ale', 'around', 'buffer', 'member', 'omni'],
     \ })
 
-    " Initially disabled.
-    call deoplete#custom#option('auto_complete', v:false)
-    let s:my_deoplete_enabled = 0
+    " Fix the way enter interacts with deoplete.
+    " If the 'pop-up-menu' is visible (i.e., if autocomplete suggestions are
+    " showing), close it then insert a newline.
+    inoremap <expr> <CR> <SID>enter_fn()
+    function! s:enter_fn() abort
+        if pumvisible()
+            " <C-y> confirms the current selection.
+            return "\<C-y>\<CR>"
+        else
+            return "\<CR>"
+        endif
+    endfunction
 
     " Toggle deoplete.
+    let s:my_deoplete_enabled = 1
     noremap <expr> <F9> <SID>toggle_deoplete()
     inoremap <expr> <F9> <SID>toggle_deoplete()
     function! s:toggle_deoplete() abort
@@ -264,22 +302,9 @@ if 0
         return ""
     endfunction
 
-    " Fix the way enter interacts with deoplete.
-    " If the 'pop-up-menu' is visible (i.e., if autocomplete suggestions are
-    " showing), close it then insert a newline.
-    inoremap <expr> <CR> <SID>enter_fn()
-    function! s:enter_fn() abort
-        if pumvisible()
-            " <C-y> confirms the current selection.
-            return "\<C-y>\<CR>"
-        else
-            return "\<CR>"
-        endif
-    endfunction
-
-    " Disable preview window. Deoplete would sometime uses this to show
-    " documentation of, e.g., python functions.
-    set completeopt-=preview
+    " Initially disabled.
+    autocmd VimEnter * call deoplete#custom#option('auto_complete', v:false)
+    let s:my_deoplete_enabled = 0
 endif
 
 " -----------------------------------------------------------------------------
@@ -307,6 +332,9 @@ set t_vb=
 
 " Show commandline completion matches above the commandline on <Tab> keypress.
 set wildmenu
+
+" Don't show documentation previews upon omnicompletion.
+set completeopt-=preview
 
 " Reload file from disk if it changes (as long as there's no edit conflict).
 " See https://unix.stackexchange.com/a/383044
@@ -455,7 +483,8 @@ set titlestring=%{expand(\"%:t\")}
 set laststatus=2
 autocmd VimEnter * set laststatus=2
 
-" Hide the vertical bar between splits. TODO: get a better fix for this.
+" Hide the vertical bar between splits.
+" TODO: get a better fix for this that works for both dark and light themes.
 highlight! VertSplit ctermfg=8 ctermbg=8
 
 " Toggle the status line.
@@ -473,6 +502,7 @@ function! s:toggle_laststatus() abort
 endfunction
 
 " Change status line color.
+" TODO: update this to work with light theme as well.
 highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
 highlight! StatusLineNC ctermbg=0 ctermfg=12 cterm=none
 
@@ -730,6 +760,9 @@ cnoremap JK <C-c>
 inoremap {<CR> {<CR>}<Esc>O
 inoremap (<CR> (<CR>)<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
+inoremap {; {
+inoremap (; (
+inoremap [; [
 
 " 123<CR> takes you to line 123.
 noremap <CR> gg
@@ -768,16 +801,20 @@ endif
 
 
 
-" Use tab/shift-tab for completion. Happens only if the PUM is active or if
-" there's a word-character behind the cursor; otherwise tab is just
-" indentation.
+" Use tab/shift-tab for completion. Happens only if there's a word-character
+" behind the cursor; otherwise tab is just indentation.
 inoremap <silent><expr> <Tab> <SID>tab_fn()
 inoremap <silent><expr> <S-Tab> <SID>s_tab_fn()
 
 function! s:tab_fn() abort
-    if pumvisible() || s:check_word_behind()
-        " Next suggestion.
-        return "\<C-n>"
+    if s:check_word_behind()
+        if !pumvisible() && &omnifunc != ''
+            " Trigger omnicompletion.
+            return "\<C-x>\<C-o>"
+        else
+            " Next suggestion.
+            return "\<C-n>"
+        endif
     else
         " Indent.
         return "\<Tab>"
@@ -785,9 +822,14 @@ function! s:tab_fn() abort
 endfunction
 
 function! s:s_tab_fn() abort
-    if pumvisible() || s:check_word_behind()
-        " Previous suggestion.
-        return "\<C-p>"
+    if s:check_word_behind()
+        if !pumvisible() && &omnifunc != ''
+            " Trigger omnicompletion.
+            return "\<C-x>\<C-o>"
+        else
+            " Previous suggestion.
+            return "\<C-p>"
+        endif
     else
         " Indent.
         return "\<S-Tab>"
