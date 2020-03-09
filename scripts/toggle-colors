@@ -3,15 +3,13 @@
 # Toggle colors between light and dark. Done via hardcoded sed commands, so
 # it's pretty brittle.
 
-# TODO: add switching xfce4-terminal colors.
-
 cfg=~/config-files
 
 isDark() {
     grep -q -E '^\s*set background=dark$' "$cfg/.vimrc"
 }
 
-darkToLight() {
+toLight() {
     # Vim
     sed -i -E 's,^(\s*set background=)dark$,\1light,g;
                s,^(set laststatus)=2$,\1=1,g;
@@ -27,14 +25,18 @@ darkToLight() {
     sed -i -E 's,^(\s*)#((old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
 
     # xfce4-terminal
+    # This palette is tweaked slightly from the original to make color 11 the
+    # same as color 10.
+    local solarized_tweaked='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#586e75;#839496;#6c71c4;#93a1a1;#fdf6e3'
     sed -i -E 's,^(ColorForeground)=.*$,\1=#073642,g;
                s,^(ColorBackground)=.*$,\1=#fdf6e3,g;
                s,^(ColorCursor)=.*$,\1=#073642,g;
-               s,^(ColorBold)=.*$,\1=#073642,g' \
+               s,^(ColorBold)=.*$,\1=#073642,g;'"
+               s/^(ColorPalette)=.*$/\\1=$solarized_tweaked/g" \
         ~/.config/xfce4/terminal/terminalrc
 }
 
-lightToDark() {
+toDark() {
     # Vim
     sed -i -E 's,^(\s*set background=)light$,\1dark,g;
                s,^(set laststatus)=1$,\1=2,g;
@@ -51,17 +53,19 @@ lightToDark() {
     sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194) .*)$,\1#\2,g' "$cfg/.config/git/config"
 
     # xfce4-terminal
+    local solarized='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#657b83;#839496;#6c71c4;#93a1a1;#fdf6e3'
     sed -i -E 's,^(ColorForeground)=.*$,\1=#839496,g;
                s,^(ColorBackground)=.*$,\1=#002b36,g;
                s,^(ColorCursor)=.*$,\1=#93a1a1,g;
-               s,^(ColorBold)=.*$,\1=#93a1a1,g' \
+               s,^(ColorBold)=.*$,\1=#93a1a1,g;'"
+               s/^(ColorPalette)=.*$/\\1=$solarized/g" \
         ~/.config/xfce4/terminal/terminalrc
 }
 
 if isDark; then
-    darkToLight
+    toLight
 else
-    lightToDark
+    toDark
 fi
 
 "$cfg/update_configs"

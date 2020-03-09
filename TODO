@@ -4,8 +4,6 @@ Important use case: go to uses of a function / type in Vim (easy if in the same 
 
 ---
 
-Get toggle-colors to do xfce4 terminal palette as well!
-
 Could probably update the fzf reverse-i-search commandline feature to run on the first enter press (since the chdir feature has that functionality). Then you'll need a separate keybind to edit the command before running, but you could just use C-t or something for that.
 
 Figure out how to get the fzf commandline to use a different highlight color for light backgrounds.
@@ -23,11 +21,6 @@ tmux keybind: alt-shift-X
   - This means creating a new session,  ] -> Unless these have their own tmux command ???
     moving the window to that session,  ]
     then opening a new terminal attached to that session.
-
----
-
-Look at this line in TJ's vimrc:
-    nnoremap <leader>m :MRU<CR>
 
 ---
 
