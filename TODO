@@ -1,70 +1,7 @@
 Important use case: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard). Could maybe be done in an fzf popup window with filename:lineno + a preview of the file? Using ripgrep somehow?
 - Figure out what you need, and look for possible solutions.
 - Could use the keybind 'K' for go-to-uses
-
----
-
-Could probably update the fzf reverse-i-search commandline feature to run on the first enter press (since the chdir feature has that functionality). Then you'll need a separate keybind to edit the command before running, but you could just use C-t or something for that.
-
-Figure out how to get the fzf commandline to use a different highlight color for light backgrounds.
-
-Install, set-up, and add to ./other-settings:
-    wfxr/forgit
-
----
-
-tmux keybinds: alt-shift-, and alt-shift-;
-- Swap current window with next/prev window.
-
-tmux keybind: alt-shift-X
-- Break window into new terminal.
-  - This means creating a new session,  ] -> Unless these have their own tmux command ???
-    moving the window to that session,  ]
-    then opening a new terminal attached to that session.
-
----
-
-    Vim plugins to try:
-    ===================
-
-tag management?
-- e.g., easytags?
-- ?: https://ricostacruz.com/til/navigate-code-with-ctags
-
-LSP (language server protocol) support:
-    ale > syntastic !!
-        " v suggested
-        let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
-        let g:ale_fixers = {'go': ['goimports']}
-        let g:ale_go_gometalinter_options = '--fast'
-        let g:terraform_align=1
-        let g:go_def_mode='gopls'
-        let g:go_info_mode='gopls'
-        let g:ale_fix_on_save = 1
-        let g:go_fmt_command = "goimports"
-    Ale seems pretty good, also TJ has some good setup options for it.
-    Also, checkout for python as well as go.
-
-Further LSP support: coc
-
-Completion (if not good enough via ale/coc/vim-go etc):
-- YouCompleteMe ?
-- Deoplete ?
-  - Clean up deoplete section of vimrc, and either debug deoplete, or get a new completion plugin.
-- "Fuzzy" fzf-style search for possible completions is a must.
-
----
-
-Check out TJ's dotfiles to look for other goodies.
-
-Vim: why does the main split's filename disappear when I'm focusing the quickfix list?
-
-Fix the way <leader>q interacts with goyo-mode.
-
-Goyo plugin hides cursor when its over a trailing whitespace (or any tab
-character) in normal mode. No big deal, but maybe there's a quick fix.
-
----
+- See also notes below re: slack convo.
 
 Some guy from #vim on slack, re: preview window for fzf find:
 " junegunn/fzf.vim
@@ -84,7 +21,72 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo
 
 ---
 
+Could probably update the fzf reverse-i-search commandline feature to run on the first enter press (since the chdir feature has that functionality). Then you'll need a separate keybind to edit the command before running, but you could just use C-t or something for that.
+
+Figure out how to get the fzf commandline to use a different highlight color for light backgrounds.
+
+Install, set-up, and add to ./other-settings:
+    wfxr/forgit
+
+tmux keybinds: alt-shift-, and alt-shift-;
+- Swap current window with next/prev window.
+
+tmux keybind: alt-shift-X
+- Break window into new terminal.
+  - This means creating a new session,  ] -> Unless these have their own tmux command ???
+    moving the window to that session,  ]
+    then opening a new terminal attached to that session.
+
+---
+
+ALE:
+    " V
+    let g:ale_linters = {'go': ['gopls', 'goimports'], 'python': ['flake8', 'pylint'], 'javascript': ['flow-language-server'],}
+    let g:ale_fixers = {'go': ['goimports']}
+    let g:ale_go_gometalinter_options = '--fast'
+    let g:terraform_align=1
+    let g:go_def_mode='gopls'
+    let g:go_info_mode='gopls'
+    let g:ale_fix_on_save = 1
+    let g:go_fmt_command = "goimports"
+
+    " TJ
+    let g:ale_linters = {
+            \ 'python': [ 'flake8' ],
+            \}
+    let g:ale_fixers = {
+            \ '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
+            \ 'cpp': [ 'clang-format', 'remove_trailing_lines', 'trim_whitespace' ],
+            \ 'python': [ 'yapf' ],
+            \}
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_linters_explicit = 1
+    let g:ale_set_quickfix = 0
+    let g:ale_sign_column_always = 0
+    let g:ale_open_list = 0
+    let g:ale_virtualenv_dir_names = ['.env', '.venv', 'env', 've-py3', 've', 'virtualenv', 'venv']
+    " let g:ale_echo_cursor = 0
+    " let g:ale_completion_enabled = 1
+    nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-n> <Plug>(ale_next_wrap)
+    nmap <leader>l :lop<CR>
+    nmap <leader>ss :ALEFix<CR>
+
+Deoplete
+- Get it working.
+- Clean up deoplete section of vimrc.
+- "Fuzzy" fzf-style search for possible completions is a must.
+
+Future: coc.nvim or nvim-lsp
+
+---
+
 Debug complete-alias + git. See todos in `.bash_aliases`.
+
+Vim: why does the main split's filename disappear when I'm focusing the quickfix list?
 
 Build the code and run go-imports on save.
 - does this already happen?

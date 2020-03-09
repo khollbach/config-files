@@ -16,6 +16,7 @@ tpope/vim-surround
 tpope/vim-repeat
 tpope/vim-rsi
 tpope/vim-fugitive
+tpope/vim-endwise
 airblade/vim-gitgutter
 haya14busa/incsearch.vim
 scrooloose/nerdcommenter

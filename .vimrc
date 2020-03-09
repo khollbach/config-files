@@ -726,6 +726,11 @@ cnoremap jK <C-c>
 cnoremap Jk <C-c>
 cnoremap JK <C-c>
 
+" Auto-close brackets on multiple lines.
+inoremap {<CR> {<CR>}<Esc>O
+inoremap (<CR> (<CR>)<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+
 " 123<CR> takes you to line 123.
 noremap <CR> gg
 
@@ -760,6 +765,8 @@ else
 
     noremap <Esc>p :<Up><CR>
 endif
+
+
 
 " Use tab/shift-tab for completion. Happens only if the PUM is active or if
 " there's a word-character behind the cursor; otherwise tab is just
