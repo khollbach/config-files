@@ -263,7 +263,8 @@ endif
 " it to be hidden by default until I press tab. Then, upon doing so, it should
 " be able narrow the possible matches according to the characters I type. Maybe
 " YCM could do something like this?
-if PluginExists('deoplete.nvim')
+"if PluginExists('deoplete.nvim')
+if 0
     let g:deoplete#enable_at_startup = 1
 
     " For why settings are after load, see https://github.com/Shougo/deoplete.nvim/issues/766

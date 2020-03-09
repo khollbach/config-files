@@ -30,7 +30,6 @@ junegunn/fzf
 majutsushi/tagbar
 godlygeek/tabular
 dense-analysis/ale
-Shougo/deoplete.nvim
 '
 
 for p in $plugins; do
