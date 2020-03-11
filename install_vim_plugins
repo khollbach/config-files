@@ -30,6 +30,7 @@ junegunn/fzf
 majutsushi/tagbar
 godlygeek/tabular
 dense-analysis/ale
+racer-rust/vim-racer
 '
 
 for p in $plugins; do

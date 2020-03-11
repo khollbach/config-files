@@ -248,6 +248,9 @@ if PluginExists("ale")
     \ }
     let g:ale_fix_on_save = 1
 
+    " Use clippy (more agressive rust linter) if available.
+    let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
+
     " Go to next/previous error.
     nmap - <Plug>(ale_next)
     nmap = <Plug>(ale_previous)
@@ -257,6 +260,15 @@ if PluginExists("vim-go")
     " Don't show a dump of gofmt errors in the quickfix list when I save a file
     " with syntax errors.
     let g:go_fmt_fail_silently = 1
+endif
+
+if PluginExists("vim-racer")
+    " See https://github.com/racer-rust/vim-racer
+    augroup Racer
+        autocmd!
+        autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
+        autocmd FileType rust nmap <buffer> K     <Plug>(rust-doc)
+    augroup END
 endif
 
 " TODO: I want to have fuzzy completion the same way deoplete works, but I want
