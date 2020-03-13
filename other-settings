@@ -9,6 +9,7 @@ ranger
 highlight  # For syntax highlighting in ranger.
 tldr
 unbuffer
+rlwrap
 
 # Install a few commandline utils via `cargo install $PKG`:
 
@@ -16,6 +17,10 @@ ripgrep
 fd-find
 bat
 hexyl
+
+rustup toolchain add nightly
+rustup component add rust-src
+cargo +nightly install racer
 
 # Misc.
 
