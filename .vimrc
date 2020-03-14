@@ -80,15 +80,15 @@ if PluginExists('vim-rsi')
     else
         inoremap <expr> <C-k> <SID>at_eol() ? "" : "<C-o>d$"
     endif
-
-    function! s:at_eol() abort
-        return col('.') ==# len(getline('.'))
-    endfunction
-
-    function! s:beyond_eol() abort
-        return col('.') > len(getline('.'))
-    endfunction
 endif
+
+function! s:at_eol() abort
+    return col('.') ==# len(getline('.'))
+endfunction
+
+function! s:beyond_eol() abort
+    return col('.') > len(getline('.'))
+endfunction
 
 if PluginExists('vim-fugitive')
     noremap <Leader>gs :Gstatus<CR>
@@ -776,13 +776,22 @@ cnoremap jK <C-c>
 cnoremap Jk <C-c>
 cnoremap JK <C-c>
 
-" Auto-close brackets on multiple lines.
-inoremap {<CR> {<CR>}<Esc>O
-inoremap (<CR> (<CR>)<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
+" Auto-close brackets/braces/parens spanning multiple lines.
+inoremap <silent><expr> [<CR> <SID>bracket_fn('[', ']')
+inoremap <silent><expr> {<CR> <SID>bracket_fn('{', '}')
+inoremap <silent><expr> (<CR> <SID>bracket_fn('(', ')')
+inoremap [; [
 inoremap {; {
 inoremap (; (
-inoremap [; [
+
+function! s:bracket_fn(open, close) abort
+    let keys = a:open . "\<CR>"
+    if s:beyond_eol()
+        " Auto-close brackets if you press `[<Enter>` at the end of a line.
+        let keys = keys . a:close . "\<Esc>O"
+    endif
+    return keys
+endfunction
 
 " 123<CR> takes you to line 123.
 noremap <CR> gg
@@ -931,3 +940,10 @@ noremap <Leader><Tab> :ls<CR>
 " Next/previous buffer.
 noremap <Leader>; :bn<CR>
 noremap <Leader>, :bp<CR>
+
+
+
+" Include work-specific configs.
+if !empty(glob('~/notes/work/vimrc'))
+   source $HOME/notes/work/vimrc
+endif
