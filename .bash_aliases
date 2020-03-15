@@ -46,6 +46,7 @@ alias pag="ps aux | grep"
 alias jq-vim="jq . | v -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
 alias jv=jq-vim
 alias ub=unbuffer
+alias ta=tmux_attach
 
 # Unlearn muscle memory.
 alias cs="sl"
