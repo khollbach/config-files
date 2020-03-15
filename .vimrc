@@ -80,15 +80,15 @@ if PluginExists('vim-rsi')
     else
         inoremap <expr> <C-k> <SID>at_eol() ? "" : "<C-o>d$"
     endif
+
+    function! s:at_eol() abort
+        return col('.') ==# len(getline('.'))
+    endfunction
+
+    function! s:beyond_eol() abort
+        return col('.') ==# len(getline('.')) + 1
+    endfunction
 endif
-
-function! s:at_eol() abort
-    return col('.') ==# len(getline('.'))
-endfunction
-
-function! s:beyond_eol() abort
-    return col('.') > len(getline('.'))
-endfunction
 
 if PluginExists('vim-fugitive')
     noremap <Leader>gs :Gstatus<CR>
@@ -776,25 +776,31 @@ cnoremap jK <C-c>
 cnoremap Jk <C-c>
 cnoremap JK <C-c>
 
-" Auto-close brackets/braces/parens spanning multiple lines.
-inoremap <silent><expr> [<CR> <SID>bracket_fn('[', ']')
-inoremap <silent><expr> {<CR> <SID>bracket_fn('{', '}')
-inoremap <silent><expr> (<CR> <SID>bracket_fn('(', ')')
-inoremap [; [
-inoremap {; {
-inoremap (; (
-
-function! s:bracket_fn(open, close) abort
-    let keys = a:open . "\<CR>"
-    if s:beyond_eol()
-        " Auto-close brackets if you press `[<Enter>` at the end of a line.
-        let keys = keys . a:close . "\<Esc>O"
+" Auto-close brackets/braces/parens spanning multiple lines. For some (unknown)
+" reason this mapping doesn't seem to take effect unless I do it on load.
+autocmd VimEnter * inoremap <silent><expr> <CR> <SID>enter_fn()
+function! s:enter_fn() abort
+    let line = getline('.')
+    let cursor = col('.')
+    if len(line) > 0 && cursor ==# len(line) + 1
+        let char = line[len(line) - 1]
+        let closing_char = ''
+        if char ==# '['
+            let closing_char = ']'
+        elseif char ==# '{'
+            let closing_char = '}'
+        elseif char ==# '('
+            let closing_char = ')'
+        endif
+        if closing_char !=# ''
+            return "\<CR>" . closing_char . "\<Esc>O"
+        endif
     endif
-    return keys
+    return "\<CR>"
 endfunction
 
 " 123<CR> takes you to line 123.
-noremap <CR> gg
+"noremap <CR> gg
 
 " Scroll 5x faster.
 noremap <C-y> 5<C-y>
