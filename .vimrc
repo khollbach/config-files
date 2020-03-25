@@ -24,6 +24,8 @@ endfunction
 if PluginExists('vim-colors-solarized')
     set background=dark
     colorscheme solarized
+else
+    colorscheme desert
 endif
 
 if PluginExists('vim-sneak')

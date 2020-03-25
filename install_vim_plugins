@@ -6,7 +6,7 @@ rm -rf ~/.vim/bundle
 plugins_dir=~/.vim/pack/plugins/start
 mkdir -pv "$plugins_dir"
 echo cd "$plugins_dir"
-cd "$plugins_dir" || exit
+cd "$plugins_dir" || exit 1
 
 plugins='
 altercation/vim-colors-solarized
@@ -22,7 +22,6 @@ haya14busa/incsearch.vim
 scrooloose/nerdcommenter
 scrooloose/nerdtree
 mbbill/undotree
-wellle/context.vim
 junegunn/goyo.vim
 sheerun/vim-polyglot
 junegunn/fzf.vim
@@ -37,13 +36,7 @@ for p in $plugins; do
     git clone --depth 1 https://github.com/"$p".git
 done
 
-# https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
-get_latest_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-    grep '"tag_name":' |                                            # Get tag line
-    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
-}
-
+source ~/config-files/.bash_functions || exit 1
 git clone --depth 1 https://github.com/fatih/vim-go.git &&
     cd vim-go &&
     git checkout "$(get_latest_release fatih/vim-go)" 2>/dev/null

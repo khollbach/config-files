@@ -12,8 +12,10 @@ export PATH=$HOME/.cargo/bin:$PATH
 export VISUAL=$(
     if command -v nvim >/dev/null; then
         command -v nvim
-    else
+    elif command -v vim >/dev/null; then
         command -v vim
+    else
+        command -v vi
     fi)
 export EDITOR=$VISUAL
 

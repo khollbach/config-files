@@ -1,3 +1,8 @@
+Make vim open files as read-only always by default, and then upon any command that would modify the file, lock the file as being written to (by unsetting readonly). This would solve the problem of opening a file just to look at (or even jumping to a defn in a file and then jumping back) in a vim session, then trying to actually *edit* that file later in another vim session (while the first session is still open). Really, this should just work in the obvious way.
+- This seems super obvious, so maybe there's already a plugin for this?
+
+---
+
 Important use case: go to uses of a function / type in Vim (easy if in the same file; o/w currently very hard). Could maybe be done in an fzf popup window with filename:lineno + a preview of the file? Using ripgrep somehow?
 - Figure out what you need, and look for possible solutions.
 - Could use the keybind 'K' for go-to-uses
@@ -46,10 +51,6 @@ Debug complete-alias + git. See todos in `.bash_aliases`.
 
 Vim: why does the main split's filename disappear when I'm focusing the quickfix list?
 
-Build the code and run go-imports on save.
-- does this already happen?
-- what's go-imports?
-
 Look at vim-go instructions.
 
 Could find a way to get your config files to have any directory name, so you can rename them at work
@@ -59,8 +60,5 @@ Could find a way to get your config files to have any directory name, so you can
 Why does my xfce+i3 take so long to load xfce4-panel?
 - I can start terminals right away, but the panel takes forever. I never had this problem with vanilla xfce4.
 - Happens at work too.
-
-Make vim open files as read-only always by default, and then upon any command that would modify the file, lock the file as being written to (by unsetting readonly). This would solve the problem of opening a file just to look at (or even jumping to a defn in a file and then jumping back) in a vim session, then trying to actually *edit* that file later in another vim session (while the first session is still open). Really, this should just work in the obvious way.
-- This seems super obvious, so maybe there's already a plugin for this?
 
 Possible future additions to vim setup: coc.nvim or nvim-lsp

@@ -48,15 +48,6 @@ alias jv=jq-vim
 alias ub=unbuffer
 alias ta=tmux_attach
 
-# Unlearn muscle memory.
-alias cs="sl"
-alias vi="sl"
-alias vim="sl"
-alias git="sl"
-alias less="sl"
-alias gss="sl"
-alias glh="sl"
-
 # Make these more user-friendly.
 alias which="type -a"
 alias grep="grep --color=auto"
@@ -68,11 +59,6 @@ fi
 # Emacs
 alias emacs="emacsclient -a '' -c"
 alias remacs="killall emacs; command emacs --daemon"
-
-# Misc.
-#alias sl="sl -e"
-#alias LS="LS -e"
-alias rain="rain -d 150"
 
 # Git shorthands.
 # Sadly this form breaks commandline autocompletion.
