@@ -23,10 +23,11 @@ ripgrep
 fd-find
 bat
 hexyl
+cargo-watch
 
-# Racer needs nightly Rust and sources installed.
-rustup toolchain add nightly
+# For Rust development. (Racer needs nightly Rust.)
 rustup component add rust-src
+rustup toolchain add nightly
 cargo +nightly install racer
 
 # Misc.
@@ -34,19 +35,20 @@ cargo +nightly install racer
 To combine i3 with xfce, see steps V, VI, VII, VIII, X of this guide:
 https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
 
-Install the latest stable release of Neovim:
-wget https://github.com/neovim/neovim/releases/download/"$(get_latest_release neovim/neovim)"/nvim.appimage
+# Install the latest stable release of Neovim.
+wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 mkdir -p ~/bin
 mv nvim.appimage ~/bin/nvim
 chmod +x ~/bin/nvim
 
-Install `pynvim` via pip3 to get certain nvim plugins to work properly.
+# To get deoplete to work:
+pip3 install pynvim
 
-Install fzf, via:
+# Install fzf.
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-Similarly, for diff-so-fancy:
+# Install diff-so-fancy.
 git clone --depth 1 https://github.com/so-fancy/diff-so-fancy.git ~/.d-s-f
 ln -s ~/.d-s-f/diff-so-fancy ~/bin/diff-so-fancy
 

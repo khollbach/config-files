@@ -30,6 +30,8 @@ majutsushi/tagbar
 godlygeek/tabular
 dense-analysis/ale
 racer-rust/vim-racer
+Shougo/deoplete.nvim
+neovim/nvim-lsp
 '
 
 for p in $plugins; do
@@ -39,4 +41,4 @@ done
 source ~/config-files/.bash_functions || exit 1
 git clone --depth 1 https://github.com/fatih/vim-go.git &&
     cd vim-go &&
-    git checkout "$(get_latest_release fatih/vim-go)" 2>/dev/null
+    git checkout "$(get_latest_release fatih/vim-go)"

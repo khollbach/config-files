@@ -1,3 +1,7 @@
+TODO: install coc.nvim and get the desired behaviour of not triggering until I press tab.
+
+---
+
 Make vim open files as read-only always by default, and then upon any command that would modify the file, lock the file as being written to (by unsetting readonly). This would solve the problem of opening a file just to look at (or even jumping to a defn in a file and then jumping back) in a vim session, then trying to actually *edit* that file later in another vim session (while the first session is still open). Really, this should just work in the obvious way.
 - This seems super obvious, so maybe there's already a plugin for this?
 

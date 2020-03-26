@@ -115,8 +115,8 @@ if PluginExists('vim-gitgutter')
     " to see if I was going to press `p` or not.
     let g:gitgutter_map_keys = 0
 
-    nmap <C-n> <Plug>(GitGutterNextHunk)zz
-    nmap <C-p> <Plug>(GitGutterPrevHunk)zz
+    nmap - <Plug>(GitGutterNextHunk)zz
+    nmap = <Plug>(GitGutterPrevHunk)zz
 
     nmap ghs <Plug>(GitGutterStageHunk)
     nmap ghu <Plug>(GitGutterUndoHunk)
@@ -181,7 +181,7 @@ if PluginExists('goyo.vim')
     noremap <silent> <Leader>f :Goyo<CR>:echo ''<CR>
 endif
 
-if PluginExists('fzf.vim') && PluginExists('fzf.vim')
+if PluginExists('fzf.vim') && PluginExists('fzf')
     " Display fzf in a popup window instead.
     " See https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581481211
     let g:fzf_layout = {
@@ -250,12 +250,12 @@ if PluginExists("ale")
     \ }
     let g:ale_fix_on_save = 1
 
-    " Use clippy (more agressive rust linter) if available.
-    let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
+    " Use clippy (more agressive rust linter).
+    let g:ale_rust_cargo_use_clippy = 1
 
     " Go to next/previous error.
-    nmap - <Plug>(ale_next)
-    nmap = <Plug>(ale_previous)
+    nmap <C-n> <Plug>(ale_next)
+    nmap <C-p> <Plug>(ale_previous)
 endif
 
 if PluginExists("vim-go")
@@ -265,7 +265,14 @@ if PluginExists("vim-go")
 endif
 
 if PluginExists("vim-racer")
-    " See https://github.com/racer-rust/vim-racer
+    " Automatically add an open-paren when completing a function name.
+    let g:racer_insert_paren = 1
+
+    " Show the type of each suggested completion in the popup menu.
+    let g:racer_experimental_completer = 1
+
+    " Go to defn / docs.
+    " https://github.com/racer-rust/vim-racer
     augroup Racer
         autocmd!
         autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
@@ -274,59 +281,36 @@ if PluginExists("vim-racer")
 endif
 
 " TODO: I want to have fuzzy completion the same way deoplete works, but I want
-" it to be hidden by default until I press tab. Then, upon doing so, it should
-" be able narrow the possible matches according to the characters I type. Maybe
-" YCM could do something like this?
+" it to be hidden until I press tab. Then, upon doing so, it should be able
+" narrow the possible matches according to the characters I type.
+"
+" In some sense, this means I want the initial completion to be synchronous,
+" and then async completion to start once the PUM is open... I wonder if this
+" is possible. TODO: try coc.nvim for this; from the wiki it looks promising.
 "if PluginExists('deoplete.nvim')
 if 0
     let g:deoplete#enable_at_startup = 1
 
-    " For why settings are after load, see https://github.com/Shougo/deoplete.nvim/issues/766
-
     " This prevents the PUM from activating immediately upon entering insert
     " mode, which I found unintuitive.
     autocmd VimEnter * call deoplete#custom#option('on_insert_enter', v:false)
+endif
 
-    " Use ALE completion suggestions as well as standard deoplete sources.
-    autocmd VimEnter * call deoplete#custom#option('sources', {
-    \ '_': ['ale', 'around', 'buffer', 'member', 'omni'],
-    \ })
+" Disabled for now, since I don't really like the virtual text overlay, and
+" Racer is better at autocompleting and jumping to definitions anyways.
+"if has("nvim-0.5") && PluginExists("nvim-lsp")
+if 0
+    packadd nvim-lsp
 
-    " Fix the way enter interacts with deoplete.
-    " If the 'pop-up-menu' is visible (i.e., if autocomplete suggestions are
-    " showing), close it then insert a newline.
-    inoremap <expr> <CR> <SID>enter_fn()
-    function! s:enter_fn() abort
-        if pumvisible()
-            " <C-y> confirms the current selection.
-            return "\<C-y>\<CR>"
-        else
-            return "\<CR>"
-        endif
-    endfunction
+    " Change the colors of overlaid 'virtual' text.
+    hi! LspDiagnosticsError ctermfg=52
+    hi! LspDiagnosticsWarning ctermfg=58
 
-    " Toggle deoplete.
-    let s:my_deoplete_enabled = 1
-    noremap <expr> <F9> <SID>toggle_deoplete()
-    inoremap <expr> <F9> <SID>toggle_deoplete()
-    function! s:toggle_deoplete() abort
-        if s:my_deoplete_enabled
-            " Disable
-            echo 'nodeoplete'
-            call deoplete#custom#option('auto_complete', v:false)
-            let s:my_deoplete_enabled = 0
-        else
-            " Enable
-            echo '  deoplete'
-            call deoplete#custom#option('auto_complete', v:true)
-            let s:my_deoplete_enabled = 1
-        endif
-        return ""
-    endfunction
-
-    " Initially disabled.
-    autocmd VimEnter * call deoplete#custom#option('auto_complete', v:false)
-    let s:my_deoplete_enabled = 0
+    " Note that this *dramatically* slows down quitting nvim (after editing
+    " Rust code); it takes about a half-second on my laptop... :(
+    if executable("rust-analyzer")
+        lua require'nvim_lsp'.rust_analyzer.setup{}
+    endif
 endif
 
 " -----------------------------------------------------------------------------
@@ -838,19 +822,20 @@ endif
 
 
 
-" Use tab/shift-tab for completion. Happens only if there's a word-character
-" behind the cursor; otherwise tab is just indentation.
-inoremap <silent><expr> <Tab> <SID>tab_fn()
-inoremap <silent><expr> <S-Tab> <SID>s_tab_fn()
+" Use tab/shift-tab for completion. Happens only if the cursor is at the end of
+" a word, or if the popup menu is already active; otherwise tab is just
+" indentation.
+inoremap <silent><expr> <Tab> <SID>tab_fn("\<C-n>")
+inoremap <silent><expr> <S-Tab> <SID>tab_fn("\<C-p>")
 
-function! s:tab_fn() abort
-    if s:check_word_behind()
+function! s:tab_fn(next_prev) abort
+    if s:check_word_behind() || pumvisible()
         if !pumvisible() && &omnifunc != ''
             " Trigger omnicompletion.
             return "\<C-x>\<C-o>"
         else
-            " Next suggestion.
-            return "\<C-n>"
+            " Next/prev suggestion.
+            return a:next_prev
         endif
     else
         " Indent.
@@ -858,26 +843,21 @@ function! s:tab_fn() abort
     endif
 endfunction
 
-function! s:s_tab_fn() abort
-    if s:check_word_behind()
-        if !pumvisible() && &omnifunc != ''
-            " Trigger omnicompletion.
-            return "\<C-x>\<C-o>"
-        else
-            " Previous suggestion.
-            return "\<C-p>"
-        endif
-    else
-        " Indent.
-        return "\<S-Tab>"
-    endif
-endfunction
-
 " Check if the character immediately to the left of the cursor is a
 " "word-character", ie [0-9A-Za-z_]. False if at the beginning of the line.
+"
+" We'll also allow `.` and `::` to count as part of a word, so that we can
+" auto-complete methods like "a.b()", and paths of the form "a::b::c()".
 function! s:check_word_behind() abort
     let col = col('.') - 1
-    return col > 0 && getline('.')[col - 1] =~ '\w'
+    if col == 0
+        return 0
+    else
+        let line = getline('.')
+        return line[col-1] =~ '\w' ||
+            \ line[col-1] ==# '.' ||
+            \ (col >= 2 && line[col-1] ==# ':' && line[col-2] ==# ':')
+    endif
 endfunction
 
 
