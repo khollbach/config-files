@@ -243,15 +243,16 @@ if PluginExists("ale")
     " Tell me which linter gave the feedback.
     let g:ale_echo_msg_format = '[%linter%] %s'
 
-    " Run goimports, rustfmt on save.
+    " Run goimports on save.
     let g:ale_fixers = {
     \ 'go': ['goimports'],
-    \ 'rust': ['rustfmt'],
     \ }
     let g:ale_fix_on_save = 1
 
-    " Use clippy (more agressive rust linter).
-    let g:ale_rust_cargo_use_clippy = 1
+    " Disable for rust code. (I use coc.nvim + rust-analyzer for that.)
+    let g:ale_linters = {
+    \ 'rust': [],
+    \ }
 
     " Go to next/previous error.
     nmap <C-n> <Plug>(ale_next)
@@ -280,37 +281,13 @@ if PluginExists("vim-racer")
     augroup END
 endif
 
-" TODO: I want to have fuzzy completion the same way deoplete works, but I want
-" it to be hidden until I press tab. Then, upon doing so, it should be able
-" narrow the possible matches according to the characters I type.
-"
-" In some sense, this means I want the initial completion to be synchronous,
-" and then async completion to start once the PUM is open... I wonder if this
-" is possible. TODO: try coc.nvim for this; from the wiki it looks promising.
-"if PluginExists('deoplete.nvim')
-if 0
-    let g:deoplete#enable_at_startup = 1
-
-    " This prevents the PUM from activating immediately upon entering insert
-    " mode, which I found unintuitive.
-    autocmd VimEnter * call deoplete#custom#option('on_insert_enter', v:false)
-endif
-
-" Disabled for now, since I don't really like the virtual text overlay, and
-" Racer is better at autocompleting and jumping to definitions anyways.
-"if has("nvim-0.5") && PluginExists("nvim-lsp")
-if 0
-    packadd nvim-lsp
-
-    " Change the colors of overlaid 'virtual' text.
-    hi! LspDiagnosticsError ctermfg=52
-    hi! LspDiagnosticsWarning ctermfg=58
-
-    " Note that this *dramatically* slows down quitting nvim (after editing
-    " Rust code); it takes about a half-second on my laptop... :(
-    if executable("rust-analyzer")
-        lua require'nvim_lsp'.rust_analyzer.setup{}
-    endif
+if !empty(glob('~/.vim/pack/coc/'))
+    " TODO:
+    " - Get rustfmt to run on save.
+    " - Get sign column to not flicker on save.
+    " - Get clippy lints to show (if they aren't already).
+    " - Get jump-to-defn to work as expected with C-]
+    " - [spike] get `K` to show docs/type/etc as hover.
 endif
 
 " -----------------------------------------------------------------------------
@@ -786,7 +763,7 @@ function! s:enter_fn() abort
 endfunction
 
 " 123<CR> takes you to line 123.
-"noremap <CR> gg
+noremap <CR> gg
 
 " Scroll 5x faster.
 noremap <C-y> 5<C-y>

@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Quick hack to put the initial prompt at the bottom of the screen.
+# Only run once per shell; i.e. not if I reload bashrc.
+if [ -z "$LS_COLORS" ]; then
+    for i in $(seq 1 100); do
+        echo
+    done
+fi
+
 # https://stackoverflow.com/questions/15883416/adding-git-branch-on-the-bash-command-prompt
 parse_git_branch() {
     command git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'

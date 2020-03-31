@@ -1,3 +1,7 @@
+[user]
+	email = khollbach@gmail.com
+	name = Kevan Hollbach
+
 [alias]
     rec = !gitrecurse git
 

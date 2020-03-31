@@ -8,6 +8,7 @@ tmux
 i3
 xfce4
 xfce4-goodies
+evince
 xclip  # For system-clipboard integration with tmux and nvim.
 ranger
 highlight  # For syntax highlighting in ranger.
@@ -15,7 +16,6 @@ tldr
 expect  # For `unbuffer`.
 rlwrap
 gcc  # Rust needs a linker.
-python3-pip
 
 # Install Rust, plus a few commandline utils via `cargo install $PKG`:
 
@@ -40,9 +40,6 @@ wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 mkdir -p ~/bin
 mv nvim.appimage ~/bin/nvim
 chmod +x ~/bin/nvim
-
-# To get deoplete to work:
-pip3 install pynvim
 
 # Install fzf.
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

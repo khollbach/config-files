@@ -29,16 +29,28 @@ junegunn/fzf
 majutsushi/tagbar
 godlygeek/tabular
 dense-analysis/ale
-racer-rust/vim-racer
-Shougo/deoplete.nvim
-neovim/nvim-lsp
 '
+#racer-rust/vim-racer
 
 for p in $plugins; do
     git clone --depth 1 https://github.com/"$p".git
 done
 
+# Install vim-go
 source ~/config-files/.bash_functions || exit 1
 git clone --depth 1 https://github.com/fatih/vim-go.git &&
     cd vim-go &&
-    git checkout "$(get_latest_release fatih/vim-go)"
+    git checkout "$(get_latest_release fatih/vim-go)" &&
+    cd ..
+
+if [ -d ~/.vim/pack/coc ]; then
+    echo coc.nvim already installed
+else
+    # Install node and npm
+    curl -sL install-node.now.sh/lts | sudo bash
+
+    # Install coc.nvim
+    mkdir -p ~/.vim/pack/coc/start
+    cd ~/.vim/pack/coc/start
+    curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz|tar xzfv -
+fi
