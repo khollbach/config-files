@@ -2,7 +2,7 @@
 
 # Quick hack to put the initial prompt at the bottom of the screen.
 # Only run once per shell; i.e. not if I reload bashrc.
-if [ -z "$LS_COLORS" ]; then
+if [ -z "$PROMPT_COMMAND" ]; then
     for i in $(seq 1 100); do
         echo
     done
@@ -80,6 +80,9 @@ export HISTCONTROL=ignoredups
 # Don't leave .pyc files or __pycache__ dirs lying around.
 export PYTHONDONTWRITEBYTECODE=1
 
+# FZF colorscheme.
+export FZF_DEFAULT_OPTS="--color dark"
+
 
 
 # Set the terminal title when opening man pages.
@@ -123,4 +126,4 @@ source "$HOME/.bash_aliases"
 source "$HOME/.bash_functions"
 
 # Work-related defs, etc.
-[ -f "$HOME/notes/work/bashrc" ] && source "$HOME/notes/work/bashrc"
+[ -f "$HOME/notes/configs/bashrc" ] && source "$HOME/notes/configs/bashrc"

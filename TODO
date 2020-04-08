@@ -1,3 +1,18 @@
+Get fzf and ranger to have lightbg-compatible file syntax highlighting.
+- Solarized ideally :)!
+
+---
+
+Get scrolling to work in both tmux *and* vim, not just one or the other.
+
+Maybe turn on mouse support for tmux and/or vim.
+
+---
+
+Figure out how to paste while correcting indentation, and pick a keybind for it.
+
+---
+
 TODO: install coc.nvim and get the desired behaviour of not triggering until I press tab.
 
 ---
@@ -31,10 +46,6 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo
 
 ---
 
-Could probably update the fzf reverse-i-search commandline feature to run on the first enter press (since the chdir feature has that functionality). Then you'll need a separate keybind to edit the command before running, but you could just use C-t or something for that.
-
-Figure out how to get the fzf commandline to use a different highlight color for light backgrounds.
-
 Install, set-up, and add to ./other-settings:
     wfxr/forgit
 
@@ -49,8 +60,6 @@ tmux keybind: alt-shift-X
 
 ---
 
-Ranger in vim instead of nerdtree.
-
 Debug complete-alias + git. See todos in `.bash_aliases`.
 
 Vim: why does the main split's filename disappear when I'm focusing the quickfix list?
@@ -64,5 +73,3 @@ Could find a way to get your config files to have any directory name, so you can
 Why does my xfce+i3 take so long to load xfce4-panel?
 - I can start terminals right away, but the panel takes forever. I never had this problem with vanilla xfce4.
 - Happens at work too.
-
-Possible future additions to vim setup: coc.nvim or nvim-lsp

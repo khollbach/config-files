@@ -16,6 +16,7 @@ tldr
 expect  # For `unbuffer`.
 rlwrap
 gcc  # Rust needs a linker.
+chromium-browser
 
 # Install Rust, plus a few commandline utils via `cargo install $PKG`:
 
@@ -70,3 +71,9 @@ Don't show bold text in bright colors
 Disable all shortcuts
 Autohide mouse pointer
 Automatically copy selection to clipboard
+
+# Ducky One 2 Mini keymaps.
+
+Esc -> `
+Ctrl -> Esc
+Capslock -> Ctrl  # This one has to be done in software, e.g. via setxkbmap.

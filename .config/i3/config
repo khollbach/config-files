@@ -7,13 +7,13 @@ set $Alt Mod1
 #bindsym Control+$Alt+Delete exec --no-startup-id "i3lock -c 000000"
 bindsym Control+$Alt+Delete exec --no-startup-id xflock4
 bindsym Print exec xfce4-screenshooter
-bindsym $Win+Return exec xfce4-terminal
-bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
+bindsym $Win+Return exec "exo-open --launch TerminalEmulator"
+bindsym $Win+i exec "exo-open --launch TerminalEmulator --execute tmux_attach"
 bindsym $Win+o exec "exo-open --launch WebBrowser"
 bindsym $Win+p exec --no-startup-id xfce4-popup-whiskermenu
-bindsym $Win+u exec "google-chrome"
+bindsym $Win+u exec firefox
 bindsym $Win+m exec "emacsclient -a '' -c"
-bindsym $Win+n exec thunar
+bindsym $Win+n exec "exo-open --launch FileManager"
 
 # Change focus.
 bindsym $Win+h focus left
@@ -115,10 +115,10 @@ mode "resize" {
     # Right: grow the focused window’s width.
     # Up: shrink the focused window’s height.
     # Down: grow the focused window’s height.
-    bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize grow height 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
-    bindsym l resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 5 px or 5 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym k resize shrink height 5 px or 5 ppt
+    bindsym l resize grow width 5 px or 5 ppt
 
     # Back to normal mode: q, Enter, Escape, or space
     bindsym q mode "default"

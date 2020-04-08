@@ -20,7 +20,6 @@ tpope/vim-endwise
 airblade/vim-gitgutter
 haya14busa/incsearch.vim
 scrooloose/nerdcommenter
-scrooloose/nerdtree
 mbbill/undotree
 junegunn/goyo.vim
 sheerun/vim-polyglot
@@ -29,8 +28,10 @@ junegunn/fzf
 majutsushi/tagbar
 godlygeek/tabular
 dense-analysis/ale
+racer-rust/vim-racer
+francoiscabrol/ranger.vim
+rbgrouleff/bclose.vim
 '
-#racer-rust/vim-racer
 
 for p in $plugins; do
     git clone --depth 1 https://github.com/"$p".git

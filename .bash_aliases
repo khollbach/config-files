@@ -3,6 +3,7 @@
 # Edit / update configs.
 alias co="c ~/config-files"
 alias u="source ~/config-files/update_configs"
+alias toggle-colors="~/config-files/scripts/toggle-colors && source ~/.bashrc"
 
 # ls aliases
 alias ls="ls -vh --color=auto"

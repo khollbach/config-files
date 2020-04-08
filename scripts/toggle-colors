@@ -24,6 +24,9 @@ toLight() {
     # Uncomment "(new|old)Highlight" lines.
     sed -i -E 's,^(\s*)#((old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
 
+    # FZF
+    sed -i -E 's,^(export FZF_DEFAULT_OPTS="--color) (dark)"$,\1 light",g' "$cfg/.bashrc"
+
     # xfce4-terminal
     # This palette is tweaked slightly from the original to make color 11 the
     # same as color 10.
@@ -51,6 +54,9 @@ toDark() {
     # diff-so-fancy
     # Comment out "(new|old)Highlight" lines corresponding to light theme.
     sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194) .*)$,\1#\2,g' "$cfg/.config/git/config"
+
+    # FZF
+    sed -i -E 's,^(export FZF_DEFAULT_OPTS="--color) (light)"$,\1 dark",g' "$cfg/.bashrc"
 
     # xfce4-terminal
     local solarized='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#657b83;#839496;#6c71c4;#93a1a1;#fdf6e3'

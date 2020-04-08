@@ -146,16 +146,6 @@ if PluginExists('nerdcommenter')
     let g:NERDSpaceDelims = 0
 endif
 
-if PluginExists('nerdtree')
-    noremap <Leader>i :NERDTreeToggle<CR>
-    noremap <Leader>I :NERDTreeFind<CR>
-
-    let NERDTreeQuitOnOpen = 1
-
-    " Otherwise it's bound to `?`, which shadows search-backwards.
-    let NERDTreeMapHelp = '<F1>'
-endif
-
 if PluginExists('undotree')
     noremap <Leader>U :UndotreeToggle<CR>
 endif
@@ -229,15 +219,20 @@ if PluginExists("ale")
     " Slightly less aggressive markers in the sign column.
     let g:ale_sign_error = ' .'
     let g:ale_sign_warning = ' .'
-    hi! ALEErrorSign ctermfg=1 ctermbg=0
-    hi! ALEWarningSign ctermfg=3 ctermbg=0
+    if &background ==# 'dark'
+        hi! ALEErrorSign ctermfg=1 ctermbg=0
+        hi! ALEWarningSign ctermfg=3 ctermbg=0
+    else
+        hi! ALEErrorSign ctermfg=1 ctermbg=7
+        hi! ALEWarningSign ctermfg=3 ctermbg=7
+    endif
 
-    " Prefer gitgutter signs to ale ones. Ideally we could just show both
+    " Prefer ale signs to gitgutter ones. Ideally we could just show both
     " side-by-side...
     " https://www.reddit.com/r/neovim/comments/f04fao/my_biggest_vimneovim_wish_single_width_sign_column/
     if PluginExists("vim-gitgutter")
-        let g:gitgutter_sign_priority = 35
-        let g:ale_sign_priority = 30
+        let g:ale_sign_priority = 11
+        let g:gitgutter_sign_priority = 10
     endif
 
     " Tell me which linter gave the feedback.
@@ -246,13 +241,9 @@ if PluginExists("ale")
     " Run goimports on save.
     let g:ale_fixers = {
     \ 'go': ['goimports'],
+    \ 'rust': ['rustfmt'],
     \ }
     let g:ale_fix_on_save = 1
-
-    " Disable for rust code. (I use coc.nvim + rust-analyzer for that.)
-    let g:ale_linters = {
-    \ 'rust': [],
-    \ }
 
     " Go to next/previous error.
     nmap <C-n> <Plug>(ale_next)
@@ -288,6 +279,23 @@ if !empty(glob('~/.vim/pack/coc/'))
     " - Get clippy lints to show (if they aren't already).
     " - Get jump-to-defn to work as expected with C-]
     " - [spike] get `K` to show docs/type/etc as hover.
+endif
+
+if PluginExists('ranger.vim') && PluginExists('bclose.vim')
+    let g:ranger_map_keys = 0
+    let g:ranger_replace_netrw = 1
+
+    map <silent> <Leader>i :RangerWorkingDirectory<CR>
+    map <silent> <Leader>I :RangerCurrentFile<CR>
+
+    " This is needed to get the ranger buffer to not have line numbers when
+    " opened from the commandline as `vim somedir/`. (Not sure why, but the
+    " TermOpen autocmd gets ignored in this edge case.)
+    augroup Ranger
+        autocmd!
+        " TermEnter triggers when entering "insert mode" in terminals.
+        autocmd TermEnter * if expand('%') =~ "term.*ranger" | setlocal nonumber | endif
+    augroup END
 endif
 
 " -----------------------------------------------------------------------------
@@ -709,21 +717,60 @@ if has('nvim') || has('terminal')
     " Make escape key behave as expected.
     tnoremap <Esc> <C-\><C-n>
 
-    " jk = Esc
-    tnoremap jk <C-\><C-n>
-    tnoremap jK <C-\><C-n>
-    tnoremap Jk <C-\><C-n>
-    tnoremap JK <C-\><C-n>
-endif
-
-" Neovim terminal settings
-if has('nvim')
-    " Line numbers off by default.
+    " No line numbers in terminals.
     autocmd TermOpen * setlocal nonumber
 
-    " Start terminal in insert mode (called "Terminal-mode" in the docs).
+    " Start terminals in insert mode.
     autocmd TermOpen * startinsert
 endif
+
+" Auto-close brackets/braces/parens spanning multiple lines. For some (unknown)
+" reason this mapping doesn't seem to take effect unless I do it on load.
+autocmd VimEnter * inoremap <silent><expr> <CR> <SID>enter_fn()
+function! s:enter_fn() abort
+    let line = getline('.')
+    let cursor = col('.') - 1
+
+    " If the cursor is between two matching brackets, pressing enter causes the
+    " closing bracket to go to a new line of its own.
+    if 1 <= cursor && cursor < len(line)
+        let open = line[cursor - 1]
+        let close = line[cursor]
+
+        if open ==# '(' && close ==# ')' ||
+        \ open ==# '[' && close ==# ']' ||
+        \ open ==# '{' && close ==# '}'
+            return "\<CR>\<Esc>O"
+        endif
+    endif
+
+    " If the cursor is immediately after an opening bracket, automatically
+    " close that bracket on its own line.
+    if cursor >= 1
+        let open = line[cursor - 1]
+
+        let close = ''
+        if open ==# '('
+            let close = ')'
+        elseif open ==# '['
+            let close = ']'
+        elseif open ==# '{'
+            let close = '}'
+        endif
+
+        if close !=# ''
+            if cursor ==# len(line)
+                return "\<CR>" . close . "\<Esc>O"
+            else
+                " If there's text after the cursor, make sure it ends up on the
+                " line between the two matching brackets.
+                return "\<CR>\<Esc>o" . close . "\<Esc>kI"
+            endif
+        endif
+    endif
+
+    return "\<CR>"
+endfunction
 
 " -----------------------------------------------------------------------------
 " Mappings
@@ -738,29 +785,6 @@ cnoremap jk <C-c>
 cnoremap jK <C-c>
 cnoremap Jk <C-c>
 cnoremap JK <C-c>
-
-" Auto-close brackets/braces/parens spanning multiple lines. For some (unknown)
-" reason this mapping doesn't seem to take effect unless I do it on load.
-autocmd VimEnter * inoremap <silent><expr> <CR> <SID>enter_fn()
-function! s:enter_fn() abort
-    let line = getline('.')
-    let cursor = col('.')
-    if len(line) > 0 && cursor ==# len(line) + 1
-        let char = line[len(line) - 1]
-        let closing_char = ''
-        if char ==# '['
-            let closing_char = ']'
-        elseif char ==# '{'
-            let closing_char = '}'
-        elseif char ==# '('
-            let closing_char = ')'
-        endif
-        if closing_char !=# ''
-            return "\<CR>" . closing_char . "\<Esc>O"
-        endif
-    endif
-    return "\<CR>"
-endfunction
 
 " 123<CR> takes you to line 123.
 noremap <CR> gg

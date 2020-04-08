@@ -1,8 +1,8 @@
-# Kinesis Advantage 2 on-board drive keymap
+# Kinesis Advantage 2 on-board drive keymap.
 # See https://gist.github.com/nicholasknight/181375ee15f9cb89d3c69f4cc2b63df9
-# See also the KA2 manual
+# See also the KA2 manual.
 
-# Left thumb cluster
+# Left thumb cluster.
 [bspace]>[lshift]
 [delete]>[lctrl]
 [lctrl]>[lwin]
@@ -10,7 +10,7 @@
 [home]>[lalt]
 [end]>[insert]
 
-# Right thumb cluster
+# Right thumb cluster.
 [space]>[space]
 [enter]>[ralt]
 [rctrl]>[enter]
@@ -18,6 +18,7 @@
 [pup]>[rctrl]
 [pdown]>[rshift]
 
+# Misc.
 [caps]>[bspace]
 [lshift]>[home]
 [rshift]>[end]
@@ -27,17 +28,9 @@
 [up]>[down]
 [down]>[up]
 
-# The 'kpshift' map behaves as a function-modifier for the 'key-pad' layer.
-# When held, pressing keys will generate their key-pad mode mapping instead
-# of their normal mapping.
-# A quirk is that you have to map both the normal version and the key-pad
-# version of the key that you want to behave as a modifier.
-[intl-\]>[kpshift]
-[kp-insert]>[kpshift]
-
-# Invert volume buttons with print-screen/scroll-lock/pause-break,
-# so that you can change volume without being in key-pad mode
-# (or holding down 'kpshift' modifier key).
+# Invert volume buttons with print-screen/scroll-lock/pause-break, so that you
+# can change volume without being in key-pad mode or holding down the 'kpshift'
+# modifier key.
 [prtscr]>[mute]
 [scroll]>[vol-]
 [pause]>[vol+]
@@ -45,7 +38,17 @@
 [vol+]>[scroll]
 [vol-]>[pause]
 
-# Give me function keys F1-F12 on the key-pad layer
+# Key-pad layer mappings. -----------------------------------------------------
+
+# The 'kpshift' map behaves as a function-modifier for the 'key-pad' layer.
+# When held, pressing keys will generate their key-pad mode mapping instead of
+# their normal mapping.
+# A quirk is that you have to map both the normal version and the key-pad
+# version of the key that you want to behave as a modifier.
+[intl-\]>[kpshift]
+[kp-insert]>[kpshift]
+
+# Give me function keys F1-F12 on the key-pad layer.
 [kp1]>[f1]
 [kp2]>[f2]
 [kp3]>[f3]
@@ -59,13 +62,13 @@
 [kp=]>[f11]
 [kpdiv]>[f12]
 
-# Also pageup/pagedown
-# (Inverted, as with up/down arrow keys)
+# Also, page-up/page-down.
+# (Inverted, as with the up/down arrow keys.)
 [kp-up]>[pdown]
 [kp-down]>[pup]
 
-# Thumb clusters, repeated for key-pad mode
-# (so that I can do, e.g., ctrl-shift-F5)
+# Thumb clusters, repeated for key-pad mode.
+# (So that I can do, e.g., ctrl-shift-F5.)
 # Left:
 [kp-bspace]>[lshift]
 [kp-delete]>[lctrl]
@@ -81,12 +84,12 @@
 [kp-pup]>[rctrl]
 [kp-pdown]>[rshift]
 
-# May as well repeat these too
+# May as well repeat these too.
 [kp-caps]>[bspace]
 [kp-lshift]>[home]
 [kp-rshift]>[end]
 
-# Null-out unused function-modified keys in the key-pad keywell
+# Null-out unused function-modified keys in the key-pad keywell.
 [kp-6]>[null]
 [kp-y]>[null]
 [kp-h]>[null]
@@ -97,3 +100,5 @@
 [kpplus]>[null]
 [kpenter1]>[null]
 [kpenter2]>[null]
+
+# vim: set syntax=config:
