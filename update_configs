@@ -27,3 +27,25 @@ tmux source-file ~/.tmux.conf 2> /dev/null || :
 # Generate .less file.
 echo lesskey ~/config-files/lesskey
 lesskey ~/config-files/lesskey
+
+# One-time FZF forgit settings.
+if [ -d ~/.forgit ]; then
+    # Use `l` instead of `enter` to preview selection.
+    if grep -q -E 'enter:execute' ~/.forgit/forgit.plugin.sh; then
+        echo forgit: remap l to enter
+        sed -i -E 's,enter:execute,l:execute,g' ~/.forgit/forgit.plugin.sh
+    fi
+
+    # Use `h` while previewing to go back.
+    if grep -q -E "LESS='-R'" ~/.forgit/forgit.plugin.sh; then
+        echo forgit: remap h to back in less
+
+        cat << EOF > ~/.forgit/lesskey
+#command
+h noaction q
+EOF
+
+        lesskey -o ~/.forgit/lesskey-compiled ~/.forgit/lesskey
+        sed -i -E "s,LESS='-R',LESSKEY_SYSTEM=$HOME/.forgit/lesskey-compiled,g" ~/.forgit/forgit.plugin.sh
+    fi
+fi

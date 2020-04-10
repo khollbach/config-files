@@ -1,5 +1,16 @@
+Refactor toggle colors a bit by using `if dark` in vimrc, and maybe tmux conf.
+
+Use --expect to get your C-r fzf binding to work the way you want.
+- And get this behaviour for C-t as well actually.
+Reference: https://github.com/junegunn/fzf/issues/355
+
+---
+
 Get fzf and ranger to have lightbg-compatible file syntax highlighting.
 - Solarized ideally :)!
+
+Set up 'delta' instead of diff-so-fancy, so that you get syntax highlighting in your diffs.
+https://github.com/dandavison/delta
 
 ---
 
@@ -45,9 +56,6 @@ nnoremap <Leader>a :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'rounded': v:false } }
 
 ---
-
-Install, set-up, and add to ./other-settings:
-    wfxr/forgit
 
 tmux keybinds: alt-shift-, and alt-shift-;
 - Swap current window with next/prev window.

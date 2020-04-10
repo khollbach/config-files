@@ -50,6 +50,9 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 git clone --depth 1 https://github.com/so-fancy/diff-so-fancy.git ~/.d-s-f
 ln -s ~/.d-s-f/diff-so-fancy ~/bin/diff-so-fancy
 
+# Install fzf 'forgit' (sourced in .bashrc).
+git clone --depth 1 https://github.com/wfxr/forgit.git ~/.forgit
+
 For passwordless sudo, append this to /etc/sudoers:
 ALL ALL=(ALL) NOPASSWD: ALL
 
@@ -72,8 +75,12 @@ Disable all shortcuts
 Autohide mouse pointer
 Automatically copy selection to clipboard
 
-# Ducky One 2 Mini keymaps.
+# Ducky One 2 Mini keymaps. (See page 33 of the manual.)
 
 Esc -> `
 Ctrl -> Esc
 Capslock -> Ctrl  # This one has to be done in software, e.g. via setxkbmap.
+
+Fn u -> Home
+Fn o -> End
+Fn h -> Delete

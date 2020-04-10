@@ -68,20 +68,49 @@ eval `dircolors | sed s,01,00,g`
 # instead of blue text against green (which is unreadable).
 export LS_COLORS="${LS_COLORS}ow=30;42:"
 
-# ripgrep config file
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon
 
 # Filter duplicates out of history.
 export HISTCONTROL=ignoredups
 
+# Keep a much longer history file (default is 500 lines).
+export HISTSIZE=100000
+
 # Don't leave .pyc files or __pycache__ dirs lying around.
 export PYTHONDONTWRITEBYTECODE=1
 
+# ripgrep config file
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
+
+
 # FZF colorscheme.
 export FZF_DEFAULT_OPTS="--color dark"
+
+# Show hidden files in FZF, respecting ripgrep's ignores (.git, etc).
+export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Allow hidden directories for fzf's change directory keybind.
+export FZF_ALT_C_COMMAND='
+    if [ "$PWD" != "$HOME" ]; then
+        fd --type d --hidden --exclude .git
+    else
+        # Ignore hidden dirs and ~/snap when used from home directory.
+        fd --type d --exclude .git --exclude /snap
+    fi
+'
+
+# Use alt-u keybind for fzf chdir.
+bind -m emacs-standard '"\eu": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
+
+# Add keybinds to fzf forgit. See also ~/config-files/update_configs
+export FORGIT_FZF_DEFAULT_OPTS='
+    --height=100%
+    --bind=j:down,k:up
+    --bind=q:abort
+'
 
 
 
@@ -118,12 +147,15 @@ function title_wrapper {
 
 
 
-# Get fzf to work.
+# Load fzf keybinds.
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# FZF 'forgit'.
+[ -f ~/.forgit/forgit.plugin.sh ] && source ~/.forgit/forgit.plugin.sh
+
 # Load aliases, functions.
-source "$HOME/.bash_aliases"
-source "$HOME/.bash_functions"
+source ~/.bash_aliases
+source ~/.bash_functions
 
 # Work-related defs, etc.
-[ -f "$HOME/notes/configs/bashrc" ] && source "$HOME/notes/configs/bashrc"
+[ -f ~/notes/configs/bashrc ] && source ~/notes/configs/bashrc
