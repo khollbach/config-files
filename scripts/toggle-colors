@@ -11,10 +11,7 @@ isDark() {
 
 toLight() {
     # Vim
-    sed -i -E 's,^(\s*set background=)dark$,\1light,g;
-               s,^(set laststatus)=2$,\1=1,g;
-               s,^(autocmd VimEnter \* set laststatus)=2$,\1=1,g' \
-        "$cfg/.vimrc"
+    sed -i -E 's,^(\s*set background=)dark$,\1light,g' "$cfg/.vimrc"
 
     # tmux
     # Uncomment "set ... fg" lines.
@@ -41,10 +38,7 @@ toLight() {
 
 toDark() {
     # Vim
-    sed -i -E 's,^(\s*set background=)light$,\1dark,g;
-               s,^(set laststatus)=1$,\1=2,g;
-               s,^(autocmd VimEnter \* set laststatus)=1$,\1=2,g' \
-        "$cfg/.vimrc"
+    sed -i -E 's,^(\s*set background=)light$,\1dark,g' "$cfg/.vimrc"
 
     # tmux (using Perl instead of sed, as per https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string)
     # Comment out three specific lines.

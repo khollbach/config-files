@@ -20,6 +20,8 @@ chromium-browser
 
 # Install Rust, plus a few commandline utils via `cargo install $PKG`:
 
+curl https://sh.rustup.rs -sSf | sh
+
 ripgrep
 fd-find
 bat
@@ -33,7 +35,7 @@ cargo +nightly install racer
 
 # Misc.
 
-To combine i3 with xfce, see steps V, VI, VII, VIII, X of this guide:
+# To combine i3 with xfce, see steps V, VI, VII, VIII, X of this guide:
 https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
 
 # Install the latest stable release of Neovim.
@@ -53,7 +55,7 @@ ln -s ~/.d-s-f/diff-so-fancy ~/bin/diff-so-fancy
 # Install fzf 'forgit' (sourced in .bashrc).
 git clone --depth 1 https://github.com/wfxr/forgit.git ~/.forgit
 
-For passwordless sudo, append this to /etc/sudoers:
+# For passwordless sudo, append this to /etc/sudoers:
 ALL ALL=(ALL) NOPASSWD: ALL
 
 To get capslock to be control in virtual consoles, add this line:
@@ -80,7 +82,6 @@ Automatically copy selection to clipboard
 Esc -> `
 Ctrl -> Esc
 Capslock -> Ctrl  # This one has to be done in software, e.g. via setxkbmap.
-
 Fn u -> Home
 Fn o -> End
 Fn h -> Delete

@@ -1,10 +1,14 @@
-Refactor toggle colors a bit by using `if dark` in vimrc, and maybe tmux conf.
-
 Use --expect to get your C-r fzf binding to work the way you want.
 - And get this behaviour for C-t as well actually.
 Reference: https://github.com/junegunn/fzf/issues/355
 
+Rebind fzf-history to M-r so that you can still use C-r with C-o.
+While you're at it, unbind M-c.
+
 ---
+
+Vim: fix light mode statusline color and get rid of the laststatus=1 hack.
+(Also, low priority: why does the main split's filename disappear when I'm focusing the quickfix list?)
 
 Get fzf and ranger to have lightbg-compatible file syntax highlighting.
 - Solarized ideally :)!
@@ -20,11 +24,11 @@ Maybe turn on mouse support for tmux and/or vim.
 
 ---
 
-Figure out how to paste while correcting indentation, and pick a keybind for it.
+Vim: figure out how to paste while correcting indentation, and pick a keybind for it.
 
 ---
 
-TODO: install coc.nvim and get the desired behaviour of not triggering until I press tab.
+In coc.nvim get the desired behaviour of not triggering until I press tab.
 
 ---
 
@@ -69,10 +73,6 @@ tmux keybind: alt-shift-X
 ---
 
 Debug complete-alias + git. See todos in `.bash_aliases`.
-
-Vim: why does the main split's filename disappear when I'm focusing the quickfix list?
-
-Look at vim-go instructions.
 
 Could find a way to get your config files to have any directory name, so you can rename them at work
 - Maybe part of update configs will involve setting the name somewhere or something? This might be a little tricky, and you might have to replace the text in profile, etc.
