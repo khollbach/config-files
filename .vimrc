@@ -21,7 +21,7 @@ function! PluginExists(name) abort
     return !empty(glob('~/.vim/pack/plugins/start/' . a:name . '/'))
 endfunction
 
-if PluginExists('vim-colors-solarized')
+if PluginExists('vim-colors-solarized') && !empty($DISPLAY)
     set background=dark
     colorscheme solarized
 else
@@ -150,34 +150,17 @@ if PluginExists('undotree')
     noremap <Leader>U :UndotreeToggle<CR>
 endif
 
-if PluginExists('context.vim')
-    " Disabled for now; it's not exactly pretty. Maybe it's useful though.
-    let g:context_enabled = 0
-
-    " Without the following, <C-y> and <C-e> are line-by-line, instead of 5 at
-    " a time as per my custom mappings. This fixes it, but I'm not sure why. I
-    " just disabled context.vim's default mappings, and then re-added them.
-    let g:context_add_mappings = 0
-    nnoremap <silent>        <C-Y> <C-Y>:call context#update('C-Y')<CR>
-    nnoremap <silent>        zz     zzzz:call context#update('zz')<CR>
-    nnoremap <silent>        zb     zbzb:call context#update('zb')<CR>
-    nnoremap <silent> <expr> <C-E>            context#mapping#ce()
-    nnoremap <silent> <expr> zt               context#mapping#zt()
-    nnoremap <silent> <expr> k                context#mapping#k()
-    nnoremap <silent> <expr> H                context#mapping#h()
-endif
-
 if PluginExists('goyo.vim')
     noremap <silent> <Leader>f :Goyo<CR>:echo ''<CR>
 endif
 
 if PluginExists('fzf.vim') && PluginExists('fzf')
     " Display fzf in a popup window instead.
-    " See https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581481211
+    " https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581481211
     let g:fzf_layout = {
         \ 'window': {
             \'width': 0.9,
-            \ 'height': 0.6,
+            \ 'height': 0.8,
             \ 'highlight': 'Todo',
             \ 'border': 'rounded' } }
 
@@ -187,7 +170,7 @@ if PluginExists('fzf.vim') && PluginExists('fzf')
     nnoremap <leader>t :Tags<CR>
     nnoremap <leader>m :History<CR>
 
-    " Better version of ack.vim
+    " Better version of `ack.vim`.
     nnoremap <expr> <leader>a ":Rg "
 endif
 
@@ -196,17 +179,20 @@ if PluginExists('tagbar')
 endif
 
 if PluginExists("tabular")
-    " Align on `=`
+    " Align on `=`.
     nmap <Leader>= :Tabularize /=<CR>
     vmap <Leader>= :Tabularize /=<CR>
 
-    " Align on `: `
-    " See https://devhints.io/tabular
+    " Align on `: `.
+    " https://devhints.io/tabular
     nmap <Leader>- :Tabularize /:\ \zs/l0l1<CR>
     vmap <Leader>- :Tabularize /:\ \zs/l0l1<CR>
 endif
 
 if PluginExists("ale")
+    " Disable by default.
+    let g:ale_enabled = 0
+
     " If I'm opening a file just to read it, I don't want distractions. To
     " manually trigger linters on an unchanged file, enter and exit insert
     " mode. (Or save the file, which also triggers fixers.)
@@ -257,9 +243,6 @@ if PluginExists("vim-go")
 endif
 
 if PluginExists("vim-racer")
-    " Automatically add an open-paren when completing a function name.
-    let g:racer_insert_paren = 1
-
     " Show the type of each suggested completion in the popup menu.
     let g:racer_experimental_completer = 1
 
@@ -272,21 +255,12 @@ if PluginExists("vim-racer")
     augroup END
 endif
 
-if !empty(glob('~/.vim/pack/coc/'))
-    " TODO:
-    " - Get rustfmt to run on save.
-    " - Get sign column to not flicker on save.
-    " - Get clippy lints to show (if they aren't already).
-    " - Get jump-to-defn to work as expected with C-]
-    " - [spike] get `K` to show docs/type/etc as hover.
-endif
-
 if PluginExists('ranger.vim') && PluginExists('bclose.vim')
     let g:ranger_map_keys = 0
     let g:ranger_replace_netrw = 1
 
-    map <silent> <Leader>i :RangerWorkingDirectory<CR>
-    map <silent> <Leader>I :RangerCurrentFile<CR>
+    map <silent> <Leader>r :RangerWorkingDirectory<CR>
+    map <silent> <Leader>R :RangerCurrentFile<CR>
 
     " This is needed to get the ranger buffer to not have line numbers when
     " opened from the commandline as `vim somedir/`. (Not sure why, but the
@@ -298,18 +272,27 @@ if PluginExists('ranger.vim') && PluginExists('bclose.vim')
     augroup END
 endif
 
+if !empty(glob('~/.vim/pack/coc/'))
+    " TODO:
+    " - Get rustfmt to run on save.
+    " - Get sign column to not flicker on save.
+    " - Get clippy lints to show (if they aren't already).
+    " - Get jump-to-defn to work as expected with C-]
+    " - [spike] get `K` to show docs/type/etc as hover.
+endif
+
 " -----------------------------------------------------------------------------
 " Settings
 " -----------------------------------------------------------------------------
-
-" This wasn't the default on CDF for some reason. Caused issues with NERDTree.
-set encoding=utf-8
 
 " Make backspace behave as expected in insert mode.
 set backspace=indent,eol,start
 
 " Allow hiding of buffers with unwritten changes.
 set hidden
+
+" Show commandline completion matches above the commandline on <Tab> keypress.
+set wildmenu
 
 " Write swap files to a particular directory, if it exists.
 set directory=~/.vim/swap//,.
@@ -321,14 +304,8 @@ set undodir=~/.vim/undo//
 " Don't flash the screen (or beep) in Windows
 set t_vb=
 
-" Show commandline completion matches above the commandline on <Tab> keypress.
-set wildmenu
-
-" Don't show documentation previews upon omnicompletion.
-set completeopt-=preview
-
 " Reload file from disk if it changes (as long as there's no edit conflict).
-" See https://unix.stackexchange.com/a/383044
+" https://unix.stackexchange.com/a/383044
 set autoread
 autocmd FocusGained,BufEnter,CursorHold *
     \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' |
@@ -341,8 +318,22 @@ autocmd FileChangedShellPost *
 
 
 
-" No startup message
+" No startup message.
 set shortmess+=I
+
+" Don't show an indicator in the echo area when you're in insert mode.
+" (The cursor shape already indicates that in Neovim.)
+set noshowmode
+
+" Don't give visual feedback for normal mode commands requiring multiple
+" keypresses.
+set noshowcmd
+
+" Don't show a how-to-quit message when you press <C-c> in normal mode. This
+" would be mapped to <Nop> except that I want to be able to discard numeric
+" arguments with <C-c>. E.g. if I type 93<C-c>83gg I'll be taken to line 83 and
+" not line 9383.
+nnoremap <C-c> <Esc>
 
 " Don't show the tildes after the last line in the file.
 " Doesn't work on Vim 8.0 for me; I haven't looked into why.
@@ -351,69 +342,19 @@ if has('nvim')
     set fillchars+=eob:\ 
 endif
 
-" Don't give visual feedback for normal mode commands requiring multiple
-" keypresses.
-set noshowcmd
-
-" Don't show an indicator in the echo area when you're in insert mode.
-" (The cursor shape already indicates that in Neovim.)
-set noshowmode
-
-" Don't show a how-to-quit message when you press <C-c> in normal mode. This
-" would be mapped to <Nop> except that I want to be able to discard numeric
-" arguments with <C-c>. E.g. if I type 93<C-c>83gg I'll be taken to line 83 and
-" not line 9383.
-nnoremap <C-c> <Esc>
 
 
+" No line numbers.
+set nonumber
 
-" Line numbers.
-set number
-
-" Toggle line numbers.
-if PluginExists('vim-gitgutter')
-    noremap <F4> :GitGutterSignsToggle<CR>:set number! number?<CR>
-    inoremap <F4> <C-o>:GitGutterSignsToggle<CR><C-o>:set number! number?<CR>
-else
-    noremap <F4> :set number! number?<CR>
-    inoremap <F4> <C-o>:set number! number?<CR>
-endif
+" No signs in the gutter.
+set signcolumn=no
 
 " Wrap long lines by default.
 set wrap
 
 " When 'wrap' is enabled, break lines at word boundaries.
 set linebreak
-
-" Toggle line wrapping.
-noremap <F5> :set wrap! wrap?<CR>
-inoremap <F5> <C-o>:set wrap! wrap?<CR>
-
-" Vertical lines after 80, 100, and 120 chars.
-"set colorcolumn=81,101,121
-set colorcolumn=
-
-" Toggle colorcolumn
-noremap <expr> <F6> <SID>toggle_colorcolumn()
-inoremap <expr> <F6> <SID>toggle_colorcolumn()
-function! s:toggle_colorcolumn() abort
-    if &colorcolumn !=# ""
-        set colorcolumn=
-    else
-        set colorcolumn=81,101,121
-    endif
-    set colorcolumn?
-
-    " Need to redraw here to get the effect right away.
-    redraw
-    return ""
-endfunction
-
-" Toggle autoindent/mappings/etc, for pasting text.
-noremap <F7> :set paste! paste?<CR>
-set pastetoggle=<F7>
-
-
 
 " Maximum line length for various formatting-related things.
 set textwidth=79
@@ -448,9 +389,36 @@ set incsearch
 " Highlight search matches by default.
 set hlsearch
 
-" Show number of matches (and current position therin) when searching.
+" Show number of matches (and current position therein) when searching.
 " Available starting in Vim 8.1.1270 and Nvim 0.4.0
 set shortmess-=S
+
+
+
+" Enable autoindent.
+set autoindent
+
+" Use 4 spaces for indent commands.
+set shiftwidth=4
+
+" Expand tab into spaces when pressed in insert mode.
+set expandtab
+
+" Allow backspacing through spaces as if they were tabs.
+set softtabstop=4
+
+" Hard tab width.
+set tabstop=4
+
+" Show hard tabs and trailing spaces.
+" Also show indicators for text that extends past the edge of the screen.
+set list
+" TODO: Get tabs to show visually, but only in languages other than go.
+set listchars=tab:\ \ ,extends:▶,precedes:◀,trail:·
+
+" Don't show trailing spaces when typing.
+autocmd InsertEnter * set listchars-=trail:·
+autocmd InsertLeave * set listchars+=trail:·
 
 
 
@@ -466,48 +434,30 @@ set title
 " an easy way to fix that here.
 set titlestring=%{expand(\"%:t\")}
 
-augroup LASTSTATUS
-if &background ==# "dark"
-    " Show status line (filename, etc) even when there's only one window.
-    set laststatus=2
-    autocmd!
+if &background ==# 'dark'
+    " Hide the vertical bar between splits.
+    hi! VertSplit ctermfg=8 ctermbg=8
+
+    " Change status line color.
+    hi! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
+    hi! StatusLineNC ctermbg=8 ctermfg=11 cterm=reverse
+
+    " This last highlight group is made-up by me.
+    hi! StatusLineTrailing ctermbg=8 ctermfg=12
 else
-    " There's a very strange nvim bug where unless I do this on load it resets
-    " to the original value of 2 some time after loading my vimrc.
-    " Interestingly, if I load my vimrc with `nvim -u vimrc-name` then the
-    " setting change sticks. Also if I do *either* of `nvim {-c,--cmd} 'set
-    " ls=1'`, that works too. *shrug*.
-    set laststatus=1
-    autocmd VimEnter * set laststatus=1
+    " Same, but for light background.
+    hi! VertSplit ctermfg=15 ctermbg=15
+    hi! StatusLine ctermbg=15 ctermfg=12 cterm=reverse
+    hi! StatusLineNC ctermbg=15 ctermfg=12 cterm=reverse
+    hi! StatusLineTrailing ctermbg=15 ctermfg=12
 endif
-augroup END
 
-" Hide the vertical bar between splits.
-" TODO: get a better fix for this that works for both dark and light themes.
-highlight! VertSplit ctermfg=8 ctermbg=8
+" Don't show status line (filename, etc) when there's only one window. There's
+" a strange nvim bug where unless I do this on load it resets to the original
+" value of 2 some time after loading my vimrc.
+autocmd VimEnter * set laststatus=1
 
-" Toggle the status line.
-noremap <expr> <Leader>' <SID>toggle_laststatus()
-function! s:toggle_laststatus() abort
-    if &laststatus ==# 2
-        set laststatus=1
-    else
-        set laststatus=2
-    endif
-
-    " Need to redraw here to get the effect right away.
-    mode
-    return ""
-endfunction
-
-" Change status line color.
-" TODO: update this to work with light theme as well.
-highlight! StatusLine ctermbg=8 ctermfg=11 cterm=reverse
-highlight! StatusLineNC ctermbg=0 ctermfg=12 cterm=none
-
-" This last highlight group is made-up by me.
-highlight! StatusLineTrailing ctermbg=8 ctermfg=12
-
+" Status line shows current file path and whether the file was modified.
 function! StatusLine()
     if expand("%:t") !=# ""
         return ' %f %#StatusLineTrailing#%( %h%w%r%m%)' . GitStatus()
@@ -521,9 +471,9 @@ set statusline=%!StatusLine()
 
 " Get the number of lines added/edited/deleted to show up in the status bar.
 if PluginExists('vim-gitgutter')
-    highlight! GSAdded ctermfg=2
-    highlight! GSModified ctermfg=3
-    highlight! GSRemoved ctermfg=1
+    hi! GSAdded ctermfg=2
+    hi! GSModified ctermfg=3
+    hi! GSRemoved ctermfg=1
     function! GitStatus()
         let result = ''
         let result = result . '%#GSAdded#' . '%( %{GSAdd()}%)'
@@ -579,15 +529,6 @@ set ruler
 " 36 (total width) = 32 (filename) + 1 (space) + 3 (modified)
 set rulerformat=%36(%=%{PercentT()}%3(%m%)%)
 
-"" Instead of the above, we update the rulerformat width dynamically when the
-"" current buffer name changes. This way we're not wasting space in the "echo
-"" area". It's too bad Vim doesn't do this for us automatically. :(
-"" This doesn't play that nicely with multiple windows though, since rulerformat
-"" is a global setting with no window-local (or buffer-local) value. :(
-"autocmd BufEnter,BufAdd,BufFilePost *
-    "\ let &rulerformat =
-    "\ "%" . (strlen(Percent_t()) + 3) . "(%=%{Percent_t()}%3(%m%)%)"
-
 " We use this function instead of %t in rulerformat, since this won't show
 " "[No Name]" when there's no open file. Also, this allows us to truncate from
 " the right instead of from the left.
@@ -606,40 +547,13 @@ function! PercentT() abort
     " We would have put this space in the 'rulerformat' string, except that
     " this way if the file is named something numeric like "0123", Vim won't
     " try to be clever and format it as "123" instead, since we return "0123 "
-    " from the %{ } block. Terrible hack, I know.
+    " from the %{ } block.
     if strlen(filename) > 0
         let filename = filename . " "
     endif
 
     return filename
 endfunction
-
-
-
-" Enable autoindent.
-set autoindent
-
-" Use 4 spaces for indent commands.
-set shiftwidth=4
-
-" Expand tab into spaces when pressed in insert mode.
-set expandtab
-
-" Allow backspacing through spaces as if they were tabs.
-set softtabstop=4
-
-" Hard tab width.
-set tabstop=4
-
-" Show hard tabs and trailing spaces.
-" Also show indicators for text that extends past the edge of the screen.
-set list
-" TODO: Get tabs to show visually, but only in languages other than go.
-set listchars=tab:\ \ ,extends:▶,precedes:◀,trail:·
-
-" Don't show trailing spaces when typing.
-autocmd InsertEnter * set listchars-=trail:·
-autocmd InsertLeave * set listchars+=trail:·
 
 
 
@@ -732,6 +646,8 @@ if has('nvim') || has('terminal')
     autocmd TermOpen * startinsert
 endif
 
+
+
 " Auto-close brackets/braces/parens spanning multiple lines. For some (unknown)
 " reason this mapping doesn't seem to take effect unless I do it on load.
 autocmd VimEnter * inoremap <silent><expr> <CR> <SID>enter_fn()
@@ -784,15 +700,11 @@ endfunction
 " Mappings
 " -----------------------------------------------------------------------------
 
-" Exit insert mode or command-line mode.
+" Exit insert mode.
 inoremap jk <Esc>
 inoremap jK <Esc>
 inoremap Jk <Esc>
 inoremap JK <Esc>
-cnoremap jk <C-c>
-cnoremap jK <C-c>
-cnoremap Jk <C-c>
-cnoremap JK <C-c>
 
 " 123<CR> takes you to line 123.
 noremap <CR> gg
@@ -822,11 +734,28 @@ if has('nvim')
 else
     noremap <Esc>w :w<CR>
     inoremap <Esc>w <C-o>:w<CR>
-
     noremap <Esc>q :qa<CR>
     inoremap <Esc>q <C-o>:qa<CR>
-
     noremap <Esc>p :<Up><CR>
+endif
+
+" Navigate windows with C-hjkl.
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" Resize current window with C-M-hjkl.
+if has('nvim')
+    noremap <M-C-h> 5<C-w><
+    noremap <M-C-j> 5<C-w>+
+    noremap <M-C-k> 5<C-w>-
+    noremap <M-C-l> 5<C-w>>
+else
+    noremap <Esc><C-h> 5<C-w><
+    noremap <Esc><C-j> 5<C-w>+
+    noremap <Esc><C-k> 5<C-w>-
+    noremap <Esc><C-l> 5<C-w>>
 endif
 
 
@@ -859,36 +788,83 @@ endfunction
 " auto-complete methods like "a.b()", and paths of the form "a::b::c()".
 function! s:check_word_behind() abort
     let col = col('.') - 1
-    if col == 0
-        return 0
-    else
-        let line = getline('.')
-        return line[col-1] =~ '\w' ||
-            \ line[col-1] ==# '.' ||
-            \ (col >= 2 && line[col-1] ==# ':' && line[col-2] ==# ':')
-    endif
+    let line = getline('.')
+    return col >= 1 && (line[col-1] =~ '\w' || line[col-1] ==# '.') ||
+        \ col >= 2 && line[col-1] ==# ':' && line[col-2] ==# ':'
 endfunction
 
 
 
-" Navigate windows with C-hjkl.
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" Hide status line, line numbers, etc.
+noremap <expr> <Leader>' ToggleDecorations()
 
-" Resize current window with C-M-hjkl.
-if has('nvim')
-    noremap <M-C-h> 5<C-w><
-    noremap <M-C-j> 5<C-w>+
-    noremap <M-C-k> 5<C-w>-
-    noremap <M-C-l> 5<C-w>>
-else
-    noremap <Esc><C-h> 5<C-w><
-    noremap <Esc><C-j> 5<C-w>+
-    noremap <Esc><C-k> 5<C-w>-
-    noremap <Esc><C-l> 5<C-w>>
-endif
+" Non script-local function, so we can do:
+" (bash)$ vim -c "call ToggleDecorations()"
+function! ToggleDecorations() abort
+    if &number
+        " Hide decorations.
+        set laststatus=1
+        set nonumber
+        set signcolumn=no
+        if PluginExists("ale")
+            ALEDisable
+        endif
+    else
+        " Show decorations.
+        set laststatus=2
+        set number
+        set signcolumn=auto
+        if PluginExists("ale")
+            ALEEnable
+        endif
+    endif
+
+    " Need to redraw here to get the effect right away.
+    mode
+
+    return ""
+endfunction
+
+" Toggle line numbers.
+noremap <expr> <F4> <SID>toggle_number()
+inoremap <expr> <F4> <SID>toggle_number()
+
+function! s:toggle_number() abort
+    if &number
+        set nonumber
+        set signcolumn=no
+    else
+        set number
+        set signcolumn=auto
+    endif
+
+    " Need to redraw here to get the effect right away.
+    mode
+
+    return ""
+endfunction
+
+" Toggle line wrapping.
+noremap <F5> :set wrap! wrap?<CR>
+inoremap <F5> <C-o>:set wrap! wrap?<CR>
+
+" Toggle colorcolumn.
+noremap <expr> <F6> <SID>toggle_colorcolumn()
+inoremap <expr> <F6> <SID>toggle_colorcolumn()
+
+function! s:toggle_colorcolumn() abort
+    if &colorcolumn !=# ""
+        set colorcolumn=
+    else
+        set colorcolumn=81,101,121
+    endif
+    set colorcolumn?
+
+    " Need to redraw here to get the effect right away.
+    redraw
+
+    return ""
+endfunction
 
 
 
@@ -921,8 +897,8 @@ noremap <Leader>v :e ~/config-files/.vimrc<CR>
 " Update configs.
 noremap <Leader>e :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
 
-" Reverse colors.
-noremap <silent> <Leader>r :!toggle-colors<CR>:source $MYVIMRC<CR>
+" Invert colors.
+noremap <silent> <Leader>i :!toggle-colors<CR>:source $MYVIMRC<CR>:<CR>
 
 " Strip trailing whitespace.
 noremap <silent> <Leader>w :%s/\s\+$//<CR>:noh<CR>

@@ -4,22 +4,29 @@ set $Win Mod4
 set $Alt Mod1
 
 # Applications.
-#bindsym Control+$Alt+Delete exec --no-startup-id "i3lock -c 000000"
-bindsym Control+$Alt+Delete exec --no-startup-id xflock4
-bindsym Print exec xfce4-screenshooter
-bindsym $Win+Return exec "exo-open --launch TerminalEmulator"
 bindsym $Win+i exec "exo-open --launch TerminalEmulator --execute tmux_attach"
 bindsym $Win+o exec "exo-open --launch WebBrowser"
 bindsym $Win+p exec --no-startup-id xfce4-popup-whiskermenu
 bindsym $Win+u exec firefox
+bindsym $Win+y exec "exo-open --launch TerminalEmulator --execute tmux_nvim"
 bindsym $Win+m exec "emacsclient -a '' -c"
 bindsym $Win+n exec "exo-open --launch FileManager"
+
+# Misc system keybinds.
+bindsym Control+$Alt+Delete exec --no-startup-id xfce4-session-logout
+bindsym Print exec xfce4-screenshooter
+bindsym $Win+Return exec "exo-open --launch TerminalEmulator"
+
+# Poor man's toggle xfce4 taskbar.
+# https://forum.xfce.org/viewtopic.php?id=11220
+bindsym $Win+apostrophe exec "pgrep xfce4-panel && xfce4-panel -q || xfce4-panel"
 
 # Change focus.
 bindsym $Win+h focus left
 bindsym $Win+j focus down
 bindsym $Win+k focus up
 bindsym $Win+l focus right
+
 # Switch focus across screens
 bindsym $Win+comma focus output left
 bindsym $Win+semicolon focus output right

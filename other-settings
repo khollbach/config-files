@@ -1,74 +1,8 @@
 Run ./update_configs to copy dotfiles. Log out and in to get PATH updates.
 
-# Aptitude packages. `sudo apt install $PKG_NAME`.
-
-redshift-gtk  # (And set it to autostart!)
-git
-tmux
-i3
-xfce4
-xfce4-goodies
-evince
-xclip  # For system-clipboard integration with tmux and nvim.
-ranger
-highlight  # For syntax highlighting in ranger.
-tldr
-expect  # For `unbuffer`.
-rlwrap
-gcc  # Rust needs a linker.
-chromium-browser
-
-# Install Rust, plus a few commandline utils via `cargo install $PKG`:
-
-curl https://sh.rustup.rs -sSf | sh
-
-ripgrep
-fd-find
-bat
-hexyl
-cargo-watch
-
-# For Rust development. (Racer needs nightly Rust.)
-rustup component add rust-src
-rustup toolchain add nightly
-cargo +nightly install racer
-
-# Misc.
-
-# To combine i3 with xfce, see steps V, VI, VII, VIII, X of this guide:
-https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
-
-# Install the latest stable release of Neovim.
-wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-mkdir -p ~/bin
-mv nvim.appimage ~/bin/nvim
-chmod +x ~/bin/nvim
-
-# Install fzf.
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
-
-# Install diff-so-fancy.
-git clone --depth 1 https://github.com/so-fancy/diff-so-fancy.git ~/.d-s-f
-ln -s ~/.d-s-f/diff-so-fancy ~/bin/diff-so-fancy
-
-# Install fzf 'forgit' (sourced in .bashrc).
-git clone --depth 1 https://github.com/wfxr/forgit.git ~/.forgit
-
-# For passwordless sudo, append this to /etc/sudoers:
-ALL ALL=(ALL) NOPASSWD: ALL
-
-To get capslock to be control in virtual consoles, add this line:
-(dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
-to /etc/rc.local and make it executable with the header #!/bin/bash
-
-On Windows, set system env var HOME to "C:\Users\$USERNAME" so Emacs can find
-your configs.
-
 # xfce4-terminal settings.
-
 Scrollbar is: Disabled
-DejaVu Sans Mono Book 22 point font, or on 1920x1080 screens:
+DejaVu Sans Mono Book 19 point font, or on 1920x1080 screens:
     14pt (=173x46 chars), 19 (127x35), 22 (106x30), 27 (87x25)
 Don't display menubar in new windows
 Solarized color scheme (light or dark)
@@ -77,8 +11,80 @@ Disable all shortcuts
 Autohide mouse pointer
 Automatically copy selection to clipboard
 
-# Ducky One 2 Mini keymaps. (See page 33 of the manual.)
+# Get the latest stable release of Neovim.
+wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+mkdir -p ~/bin
+mv nvim.appimage ~/bin/nvim
+chmod +x ~/bin/nvim
 
+# For passwordless sudo, append this to /etc/sudoers:
+ALL ALL=(ALL) NOPASSWD: ALL
+
+# Aptitude packages. `sudo apt install ...`
+redshift-gtk  # (And set it to autostart!)
+git
+tmux
+xclip  # For system-clipboard integration with tmux and nvim.
+i3
+xfce4
+xfce4-goodies
+chromium-browser
+evince
+tldr
+expect  # For `unbuffer`.
+rlwrap
+htop
+tree
+gcc  # Rust needs a linker.
+curl
+python-pip
+
+pip install ranger-fm
+
+# Install Rust, plus a few commandline utils.
+curl https://sh.rustup.rs -sSf | sh
+rustup component add rust-src
+rustup toolchain add nightly
+cargo +nightly install racer
+cargo install ripgrep hexyl cargo-watch
+
+# fd-find
+https://github.com/sharkdp/fd/releases/latest/
+sudo apt install ~/Downloads/fd_X.Y.Z_amd64.deb
+
+# bat
+https://github.com/sharkdp/bat/releases/latest/
+sudo apt install ~/Downloads/bat_X.Y.Z_amd64.deb
+
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.opt/fzf
+~/.opt/fzf/install
+
+# diff-so-fancy
+git clone --depth 1 https://github.com/so-fancy/diff-so-fancy.git ~/.opt/diff-so-fancy
+ln -s ~/.opt/diff-so-fancy/diff-so-fancy ~/bin/diff-so-fancy
+
+# fzf forgit
+git clone --depth 1 https://github.com/wfxr/forgit.git ~/.opt/forgit
+
+# To combine i3 with xfce, see steps V, VI, VII, VIII, X of this guide:
+https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
+
+# To get capslock to be control in virtual consoles, add the following
+# to /etc/rc.local and make it executable with the header `#!/bin/bash`:
+(dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
+
+# `sudoedit /etc/default/grub` and change the timeout from 10 seconds to 2:
+GRUB_TIMEOUT=2
+# and then run the following to apply the changes:
+sudo update-grub
+
+# Windows setup.
+Right-click on `caps-to-ctrl.reg` and click "merge", then reboot.
+Install and configure `f.lux`.
+Set system env var HOME to "C:\Users\$USERNAME" so Emacs can find your configs.
+
+# Ducky One 2 Mini keymaps. (See page 33 of the manual.)
 Esc -> `
 Ctrl -> Esc
 Capslock -> Ctrl  # This one has to be done in software, e.g. via setxkbmap.

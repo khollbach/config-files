@@ -3,9 +3,9 @@
 # Edit / update configs.
 alias co="c ~/config-files"
 alias u="source ~/config-files/update_configs"
-alias toggle-colors="~/config-files/scripts/toggle-colors && source ~/.bashrc"
+alias toggle-colors="command toggle-colors && source ~/.bashrc"
 
-# ls aliases
+# ls aliases.
 alias ls="ls -vh --color=auto"
 alias la="ls -A"
 alias ll="ls -lG"
@@ -13,10 +13,9 @@ alias lla="ll -lA"
 alias lt="ll -tr"
 alias lta="lt -A"
 
-# `-` = `c -`
+# `-`: change to previous directory.
+# `..`: change to parent directory.
 alias -- -="c -"
-
-# `..` = `c ..`, etc...
 alias      ..="c .."
 alias     ...="c ../.."
 alias    ....="c ../../.."
@@ -24,30 +23,30 @@ alias   .....="c ../../../.."
 alias  ......="c ../../../../.."
 alias .......="c ../../../../../.."
 
-alias ack="rg"
-alias cat="bat"
-
-# Neovim, if installed.
-if command -v nvim >/dev/null; then
-    alias vim="nvim"
-fi
-
-# Save a lot of typing.
-alias c="_cs"
-alias a="ack"
+# Spend less time typing.
+alias c=cs
+alias v=tmux_nvim
+alias vv='tmux_nvim -c "call ToggleDecorations()"'
+alias l=my_bat
+alias a=ack
 alias ai="ack -i"
-alias f="fd"
-alias t="my_time"
-alias p="python3"
-alias v="command nvim"
-alias l="command less"
-alias r='RANGER_ORIGINAL_PWD=$PWD ranger'
-alias ltmk="latexmk -pdf -pvc"
-alias pag="ps aux | grep"
-alias jq-vim="jq . | v -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
-alias jv=jq-vim
-alias ub=unbuffer
+alias f="fd --hidden --exclude .git"
+alias r='PAGER=my_bat ranger_pwd=$PWD ranger'
+alias p=python3
+alias t="my_time "
+alias ub="unbuffer "
 alias ta=tmux_attach
+alias pag="ps aux | grep"
+alias ltmk="latexmk -pdf -pvc"
+alias jq-vim="jq . | nvim -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
+alias jv=jq-vim
+
+# Vanilla vi(m).
+alias vi="vi -u NONE"
+
+# Make Emacs startup only slow the first time you run it.
+alias emacs="emacsclient -a '' -c"
+alias remacs="killall emacs; command emacs --daemon"
 
 # Make these more user-friendly.
 alias which="type -a"
@@ -57,9 +56,13 @@ if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
 
-# Emacs
-alias emacs="emacsclient -a '' -c"
-alias remacs="killall emacs; command emacs --daemon"
+# Replace these with something else.
+if command -v nvim >/dev/null; then
+    alias vim=nvim
+fi
+if command -v rg >/dev/null; then
+    alias ack=rg
+fi
 
 # Git shorthands.
 # Sadly this form breaks commandline autocompletion.

@@ -1,4 +1,7 @@
+" --------
 " Mappings
+" --------
+
 inoremap jk <Esc>
 inoremap jK <Esc>
 inoremap Jk <Esc>
@@ -23,12 +26,15 @@ noremap <Space>w :w<CR>
 noremap <Space>' :set hlsearch!<CR>
 noremap <Space>q :q<CR>
 
-
-
+" --------
 " Settings
+" --------
+
 set scrolloff=5
-set ignorecase " I really don't like this, but `noremap / /\c` doesn't work.
-set clipboard+=unnamedplus " Yank/paste to/from system clipboard always.
-                           " This includes `y', `d', `c', `p', etc.
-set visualbell " Don't make bell noises for things like <C-c>, h at beginning
-               " of line, k at beginning of file, etc.
+set ignorecase
+" Yank/paste to/from system clipboard always.
+" This includes `y', `d', `c', `p', etc.
+set clipboard+=unnamedplus
+" Don't make bell noises for things like <C-c>,
+" h at beginning of line, k at beginning of file, etc.
+set visualbell

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Wrapper around `bat` to allow editing the file from `less`.
+
+# todo sadly this doesn't jump to line numbers. The fix would involve
+# contributing a patch to gnu `less` adding a switch to allow opening the
+# editor even when viewing stdin. Then you could use LESSEDITOR and read the
+# filename from an environment variable.
+
+# Remember the last argument so less knows about it.
+# This is necessary because bat feeds stdin to less, and no filename.
+less_filename="${@: -1}" exec bat "$@"

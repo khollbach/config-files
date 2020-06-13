@@ -37,8 +37,8 @@ for p in $plugins; do
     git clone --depth 1 https://github.com/"$p".git
 done
 
-# Install vim-go
-source ~/config-files/.bash_functions || exit 1
+# vim-go
+source ~/.bash_functions || exit 1
 git clone --depth 1 https://github.com/fatih/vim-go.git &&
     cd vim-go &&
     git checkout "$(get_latest_release fatih/vim-go)" &&

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # cd and ls
-function _cs {
+function cs {
     cd "$@" && ls
 }
 

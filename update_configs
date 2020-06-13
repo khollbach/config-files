@@ -1,20 +1,19 @@
 #!/bin/bash
 
-# Copy dotfiles to home dir.
+# Copy dotfiles to home directory.
 if command -v rsync >/dev/null; then
     # If -a is given on the commandline, omit the -u flag to rsync.
-    rsync $([ "$1" == -a ] && printf "" || printf "%s" "-u") -rpv \
+    rsync $([ "$1" == -a ] || printf "%s" "-u") -rpv \
         ~/config-files/.[!.]* ~ \
         --exclude .git --exclude .gitignore
 else
     cp -v ~/config-files/.[!.]* ~ 2>/dev/null
-    cp -rv ~/config-files/{.config,.docker,.emacs.d,.vim} ~
+    cp -rv ~/config-files/{.Desktop,.config,.docker,.emacs.d,.vim} ~
 fi
-
 echo
 
-# Reload bashrc definitions if you sourced this script from your shell.
-# (Only do so if the current shell is 'interactive' [-i option])
+# Reload .bashrc definitions if you sourced this script from your shell.
+# (Only do so if the current shell is 'interactive' [-i option].)
 if [[ $- == *i* ]]; then
     echo source ~/.bashrc
     source ~/.bashrc
@@ -22,30 +21,8 @@ fi
 
 # Reload tmux conf. Ignore failure if tmux isn't running.
 echo tmux source-file ~/.tmux.conf
-tmux source-file ~/.tmux.conf 2> /dev/null || :
+tmux source-file ~/.tmux.conf 2>/dev/null || :
 
 # Generate .less file.
 echo lesskey ~/config-files/lesskey
 lesskey ~/config-files/lesskey
-
-# One-time FZF forgit settings.
-if [ -d ~/.forgit ]; then
-    # Use `l` instead of `enter` to preview selection.
-    if grep -q -E 'enter:execute' ~/.forgit/forgit.plugin.sh; then
-        echo forgit: remap l to enter
-        sed -i -E 's,enter:execute,l:execute,g' ~/.forgit/forgit.plugin.sh
-    fi
-
-    # Use `h` while previewing to go back.
-    if grep -q -E "LESS='-R'" ~/.forgit/forgit.plugin.sh; then
-        echo forgit: remap h to back in less
-
-        cat << EOF > ~/.forgit/lesskey
-#command
-h noaction q
-EOF
-
-        lesskey -o ~/.forgit/lesskey-compiled ~/.forgit/lesskey
-        sed -i -E "s,LESS='-R',LESSKEY_SYSTEM=$HOME/.forgit/lesskey-compiled,g" ~/.forgit/forgit.plugin.sh
-    fi
-fi

@@ -21,7 +21,7 @@ toLight() {
     # Uncomment "(new|old)Highlight" lines.
     sed -i -E 's,^(\s*)#((old|new)Highlight = .*)$,\1\2,g' "$cfg/.config/git/config"
 
-    # FZF
+    # fzf
     sed -i -E 's,^(export FZF_DEFAULT_OPTS="--color) (dark)"$,\1 light",g' "$cfg/.bashrc"
 
     # xfce4-terminal
@@ -40,8 +40,9 @@ toDark() {
     # Vim
     sed -i -E 's,^(\s*set background=)light$,\1dark,g' "$cfg/.vimrc"
 
-    # tmux (using Perl instead of sed, as per https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string)
+    # tmux
     # Comment out three specific lines.
+    # We use Perl instead of sed, as per https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string
     local pattern='(\s*)(set -g \S+ fg=\S+)\n'
     perl -0 -pi -e 's/(# Light grey[^\n]*)\n'"$pattern$pattern$pattern"'/\1\n\2#\3\n\4#\5\n\6#\7\n/gm' "$cfg/.tmux.conf"
 
@@ -49,7 +50,7 @@ toDark() {
     # Comment out "(new|old)Highlight" lines corresponding to light theme.
     sed -i -E 's,^(\s*)((old|new)Highlight = .* (224|194) .*)$,\1#\2,g' "$cfg/.config/git/config"
 
-    # FZF
+    # fzf
     sed -i -E 's,^(export FZF_DEFAULT_OPTS="--color) (light)"$,\1 dark",g' "$cfg/.bashrc"
 
     # xfce4-terminal
