@@ -27,11 +27,11 @@ alias .......="c ../../../../../.."
 alias c=cs
 alias v=tmux_nvim
 alias vv='tmux_nvim -c "call ToggleDecorations()"'
-alias l=my_bat
+alias l=bat_less
 alias a=ack
 alias ai="ack -i"
 alias f="fd --hidden --exclude .git"
-alias r='PAGER=my_bat ranger_pwd=$PWD ranger'
+alias r='PAGER=bat_less ranger_pwd=$PWD ranger'
 alias p=python3
 alias t="my_time "
 alias ub="unbuffer "

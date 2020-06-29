@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Preprocess the file with bat for syntax-highlighting.
+LESSOPEN='|bat --color=always %s' less "$@"

@@ -4,7 +4,7 @@ e noaction 5j
 y noaction 5k
 ^Y noaction 5k
 h noaction q
-l noaction !nvim "$less_filename"\rq
+l noaction vq
 
 #env
 LESS = -i -j4 -R
