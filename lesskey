@@ -7,4 +7,4 @@ h noaction q
 l noaction vq
 
 #env
-LESS = -i -j4 -R
+LESS = -i -j4 -R -x4
