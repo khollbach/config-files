@@ -251,8 +251,81 @@ if PluginExists("vim-racer")
     augroup Racer
         autocmd!
         autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
-        autocmd FileType rust nmap <buffer> K     <Plug>(rust-doc)
+
+        autocmd FileType rust nnoremap <silent> <buffer> K :call MyRustDoc()<CR>
     augroup END
+
+    " Open the docs for the selected stdlib identifier in a web browser.
+    function! MyRustDoc() abort
+        " Vim uses 1-indexed cols, but racer uses 0-indexed.
+        let col = col('.') - 1
+
+        if getline('.')[col] !~# '\w'
+            return
+        end
+
+        " Create a temporary file with the buffer's current state to be used
+        " by racer instead. This matters if the user has unsaved changes.
+        let b:altfile = tempname()
+        call writefile(getline(1, '$'), b:altfile)
+        let cmd = 'racer find-definition ' . line('.') . ' ' . col . ' ' . expand('%:p') . ' ' . b:altfile
+        let res = system(cmd)
+        call delete(b:altfile)
+
+        let line = split(res, '\n')[0]
+        if line !~# '^MATCH '
+            " In this case, may as well try the docs anyways.
+            " E.g., the identifier could be a keyword or something.
+            " todo: grab the identifier from the code somehow... `viwy` ?
+            let ident = '...'
+            if !LookupRustDocs(ident)
+                echo "Racer doesn't know about that identifier."
+            endif
+            return
+        endif
+
+        let info = split(line[6:], ',')
+        let ident = info[0]
+        let filepath = info[3]
+        let type = info[4]
+
+        " Trim the front of the path.
+        let tmp = split(filepath, '/lib/rustlib/src/rust/src/lib')
+        if len(tmp) != 2
+            echo "Not found in the standard library."
+            return
+        endif
+        let filepath = tmp[1]
+
+        " Trim the back. Two options: '/string.rs' or 'string/mod.rs', so we'll
+        " try both trimming the `.rs`, and trimming the whole filename.
+        let path1 = split(filepath, '\.rs$')[0]
+        let path2 = split(filepath, '/[^/]\+$')[0]
+
+        " Try the paths, with and without the identifier appended.
+        " (If the identifier is a module, it's name shouldn't appear twice.)
+        for path in [path1 . '/' . ident, path2 . '/' . ident, path2]
+            if LookupRustDocs(path)
+                return
+            end
+        endfor
+
+        echo "Couldn't find `" . filepath . ':' . ident . "` in the rust docs."
+    endfunction
+
+    " path is something like 'std/thread/spawn'
+    " Returns 1 iff the docs are found succesfully.
+    function! LookupRustDocs(path) abort
+        let path = substitute(a:path, '/', '::', 'g')
+
+        call system('rustup doc ' . path)
+
+        if v:shell_error ==# 0
+            return 1
+        else
+            return 0
+        endif
+    endfunction
 endif
 
 if PluginExists('ranger.vim') && PluginExists('bclose.vim')
@@ -789,7 +862,7 @@ endfunction
 function! s:check_word_behind() abort
     let col = col('.') - 1
     let line = getline('.')
-    return col >= 1 && (line[col-1] =~ '\w' || line[col-1] ==# '.') ||
+    return col >= 1 && (line[col-1] =~# '\w' || line[col-1] ==# '.') ||
         \ col >= 2 && line[col-1] ==# ':' && line[col-2] ==# ':'
 endfunction
 
