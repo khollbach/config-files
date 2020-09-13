@@ -34,7 +34,7 @@ function prompt_command {
         git_branch=""
     fi
 
-    # Add line breaks if $prompt_contents is anything more than '\w', or \w is
+    # Add a line break if $prompt_contents is anything more than '\w', or \w is
     # longer than 48 chars, or git branch is showing.
     local newline=""
     local w=$(dirs +0)
@@ -49,8 +49,9 @@ function prompt_command {
     # | ~/config-files (branch-name)
     # | $ _
     # or:
+    # |
     # | ~/config-files$ _
-    PS1="$reset$newline"
+    PS1="$reset\n"
     PS1="$PS1$color$prompt_contents$reset$git_branch$newline"
     PS1="$PS1$color"'\$'"$reset "
 }
