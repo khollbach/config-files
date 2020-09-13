@@ -5,6 +5,9 @@
 # Search hidden files and directories by default.
 --hidden
 
+# Sort output by file path. Slows down searching.
+--sort=path
+
 # Ignore ctags tagfiles, .git directories, etc.
 --glob=!tags
 --glob=!.git

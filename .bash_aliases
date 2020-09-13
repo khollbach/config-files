@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Edit / update configs.
-alias co="c ~/config-files"
+# Update configs.
 alias u="source ~/config-files/update_configs"
 alias toggle-colors="command toggle-colors && source ~/.bashrc"
 
@@ -33,11 +32,13 @@ alias ai="ack -i"
 alias f="fd --hidden --exclude .git"
 alias r='PAGER=bat_less ranger_pwd=$PWD ranger'
 alias p=python3
+alias k=cargo
+alias kc="cargo c"
 alias t="my_time "
 alias ub="unbuffer "
 alias ta=tmux_attach
 alias pag="ps aux | grep"
-alias ltmk="latexmk -pdf -pvc"
+alias ltmk="latexmk -pdf -pvc --shell-escape"
 alias jq-vim="jq . | nvim -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
 alias jv=jq-vim
 
@@ -50,11 +51,12 @@ alias remacs="killall emacs; command emacs --daemon"
 
 # Make these more user-friendly.
 alias which="type -a"
-alias grep="grep --color=auto"
+alias grep="grep --color=always"
 alias amm="amm --no-remote-logging"
 if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
+alias rg='rg --pretty'
 
 # Replace these with something else.
 if command -v nvim >/dev/null; then

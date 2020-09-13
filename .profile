@@ -20,7 +20,7 @@ export EDITOR="$VISUAL"
 # Pager, mostly for ranger.
 export PAGER="$(
     if command -v bat >/dev/null; then
-        command -v bat
+        command -v bat_less
     else
         command -v less
     fi)"
