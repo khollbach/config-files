@@ -21,9 +21,10 @@ function! PluginExists(name) abort
     return !empty(glob('~/.vim/pack/plugins/start/' . a:name . '/'))
 endfunction
 
-if PluginExists('vim-colors-solarized') && !empty($DISPLAY)
+if PluginExists('NeoSolarized') && !empty($DISPLAY)
+    set termguicolors
     set background=dark
-    colorscheme solarized
+    colorscheme NeoSolarized
 else
     colorscheme desert
 endif
@@ -272,12 +273,17 @@ if PluginExists("vim-racer")
         let res = system(cmd)
         call delete(b:altfile)
 
+        if len(res) == 0
+            echo "Error: empty output from Racer."
+            return
+        endif
+
         let line = split(res, '\n')[0]
         if line !~# '^MATCH '
             " In this case, may as well try the docs anyways.
             " E.g., the identifier could be a keyword or something.
             " todo: grab the identifier from the code somehow... `viwy` ?
-            let ident = '...'
+            let ident = '...unknown-ident...'
             if !LookupRustDocs(ident)
                 echo "Racer doesn't know about that identifier."
             endif
@@ -318,6 +324,8 @@ if PluginExists("vim-racer")
     function! LookupRustDocs(path) abort
         let path = substitute(a:path, '/', '::', 'g')
 
+        " The echo is for debugging; remove it when you feel this feature works.
+        echo path
         call system('rustup doc ' . path)
 
         if v:shell_error ==# 0

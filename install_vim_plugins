@@ -6,7 +6,7 @@ echo cd "$plugins_dir"
 cd "$plugins_dir" || exit 1
 
 plugins='
-altercation/vim-colors-solarized
+overcache/NeoSolarized
 justinmk/vim-sneak
 tpope/vim-sensible
 tpope/vim-surround

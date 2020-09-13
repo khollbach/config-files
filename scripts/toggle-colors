@@ -27,7 +27,7 @@ toLight() {
     # xfce4-terminal
     # This palette is tweaked slightly from the original to make color 11 the
     # same as color 10.
-    local solarized_tweaked='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#586e75;#839496;#6c71c4;#93a1a1;#fdf6e3'
+    local solarized_tweaked='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#859900;#b58900;#268bd2;#6c71c4;#2aa198;#fdf6e3'
     sed -i -E 's,^(ColorForeground)=.*$,\1=#073642,g;
                s,^(ColorBackground)=.*$,\1=#fdf6e3,g;
                s,^(ColorCursor)=.*$,\1=#073642,g;
@@ -44,7 +44,7 @@ toDark() {
     # Comment out three specific lines.
     # We use Perl instead of sed, as per https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string
     local pattern='(\s*)(set -g \S+ fg=\S+)\n'
-    perl -0 -pi -e 's/(# Light grey[^\n]*)\n'"$pattern$pattern$pattern"'/\1\n\2#\3\n\4#\5\n\6#\7\n/gm' "$cfg/.tmux.conf"
+    perl -0 -pi -e 's/(# Light [^\n]*)\n'"$pattern$pattern$pattern"'/\1\n\2#\3\n\4#\5\n\6#\7\n/gm' "$cfg/.tmux.conf"
 
     # diff-so-fancy
     # Comment out "(new|old)Highlight" lines corresponding to light theme.
@@ -54,7 +54,7 @@ toDark() {
     sed -i -E 's,^(export FZF_DEFAULT_OPTS="--color) (light)"$,\1 dark",g' "$cfg/.bashrc"
 
     # xfce4-terminal
-    local solarized='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#657b83;#839496;#6c71c4;#93a1a1;#fdf6e3'
+    local solarized='#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#859900;#b58900;#268bd2;#6c71c4;#2aa198;#fdf6e3'
     sed -i -E 's,^(ColorForeground)=.*$,\1=#839496,g;
                s,^(ColorBackground)=.*$,\1=#002b36,g;
                s,^(ColorCursor)=.*$,\1=#93a1a1,g;
