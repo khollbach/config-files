@@ -54,16 +54,16 @@ sudo apt install ~/Downloads/fd_X.Y.Z_amd64.deb
 https://github.com/sharkdp/bat/releases/latest/
 sudo apt install ~/Downloads/bat_X.Y.Z_amd64.deb
 
+# delta
+https://github.com/dandavison/delta/releases/latest/
+sudo apt install ~/Downloads/git-delta_X.Y.Z_amd64.deb
+
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.opt/fzf
 ~/.opt/fzf/install
 
 # fzf forgit
 git clone --depth 1 https://github.com/wfxr/forgit.git ~/.opt/forgit
-
-# diff-so-fancy
-git clone --depth 1 https://github.com/so-fancy/diff-so-fancy.git ~/.opt/diff-so-fancy
-ln -s ~/.opt/diff-so-fancy/diff-so-fancy ~/bin/diff-so-fancy
 
 # Windows setup.
 Right-click on `caps-to-ctrl.reg` and click "merge", then reboot.

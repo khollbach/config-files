@@ -30,6 +30,10 @@ main() {
             # If this is the root of a git repo, print the repo name (in
             # blue) and then run the command.
             if [[ -d .git ]]; then
+                if [[ -n "$any_successes" ]]; then
+                    echo  # newline
+                fi
+
                 echo -e "\e[0;34m$PWD\e[0m"
                 "${shell_command[@]}"
 

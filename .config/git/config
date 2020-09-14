@@ -5,11 +5,12 @@
 [alias]
     rec = !gitrecurse git
 
-    s = !gitrecurse git status -sb
-    si = !gitrecurse git status -sb --ignored
-    p = !gitrecurse git pull --rebase
-    f = !gitrecurse git fetch
-    l = !gitrecurse git --no-pager log --oneline -n 10
+    s = rec status -sb
+    si = rec status -sb --ignored
+    p = rec pull --rebase
+    f = rec fetch
+    l = rec --no-pager log --oneline -n 10
+
     d = diff
     ds = diff --staged
     h = show
@@ -33,24 +34,27 @@
     clean-ignored = clean -X
     current-branch = rev-parse --abbrev-ref HEAD
 
-# diff-so-fancy
 [core]
-    pager = diff-so-fancy | less --tabs=4
-[color]
-    ui = true
-[color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52  # >>> int('100', 6) + 16
-    newNormal = green bold
-    newHighlight = green bold 22  # >>> int('010', 6) + 16
+    pager = delta
 
-    # For light terminal backgrounds.
-    #oldHighlight = red bold 224  # >>> int('544', 6) + 16
-    #newHighlight = green bold 194  # >>> int('454', 6) + 16
-[color "diff"]
-    meta = yellow
-    frag = magenta bold
-    commit = yellow bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = decorations dark
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box
+    file-style = bold yellow
+    file-decoration-style = yellow box ul
+    hunk-header-decoration-style = yellow box
+
+[delta "dark"]
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+
+[delta "light"]
+    plus-style = syntax "#ddffdd"
+    minus-style = syntax "#ffdddd"
+    plus-emph-style = syntax "#aaffaa"
+    minus-emph-style = syntax "#ffaaaa"
