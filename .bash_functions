@@ -10,6 +10,11 @@ function ev {
     evince "$@" &> /dev/null &
 }
 
+# Invoke rust compiler; pipe colorful stderr to less.
+rc() {
+    ub rustc "$@" 2>&1 | l
+}
+
 # Time a long command and ring a bell when done.
 function my_time {
     # When did I start?
@@ -32,11 +37,6 @@ function my_time {
     fi
 
     return $rv
-}
-
-# Invoke rust compiler; pipe colorful stderr to less.
-rc() {
-    ub rustc "$@" 2>&1 | l
 }
 
 # https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
