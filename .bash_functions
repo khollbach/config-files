@@ -5,6 +5,11 @@ function cs {
     cd "$@" && ls
 }
 
+# tree | less
+function tl {
+    ub tree "$@" | l
+}
+
 # Run evince in background and ignore stdout/stderr.
 function ev {
     evince "$@" &> /dev/null &

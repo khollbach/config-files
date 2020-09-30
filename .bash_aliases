@@ -69,6 +69,10 @@ if command -v rg >/dev/null; then
     alias ack=rg
 fi
 
+# Switch between side-by-side and single-column delta diffs.
+# Usage: e.g., type `2 git diff`.
+alias 2='GIT_PAGER="delta -s"'
+
 # Git shorthands.
 # Sadly this form breaks commandline autocompletion.
 # TODO: fix it somehow. Try one of the suggestions here:

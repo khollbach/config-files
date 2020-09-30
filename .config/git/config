@@ -52,6 +52,8 @@
 [delta "dark"]
     plus-style = syntax "#003800"
     minus-style = syntax "#3f0001"
+    plus-emph-style = syntax "#004c00"
+    minus-emph-style = syntax "#5f0001"
 
 [delta "light"]
     plus-style = syntax "#ddffdd"
