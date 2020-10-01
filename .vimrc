@@ -116,12 +116,13 @@ if PluginExists('vim-gitgutter')
     " to see if I was going to press `p` or not.
     let g:gitgutter_map_keys = 0
 
-    nmap - <Plug>(GitGutterNextHunk)zz
-    nmap = <Plug>(GitGutterPrevHunk)zz
+    nmap <C-n> <Plug>(GitGutterNextHunk)zz
+    nmap <C-p> <Plug>(GitGutterPrevHunk)zz
 
-    nmap ghs <Plug>(GitGutterStageHunk)
+    " Add, undo, or diff hunks.
+    nmap gha <Plug>(GitGutterStageHunk)
     nmap ghu <Plug>(GitGutterUndoHunk)
-    nmap ghp <Plug>(GitGutterPreviewHunk)
+    nmap ghd <Plug>(GitGutterPreviewHunk)
 endif
 
 if PluginExists('incsearch.vim')
@@ -231,10 +232,6 @@ if PluginExists("ale")
     \ 'rust': ['rustfmt'],
     \ }
     let g:ale_fix_on_save = 1
-
-    " Go to next/previous error.
-    nmap <C-n> <Plug>(ale_next)
-    nmap <C-p> <Plug>(ale_previous)
 endif
 
 if PluginExists("vim-go")
@@ -798,9 +795,6 @@ noremap <C-e> 5<C-e>
 noremap <Home> ^
 inoremap <Home> <C-o>^
 
-" Select recently pasted text. (Built-in) gv selects recently selected text.
-nnoremap gp `[v`]
-
 if has('nvim')
     " Save.
     noremap <M-w> :w<CR>
@@ -958,8 +952,15 @@ noremap <Leader>p "+p
 noremap <Leader>P "+P
 
 " Paste from 0-register (yanked text only).
-noremap <Leader>h "0p
-noremap <Leader>H "0P
+noremap <Leader>l "0p
+noremap <Leader>L "0P
+
+" Select recently changed text; i.e. recently pasted / inserted / deleted, etc.
+" This gets messed-up by ":w" though, since `[ and `] reset to the whole file.
+nnoremap <Leader>i `[v`]
+
+" Rebind re-select recently-selected text.
+nnoremap <Leader>v gv
 
 " :noh
 noremap <Leader>j :nohlsearch<CR>:echo<CR>
@@ -972,14 +973,14 @@ noremap <Leader>q :q<CR>
 nnoremap <Leader>s :%s/\C//gc<left><left><left><left>
 vnoremap <Leader>s :s/\C//gc<left><left><left><left>
 
-" Edit `.vimrc`.
-noremap <Leader>v :e ~/config-files/.vimrc<CR>
-
 " Update configs.
 noremap <Leader>e :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
 
+" Edit `.vimrc`.
+noremap <Leader>E :e ~/config-files/.vimrc<CR>
+
 " Invert colors.
-noremap <silent> <Leader>i :!toggle-colors<CR>:source $MYVIMRC<CR>:<CR>
+noremap <silent> <Leader>z :!toggle-colors<CR>:source $MYVIMRC<CR>:<CR>
 
 " Strip trailing whitespace.
 noremap <silent> <Leader>w :%s/\s\+$//<CR>:noh<CR>
@@ -999,5 +1000,5 @@ noremap <Leader>, :bp<CR>
 
 " Include work-specific configs.
 if !empty(glob('~/notes/work/vimrc'))
-   source $HOME/notes/work/vimrc
+    source $HOME/notes/work/vimrc
 endif
