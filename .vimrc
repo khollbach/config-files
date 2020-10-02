@@ -958,6 +958,7 @@ noremap <Leader>L "0P
 " Select recently changed text; i.e. recently pasted / inserted / deleted, etc.
 " This gets messed-up by ":w" though, since `[ and `] reset to the whole file.
 nnoremap <Leader>i `[v`]
+nnoremap gp <Nop>
 
 " Rebind re-select recently-selected text.
 nnoremap <Leader>v gv

@@ -28,7 +28,10 @@ function prompt_command {
     # Show the current git branch if you're in a git repo and you've checked
     # out anything other than master.
     local git_branch=$(parse_git_branch)
-    if [ -n "$git_branch" ] && [ "$git_branch" != '(master)' ]; then
+    if [ -n "$git_branch" ] \
+        && [ "$git_branch" != '(master)' ] \
+        && [ "$git_branch" != '(main)' ]
+    then
         git_branch=" $green$git_branch$reset"
     else
         git_branch=""
