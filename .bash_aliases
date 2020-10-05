@@ -33,10 +33,10 @@ alias f="fd --hidden --exclude .git"
 alias r='PAGER=bat_less ranger_pwd=$PWD ranger'
 alias p=python3
 alias k=cargo
-alias kc="cargo c"
-alias kt="cargo t"
-alias kr="cargo r"
-alias kb="cargo b"
+alias kc="kk c"
+alias kt="kk t"
+alias kr="k r"
+alias kb="kk b"
 alias t="my_time "
 alias ub="unbuffer "
 alias ta=tmux_attach

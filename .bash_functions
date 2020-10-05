@@ -7,7 +7,8 @@ function cs {
 
 # tree | less
 function tl {
-    ub tree "$@" | l
+    ub tree "$@" |& l
+    return ${PIPESTATUS[0]}
 }
 
 # Run evince in background and ignore stdout/stderr.
@@ -15,9 +16,16 @@ function ev {
     evince "$@" &> /dev/null &
 }
 
-# Invoke rust compiler; pipe colorful stderr to less.
+# Invoke rust compiler; pipe colorful stdout/err to less.
 rc() {
-    ub rustc "$@" 2>&1 | l
+    rustc --color always "$@" |& less -F
+    return ${PIPESTATUS[0]}
+}
+
+# Invoke rust build tool; pipe colorful stdout/err to less.
+kk() {
+    k --color always "$@" |& less -F
+    return ${PIPESTATUS[0]}
 }
 
 # Time a long command and ring a bell when done.
