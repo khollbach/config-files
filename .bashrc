@@ -191,4 +191,4 @@ source ~/.bash_aliases
 source ~/.bash_functions
 
 # Work-related defs, etc.
-[ -f ~/notes/configs/bashrc ] && source ~/notes/configs/bashrc
+[ -f ~/notes/.configs/bashrc ] && source ~/notes/.configs/bashrc
