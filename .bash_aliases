@@ -29,14 +29,15 @@ alias vv='tmux_nvim -c "call ToggleDecorations()"'
 alias l=bat_less
 alias a=ack
 alias ae="ack --case-sensitive"
+alias aw="ack --case-sensitive -w"
 alias f="fd --hidden --exclude .git"
 alias r='PAGER=bat_less ranger_pwd=$PWD ranger'
 alias p=python3
 alias k=cargo
 alias kc="kk c"
+alias kb="kk b"
 alias kt="kk t"
 alias kr="k r"
-alias kb="kk b"
 alias t="my_time "
 alias ub="unbuffer "
 alias ta=tmux_attach
