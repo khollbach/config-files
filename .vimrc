@@ -943,6 +943,9 @@ endfunction
 
 
 
+
+    " Rebind re-select recently-selected text.
+    nnoremap <Leader>v gv
 " Copy/cut/paste to/from system clipboard.
 noremap <Leader>y "+y
 noremap <Leader>Y "+Y
@@ -957,11 +960,8 @@ noremap <Leader>L "0P
 
 " Select recently changed text; i.e. recently pasted / inserted / deleted, etc.
 " This gets messed-up by ":w" though, since `[ and `] reset to the whole file.
-nnoremap <Leader>i `[v`]
+nnoremap <Leader>v `[v`]
 nnoremap gp <Nop>
-
-" Rebind re-select recently-selected text.
-nnoremap <Leader>v gv
 
 " :noh
 noremap <Leader>j :nohlsearch<CR>:echo<CR>

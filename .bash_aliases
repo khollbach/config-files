@@ -28,8 +28,8 @@ alias v=tmux_nvim
 alias vv='tmux_nvim -c "call ToggleDecorations()"'
 alias l=bat_less
 alias a=ack
-alias ae="ack --case-sensitive"
-alias aw="ack --case-sensitive -w"
+alias ae="a --case-sensitive"
+alias aw="a --case-sensitive -w"
 alias f="fd --hidden --exclude .git"
 alias r='PAGER=bat_less ranger_pwd=$PWD ranger'
 alias p=python3
@@ -53,25 +53,27 @@ alias vi="vi -u NONE"
 alias emacs="emacsclient -a '' -c"
 alias remacs="killall emacs; command emacs --daemon"
 
-# Make these more user-friendly.
+# Make these easier to use.
 alias which="type -a"
 alias grep="grep --color=always"
+alias rg='rg --pretty'
 alias amm="amm --no-remote-logging"
 if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
-alias rg='rg --pretty'
 
-# Replace these with something else.
-if command -v nvim >/dev/null; then
-    alias vim=nvim
-fi
+# ack -> ripgrep.
 if command -v rg >/dev/null; then
     alias ack=rg
 fi
 
+# Vim -> Neovim.
+if command -v nvim >/dev/null; then
+    alias vim=nvim
+fi
+
 # Switch between side-by-side and single-column delta diffs.
-# Usage: e.g., type `2 git diff`.
+# Usage: `2 git diff`
 alias 2='GIT_PAGER="delta -s"'
 
 # Git shorthands.

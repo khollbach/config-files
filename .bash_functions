@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Run evince in background and ignore stdout/stderr.
+function ev {
+    evince "$@" &> /dev/null &
+}
+
 # cd and ls
 function cs {
     cd "$@" && ls
@@ -11,9 +16,13 @@ function tl {
     return ${PIPESTATUS[0]}
 }
 
-# Run evince in background and ignore stdout/stderr.
-function ev {
-    evince "$@" &> /dev/null &
+# Ignore hidden directories in home. Also ignore ~/snap.
+function rg {
+    if [[ "$PWD" == "$HOME" ]]; then
+        command rg -g '!/.*' -g '!/snap/' "$@"
+    else
+        command rg "$@"
+    fi
 }
 
 # Invoke rust compiler; pipe colorful stdout/err to less.
