@@ -19,8 +19,8 @@ pip3 install ranger-fm
 
 # xfce4-terminal settings.
 Scrollbar is: Disabled
-DejaVu Sans Mono Book 16 point font, or on 1920x1080 screens:
-    14pt (=173x46 chars), 16 (146x40), 19 (127x35), 22 (106x30)
+Automatically copy selection to clipboard
+DejaVu Sans Mono Book 14 or 17 point font.
 Don't display menubar in new windows
 Solarized (dark) color scheme
 Don't show bold text in bright colors

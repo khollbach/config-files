@@ -32,8 +32,8 @@ rc() {
 }
 
 # Invoke rust build tool; pipe colorful stdout/err to less.
-kk() {
-    k --color always "$@" |& less -F
+oo() {
+    o --color always "$@" |& less -F
     return ${PIPESTATUS[0]}
 }
 

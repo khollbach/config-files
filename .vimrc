@@ -791,10 +791,6 @@ noremap <CR> gg
 noremap <C-y> 5<C-y>
 noremap <C-e> 5<C-e>
 
-" Go to the first non-blank character, instead of the actual start of line.
-noremap <Home> ^
-inoremap <Home> <C-o>^
-
 if has('nvim')
     " Save.
     noremap <M-w> :w<CR>
@@ -941,11 +937,9 @@ function! s:toggle_colorcolumn() abort
     return ""
 endfunction
 
+" Re-select recently-selected text.
+nnoremap <Leader>v gv
 
-
-
-    " Rebind re-select recently-selected text.
-    nnoremap <Leader>v gv
 " Copy/cut/paste to/from system clipboard.
 noremap <Leader>y "+y
 noremap <Leader>Y "+Y
@@ -1003,3 +997,25 @@ noremap <Leader>, :bp<CR>
 if !empty(glob('~/notes/work/vimrc'))
     source $HOME/notes/work/vimrc
 endif
+
+" Playing around with alternate layouts.
+source $HOME/config-files/unmap.vimrc
+source $HOME/config-files/remap.vimrc
+
+" Start of line is first non-blank character.
+noremap <Home> ^
+inoremap <Home> <C-o>^
+
+" Make ctrl+arrows do what you expect: move by words or paragraphs.
+noremap <C-Left> b
+noremap <C-Right> w
+noremap <C-Up> {
+noremap <C-Down> }
+inoremap <C-Left> <C-o>b
+inoremap <C-Right> <C-o>w
+inoremap <C-Up> <C-o>{
+inoremap <C-Down> <C-o>}
+
+" Make ctrl+backspace and ctrl+delete work as expected.
+inoremap <C-h> <C-\><C-o>db
+inoremap <C-del> <C-\><C-o>de

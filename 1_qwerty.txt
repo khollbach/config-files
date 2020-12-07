@@ -1,36 +1,67 @@
 # Kinesis Advantage 2 on-board drive keymap.
-# See https://gist.github.com/nicholasknight/181375ee15f9cb89d3c69f4cc2b63df9
-# See also the KA2 manual.
+#
+# To put this on the keyboard, see: https://gist.github.com/nicholasknight/181375ee15f9cb89d3c69f4cc2b63df9#the-on-board-drive
+#
+# In summary:
+#   progm+shift+escape => super-user mode on/off
+#   progm+F1 => mount/unmount on-board drive
+#   Copy the file to the `active/` directory with the name `1_qwerty.txt`.
+#   progm+F3 => activate the qwerty map
+#   progm+1 => activate the new mapping file
+# For the first two commands, the lights will flash three times for
+# "on"/"mounted", and twice for "off"/"unmounted".
+#
+# See also the KA2 manual. The appendix has a visualization, with keycodes.
 
-# Left thumb cluster.
+# Misc mappings. --------------------------------------------------------------
+
+# Left/right thumb clusters: mostly modifier keys.
+# Left:
 [bspace]>[lshift]
 [delete]>[lctrl]
-[lctrl]>[lwin]
-[lalt]>[escape]
-[home]>[lalt]
-[end]>[insert]
-
-# Right thumb cluster.
+[lctrl]>[escape]
+[lalt]>[lalt]
+[home]>[lwin]
+[end]>[rctrl]
+# Right:
 [space]>[space]
 [enter]>[ralt]
 [rctrl]>[enter]
-[rwin]>[delete]
-[pup]>[rctrl]
+[rwin]>[rwin]
+[pup]>[delete]
 [pdown]>[rshift]
 
-# Misc.
+# Thumb cluster modifiers, repeated for key-pad mode.
+# (So that I can do, e.g., ctrl-shift-F5.)
+# Left:
+[kp-bspace]>[lshift]
+[kp-delete]>[lctrl]
+[kp-lctrl]>[null]
+[kp-lalt]>[lalt]
+[kp-home]>[lwin]
+[kp-end]>[rctrl]
+# Right:
+[kp0]>[null]
+[kp-enter]>[ralt]
+[kp-rctrl]>[null]
+[kp-rwin]>[null]
+[kp-pup]>[rwin]
+[kp-pdown]>[rshift]
+
+# capslock => backspace
+# left/right shift => home/end
+# If you really want to toggle capslock, you can use kpshift+caps.
 [caps]>[bspace]
 [lshift]>[home]
 [rshift]>[end]
 
-# This seems heinous, I know.
-# It's because of Vim muscle memory; the up/down arrows are directly below JK.
+# Flip up and down arrow keys. This is because of Vim muscle memory: the
+# up/down arrows are directly below J/K.
 [up]>[down]
 [down]>[up]
 
 # Invert volume buttons with print-screen/scroll-lock/pause-break, so that you
-# can change volume without being in key-pad mode or holding down the 'kpshift'
-# modifier key.
+# can change volume without being in key-pad mode or holding down 'kpshift'.
 [prtscr]>[mute]
 [scroll]>[vol-]
 [pause]>[vol+]
@@ -40,15 +71,30 @@
 
 # Key-pad layer mappings. -----------------------------------------------------
 
-# The 'kpshift' map behaves as a function-modifier for the 'key-pad' layer.
-# When held, pressing keys will generate their key-pad mode mapping instead of
-# their normal mapping.
-# A quirk is that you have to map both the normal version and the key-pad
-# version of the key that you want to behave as a modifier.
+# The `kpshift` logical key behaves as a function-modifier for the 'key-pad'
+# layer. When held, pressing keys will generate their key-pad mode mapping
+# instead of their normal mode mapping. A quirk is that you have to map both
+# the normal version and the key-pad version of the key that you want to behave
+# as a modifier; in our case:
 [intl-\]>[kpshift]
 [kp-insert]>[kpshift]
 
-# Give me function keys F1-F12 on the key-pad layer.
+# Null-out unused function-modified keys in the key-pad keywell.
+[kp-6]>[null]
+[kp-y]>[null]
+[kp-h]>[null]
+[kp-n]>[null]
+[kpmult]>[null]
+[kpmin]>[null]
+[kpplus]>[null]
+[kpenter1]>[null]
+[kpenter2]>[null]
+[kp-hyphen]>[null]
+[kp-\]>[null]
+[kp-']>[null]  # '
+[kp-rshift]>[null]
+
+# Function keys F1-F12.
 [kp1]>[f1]
 [kp2]>[f2]
 [kp3]>[f3]
@@ -62,43 +108,50 @@
 [kp=]>[f11]
 [kpdiv]>[f12]
 
-# Also, page-up/page-down.
-# (Inverted, as with the up/down arrow keys.)
-[kp-up]>[pdown]
-[kp-down]>[pup]
+# Volume down/up/mute. (Under up/down arrows.)
+[kp-up]>[vol-]
+[kp-down]>[vol+]
+[kp.]>[mute]
 
-# Thumb clusters, repeated for key-pad mode.
-# (So that I can do, e.g., ctrl-shift-F5.)
-# Left:
-[kp-bspace]>[lshift]
-[kp-delete]>[lctrl]
-[kp-lctrl]>[lwin]
-[kp-lalt]>[escape]
-[kp-home]>[lalt]
-[kp-end]>[insert]
-# Right:
-[kp0]>[space]
-[kp-enter]>[ralt]
-[kp-rctrl]>[enter]
-[kp-rwin]>[delete]
-[kp-pup]>[rctrl]
-[kp-pdown]>[rshift]
+# page-down / page-up   =>   kpshift+SPC / kpshift+;
+# (They're easy to hit.)
+[kp0]>[pdown]
+[kpplus]>[pup]
 
-# May as well repeat these too.
-[kp-caps]>[bspace]
-[kp-lshift]>[home]
-[kp-rshift]>[end]
+# Print screen. (Under p key.)
+[kpmin]>[prtscr]
 
-# Null-out unused function-modified keys in the key-pad keywell.
-[kp-6]>[null]
-[kp-y]>[null]
-[kp-h]>[null]
-[kp-n]>[null]
-[kp.]>[null]
-[kpmult]>[null]
-[kpmin]>[null]
-[kpplus]>[null]
-[kpenter1]>[null]
-[kpenter2]>[null]
+# Alternate keyboard layout: Workman (with small changes) ---------------------
+
+[Q]>[Q]
+[W]>[D]
+[E]>[R]
+[R]>[W]
+[T]>[B]
+[Y]>[K]  # usually J
+[U]>[F]
+[I]>[U]
+[O]>[P]
+[P]>[;]
+[A]>[A]
+[S]>[S]
+[D]>[H]
+[F]>[T]
+[G]>[G]
+[H]>[Y]
+[J]>[N]
+[K]>[E]
+[L]>[O]
+[;]>[I]
+[Z]>[Z]
+[X]>[X]
+[C]>[M]
+[V]>[C]
+[B]>[V]
+[N]>[J]  # usually K
+[M]>[L]
+[,]>[,]
+[.]>[.]
+[/]>[/]
 
 # vim: set syntax=config:

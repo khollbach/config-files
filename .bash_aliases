@@ -23,9 +23,10 @@ alias  ......="c ../../../../.."
 alias .......="c ../../../../../.."
 
 # Spend less time typing.
+alias s=ls
 alias c=cs
-alias v=tmux_nvim
-alias vv='tmux_nvim -c "call ToggleDecorations()"'
+alias e=tmux_nvim
+alias E='tmux_nvim -c "call ToggleDecorations()"'
 alias l=bat_less
 alias a=ack
 alias ae="a --case-sensitive"
@@ -33,11 +34,11 @@ alias aw="a --case-sensitive -w"
 alias f="fd --hidden --exclude .git"
 alias r='PAGER=bat_less ranger_pwd=$PWD ranger'
 alias p=python3
-alias k=cargo
-alias kc="kk c"
-alias kb="kk b"
-alias kt="kk t"
-alias kr="k r"
+alias o=cargo
+alias oc="oo c"
+alias ob="oo b"
+alias ot="oo t"
+alias or="o r"
 alias t="my_time "
 alias ub="unbuffer "
 alias ta=tmux_attach
@@ -51,7 +52,7 @@ alias vi="vi -u NONE"
 
 # Make Emacs startup only slow the first time you run it.
 alias emacs="emacsclient -a '' -c"
-alias remacs="killall emacs; command emacs --daemon"
+alias remacs="pushd ~ >/dev/null && killall emacs && command emacs --daemon && popd >/dev/null"
 
 # Make these easier to use.
 alias which="type -a"

@@ -4,40 +4,42 @@ set $Win Mod4
 set $Alt Mod1
 
 # Applications.
-bindsym $Win+i exec "xfce4-terminal --execute tmux_attach"
-bindsym $Win+o exec google-chrome
-bindsym $Win+p exec --no-startup-id xfce4-popup-whiskermenu
-bindsym $Win+u exec firefox
-bindsym $Win+y exec "xfce4-terminal --execute tmux_nvim"
-bindsym $Win+m exec "emacsclient -a '' -c"
-bindsym $Win+n exec "exo-open --launch FileManager"
+bindsym $Win+o exec "xfce4-terminal --execute tmux_attach"
+bindsym $Win+i exec google-chrome
+bindsym $Win+semicolon exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermenu || dmenu_run"
+
+#bindsym $Win+u exec firefox
+#bindsym $Win+y exec "exo-open --launch FileManager"
+#bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c"
+#bindsym $Win+m exec emacs
+#bindsym $Win+n exec "xfce4-terminal --execute tmux_nvim"
+
+# Simple, hacky way to toggle xfce4 taskbar.
+# https://forum.xfce.org/viewtopic.php?id=11220
+bindsym $Win+apostrophe exec --no-startup-id "pgrep xfce4-panel && xfce4-panel -q || xfce4-panel"
 
 # Misc system keybinds.
 bindsym Control+$Alt+Delete exec --no-startup-id xfce4-session-logout
 bindsym Print exec xfce4-screenshooter
 bindsym $Win+Return exec "exo-open --launch TerminalEmulator"
 
-# Poor man's toggle xfce4 taskbar.
-# https://forum.xfce.org/viewtopic.php?id=11220
-bindsym $Win+apostrophe exec "pgrep xfce4-panel && xfce4-panel -q || xfce4-panel"
-
 # Change focus.
-bindsym $Win+h focus left
-bindsym $Win+j focus down
-bindsym $Win+k focus up
-bindsym $Win+l focus right
+bindsym $Win+l focus left
+bindsym $Win+n focus down
+bindsym $Win+e focus up
+bindsym $Win+u focus right
 
 # Switch focus across screens
 bindsym $Win+comma focus output left
-bindsym $Win+semicolon focus output right
+bindsym $Win+period focus output right
 
 # Move focused window.
-bindsym $Win+$Alt+h move left
-bindsym $Win+$Alt+j move down
-bindsym $Win+$Alt+k move up
-bindsym $Win+$Alt+l move right
+bindsym $Win+$Alt+l move left
+bindsym $Win+$Alt+n move down
+bindsym $Win+$Alt+e move up
+bindsym $Win+$Alt+u move right
 bindsym $Win+$Alt+comma move output left; focus output left
-bindsym $Win+$Alt+semicolon move output right; focus output right
+bindsym $Win+$Alt+period move output right; focus output right
 
 # Switch to workspace.
 bindsym $Win+1 workspace 1
@@ -76,16 +78,16 @@ exec --no-startup-id i3-msg "workspace 1"
 bindsym $Win+$Alt+q kill
 
 # Fullscreen the focused window.
-bindsym $Win+f fullscreen toggle
+bindsym $Win+t fullscreen toggle
 
 # Change split mode (vertical / horizontal).
-bindsym $Win+v split v
+bindsym $Win+c split v
 bindsym $Win+g split h
 
 # Change container layout: stacked / tabbed / (vertical/horizontal split).
-bindsym $Win+s layout stacking
-bindsym $Win+w layout tabbed
-bindsym $Win+e layout toggle split
+#bindsym $Win+s layout stacking
+#bindsym $Win+w layout tabbed
+#bindsym $Win+e layout toggle split
 
 # Toggle tiling / floating for the current window.
 bindsym $Win+$Alt+space floating toggle
@@ -95,7 +97,7 @@ bindsym $Win+space focus mode_toggle
 
 # Focus parent/child container.
 bindsym $Win+a focus parent
-bindsym $Win+d focus child
+bindsym $Win+h focus child
 
 # "Zoom" -- aka fullscreen an enclosing split-container, without the app
 # (usually Chrome) thinking it's fullscreen-ed. This way you can still see the
@@ -110,7 +112,7 @@ bindsym $Win+$Alt+r restart
 
 # Exit i3 and logout of the X session.
 #bindsym $Win+$Alt+e exec --no-startup-id "i3-msg exit"
-bindsym $Win+$Alt+e exec --no-startup-id xfce4-session-logout
+#bindsym $Win+$Alt+e exec --no-startup-id xfce4-session-logout
 
 
 
@@ -122,10 +124,10 @@ mode "resize" {
     # Right: grow the focused window’s width.
     # Up: shrink the focused window’s height.
     # Down: grow the focused window’s height.
-    bindsym h resize shrink width 5 px or 5 ppt
-    bindsym j resize grow height 5 px or 5 ppt
-    bindsym k resize shrink height 5 px or 5 ppt
-    bindsym l resize grow width 5 px or 5 ppt
+    bindsym l resize shrink width 5 px or 5 ppt
+    bindsym n resize grow height 5 px or 5 ppt
+    bindsym e resize shrink height 5 px or 5 ppt
+    bindsym u resize grow width 5 px or 5 ppt
 
     # Back to normal mode: q, Enter, Escape, or space
     bindsym q mode "default"

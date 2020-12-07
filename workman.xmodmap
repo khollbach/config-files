@@ -1,0 +1,35 @@
+! J and K are swapped from their usual positions.
+
+keycode 24 = q Q
+keycode 25 = d D
+keycode 26 = r R
+keycode 27 = w W
+keycode 28 = b B
+keycode 29 = k K
+keycode 30 = f F
+keycode 31 = u U
+keycode 32 = p P
+keycode 33 = semicolon colon
+
+keycode 38 = a A
+keycode 39 = s S
+keycode 40 = h H
+keycode 41 = t T
+keycode 42 = g G
+keycode 43 = y Y
+keycode 44 = n N
+keycode 45 = e E
+keycode 46 = o O
+keycode 47 = i I
+keycode 48 = apostrophe quotedbl
+
+keycode 52 = z Z
+keycode 53 = x X
+keycode 54 = m M
+keycode 55 = c C
+keycode 56 = v V
+keycode 57 = j J
+keycode 58 = l L
+keycode 59 = comma less
+keycode 60 = period greater
+keycode 61 = slash question
