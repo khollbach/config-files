@@ -7,7 +7,7 @@ function ev {
 
 # cd and ls
 function cs {
-    cd "$@" && ls
+    cd "$@" && s
 }
 
 # tree | less

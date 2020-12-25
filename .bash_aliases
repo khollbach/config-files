@@ -5,9 +5,9 @@ alias u="source ~/config-files/update_configs"
 alias toggle-colors="command toggle-colors && source ~/.bashrc"
 
 # ls aliases.
-alias ls="ls -vh --color=auto"
-alias la="ls -A"
-alias ll="ls -lG"
+alias s="command ls -vh --color=auto"
+alias la="s -A"
+alias ll="s -lG"
 alias lla="ll -lA"
 alias lt="ll -tr"
 alias lta="lt -A"
@@ -23,7 +23,6 @@ alias  ......="c ../../../../.."
 alias .......="c ../../../../../.."
 
 # Spend less time typing.
-alias s=ls
 alias c=cs
 alias e=tmux_nvim
 alias E='tmux_nvim -c "call ToggleDecorations()"'

@@ -4,15 +4,15 @@ inoremap <M-d> <nop>
 inoremap <M-q> <nop>
 noremap <M-s> :w<CR>
 noremap <M-a> :qall<CR>
-inoremap <M-s> :w<CR>
-inoremap <M-a> :qall<CR>
+inoremap <M-s> <C-o>:w<CR>
+inoremap <M-a> <C-o>:qall<CR>
 
 " For now...
 noremap D H
 noremap R M
 noremap W L
-noremap m v
-noremap M V
+noremap m V
+noremap M v
 noremap L J
 noremap k u
 noremap K <C-r>
@@ -83,3 +83,4 @@ noremap E 5<C-y>
 " Find
 " todo: other details
 noremap <space> f
+noremap <del> F

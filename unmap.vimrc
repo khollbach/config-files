@@ -80,6 +80,7 @@ noremap > <nop>
 noremap ? <nop>
 
 " Numbers
+noremap 0 <nop>
 "noremap 1 <nop>
 "noremap 2 <nop>
 "noremap 3 <nop>
@@ -89,7 +90,6 @@ noremap ? <nop>
 "noremap 7 <nop>
 "noremap 8 <nop>
 "noremap 9 <nop>
-"noremap 0 <nop>
 
 " Symbols
 "noremap ! <nop>
