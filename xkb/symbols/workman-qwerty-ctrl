@@ -1,0 +1,82 @@
+default partial alphanumeric_keys xkb_symbols "default" {
+    include "us(basic)"
+    name[Group1] = "English (Workman with Qwerty control keys)";
+
+    // todo: implement this type so that capslock works.
+    //key.type[Group1] = "WIQ_ALPHABETIC";
+    key.type[Group1] = "WIQ_TWO_LEVEL";
+
+    key <AD01> { [ NoSymbol, q, Q ], actions[Group1] = [ RedirectKey(key=<I152>) ] };
+    key <AD02> { [ NoSymbol, d, D ], actions[Group1] = [ RedirectKey(key=<I153>) ] };
+    key <AD03> { [ NoSymbol, r, R ], actions[Group1] = [ RedirectKey(key=<I154>) ] };
+    key <AD04> { [ NoSymbol, w, W ], actions[Group1] = [ RedirectKey(key=<I155>) ] };
+    key <AD05> { [ NoSymbol, b, B ], actions[Group1] = [ RedirectKey(key=<I156>) ] };
+    key <AD06> { [ NoSymbol, k, K ], actions[Group1] = [ RedirectKey(key=<I157>) ] };
+    key <AD07> { [ NoSymbol, f, F ], actions[Group1] = [ RedirectKey(key=<I158>) ] };
+    key <AD08> { [ NoSymbol, u, U ], actions[Group1] = [ RedirectKey(key=<I159>) ] };
+    key <AD09> { [ NoSymbol, p, P ], actions[Group1] = [ RedirectKey(key=<I160>) ] };
+    key <AD10> { [ NoSymbol, semicolon, colon ], actions[Group1] = [ RedirectKey(key=<I161>) ], type[Group1] = "WIQ_TWO_LEVEL" };
+
+    key <AC01> { [ NoSymbol, a, A ], actions[Group1] = [ RedirectKey(key=<I162>) ] };
+    key <AC02> { [ NoSymbol, s, S ], actions[Group1] = [ RedirectKey(key=<I163>) ] };
+    key <AC03> { [ NoSymbol, h, H ], actions[Group1] = [ RedirectKey(key=<I164>) ] };
+    key <AC04> { [ NoSymbol, t, T ], actions[Group1] = [ RedirectKey(key=<I165>) ] };
+    key <AC05> { [ NoSymbol, g, G ], actions[Group1] = [ RedirectKey(key=<I166>) ] };
+    key <AC06> { [ NoSymbol, y, Y ], actions[Group1] = [ RedirectKey(key=<I167>) ] };
+    key <AC07> { [ NoSymbol, n, N ], actions[Group1] = [ RedirectKey(key=<I168>) ] };
+    key <AC08> { [ NoSymbol, e, E ], actions[Group1] = [ RedirectKey(key=<I169>) ] };
+    key <AC09> { [ NoSymbol, o, O ], actions[Group1] = [ RedirectKey(key=<I170>) ] };
+    key <AC10> { [ NoSymbol, i, I ], actions[Group1] = [ RedirectKey(key=<I171>) ] };
+
+    key <AB01> { [ NoSymbol, z, Z ], actions[Group1] = [ RedirectKey(key=<I172>) ] };
+    key <AB02> { [ NoSymbol, x, X ], actions[Group1] = [ RedirectKey(key=<I173>) ] };
+    key <AB03> { [ NoSymbol, m, M ], actions[Group1] = [ RedirectKey(key=<I174>) ] };
+    key <AB04> { [ NoSymbol, c, C ], actions[Group1] = [ RedirectKey(key=<I175>) ] };
+    key <AB05> { [ NoSymbol, v, V ], actions[Group1] = [ RedirectKey(key=<I176>) ] };
+    key <AB06> { [ NoSymbol, j, J ], actions[Group1] = [ RedirectKey(key=<I177>) ] };
+    key <AB07> { [ NoSymbol, l, L ], actions[Group1] = [ RedirectKey(key=<I178>) ] };
+    key <AB08> { [ NoSymbol, comma, less ], actions[Group1] = [ RedirectKey(key=<I179>) ], type[Group1] = "WIQ_TWO_LEVEL" };
+    key <AB09> { [ NoSymbol, period, greater ], actions[Group1] = [ RedirectKey(key=<I180>) ], type[Group1] = "WIQ_TWO_LEVEL" };
+    key <AB10> { [ NoSymbol, slash, question ], actions[Group1] = [ RedirectKey(key=<I181>) ], type[Group1] = "WIQ_TWO_LEVEL" };
+
+    include "wiq(imaginary-qwerty)"
+};
+
+// Qwerty keys on the multimedia keys that most physical keyboards don't have.
+// This is a terrible hack, taken from here: https://github.com/ZeptByteS/dvorak-qwerty/tree/develop
+partial alphanumeric_keys xkb_symbols "imaginary-qwerty" {
+    key.type[Group1] = "ALPHABETIC";
+
+    key <I152> { [ q, Q ] };
+    key <I153> { [ w, W ] };
+    key <I154> { [ e, E ] };
+    key <I155> { [ r, R ] };
+    key <I156> { [ t, T ] };
+    key <I157> { [ y, Y ] };
+    key <I158> { [ u, U ] };
+    key <I159> { [ i, I ] };
+    key <I160> { [ o, O ] };
+    key <I161> { [ p, P ] };
+
+    key <I162> { [ a, A ] };
+    key <I163> { [ s, S ] };
+    key <I164> { [ d, D ] };
+    key <I165> { [ f, F ] };
+    key <I166> { [ g, G ] };
+    key <I167> { [ h, H ] };
+    key <I168> { [ j, J ] };
+    key <I169> { [ k, K ] };
+    key <I170> { [ l, L ] };
+    key <I171> { [ semicolon, colon ], type[Group1] = "TWO_LEVEL" };
+
+    key <I172> { [ z, Z ] };
+    key <I173> { [ x, X ] };
+    key <I174> { [ c, C ] };
+    key <I175> { [ v, V ] };
+    key <I176> { [ b, B ] };
+    key <I177> { [ n, N ] };
+    key <I178> { [ m, M ] };
+    key <I179> { [ comma, less ], type[Group1] = "TWO_LEVEL" };
+    key <I180> { [ period, greater ], type[Group1] = "TWO_LEVEL" };
+    key <I181> { [ slash, question ], type[Group1] = "TWO_LEVEL" };
+};

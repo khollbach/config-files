@@ -24,23 +24,3 @@ export PAGER="$(
     else
         command -v less
     fi)"
-
-# setxkbmap and xmodmap will only work if X is running.
-if [ -n "$DISPLAY" ]; then
-    # Map capslock to control.
-    if command -v setxkbmap >/dev/null; then
-        setxkbmap -option ctrl:nocaps
-    fi
-
-    # Workman keyboard layout.
-    if command -v xmodmap >/dev/null && [ -f "$HOME/config-files/workman.xmodmap" ]; then
-        xmodmap "$HOME/config-files/workman.xmodmap"
-    fi
-
-    # Swap alt and super on Mac keyboard, since they're backwards.
-    if [ "$HOSTNAME" == kevan-MacBook ] &&
-        command -v xmodmap >/dev/null && [ -f "$HOME/config-files/swap-alt-super.xmodmap" ]; then
-
-        xmodmap "$HOME/config-files/swap-alt-super.xmodmap"
-    fi
-fi

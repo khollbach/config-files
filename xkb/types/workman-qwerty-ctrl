@@ -1,0 +1,20 @@
+default partial xkb_types "default" {
+    virtual_modifiers Alt,Super;
+
+    // When typing control/alt/super modified keys, use qwerty; otherwise use
+    // workman. This is so that ctrl-z/x/c/v, etc stay where they are.
+    type "WIQ_TWO_LEVEL" {
+        modifiers = Shift+Control+Alt+Super;
+
+        map[None] = Level2;
+        map[Shift] = Level3;
+
+        // Everything else (at least one modifier) => Level1
+
+        level_name[Level1] = "Qwerty redirect";
+        level_name[Level2] = "Workman upper";
+        level_name[Level3] = "Workman lower";
+    };
+
+    // todo: implement a "WIQ_ALPHABETIC" type that respects capslock.
+};
