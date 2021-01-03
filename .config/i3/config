@@ -10,7 +10,7 @@ bindsym $Win+semicolon exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-wh
 
 #bindsym $Win+u exec firefox
 #bindsym $Win+y exec "exo-open --launch FileManager"
-#bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c"
+#bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c -n"
 #bindsym $Win+m exec emacs
 #bindsym $Win+n exec "xfce4-terminal --execute tmux_nvim"
 

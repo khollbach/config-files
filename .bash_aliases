@@ -50,7 +50,7 @@ alias jv=jq-vim
 alias vi="vi -u NONE"
 
 # Make Emacs startup only slow the first time you run it.
-alias emacs="emacsclient -a '' -c"
+alias emacs="emacsclient -a '' -c -n"
 alias remacs="pushd ~ >/dev/null && killall emacs && command emacs --daemon && popd >/dev/null"
 
 # Make these easier to use.
