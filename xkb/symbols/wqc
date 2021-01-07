@@ -2,9 +2,16 @@ default partial alphanumeric_keys xkb_symbols "default" {
     include "us(basic)"
     name[Group1] = "English (Workman with Qwerty control keys)";
 
+    // Map right alt to escape.
+    key <RALT> { [ Escape ], type[Group1] = "ONE_LEVEL" };
+
+    // This should just work, but doesn't because of this bug:
+    // https://gitlab.freedesktop.org/xorg/xserver/-/issues/320
+    //key.repeat = yes;
+
     // todo: implement this type so that capslock works.
-    //key.type[Group1] = "WIQ_ALPHABETIC";
-    key.type[Group1] = "WIQ_TWO_LEVEL";
+    //key.type[Group1] = "WQC_ALPHABETIC";
+    key.type[Group1] = "WQC_TWO_LEVEL";
 
     key <AD01> { [ NoSymbol, q, Q ], actions[Group1] = [ RedirectKey(key=<I152>) ] };
     key <AD02> { [ NoSymbol, d, D ], actions[Group1] = [ RedirectKey(key=<I153>) ] };
@@ -15,7 +22,7 @@ default partial alphanumeric_keys xkb_symbols "default" {
     key <AD07> { [ NoSymbol, f, F ], actions[Group1] = [ RedirectKey(key=<I158>) ] };
     key <AD08> { [ NoSymbol, u, U ], actions[Group1] = [ RedirectKey(key=<I159>) ] };
     key <AD09> { [ NoSymbol, p, P ], actions[Group1] = [ RedirectKey(key=<I160>) ] };
-    key <AD10> { [ NoSymbol, semicolon, colon ], actions[Group1] = [ RedirectKey(key=<I161>) ], type[Group1] = "WIQ_TWO_LEVEL" };
+    key <AD10> { [ NoSymbol, semicolon, colon ], actions[Group1] = [ RedirectKey(key=<I161>) ], type[Group1] = "WQC_TWO_LEVEL" };
 
     key <AC01> { [ NoSymbol, a, A ], actions[Group1] = [ RedirectKey(key=<I162>) ] };
     key <AC02> { [ NoSymbol, s, S ], actions[Group1] = [ RedirectKey(key=<I163>) ] };
@@ -35,11 +42,11 @@ default partial alphanumeric_keys xkb_symbols "default" {
     key <AB05> { [ NoSymbol, v, V ], actions[Group1] = [ RedirectKey(key=<I176>) ] };
     key <AB06> { [ NoSymbol, j, J ], actions[Group1] = [ RedirectKey(key=<I177>) ] };
     key <AB07> { [ NoSymbol, l, L ], actions[Group1] = [ RedirectKey(key=<I178>) ] };
-    key <AB08> { [ NoSymbol, comma, less ], actions[Group1] = [ RedirectKey(key=<I179>) ], type[Group1] = "WIQ_TWO_LEVEL" };
-    key <AB09> { [ NoSymbol, period, greater ], actions[Group1] = [ RedirectKey(key=<I180>) ], type[Group1] = "WIQ_TWO_LEVEL" };
-    key <AB10> { [ NoSymbol, slash, question ], actions[Group1] = [ RedirectKey(key=<I181>) ], type[Group1] = "WIQ_TWO_LEVEL" };
+    key <AB08> { [ NoSymbol, comma, less ], actions[Group1] = [ RedirectKey(key=<I179>) ], type[Group1] = "WQC_TWO_LEVEL" };
+    key <AB09> { [ NoSymbol, period, greater ], actions[Group1] = [ RedirectKey(key=<I180>) ], type[Group1] = "WQC_TWO_LEVEL" };
+    key <AB10> { [ NoSymbol, slash, question ], actions[Group1] = [ RedirectKey(key=<I181>) ], type[Group1] = "WQC_TWO_LEVEL" };
 
-    include "wiq(imaginary-qwerty)"
+    include "wqc(imaginary-qwerty)"
 };
 
 // Qwerty keys on the multimedia keys that most physical keyboards don't have.

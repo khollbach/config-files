@@ -24,3 +24,8 @@ export PAGER="$(
     else
         command -v less
     fi)"
+
+# Work around a bug in xkb; enable autorepeat for alphabetic keys.
+for scancode in $(seq 24 33) $(seq 38 47) $(seq 52 61) $(seq 152 181); do
+    xset r $scancode
+done

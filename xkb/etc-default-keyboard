@@ -3,7 +3,7 @@
 # Consult the keyboard(5) manual page.
 
 XKBMODEL="pc105"
-XKBLAYOUT="workman-qwerty-ctrl,us"
+XKBLAYOUT="wqc,us"
 XKBVARIANT=""
 XKBOPTIONS="grp:shifts_toggle,ctrl:nocaps"
 

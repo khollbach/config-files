@@ -3,7 +3,7 @@ default partial xkb_types "default" {
 
     // When typing control/alt/super modified keys, use qwerty; otherwise use
     // workman. This is so that ctrl-z/x/c/v, etc stay where they are.
-    type "WIQ_TWO_LEVEL" {
+    type "WQC_TWO_LEVEL" {
         modifiers = Shift+Control+Alt+Super;
 
         map[None] = Level2;
@@ -16,5 +16,5 @@ default partial xkb_types "default" {
         level_name[Level3] = "Workman lower";
     };
 
-    // todo: implement a "WIQ_ALPHABETIC" type that respects capslock.
+    // todo: implement a "WQC_ALPHABETIC" type that respects capslock.
 };

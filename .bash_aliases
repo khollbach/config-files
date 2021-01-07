@@ -61,6 +61,8 @@ alias amm="amm --no-remote-logging"
 if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
+alias cc="clang -Wall -Wextra -Werror"
+alias gcc="gcc -Wall -Wextra -Werror -O"
 
 # ack -> ripgrep.
 if command -v rg >/dev/null; then
