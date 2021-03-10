@@ -1,18 +1,15 @@
-## Keybinds
-
+# These are just aliases.
 set $Win Mod4
 set $Alt Mod1
 
-# Applications.
-bindsym $Win+o exec "xfce4-terminal --execute tmux_attach"
-bindsym $Win+i exec google-chrome
-bindsym $Win+semicolon exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermenu || dmenu_run"
 
-#bindsym $Win+u exec firefox
-#bindsym $Win+y exec "exo-open --launch FileManager"
-#bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c -n"
-#bindsym $Win+m exec emacs
-#bindsym $Win+n exec "xfce4-terminal --execute tmux_nvim"
+
+# Applications.
+bindsym $Win+l exec "xfce4-terminal --execute tmux_attach"
+bindsym $Win+semicolon exec google-chrome
+bindsym $Win+u exec "exo-open --launch FileManager"
+bindsym $Win+o exec --no-startup-id "emacsclient -a '' -c -n"
+bindsym $Win+p exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermenu || dmenu_run"
 
 # Simple, hacky way to toggle xfce4 taskbar.
 # https://forum.xfce.org/viewtopic.php?id=11220
@@ -23,21 +20,23 @@ bindsym Control+$Alt+Delete exec --no-startup-id xfce4-session-logout
 bindsym Print exec xfce4-screenshooter
 bindsym $Win+Return exec "exo-open --launch TerminalEmulator"
 
+
+
 # Change focus.
-bindsym $Win+l focus left
-bindsym $Win+n focus down
-bindsym $Win+e focus up
-bindsym $Win+u focus right
+bindsym $Win+m focus left
+bindsym $Win+j focus down
+bindsym $Win+k focus up
+bindsym $Win+i focus right
 
 # Switch focus across screens
 bindsym $Win+comma focus output left
 bindsym $Win+period focus output right
 
 # Move focused window.
-bindsym $Win+$Alt+l move left
-bindsym $Win+$Alt+n move down
-bindsym $Win+$Alt+e move up
-bindsym $Win+$Alt+u move right
+bindsym $Win+$Alt+m move left
+bindsym $Win+$Alt+j move down
+bindsym $Win+$Alt+k move up
+bindsym $Win+$Alt+i move right
 bindsym $Win+$Alt+comma move output left; focus output left
 bindsym $Win+$Alt+period move output right; focus output right
 
@@ -69,19 +68,19 @@ bindsym $Win+$Alt+0 move workspace 10; workspace 10
 bindsym $Win+minus move scratchpad
 bindsym $Win+equal scratchpad show
 
-# Start on workspace 1.
-exec --no-startup-id i3-msg "workspace 1"
 
 
+# Restart i3 inplace to see updated configs, bar, etc.
+bindsym $Win+$Alt+r restart
 
 # Kill focused window.
 bindsym $Win+$Alt+q kill
 
 # Fullscreen the focused window.
-bindsym $Win+t fullscreen toggle
+bindsym $Win+f fullscreen toggle
 
 # Change split mode (vertical / horizontal).
-bindsym $Win+c split v
+bindsym $Win+v split v
 bindsym $Win+g split h
 
 # Change container layout: stacked / tabbed / (vertical/horizontal split).
@@ -89,15 +88,15 @@ bindsym $Win+g split h
 #bindsym $Win+w layout tabbed
 #bindsym $Win+e layout toggle split
 
+# Focus parent/child container.
+bindsym $Win+a focus parent
+bindsym $Win+d focus child
+
 # Toggle tiling / floating for the current window.
 bindsym $Win+$Alt+space floating toggle
 
 # Change focus between the tiling and floating window layers.
 bindsym $Win+space focus mode_toggle
-
-# Focus parent/child container.
-bindsym $Win+a focus parent
-bindsym $Win+h focus child
 
 # "Zoom" -- aka fullscreen an enclosing split-container, without the app
 # (usually Chrome) thinking it's fullscreen-ed. This way you can still see the
@@ -105,20 +104,9 @@ bindsym $Win+h focus child
 # https://www.reddit.com/r/i3wm/comments/ed5qmw/full_screen_on_chrome_no_url_bar/
 bindsym $Win+z split v; focus parent; fullscreen toggle; focus child
 
-
-
-# Restart i3 inplace to see updated configs, bar, etc.
-bindsym $Win+$Alt+r restart
-
-# Exit i3 and logout of the X session.
-#bindsym $Win+$Alt+e exec --no-startup-id "i3-msg exit"
-#bindsym $Win+$Alt+e exec --no-startup-id xfce4-session-logout
-
-
-
 # Resize-window mode.
-# (You can also just use the mouse! Alt + right-mouse-drag resizes windows.)
 bindsym $Win+r mode "resize"
+
 mode "resize" {
     # Left: shrink the focused window’s width.
     # Right: grow the focused window’s width.
@@ -140,8 +128,6 @@ mode "resize" {
 
 
 
-## Settings
-
 # Don't show window titlebars by default. Still shows when stacked or tabbed.
 new_window pixel 3
 
@@ -152,9 +138,7 @@ font pango:DejaVu Sans Mono 12
 hide_edge_borders smart
 
 # Don't wrap around the screen when selecting windows to the left/right, etc.
-# TODO: this option isn't available until i3 version 4.15. Uncomment this when
-# ubuntu upgrades it's version.
-#focus_wrapping no
+focus_wrapping no
 
 # Use Alt + left-mouse to drag floating windows to their wanted position.
 floating_modifier $Alt
@@ -163,21 +147,7 @@ floating_modifier $Alt
 focus_follows_mouse no  # Don't focus things on mouse-over.
 mouse_warping none  # Don't pull my mouse around when switching windows.
 
-
-
-## Status bar
-
-# Using xfce4-panel instead of i3bar for now.
-## Start i3bar. Shows workspaces, plus some system info from i3status, if
-## available.
-#bar {
-    #id status-bar
-    #font pango:DejaVu Sans Mono 14
-    #mode invisible  # `dock` = shown; `invisible` = hidden.
-    #status_command i3status
-#}
-## Toggle i3bar.
-#bindsym $Win+apostrophe exec --no-startup-id i3bar-toggle
-
 # Notification manager.
 exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
+
+# vim: set syntax=config:

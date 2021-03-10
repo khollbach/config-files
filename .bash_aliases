@@ -25,7 +25,8 @@ alias .......="c ../../../../../.."
 # Spend less time typing.
 alias c=cs
 alias e=tmux_nvim
-alias E='tmux_nvim -c "call ToggleDecorations()"'
+alias ee='tmux_nvim -c "call ToggleDecorations()"'
+alias se=sudoedit
 alias l=bat_less
 alias a=ack
 alias ae="a --case-sensitive"
@@ -62,7 +63,9 @@ if command -v rlwrap >/dev/null; then
     alias ocaml="rlwrap ocaml"
 fi
 alias cc="clang -Wall -Wextra -Werror"
+alias cx="clang++ -Wall -Wextra -Werror"
 alias gcc="gcc -Wall -Wextra -Werror -O"
+alias g++="g++ -Wall -Wextra -Werror -O"
 
 # ack -> ripgrep.
 if command -v rg >/dev/null; then

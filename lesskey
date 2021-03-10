@@ -1,10 +1,20 @@
 #command
-e noaction 5j
-^E noaction 5j
-y noaction 5k
-^Y noaction 5k
-h noaction q
-l noaction vq
+a noaction q
+h noaction u
+t noaction d
+H noaction b
+T noaction f
+
+^N forw-line
+^E back-line
+n noaction 5^N
+e noaction 5^E
+N noaction n
+E noaction e
+o noaction vq
+
+j repeat-search
+J reverse-search
 
 #env
-LESS = -i -j4 -R -x4
+LESS = -i -j4 -R --tabs=4

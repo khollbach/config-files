@@ -1,0 +1,15 @@
+#!/bin/bash
+# Copy the layout files to the KA2's on-board drive.
+
+set -e
+
+local src=$(dirname "$0")
+local dest=/media/kevan/KINESISashtasht
+
+if [[ ! -d "$dest" ]]; then
+    echo Directory does not exist. Mount the drive first.
+    exit 1
+fi
+
+cp "$src/1_qwerty.txt" "$dest/"
+cat 1_qwerty.txt 2_qwerty-suffix > "$dest/2_qwerty.txt"

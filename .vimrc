@@ -977,19 +977,8 @@ noremap <Leader>E :e ~/config-files/.vimrc<CR>
 " Invert colors.
 noremap <silent> <Leader>z :!toggle-colors<CR>:source $MYVIMRC<CR>:<CR>
 
-" Strip trailing whitespace.
-noremap <silent> <Leader>w :%s/\s\+$//<CR>:noh<CR>
-
-" Change file permissions to be executable or not.
-noremap <Leader>x :!chmod +x %<CR>
-noremap <Leader>X :!chmod -x %<CR>
-
 " List buffers.
 noremap <Leader><Tab> :ls<CR>
-
-" Next/previous buffer.
-noremap <Leader>; :bn<CR>
-noremap <Leader>, :bp<CR>
 
 
 
@@ -999,11 +988,11 @@ if !empty(glob('~/notes/work/vimrc'))
 endif
 
 " Playing around with alternate layouts.
-source $HOME/config-files/unmap.vimrc
-source $HOME/config-files/remap.vimrc
+source $HOME/config-files/vim/unmap.vimrc
+source $HOME/config-files/vim/remap.vimrc
 
 " Start of line is first non-blank character.
-noremap <Home> ^
+"noremap <Home> ^
 inoremap <Home> <C-o>^
 
 " Make ctrl+arrows do what you expect: move by words or paragraphs.
@@ -1019,3 +1008,38 @@ inoremap <C-Down> <C-o>}
 " Make ctrl+backspace and ctrl+delete work as expected.
 inoremap <C-h> <C-\><C-o>db
 inoremap <C-del> <C-\><C-o>de
+
+" Strip trailing whitespace.
+noremap <silent> <Space>s :%s/\s\+$//<CR>:noh<CR>
+
+" Change file permissions to be executable or not.
+noremap <Space>x :!chmod +x %<CR>
+noremap <Space>X :!chmod -x %<CR>
+
+" Comment / uncomment -- these cause issues, e.g. "." gets remapped after. :/
+"map <Space>/ <plug>NERDCommenterComment
+"map <Space>? <plug>NERDCommenterUncomment
+
+" Update configs.
+noremap <Space>u :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
+
+" Edit `.vimrc`.
+noremap <Space>U :e ~/config-files/.vimrc<CR>
+
+" :noh
+noremap <Space>n :nohlsearch<CR>:echo<CR>
+noremap <Space>e :set hlsearch! hlsearch?<CR>
+
+" Copy/cut/paste to/from system clipboard.
+noremap <Space>d "+y
+noremap <Space>r "+d
+noremap <Space>w "+c
+noremap <Space>c "+p
+noremap <Space>C "+P
+
+" Next/previous buffer.
+noremap - :bn<CR>
+noremap = :bp<CR>
+
+" Open file.
+nnoremap <Space>o :Files<CR>

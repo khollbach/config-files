@@ -127,15 +127,15 @@ bind -m emacs-standard '"\eu": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\
 # Add keybinds to fzf forgit.
 export FORGIT_FZF_DEFAULT_OPTS='
     --height=100%
-    --bind=j:down,k:up
-    --bind=h:abort,q:abort
+    --bind=n:down,e:up
+    --bind=a:abort
 '
 
-# forgit: use `l` instead of `enter` to preview selection.
+# forgit: use `o` instead of `enter` to preview selection.
 # Should run only once.
 if [ -d ~/.opt/forgit ] && grep -q -E 'enter:execute' ~/.opt/forgit/forgit.plugin.sh; then
-    echo forgit: remap l to enter
-    sed -i -E 's,enter:execute,l:execute,g' ~/.opt/forgit/forgit.plugin.sh
+    echo forgit: remap o to enter
+    sed -i -E 's,enter:execute,o:execute,g' ~/.opt/forgit/forgit.plugin.sh
 fi
 
 
