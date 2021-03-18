@@ -39,20 +39,6 @@
   ;; This way, motions like `w' and `e' work as expected.
   (add-hook 'text-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
-  ;; insert mode C-u = backward-kill-line (Readline's C-u)
-  ;; M-u = universal-argument (Emacs' C-u)
-  ;;
-  ;; See https://github.com/wasamasa/dotemacs/blob/master/init.org#evil
-  ;; and https://www.emacswiki.org/emacs/BackwardKillLine
-  (defun backward-kill-line (arg)
-    "Kill ARG lines backward."
-    (interactive "p")
-    (kill-line (- 1 arg)))
-  (define-key global-map (kbd "C-u") 'backward-kill-line)
-  (define-key global-map (kbd "M-u") 'universal-argument)
-  (define-key universal-argument-map (kbd "C-u") nil)
-  (define-key universal-argument-map (kbd "M-u") 'universal-argument-more)
-
   ;;; Various key-bindings.
 
   ;; Reload definitions from `init.el`.

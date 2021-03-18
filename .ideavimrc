@@ -1,40 +1,15 @@
-" --------
-" Mappings
-" --------
-
-inoremap jk <Esc>
-inoremap jK <Esc>
-inoremap Jk <Esc>
-inoremap JK <Esc>
-noremap <CR> gg
-noremap <C-y> 5<C-y>
-noremap <C-e> 5<C-e>
-noremap <Home> ^
-noremap <Space> <Nop>
-nnoremap gp `[v`]
-
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <Space>h "0p
-" This bind is buggy for me: it correctly pastes but then acts as if an extra
-" `H` command was sent, and moves the cursor to the top of the screen.
-noremap <Space>H "0P
-" (IntelliJ trims whitespace upon `:w`)
-noremap <Space>w :w<CR>
-noremap <Space>' :set hlsearch!<CR>
-noremap <Space>q :q<CR>
-
-" --------
-" Settings
-" --------
+" Custom keymap.
+source ~/config-files/vim/remap.vimrc
 
 set scrolloff=5
+set incsearch
 set ignorecase
-" Yank/paste to/from system clipboard always.
-" This includes `y', `d', `c', `p', etc.
-set clipboard+=unnamedplus
-" Don't make bell noises for things like <C-c>,
-" h at beginning of line, k at beginning of file, etc.
+
+" Use IntelliJ's clipboard.
+set clipboard+=ideaput
+
+" Turn off `ding` sound effects for movement keys.
 set visualbell
+
+" Smarter line joining; handles things like comments, etc.
+set ideajoin

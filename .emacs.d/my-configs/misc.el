@@ -19,7 +19,7 @@
 
 ;; Thin vertical line at 100 chars.
 ;;
-;; todo: it would be nice to have one at 80 as well ... idk if this is supported though.
+;; It would be nice to have one at 80 as well, but this feature doesn't seem to exist.
 (add-hook 'prog-mode-hook (lambda ()
                             (display-fill-column-indicator-mode)
                             (setq display-fill-column-indicator-column 100)))
@@ -34,6 +34,26 @@
 ;; todo: it would be nice if command history persisted across sessions too,
 ;; e.g. things like `C-x C-f` file listings, so you can just press <up>
 ;; to see what you were recently looking at, etc, etc.
+
+;; ``Smooth'' scrolling, instead of half-screen jumps.
+;;
+;; https://stackoverflow.com/questions/3631220/fix-to-get-smooth-scrolling-in-emacs
+(setq redisplay-dont-pause t
+      scroll-margin 5
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
+
+;; Insert comment characters.
+;;
+;; todo: this isn't working when I press <CR>
+;;
+;; https://stackoverflow.com/questions/11969442/comment-mode-in-emacs
+;(defun my-prog-mode-hook ()
+;    (setq fill-column 72)
+;    (set (make-local-variable 'comment-auto-fill-only-comments) t)
+;    (auto-fill-mode t))
+;(add-hook 'prog-mode-hook 'my-prog-mode-hook)
 
 
 

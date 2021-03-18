@@ -1043,3 +1043,9 @@ noremap = :bp<CR>
 
 " Open file.
 nnoremap <Space>o :Files<CR>
+
+" Make this keybind work in rust files.
+augroup Racer
+    autocmd!
+    autocmd FileType rust nmap <buffer> <C-f> <Plug>(rust-def)
+augroup END

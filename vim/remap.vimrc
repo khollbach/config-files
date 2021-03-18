@@ -1,3 +1,21 @@
+" Save and quit
+noremap <M-s> :w<CR>
+noremap <M-a> :qall<CR>
+inoremap <M-s> <C-o>:w<CR>
+inoremap <M-a> <C-o>:qall<CR>
+
+" Jump to definition / jump back.
+noremap <C-d> <C-t>
+noremap <C-f> <C-]>
+
+" Select recently changed / pasted text.
+nnoremap gp `[v`]
+
+" Toggle comments.
+"map <space>/ <plug>NERDCommenterComment
+"map <space>? <plug>NERDCommenterUncomment
+
+
 " hjkl
 noremap l h
 noremap n j
@@ -34,14 +52,6 @@ noremap r d
 noremap w c
 noremap c p
 noremap C P
-
-" Find.
-noremap <del> f
-noremap <s-del> F
-noremap <ins> t
-noremap <s-ins> T
-noremap <home> ,
-noremap <end> ;
 
 " Scrolling
 noremap h <C-u>
@@ -90,24 +100,10 @@ noremap ? ?
 noremap j n
 noremap J N
 
-" Save and quit
-noremap <M-s> :w<CR>
-noremap <M-a> :qall<CR>
-inoremap <M-s> <C-o>:w<CR>
-inoremap <M-a> <C-o>:qall<CR>
-
-" Toggle comments
-"map <space>/ <plug>NERDCommenterComment
-"map <space>? <plug>NERDCommenterUncomment
+" Start of line is first non-blank character.
+noremap <Home> ^
+inoremap <Home> <C-o>^
 
 " Up/down by 1 line.
 noremap <C-j> <C-e>
 noremap <C-k> <C-y>
-
-" Jump to definition / jump back.
-noremap <C-d> <C-t>
-noremap <C-f> <C-]>
-augroup Racer
-    autocmd!
-    autocmd FileType rust nmap <buffer> <C-f> <Plug>(rust-def)
-augroup END
