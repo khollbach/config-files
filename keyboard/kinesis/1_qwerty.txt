@@ -22,30 +22,30 @@
 [lctrl]>[escape]
 [lalt]>[lalt]
 [home]>[lwin]
-[end]>[rctrl]
+[end]>[kpshift]
 # Right:
 [space]>[space]
 [enter]>[lalt]  # Use lalt since ralt is mapped to esc in xkb (for my laptop).
 [rctrl]>[enter]
-[rwin]>[insert]
+[rwin]>[rctrl]
 [pup]>[delete]
 [pdown]>[rshift]
 
-# Thumb cluster modifiers, repeated for key-pad mode.
+# Thumb clusters, repeated for key-pad mode.
 # (So that I can do, e.g., ctrl-shift-F5.)
 # Left:
 [kp-bspace]>[lshift]
 [kp-delete]>[lctrl]
-[kp-lctrl]>[null]
+[kp-lctrl]>[escape]
 [kp-lalt]>[lalt]
 [kp-home]>[lwin]
-[kp-end]>[rctrl]
+[kp-end]>[kpshift]
 # Right:
-[kp0]>[null]
+[kp0]>[space]
 [kp-enter]>[lalt]
-[kp-rctrl]>[null]
-[kp-rwin]>[null]
-[kp-pup]>[rwin]
+[kp-rctrl]>[enter]
+[kp-rwin]>[rctrl]
+[kp-pup]>[delete]
 [kp-pdown]>[rshift]
 
 # capslock => backspace
@@ -69,15 +69,15 @@
 [vol+]>[scroll]
 [vol-]>[pause]
 
-# Key-pad layer mappings. -----------------------------------------------------
+# I'm not currently using this key.
+[intl-\]>[null]
 
+# Key-pad layer mappings. -----------------------------------------------------
 # The `kpshift` logical key behaves as a function-modifier for the 'key-pad'
 # layer. When held, pressing keys will generate their key-pad mode mapping
 # instead of their normal mode mapping. A quirk is that you have to map both
 # the normal version and the key-pad version of the key that you want to behave
-# as a modifier; in our case:
-[intl-\]>[kpshift]
-[kp-insert]>[kpshift]
+# as a modifier (in our case, 'end' and 'kp-end').
 
 # Null-out unused function-modified keys in the key-pad keywell.
 [kp-6]>[null]
@@ -108,17 +108,16 @@
 [kp=]>[f11]
 [kpdiv]>[f12]
 
-# Volume down/up/mute. (Under up/down arrows.)
+# Volume down / up / mute.
 [kp-up]>[vol-]
 [kp-down]>[vol+]
 [kp.]>[mute]
 
-# page-down / page-up   =>   kpshift+SPC / kpshift+;
-# (They're easy to hit.)
-[kp0]>[pdown]
-[kpplus]>[pup]
+# page up/down
+[kp-d]>[pup]
+[kp-f]>[pdown]
 
-# Print screen. (Under p key.)
-[kpmin]>[prtscr]
+# Print screen.
+[kpplus]>[prtscr]
 
 # vim: set syntax=config:
