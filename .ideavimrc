@@ -1,12 +1,16 @@
 " Custom keymap.
 source ~/config-files/vim/remap.vimrc
 
+" Trims trailing whitespace, so that { and } motions work properly.
+noremap <Esc> :w<CR>
+
 set scrolloff=5
 set incsearch
 set ignorecase
 
-" Use IntelliJ's clipboard.
+" Use IntelliJ's clipboard, and automatically share with the system clipboard.
 set clipboard+=ideaput
+set clipboard+=unnamedplus
 
 " Turn off `ding` sound effects for movement keys.
 set visualbell

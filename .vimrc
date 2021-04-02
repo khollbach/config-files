@@ -8,10 +8,10 @@ syntax on
 " Automatically detect known filetypes.
 filetype plugin indent on
 
-" Set leader to space.
-let mapleader = "\<Space>"
-noremap <Space> <Nop>
-noremap <Space><Space> <Nop>
+" Set leader to enter.
+let mapleader = "\<CR>"
+noremap <CR> <Nop>
+noremap <CR><CR> <Nop>
 
 " -----------------------------------------------------------------------------
 " Plugins
@@ -987,13 +987,8 @@ if !empty(glob('~/notes/work/vimrc'))
     source $HOME/notes/work/vimrc
 endif
 
-" Playing around with alternate layouts.
-source $HOME/config-files/vim/unmap.vimrc
+" Alternate layout for the main editing keys.
 source $HOME/config-files/vim/remap.vimrc
-
-" Start of line is first non-blank character.
-"noremap <Home> ^
-inoremap <Home> <C-o>^
 
 " Make ctrl+arrows do what you expect: move by words or paragraphs.
 noremap <C-Left> b
@@ -1010,39 +1005,39 @@ inoremap <C-h> <C-\><C-o>db
 inoremap <C-del> <C-\><C-o>de
 
 " Strip trailing whitespace.
-noremap <silent> <Space>s :%s/\s\+$//<CR>:noh<CR>
+noremap <silent> <leader>s :%s/\s\+$//<CR>:noh<CR>
 
 " Change file permissions to be executable or not.
-noremap <Space>x :!chmod +x %<CR>
-noremap <Space>X :!chmod -x %<CR>
+noremap <leader>x :!chmod +x %<CR>
+noremap <leader>X :!chmod -x %<CR>
 
 " Comment / uncomment -- these cause issues, e.g. "." gets remapped after. :/
-"map <Space>/ <plug>NERDCommenterComment
-"map <Space>? <plug>NERDCommenterUncomment
+"map <leader>/ <plug>NERDCommenterComment
+"map <leader>? <plug>NERDCommenterUncomment
 
 " Update configs.
-noremap <Space>u :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
+noremap <leader>u :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
 
 " Edit `.vimrc`.
-noremap <Space>U :e ~/config-files/.vimrc<CR>
+noremap <leader>U :e ~/config-files/.vimrc<CR>
 
 " :noh
-noremap <Space>n :nohlsearch<CR>:echo<CR>
-noremap <Space>e :set hlsearch! hlsearch?<CR>
+noremap <leader>n :nohlsearch<CR>:echo<CR>
+noremap <leader>e :set hlsearch! hlsearch?<CR>
 
 " Copy/cut/paste to/from system clipboard.
-noremap <Space>d "+y
-noremap <Space>r "+d
-noremap <Space>w "+c
-noremap <Space>c "+p
-noremap <Space>C "+P
+noremap <leader>d "+y
+noremap <leader>r "+d
+noremap <leader>w "+c
+noremap <leader>c "+p
+noremap <leader>C "+P
 
 " Next/previous buffer.
 noremap - :bn<CR>
 noremap = :bp<CR>
 
 " Open file.
-nnoremap <Space>o :Files<CR>
+nnoremap <leader>o :Files<CR>
 
 " Make this keybind work in rust files.
 augroup Racer

@@ -4,6 +4,10 @@ noremap <M-a> :qall<CR>
 inoremap <M-s> <C-o>:w<CR>
 inoremap <M-a> <C-o>:qall<CR>
 
+" Start of line is first non-blank character.
+noremap <Home> ^
+inoremap <Home> <C-o>^
+
 " Jump to definition / jump back.
 noremap <C-d> <C-t>
 noremap <C-f> <C-]>
@@ -11,9 +15,9 @@ noremap <C-f> <C-]>
 " Select recently changed / pasted text.
 nnoremap gp `[v`]
 
-" Toggle comments.
-"map <space>/ <plug>NERDCommenterComment
-"map <space>? <plug>NERDCommenterUncomment
+" Leader.
+"noremap <CR> ???
+
 
 
 " hjkl
@@ -74,36 +78,31 @@ noremap m V
 noremap M v
 noremap <C-c> <C-v>
 
-" Macros
+" Macros, marks
 noremap v q
 noremap V @
 noremap <Backspace> @@
+noremap y m
 
 " Cursor top/mid/bot
 noremap D H
 noremap R M
 noremap W L
 
-" These are just the same as before.
-noremap <return> gg
-noremap g g
-noremap G G
-noremap z z
-noremap zn zb
-noremap ze zt
-noremap < <
-noremap > >
-noremap x x
-noremap X X
-noremap / /
-noremap ? ?
+" Find
+noremap <space> f
+noremap <s-space> F
+noremap <del> t
+noremap <s-del> T
+noremap <bslash> ;
+noremap <bar> ,
+" Workaround for a bug in IdeaVim.
+inoremap <s-space> <space>
+
+" Next / prev search.
 noremap j n
 noremap J N
 
-" Start of line is first non-blank character.
-noremap <Home> ^
-inoremap <Home> <C-o>^
-
-" Up/down by 1 line.
-noremap <C-j> <C-e>
-noremap <C-k> <C-y>
+" Cursor to screen bottom / top.
+noremap zn zb
+noremap ze zt
