@@ -1,10 +1,14 @@
 #!/bin/sh
 
-# Include private bin dirs, scripts dir, rust binaries in path.
+# Include private bin dirs, scripts dir, rust and go binaries in path.
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/config-files/scripts:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
+if command -v go >/dev/null; then
+    export PATH="$(go env GOPATH)/bin:$PATH"
+fi
 
 # Set default editor for git commit messages, ranger, etc.
 export VISUAL="$(
