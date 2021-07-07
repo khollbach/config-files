@@ -1,10 +1,14 @@
 #!/bin/bash
 
-# If not inside a tmux session, re-run from inside one, but hide the status
-# bar.
-if [[ -z "$TMUX" ]]; then
+# If not inside a tmux session, re-run from inside one,
+# but hide the status bar.
+if command -v tmux >/dev/null && [ -z "$TMUX" ]; then
     exec tmux new-session "$0" "$@" \; set-option status off
 fi
 
 # Start nvim.
-exec nvim "$@"
+if command -v nvim >/dev/null; then
+    exec nvim "$@"
+else
+    exec vi -u NONE "$@"
+fi
