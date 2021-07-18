@@ -114,10 +114,10 @@
 [kp.]>[mute]
 
 # page up/down
-[kp-d]>[pup]
-[kp-f]>[pdown]
+[kp0]>[pdown]
+[kpplus]>[pup]
 
 # Print screen.
-[kpplus]>[prtscr]
+[kpmin]>[prtscr]
 
 # vim: set syntax=config:
