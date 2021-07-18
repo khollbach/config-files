@@ -129,3 +129,9 @@
 ;; For files that do not specify a major mode, be in text-mode by default.
 ;; (The alternative is fundamental-mode, which isn't nearly as useful.)
 (setq-default major-mode 'text-mode)
+
+;; Disable electric-indent-mode when editing latex.
+;; https://emacs.stackexchange.com/questions/30147/disabling-electric-indent-mode-for-one-mode-latex-mode-only
+(defun remove-electric-indent-mode ()
+  (electric-indent-local-mode -1))
+(add-hook 'tex-mode-hook 'remove-electric-indent-mode)
