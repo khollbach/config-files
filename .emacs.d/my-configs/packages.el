@@ -44,7 +44,7 @@
   ;; Reload definitions from `init.el`.
   (defun reload-configs ()
     (interactive)
-    (shell-command "~/config-files/update_configs")
+    (shell-command "~/.config-files/update_configs")
     (load-file "~/.emacs.d/init.el"))
   (key-seq-define evil-motion-state-map " e" 'reload-configs)
 
@@ -54,14 +54,14 @@
   ;; `update_configs` won't see your changes.
   (defun update-configs-kill-emacs ()
     (interactive)
-    (shell-command "~/config-files/update_configs")
+    (shell-command "~/.config-files/update_configs")
     (save-buffers-kill-emacs))
   (key-seq-define evil-motion-state-map " r" 'update-configs-kill-emacs)
 
   ;; Edit `init.el`.
   (defun edit-configs ()
     (interactive)
-    (find-file "~/config-files/.emacs.d/init.el"))
+    (find-file "~/.config-files/.emacs.d/init.el"))
   ;; This doesn't accept "shift-space E", but I'm completed stumped on
   ;; how to do that.
   (key-seq-define evil-motion-state-map " E" 'edit-configs)

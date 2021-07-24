@@ -6,7 +6,7 @@
 
 set -e
 
-main() {
+function main {
     local src=$(dirname "$0")
     local dest=/media/kevan/ADVANTAGE2/active
 
@@ -16,7 +16,7 @@ main() {
     fi
 
     cp "$src/1_qwerty.txt" "$dest/"
-    cat 1_qwerty.txt 2_qwerty-suffix > "$dest/2_qwerty.txt"
+    cat "$src/1_qwerty.txt" "$src/2_qwerty.txt-suffix" > "$dest/2_qwerty.txt"
 }
 
 main "$@"

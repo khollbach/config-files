@@ -11,7 +11,7 @@ n noaction 5^N
 e noaction 5^E
 N noaction n
 E noaction e
-o noaction vq
+s noaction G''=
 
 j repeat-search
 J reverse-search

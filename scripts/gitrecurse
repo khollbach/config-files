@@ -1,50 +1,51 @@
 #!/bin/bash
 
 # If the current directory is a git repo, run the given shell command.
-# Otherwise, run it in *each* direct subdirectory that is a git repo.
+# Otherwise, run it in *each* direct sub-directory that is a git repo.
 #
 # This script is called `gitrecurse` for historical reasons, it doesn't recurse
 # into sub-sub-dirs anymore for performance reasons.
 #
-# Sample usage:
+# Example usage:
 # $ cd ~
 # $ gitrecurse git status -s
 # ...
 # $ gitrecurse git pull
 # ...
-main() {
+function main {
     local shell_command=("$@")
 
-    if git status &>/dev/null; then
+    if git rev-parse --is-inside-work-tree &>/dev/null; then
         "${shell_command[@]}"
     else
         local any_successes
 
         # For every subdir.
-        for dir in */; do
+        for dir in */ .*/; do
             # (Weird edge case: empty glob.)
             if [[ "$dir" == "*/" ]]; then break; fi
+            if [[ "$dir" == . || "$dir" == .. ]]; then continue; fi
 
             pushd "$dir" >/dev/null || continue
 
-            # If this is the root of a git repo, print the repo name (in
-            # blue) and then run the command.
+            # If this is the root of a git repo, print the repo name (in blue)
+            # and then run the command.
             if [[ -d .git ]]; then
                 if [[ -n "$any_successes" ]]; then
-                    echo  # newline
+                    echo
                 fi
 
                 echo -e "\e[0;34m$PWD\e[0m"
                 "${shell_command[@]}"
 
-                any_successes=yes
+                any_successes=true
             fi
 
             popd >/dev/null || exit 1
         done
 
         if [[ -z "$any_successes" ]]; then
-            echo "$PWD isn't a git repository, and neither are any immediate subdirectories."
+            echo "$PWD isn't a git repository, and neither are any immediate sub-directories."
             exit 1
         fi
     fi

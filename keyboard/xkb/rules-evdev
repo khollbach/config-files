@@ -1,6 +1,0 @@
-Change this:
-  *             =   +inet(evdev)
-to this:
-  *             =   +inet(evdev)+wqc(imaginary-qwerty)
-
-Otherwise, our mappings just get overridden by the mappings in `symbols/inet`.

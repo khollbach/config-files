@@ -1,17 +1,16 @@
-default partial alphanumeric_keys xkb_symbols "default" {
-    include "us(basic)"
-    name[Group1] = "English (Workman with Qwerty control keys)";
+// Re-map the alphabetic keys to use the workman keyboard layout, but
+// keep control-modified keys where they are: e.g., ctrl-c hasn't moved.
+//
+// Note that there's a minor change from the standard workman layout:
+// I've swapped the positions of the j and k keys.
+partial default alphanumeric_keys xkb_symbols "wqc-symbols" {
+    include "us"
 
-    // Map right alt to escape.
-    key <RALT> { [ Escape ], type[Group1] = "ONE_LEVEL" };
+    name[Group1] = "English (Workman, but with qwerty control keys)";
 
-    // This should just work, but doesn't because of this bug:
-    // https://gitlab.freedesktop.org/xorg/xserver/-/issues/320
+    key.type[Group1] = "WQC_ALPHABETIC";
+
     //key.repeat = yes;
-
-    // todo: implement this type so that capslock works.
-    //key.type[Group1] = "WQC_ALPHABETIC";
-    key.type[Group1] = "WQC_TWO_LEVEL";
 
     key <AD01> { [ NoSymbol, q, Q ], actions[Group1] = [ RedirectKey(key=<I152>) ] };
     key <AD02> { [ NoSymbol, d, D ], actions[Group1] = [ RedirectKey(key=<I153>) ] };
@@ -45,15 +44,15 @@ default partial alphanumeric_keys xkb_symbols "default" {
     key <AB08> { [ NoSymbol, comma, less ], actions[Group1] = [ RedirectKey(key=<I179>) ], type[Group1] = "WQC_TWO_LEVEL" };
     key <AB09> { [ NoSymbol, period, greater ], actions[Group1] = [ RedirectKey(key=<I180>) ], type[Group1] = "WQC_TWO_LEVEL" };
     key <AB10> { [ NoSymbol, slash, question ], actions[Group1] = [ RedirectKey(key=<I181>) ], type[Group1] = "WQC_TWO_LEVEL" };
-
-    include "wqc(imaginary-qwerty)"
 };
 
-// Qwerty keys on the multimedia keys that most physical keyboards don't have.
-// This is a terrible hack, taken from here: https://github.com/ZeptByteS/dvorak-qwerty/tree/develop
-partial alphanumeric_keys xkb_symbols "imaginary-qwerty" {
-    key.type[Group1] = "ALPHABETIC";
-
+// This maps a bunch of "multimedia" physical keys to qwerty logical keys.
+//
+// These physical keys don't actually appear on most keyboards. We're just
+// using them as the target of RedirectKey actions elsewhere in the code.
+//
+// For details on why we need this, see the comments in the file `types/wqc`.
+partial alphanumeric_keys xkb_symbols "replica-qwerty-symbols" {
     key <I152> { [ q, Q ] };
     key <I153> { [ w, W ] };
     key <I154> { [ e, E ] };
@@ -74,7 +73,7 @@ partial alphanumeric_keys xkb_symbols "imaginary-qwerty" {
     key <I168> { [ j, J ] };
     key <I169> { [ k, K ] };
     key <I170> { [ l, L ] };
-    key <I171> { [ semicolon, colon ], type[Group1] = "TWO_LEVEL" };
+    key <I171> { [ semicolon, colon ] };
 
     key <I172> { [ z, Z ] };
     key <I173> { [ x, X ] };
@@ -83,7 +82,7 @@ partial alphanumeric_keys xkb_symbols "imaginary-qwerty" {
     key <I176> { [ b, B ] };
     key <I177> { [ n, N ] };
     key <I178> { [ m, M ] };
-    key <I179> { [ comma, less ], type[Group1] = "TWO_LEVEL" };
-    key <I180> { [ period, greater ], type[Group1] = "TWO_LEVEL" };
-    key <I181> { [ slash, question ], type[Group1] = "TWO_LEVEL" };
+    key <I179> { [ comma, less ] };
+    key <I180> { [ period, greater ] };
+    key <I181> { [ slash, question ] };
 };

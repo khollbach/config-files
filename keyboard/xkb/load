@@ -1,0 +1,5 @@
+#!/bin/bash
+
+script_dir=$(dirname "$0")
+
+xkbcomp -I"$script_dir" "$script_dir/keymaps/wqc-us.xkb" "$DISPLAY"

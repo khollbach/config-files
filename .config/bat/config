@@ -1,0 +1,10 @@
+# I only use bat for syntax hightlighting, so always use colors, and never
+# automatically invoke a pager.
+--color=always
+--paging=never
+
+# Color-scheme.
+--theme="Solarized (dark)"
+
+# Don't show line numbers or filename in the output.
+--plain

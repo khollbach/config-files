@@ -2,7 +2,7 @@
 
 # Start tmux. If a session is already running that isn't attached to, then
 # attach to that session instead of starting a new one.
-main() {
+function main {
     # If tmux isn't running at all, or if all sessions are already attached to,
     # this will be empty.
     local unattached_sessions=$(tmux ls 2> /dev/null | grep -v attached)

@@ -1,3 +1,4 @@
+# This prevents other dirs from being created automatically under $HOME.
 XDG_DESKTOP_DIR="$HOME/.Desktop"
 XDG_DOWNLOAD_DIR="$HOME/Downloads"
 XDG_TEMPLATES_DIR="$HOME/"

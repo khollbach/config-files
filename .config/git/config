@@ -2,6 +2,10 @@
 	email = khollbach@gmail.com
 	name = Kevan Hollbach
 
+[include]
+    # Include delta configs.
+    path = delta
+
 [alias]
     rec = !gitrecurse git
 
@@ -11,17 +15,18 @@
     f = rec fetch
     l = rec --no-pager log --oneline -n 10
 
+    lo = log --oneline
     d = diff
     ds = diff --staged
+    c = commit
+
     h = show
     a = add
-    aa = add --all :/
-    c = commit
+    aa = add --all
     pu = push
     cl = clone
     co = checkout
     ll = log
-    lo = log --oneline
     st = stash
     sp = stash pop
     sl = stash list
@@ -33,30 +38,3 @@
     last = !git --no-pager log -1 HEAD
     clean-ignored = clean -X
     current-branch = rev-parse --abbrev-ref HEAD
-
-[core]
-    pager = delta
-
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    features = decorations dark
-
-[delta "decorations"]
-    commit-decoration-style = bold yellow box
-    file-style = bold yellow
-    file-decoration-style = yellow box ul
-    hunk-header-decoration-style = yellow box
-
-[delta "dark"]
-    plus-style = syntax "#003800"
-    minus-style = syntax "#3f0001"
-    plus-emph-style = syntax "#004c00"
-    minus-emph-style = syntax "#5f0001"
-
-[delta "light"]
-    plus-style = syntax "#ddffdd"
-    minus-style = syntax "#ffdddd"
-    plus-emph-style = syntax "#aaffaa"
-    minus-emph-style = syntax "#ffaaaa"

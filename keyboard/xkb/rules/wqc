@@ -1,0 +1,32 @@
+! model = keycodes
+  *     = evdev+aliases(qwerty)
+
+! model = types
+  *     = complete+wqc
+
+! model = compat
+  *     = complete
+
+! model = geometry
+  *     = pc(pc105)
+
+! model = symbols
+  *     = pc
+
+! model layout = symbols
+  *     *      = +%l%(v)
+
+! model layout[1] = symbols
+  *     *         = +%l[1]%(v[2])
+
+! model layout[2] = symbols
+  *     *         = +%l[2]%(v[2]):2
+
+! model = symbols
+  *     = +inet(evdev)+wqc(replica-qwerty-symbols)
+
+// Add options here as you need them.
+! option = symbols
+  grp:shifts_toggle = +group(shifts_toggle)
+  ctrl:nocaps = +ctrl(nocaps)
+  custom:ralt_escape = +ralt_escape

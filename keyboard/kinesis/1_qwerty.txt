@@ -120,4 +120,4 @@
 # Print screen.
 [kpmin]>[prtscr]
 
-# vim: set syntax=config:
+# vi: syntax=config

@@ -3,12 +3,11 @@ set $Win Mod4
 set $Alt Mod1
 
 
-
 # Applications.
-bindsym $Win+l exec "xfce4-terminal --execute tmux_attach"
+bindsym $Win+space exec --no-startup-id "alacritty --command tmux_attach"
+bindsym $Win+Return exec --no-startup-id alacritty
 bindsym $Win+semicolon exec google-chrome
-bindsym $Win+u exec "exo-open --launch FileManager"
-bindsym $Win+o exec --no-startup-id "emacsclient -a '' -c -n"
+bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c -n"
 bindsym $Win+p exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermenu || dmenu_run"
 
 # Simple, hacky way to toggle xfce4 taskbar.
@@ -18,25 +17,23 @@ bindsym $Win+apostrophe exec --no-startup-id "pgrep xfce4-panel && xfce4-panel -
 # Misc system keybinds.
 bindsym Control+$Alt+Delete exec --no-startup-id xfce4-session-logout
 bindsym Print exec xfce4-screenshooter
-bindsym $Win+Return exec "exo-open --launch TerminalEmulator"
 
 
 
 # Change focus.
-bindsym $Win+m focus left
-bindsym $Win+j focus down
-bindsym $Win+k focus up
-bindsym $Win+i focus right
-
-# Switch focus across screens
+bindsym $Win+i focus up
+bindsym $Win+j focus left
+bindsym $Win+k focus down
+bindsym $Win+l focus right
+# Across screens.
 bindsym $Win+comma focus output left
 bindsym $Win+period focus output right
 
 # Move focused window.
-bindsym $Win+$Alt+m move left
-bindsym $Win+$Alt+j move down
-bindsym $Win+$Alt+k move up
-bindsym $Win+$Alt+i move right
+bindsym $Win+$Alt+i move up
+bindsym $Win+$Alt+j move left
+bindsym $Win+$Alt+k move down
+bindsym $Win+$Alt+l move right
 bindsym $Win+$Alt+comma move output left; focus output left
 bindsym $Win+$Alt+period move output right; focus output right
 
@@ -64,7 +61,7 @@ bindsym $Win+$Alt+8 move workspace 8; workspace 8
 bindsym $Win+$Alt+9 move workspace 9; workspace 9
 bindsym $Win+$Alt+0 move workspace 10; workspace 10
 
-# Send focused window away temporarily.
+# Send focused window away temporarily, or bring it back.
 bindsym $Win+minus move scratchpad
 bindsym $Win+equal scratchpad show
 
@@ -80,29 +77,25 @@ bindsym $Win+$Alt+q kill
 bindsym $Win+f fullscreen toggle
 
 # Change split mode (vertical / horizontal).
-bindsym $Win+v split v
-bindsym $Win+g split h
-
-# Change container layout: stacked / tabbed / (vertical/horizontal split).
-#bindsym $Win+s layout stacking
-#bindsym $Win+w layout tabbed
-#bindsym $Win+e layout toggle split
+bindsym $Win+u split v
+bindsym $Win+o split h
 
 # Focus parent/child container.
 bindsym $Win+a focus parent
 bindsym $Win+d focus child
 
-# Toggle tiling / floating for the current window.
-bindsym $Win+$Alt+space floating toggle
-
 # Change focus between the tiling and floating window layers.
-bindsym $Win+space focus mode_toggle
+bindsym $Win+s focus mode_toggle
 
-# "Zoom" -- aka fullscreen an enclosing split-container, without the app
-# (usually Chrome) thinking it's fullscreen-ed. This way you can still see the
-# search bar. It's a bit of a hack; and the split-container gets left behind.
-# https://www.reddit.com/r/i3wm/comments/ed5qmw/full_screen_on_chrome_no_url_bar/
-bindsym $Win+z split v; focus parent; fullscreen toggle; focus child
+# Toggle tiling / floating for the current window.
+bindsym $Win+$Alt+s floating toggle
+
+# Change container layout: stacked / tabbed / (vertical/horizontal split).
+#bindsym $Win+s layout stacking
+bindsym $Win+w layout tabbed
+bindsym $Win+e layout toggle split
+
+
 
 # Resize-window mode.
 bindsym $Win+r mode "resize"
@@ -112,10 +105,10 @@ mode "resize" {
     # Right: grow the focused window’s width.
     # Up: shrink the focused window’s height.
     # Down: grow the focused window’s height.
-    bindsym l resize shrink width 5 px or 5 ppt
-    bindsym n resize grow height 5 px or 5 ppt
-    bindsym e resize shrink height 5 px or 5 ppt
-    bindsym u resize grow width 5 px or 5 ppt
+    bindsym n resize shrink width 5 px or 5 ppt
+    bindsym o resize grow width 5 px or 5 ppt
+    bindsym u resize shrink height 5 px or 5 ppt
+    bindsym e resize grow height 5 px or 5 ppt
 
     # Back to normal mode: q, Enter, Escape, or space
     bindsym q mode "default"
@@ -148,6 +141,4 @@ focus_follows_mouse no  # Don't focus things on mouse-over.
 mouse_warping none  # Don't pull my mouse around when switching windows.
 
 # Notification manager.
-exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
-
-# vim: set syntax=config:
+#exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd

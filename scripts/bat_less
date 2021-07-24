@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Preprocess the file with bat for syntax-highlighting.
-#
-# The command "k" scrolls the first line of output to the top of the screen. I
-# would've put it in `lesskey`, but it plays terribly with "-F" (auto-quit if
-# less than one screen): you get a screenfull of `~`s even if the output was a
-# single line.
-LESSOPEN='|bat --color=always %s' less +k "$@"

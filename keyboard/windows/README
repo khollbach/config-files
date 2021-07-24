@@ -1,3 +1,5 @@
-You'll need to download Microsoft Keyboard Layout Creator to use the .klc file.
+You must download "Microsoft Keyboard Layout Creator" to use the `.klc` file.
 
-This was surprisingly easy to do. Inspired by https://github.com/bradfeehan/Dvorak-QWERTY-Ctrl -- see the notes there for installation instructions.
+This was surprisingly easy to do; I took this approach from `https://github.com/bradfeehan/Dvorak-QWERTY-Ctrl`. See the instructions there for how to install -- it's quite simple.
+
+To map capslock to control, right-click the `.reg` file and click on "merge". It will take effect once you reboot.

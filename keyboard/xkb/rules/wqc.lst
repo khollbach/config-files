@@ -1,0 +1,6 @@
+// This file is only used to generate documentation.
+//
+// This is the bare minimum needed, so that xkb will parse it.
+
+! model
+  asdf asdf

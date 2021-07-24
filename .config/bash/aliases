@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Update configs.
+alias u="source ~/.config-files/update_configs"
+alias co='cd ~/.config-files'
+
+# ls aliases.
+alias ls="command ls -vh --color=auto"
+alias la="ls -A"
+alias ll="ls -lG"
+alias lla="ll -lA"
+alias lt="ll -tr"
+alias lta="lt -A"
+
+# `-`: change to previous directory.
+# `..`: change to parent directory.
+alias --    -="cd -"
+alias      ..="cd .."
+alias     ...="cd ../.."
+alias    ....="cd ../../.."
+alias   .....="cd ../../../.."
+alias  ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
+
+# Spend less time typing.
+alias c=cd
+alias s=ls
+alias e=nvim
+alias er='nvim -MR'
+alias se=sudoedit
+alias l=less
+alias a=rg
+alias f='fd --hidden'
+alias p=python3
+alias o=cargo
+alias oc="cargo_less c"
+alias ob="cargo_less b"
+alias ot="cargo_less t"
+alias or="cargo r"
+alias t="time_and_notify "
+alias uu="unbuffer "
+alias ta=tmux_attach
+alias pag="ps aux | grep"
+alias ltmk="latexmk -pdf -pvc --shell-escape"
+alias jq-vim="jq . | nvim -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
+alias jv=jq-vim
+
+# Vanilla vi; don't load vim configs.
+alias vi="vi -u NONE"
+
+# Make Emacs startup only slow the first time you run it.
+alias emacs="emacsclient -a '' -c -n"
+alias remacs="killall emacs && pushd ~ >/dev/null && command emacs --daemon && popd >/dev/null"
+
+# Make these easier to use.
+alias which="type -a"
+alias grep="grep --color=always"
+alias tree="tree -C"
+alias amm="amm --no-remote-logging"
+if command -v rlwrap >/dev/null; then
+    alias ocaml="rlwrap ocaml"
+fi
+alias cc="clang -Wall -Wextra -Werror"
+alias cx="clang++ -Wall -Wextra -Werror"
+alias gcc="gcc -Wall -Wextra -Werror -O"
+alias g++="g++ -Wall -Wextra -Werror -O"

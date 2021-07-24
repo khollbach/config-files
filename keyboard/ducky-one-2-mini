@@ -1,0 +1,8 @@
+For details on how to remap keys, see page 33 of the manual.
+
+Esc -> `
+Ctrl -> Esc
+Capslock -> Ctrl  # This one has to be done in software, e.g. via setxkbmap.
+Fn u -> Home
+Fn o -> End
+Fn h -> Delete

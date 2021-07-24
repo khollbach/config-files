@@ -1,0 +1,20 @@
+# Always show colors and line numbers in the output.
+--pretty
+
+# Sort output by file path.
+#
+# Slows down searching, but it's easier to find what you're looking for.
+--sort=path
+
+# Ignore case by default. Use `-s` to make search case-sensitive.
+--ignore-case
+
+# Include hidden files and directories in the search by default.
+--hidden
+
+# Ignore .git directories, ctags tagfiles, etc.
+--glob=!.git/
+--glob=!.svn/
+--glob=!.hg/
+--glob=!tags
+--glob=!node_modules/

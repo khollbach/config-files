@@ -8,11 +8,6 @@ syntax on
 " Automatically detect known filetypes.
 filetype plugin indent on
 
-" Set leader to enter.
-let mapleader = "\<CR>"
-noremap <CR> <Nop>
-noremap <CR><CR> <Nop>
-
 " -----------------------------------------------------------------------------
 " Plugins
 " -----------------------------------------------------------------------------
@@ -331,23 +326,6 @@ if PluginExists("vim-racer")
             return 0
         endif
     endfunction
-endif
-
-if PluginExists('ranger.vim') && PluginExists('bclose.vim')
-    let g:ranger_map_keys = 0
-    let g:ranger_replace_netrw = 1
-
-    map <silent> <Leader>r :RangerWorkingDirectory<CR>
-    map <silent> <Leader>R :RangerCurrentFile<CR>
-
-    " This is needed to get the ranger buffer to not have line numbers when
-    " opened from the commandline as `vim somedir/`. (Not sure why, but the
-    " TermOpen autocmd gets ignored in this edge case.)
-    augroup Ranger
-        autocmd!
-        " TermEnter triggers when entering "insert mode" in terminals.
-        autocmd TermEnter * if expand('%') =~ "term.*ranger" | setlocal nonumber | endif
-    augroup END
 endif
 
 if !empty(glob('~/.vim/pack/coc/'))
@@ -778,18 +756,8 @@ endfunction
 " Mappings
 " -----------------------------------------------------------------------------
 
-" Exit insert mode.
-inoremap jk <Esc>
-inoremap jK <Esc>
-inoremap Jk <Esc>
-inoremap JK <Esc>
-
 " 123<CR> takes you to line 123.
 noremap <CR> gg
-
-" Scroll 5x faster.
-noremap <C-y> 5<C-y>
-noremap <C-e> 5<C-e>
 
 if has('nvim')
     " Save.
@@ -801,13 +769,13 @@ if has('nvim')
     inoremap <M-q> <C-o>:qa<CR>
 
     " Execute last command.
-    noremap <M-p> :<Up><CR>
+    noremap <M-;> :<Up><CR>
 else
     noremap <Esc>w :w<CR>
     inoremap <Esc>w <C-o>:w<CR>
     noremap <Esc>q :qa<CR>
     inoremap <Esc>q <C-o>:qa<CR>
-    noremap <Esc>p :<Up><CR>
+    noremap <Esc>; :<Up><CR>
 endif
 
 " Navigate windows with C-hjkl.
@@ -969,10 +937,10 @@ nnoremap <Leader>s :%s/\C//gc<left><left><left><left>
 vnoremap <Leader>s :s/\C//gc<left><left><left><left>
 
 " Update configs.
-noremap <Leader>e :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
+noremap <Leader>e :!source ~/.config-files/update_configs<CR>:source $MYVIMRC<CR>
 
 " Edit `.vimrc`.
-noremap <Leader>E :e ~/config-files/.vimrc<CR>
+noremap <Leader>E :e ~/.config-files/.vimrc<CR>
 
 " Invert colors.
 noremap <silent> <Leader>z :!toggle-colors<CR>:source $MYVIMRC<CR>:<CR>
@@ -988,7 +956,7 @@ if !empty(glob('~/notes/work/vimrc'))
 endif
 
 " Alternate layout for the main editing keys.
-source $HOME/config-files/vim/remap.vimrc
+source $HOME/.config/nvim/mappings.vim
 
 " Make ctrl+arrows do what you expect: move by words or paragraphs.
 noremap <C-Left> b
@@ -1016,10 +984,10 @@ noremap <leader>X :!chmod -x %<CR>
 "map <leader>? <plug>NERDCommenterUncomment
 
 " Update configs.
-noremap <leader>u :!source ~/config-files/update_configs<CR>:source $MYVIMRC<CR>
+noremap <leader>u :!source ~/.config-files/update_configs<CR>:source $MYVIMRC<CR>
 
 " Edit `.vimrc`.
-noremap <leader>U :e ~/config-files/.vimrc<CR>
+noremap <leader>U :e ~/.config-files/.vimrc<CR>
 
 " :noh
 noremap <leader>n :nohlsearch<CR>:echo<CR>

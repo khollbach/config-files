@@ -1,0 +1,17 @@
+window:
+  padding:
+    x: 3
+    y: 3
+
+font:
+  normal:
+    family: DejaVu Sans Mono
+
+  size: 14
+
+mouse:
+  hide_when_typing: true
+
+hints:
+  # Disable clicking on URI links.
+  enabled: []

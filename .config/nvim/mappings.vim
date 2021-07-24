@@ -15,9 +15,6 @@ noremap <C-f> <C-]>
 " Select recently changed / pasted text.
 nnoremap gp `[v`]
 
-" Leader.
-"noremap <CR> ???
-
 
 
 " hjkl

@@ -1,10 +1,5 @@
 #!/bin/bash
 
-plugins_dir=~/.vim/pack/plugins/start
-mkdir -pv "$plugins_dir"
-echo cd "$plugins_dir"
-cd "$plugins_dir" || exit 1
-
 plugins='
 overcache/NeoSolarized
 justinmk/vim-sneak
@@ -26,9 +21,14 @@ majutsushi/tagbar
 godlygeek/tabular
 dense-analysis/ale
 racer-rust/vim-racer
-francoiscabrol/ranger.vim
-rbgrouleff/bclose.vim
 '
+
+plugins_dir=~/.vim/pack/plugins/start
+
+mkdir -pv "$plugins_dir" || exit 1
+
+echo cd "$plugins_dir"
+cd "$plugins_dir" || exit 1
 
 for p in $plugins; do
     git clone --depth 1 https://github.com/"$p".git

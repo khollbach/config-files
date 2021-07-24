@@ -1,7 +1,11 @@
 #!/bin/bash
 
-colors_bold
+script_dir=$(dirname "$0")/colors-scripts
+
+"$script_dir/bold"
 echo
-colors256
+
+"$script_dir/256"
 echo
-colors24bit
+
+"$script_dir/24bit"

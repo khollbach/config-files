@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Set LS_COLORS to not use any bold fonts.
+# The default is to have directory names in bold, which I don't like.
+eval $(dircolors | sed s,01,00,g)
+
+# Make other-writable directory names show as black text on a green background,
+# instead of blue text against green (which is unreadable).
+export LS_COLORS="${LS_COLORS}ow=30;42:"
+
+# Unmap C-s from freezing tty output, so that it can be used for i-search.
+stty -ixon
+
+# Filter duplicates out of history.
+export HISTCONTROL=ignoredups
+
+# Keep a much larger history file (default is 500 lines).
+export HISTSIZE=100000
+
+# Don't leave .pyc files or __pycache__ dirs lying around.
+export PYTHONDONTWRITEBYTECODE=1
+
+# Tell ripgrep where to find configs.
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
+
+# Use bat for better syntax highlighting of man pages.
+if command -v bat >/dev/null; then
+    export MANPAGER="sh -c 'col -bx | bat -l man | less'"
+fi
+
+# Set the terminal title when opening man pages.
+alias man="title_wrapper man"

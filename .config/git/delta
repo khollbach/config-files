@@ -1,0 +1,32 @@
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    # Don't wrap long lines.
+    pager = less --chop-long-lines
+
+    syntax-theme = Solarized (dark)
+    features = decorations
+
+    # Syntax-highlight removed lines as well.
+    minus-style = syntax auto
+    minus-emph-style = syntax auto
+
+    # No line numbers in side-by-side view. Note that this breaks line-number
+    # display in unified view, so don't expact that to work.
+    line-numbers-left-format = ""
+    line-numbers-right-format = " "
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box
+
+    file-decoration-style = yellow box ul
+    file-style = yellow
+
+# vi: syntax=gitconfig

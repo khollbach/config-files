@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+# Demand root.
+if [[ "$UID" != 0 ]]; then
+    exec sudo "$0" "$@"
+fi
+
+# Print a command, then run it.
+function log_cmd {
+    echo "$@"
+    "$@"
+}
+
+script_dir=$(dirname "$0")
+
+xkb_dir=/usr/share/X11/xkb
+for d in rules symbols types; do
+    log_cmd cp "$script_dir/$d/"* "$xkb_dir/$d/"
+done
+
+log_cmd cp "$script_dir/90-keyboard-wqc.conf" /etc/X11/xorg.conf.d/

@@ -1,79 +1,54 @@
-Run ./update_configs to copy dotfiles. Log out and in to get PATH updates.
-
-# For passwordless sudo, append this to /etc/sudoers:
+# For passwordless `sudo`,
+sudoedit /etc/sudoers
+# and append this line:
 ALL ALL=(ALL) NOPASSWD: ALL
 
-# Get the latest stable release of Neovim.
-wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-mkdir -p ~/bin
-mv nvim.appimage ~/bin/nvim
-chmod +x ~/bin/nvim
+Install google chrome. Log in to sync.
 
-Run ./install_vim_plugins to download Vim plugins.
+# APT packages.
+sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang
 
-# Aptitude packages. `sudo apt install ...`
-# Set redshift to autostart.
-git redshift-gtk tmux xclip i3 xfce4 xfce4-goodies blueman chromium-browser evince tldr expect rlwrap htop tree curl python3-pip
+Set up ssh keys; clone this repo.
 
-pip3 install ranger-fm
+Run ./keyboard/xkb/install to set the keyboard layout to workman.
+Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
 
-# xfce4-terminal settings.
-Scrollbar is: Disabled
-Automatically copy selection to clipboard
-DejaVu Sans Mono Book ~15 point font.
-Don't display menubar in new windows
-Solarized (dark) color scheme
-Don't show bold text in bright colors
-Disable all shortcuts
-Autohide mouse pointer
+Run ./update_configs to copy dotfiles into $HOME.
+Log out and log back in to get PATH updates.
 
-# To combine i3 with xfce, see steps VI, VII, VIII of this guide:
-https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
+# Install Neovim.
+wget https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage
+mkdir -p ~/.local/bin
+mv nvim.appimage ~/.local/bin/nvim
+chmod +x ~/.local/bin/nvim
 
-# To get capslock to be control in virtual consoles, add the following
-# to /etc/rc.local and make it executable with the header `#!/bin/bash`:
-(dumpkeys | head -1; echo keycode 58 = Control) | loadkeys -
-
-# `sudoedit /etc/default/grub` and change the timeout from 10 seconds to 2:
-GRUB_TIMEOUT=2
-# and then run the following to apply the changes:
-sudo update-grub
-
-# Install Rust, plus a few commandline utils.
-curl https://sh.rustup.rs -sSf | sh
+# Install Rust, plus a few command-line utils.
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup component add rust-src
 rustup toolchain add nightly
 cargo +nightly install racer
 cargo install ripgrep hexyl cargo-watch
 
-# fd-find
-https://github.com/sharkdp/fd/releases/latest/
-sudo apt install ~/Downloads/fd_X.Y.Z_amd64.deb
+# Install Alacritty terminal emulator.
+sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+cargo install alacritty
 
-# bat
-https://github.com/sharkdp/bat/releases/latest/
-sudo apt install ~/Downloads/bat_X.Y.Z_amd64.deb
+# In xfce, swap out xfwm4 for i3. See steps VI, VII, and VIII of this guide.
+# (It's also nice to add a "Workspace Switcher" widget to the xfce panel.)
+https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
 
-# delta
-https://github.com/dandavison/delta/releases/latest/
-sudo apt install ~/Downloads/git-delta_X.Y.Z_amd64.deb
+# If you're booting via grub,
+sudoedit /etc/default/grub
+# and change the timeout from 10 seconds to 2:
+GRUB_TIMEOUT=2
+# Then run the following to apply the changes:
+sudo update-grub
 
-# fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.opt/fzf
-~/.opt/fzf/install
-
-# fzf forgit
-git clone --depth 1 https://github.com/wfxr/forgit.git ~/.opt/forgit
+# If you're dual-booting windows, run this to fix real-time clock conflicts:
+timedatectl set-local-rtc 1
 
 # Windows setup.
-Right-click on `caps-to-ctrl.reg` and click "merge", then reboot.
-Install and configure `f.lux`.
-Set system env var HOME to "C:\Users\$USERNAME" so Emacs can find your configs.
-
-# Ducky One 2 Mini keymaps. (See page 33 of the manual.)
-Esc -> `
-Ctrl -> Esc
-Capslock -> Ctrl  # This one has to be done in software, e.g. via setxkbmap.
-Fn u -> Home
-Fn o -> End
-Fn h -> Delete
+See `./keyboard/windows` for keyboard setup.
+Install and configure `f.lux` to your liking.
+To make sure Emacs knows where to find your configs, set the
+system environment variable "HOME" to "C:\Users\$USERNAME".

@@ -1,20 +1,43 @@
-default partial xkb_types "default" {
-    virtual_modifiers Alt,Super;
+partial default xkb_types "wqc-types" {
+    // For our purposes, a "virtual modifier" is just an alias.
+    // Alt is an alias for Mod1, and Super is an alias for Mod4.
+    virtual_modifiers Alt, Super;
 
-    // When typing control/alt/super modified keys, use qwerty; otherwise use
+    // When holding control, alt, or super, behave like qwerty. Otherwise,
     // workman. This is so that ctrl-z/x/c/v, etc stay where they are.
     type "WQC_TWO_LEVEL" {
         modifiers = Shift+Control+Alt+Super;
 
         map[None] = Level2;
         map[Shift] = Level3;
+        // Implicitly, everything else (at least one modifier) => Level1
 
-        // Everything else (at least one modifier) => Level1
-
+        // Note: we don't map Level1 to qwerty keysyms directly, since many
+        // applications don't handle this correctly: they assume that every
+        // physical key (keycode) always maps to the same logical key (keysym).
+        //
+        // Instead, we use the RedirectKey action to generate an entirely
+        // different keycode whenever we access Level1 (qwerty keys).
+        // A bit of a hack, but it works! For details, see the symbols file.
         level_name[Level1] = "Qwerty redirect";
-        level_name[Level2] = "Workman upper";
-        level_name[Level3] = "Workman lower";
+        level_name[Level2] = "Workman base";
+        level_name[Level3] = "Workman shift";
     };
 
-    // todo: implement a "WQC_ALPHABETIC" type that respects capslock.
+    // Identical to WQC_TWO_LEVEL, except that this also respects capslock.
+    //
+    // For details on how this works, see the comments above. Also, see the
+    // analogous built-in types (TWO_LEVEL and ALPHABETIC) for comparison.
+    type "WQC_ALPHABETIC" {
+        modifiers = Shift+Lock+Control+Alt+Super;
+
+        map[None] = Level2;
+        map[Shift] = Level3;
+        map[Lock] = Level3;
+        map[Shift+Lock] = Level2;
+
+        level_name[Level1] = "Qwerty redirect";
+        level_name[Level2] = "Workman base";
+        level_name[Level3] = "Workman caps";
+    };
 };

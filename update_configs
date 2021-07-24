@@ -1,28 +1,48 @@
 #!/bin/bash
 
-# Copy dotfiles to home directory.
-if command -v rsync >/dev/null; then
-    # If -a is given on the commandline, omit the -u flag to rsync.
-    rsync $([ "$1" == -a ] || printf "%s" "-u") -rpv \
-        ~/config-files/.[!.]* ~ \
-        --exclude .git --exclude .gitignore
-else
-    cp -v ~/config-files/.[!.]* ~ 2>/dev/null
-    cp -rv ~/config-files/{.Desktop,.config,.docker,.emacs.d,.vim} ~
-fi
-echo
+function main {
+    local script_dir=$(dirname "$BASH_SOURCE")
 
-# Reload .bashrc definitions if you sourced this script from your shell.
-# (Only do so if the current shell is 'interactive' [-i option].)
-if [[ $- == *i* ]]; then
-    echo source ~/.bashrc
-    source ~/.bashrc
-fi
+    # Copy dot-files to $HOME.
+    if command -v rsync >/dev/null; then
+        # If -a is given on the command-line, omit the -u flag to rsync.
+        # In this case, we copy all files, not just those that have changed.
+        local u_flag=-u
+        if [ "$1" == -a ]; then
+            u_flag=
+        fi
 
-# Reload tmux conf. Ignore failure if tmux isn't running.
-echo tmux source-file ~/.tmux.conf
-tmux source-file ~/.tmux.conf 2>/dev/null || :
+        rsync -rpv $u_flag \
+            "$script_dir"/.[!.]* ~ \
+            --exclude .git --exclude .gitignore
+    else
+        cp -v "$script_dir"/.[!.]* ~ 2>/dev/null
+        cp -rv "$script_dir"/{.Desktop,.config,.docker,.emacs.d,.vim} ~
+    fi
+    echo
 
-# Generate .less file.
-echo lesskey ~/config-files/lesskey
-lesskey ~/config-files/lesskey
+    # Reload .bashrc definitions if you sourced this script from your shell.
+    # We check for the -i option to bash, indicating an "interactive" shell.
+    if [[ $- == *i* ]]; then
+        log_cmd source ~/.bashrc
+    fi
+
+    # Reload tmux config.
+    if tmux info &>/dev/null; then
+        log_cmd tmux source-file ~/.tmux.conf
+    fi
+
+    # Generate `.less` config file.
+    log_cmd lesskey ~/.config/less/lesskey
+}
+
+function log_cmd {
+    echo "$@"
+    "$@"
+}
+
+main "$@"
+
+# "Local" functions.
+unset -f main
+unset -f log_cmd

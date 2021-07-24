@@ -1,5 +1,5 @@
 " Custom keymap.
-source ~/config-files/vim/remap.vimrc
+source ~/.config/nvim/mappings.vim
 
 " Trims trailing whitespace, so that { and } motions work properly.
 noremap <Esc> :w<CR>

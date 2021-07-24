@@ -1,0 +1,11 @@
+xkb_keymap {
+    xkb_keycodes  { include "evdev+aliases(qwerty)" };
+    xkb_types     { include "complete+wqc" };
+    xkb_compat    { include "complete" };
+    xkb_symbols   { include "pc+wqc+us:2+inet(evdev)"
+                    include "group(shifts_toggle)+ctrl(nocaps)+ralt_escape"
+                    // This has to appear after inet(evdev), otherwise it gets
+                    // overridden.
+                    include "wqc(replica-qwerty-symbols)" };
+    xkb_geometry  { include "pc(pc105)" };
+};
