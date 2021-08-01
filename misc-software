@@ -12,8 +12,9 @@ sudo apt install ~/Downloads/git-delta_X.Y.Z_amd64.deb
 
 # fzf: command-line fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.opt/fzf
+~/.opt/fzf/install --bin
 mkdir -p ~/.local/bin
 ln -s ~/.opt/fzf/bin/fzf ~/.local/bin/fzf
 
-# forgit: fzf + git, mostly for viewing diffs -- todo ...
+# forgit: fzf + git, mostly for viewing diffs
 git clone --depth 1 https://github.com/wfxr/forgit.git ~/.opt/forgit

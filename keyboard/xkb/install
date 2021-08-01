@@ -20,4 +20,5 @@ for d in rules symbols types; do
     log_cmd cp "$script_dir/$d/"* "$xkb_dir/$d/"
 done
 
+log_cmd mkdir -p /etc/X11/xorg.conf.d/
 log_cmd cp "$script_dir/90-keyboard-wqc.conf" /etc/X11/xorg.conf.d/
