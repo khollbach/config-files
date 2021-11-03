@@ -1,18 +1,3 @@
-# Kinesis Advantage 2 on-board drive keymap.
-#
-# To put this on the keyboard, see: https://gist.github.com/nicholasknight/181375ee15f9cb89d3c69f4cc2b63df9#the-on-board-drive
-#
-# In summary:
-#   progm+shift+escape => super-user mode on/off
-#   progm+F1 => mount/unmount on-board drive
-#   Copy the file to the `active/` directory with the name `1_qwerty.txt`.
-#   progm+F3 => activate the qwerty map
-#   progm+1 => activate the new mapping file
-# For the first two commands, the lights will flash three times for
-# "on"/"mounted", and twice for "off"/"unmounted".
-#
-# See also the KA2 manual. The appendix has a visualization, with keycodes.
-
 # Misc mappings. --------------------------------------------------------------
 
 # Left/right thumb clusters: mostly modifier keys.

@@ -1,0 +1,14 @@
+These files are keymaps that can be put on the Kinesis Advantage 2's on-board drive.
+
+For more info, see:
+https://gist.github.com/nicholasknight/181375ee15f9cb89d3c69f4cc2b63df9#the-on-board-drive
+
+TLDR:
+- progm+Shift+Escape => "super-user" mode on/off
+- progm+F1 			 => mount/unmount on-board drive (requires super-user)
+- Copy the keymap file to the `active/` directory, named `1_qwerty.txt`.
+- progm+F3 			 => activate qwerty
+- progm+1 			 => activate the custom keymap
+(For the first two commands, the lights will flash three times for "on"/"mounted", and twice for "off"/"unmounted".)
+
+See also the KA2 manual. Check the appendix for a diagram of the keycodes (names of the keys) for remapping.

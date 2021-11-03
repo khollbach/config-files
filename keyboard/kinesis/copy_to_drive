@@ -1,14 +1,13 @@
 #!/bin/bash
-
-# Copy the layout files to the KA2's on-board drive.
 #
-# See the comments in 1_qwerty.txt for more info.
+# Copy the layout files to the KA2's on-board drive.
 
 set -e
 
 function main {
     local src=$(dirname "$0")
-    local dest=/media/kevan/ADVANTAGE2/active
+    #local dest=/media/kevan/ADVANTAGE2/active
+    local dest=/f/active
 
     if [[ ! -d "$dest" ]]; then
         echo Directory does not exist. Mount the drive first.
@@ -16,7 +15,7 @@ function main {
     fi
 
     cp "$src/1_qwerty.txt" "$dest/"
-    cat "$src/1_qwerty.txt" "$src/2_qwerty.txt-suffix" > "$dest/2_qwerty.txt"
+    cat "$src/1_qwerty.txt" "$src/workman-keymap-suffix" > "$dest/2_qwerty.txt"
 }
 
 main "$@"
