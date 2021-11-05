@@ -6,8 +6,8 @@ set -e
 
 function main {
     local src=$(dirname "$0")
-    #local dest=/media/kevan/ADVANTAGE2/active
-    local dest=/f/active
+    local dest=/media/kevan/ADVANTAGE2/active
+    #local dest=/f/active
 
     if [[ ! -d "$dest" ]]; then
         echo Directory does not exist. Mount the drive first.

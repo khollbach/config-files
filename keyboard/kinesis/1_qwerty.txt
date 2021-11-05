@@ -12,7 +12,7 @@
 [space]>[space]
 [enter]>[lalt]  # Use lalt since ralt is mapped to esc in xkb (for my laptop).
 [rctrl]>[enter]
-[rwin]>[rctrl]
+[rwin]>[kp-insert]  # [insert] doesn't seem to do anything. [kp-insert] works.
 [pup]>[delete]
 [pdown]>[rshift]
 

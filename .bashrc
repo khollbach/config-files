@@ -18,3 +18,7 @@ if pushd ~/.config/bash >/dev/null; then
     done
     popd >/dev/null
 fi
+
+if [[ -f ~/notes/personal-configs/bashrc ]]; then
+    source ~/notes/personal-configs/bashrc
+fi
