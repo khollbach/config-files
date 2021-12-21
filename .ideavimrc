@@ -2,7 +2,8 @@
 source ~/.config/nvim/mappings.vim
 
 " Trims trailing whitespace, so that { and } motions work properly.
-noremap <Esc> :w<CR>
+" todo: find a better (ideally automatic) fix for trailing whitespace.
+"noremap <Esc> :w<CR>
 
 set scrolloff=5
 set incsearch
@@ -17,3 +18,26 @@ set visualbell
 
 " Smarter line joining; handles things like comments, etc.
 set ideajoin
+
+
+
+" This is a workaround for the following issue: The "Run" action causes focus
+" to be *nowhere*, which causes the "FocusEditor" action to just not work.
+" (This means you can't hit Escape to re-focus the editor after you Run.)
+"
+" To fix it, put this in `~/.config/JetBrains/CLionYYYY.N/options/macros.xml`,
+" and bind one of them to Escape. (Don't unbind other meanings of Escape.)
+"
+"<application>
+"  <component name="ActionMacroManager">
+"    <macro name="Select editor (via navbar) -- only works in zen mode">
+"      <action id="ShowNavBar" />
+"      <action id="NavBar-cancel" />
+"    </macro>
+"    <macro name="Select editor (via switcher) -- should always work">
+"      <action id="SwitcherForward" />
+"      <action id="SwitcherBackward" />
+"      <shortuct text="ENTER" />
+"    </macro>
+"  </component>
+"</application>
