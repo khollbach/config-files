@@ -3,7 +3,10 @@ source ~/.config/nvim/mappings.vim
 
 " Trims trailing whitespace, so that { and } motions work properly.
 " todo: find a better (ideally automatic) fix for trailing whitespace.
-"noremap <Esc> :w<CR>
+noremap <Esc> :w<CR>
+
+" Fix `cc` (change whole line) so it correctly autoindents, like in Vim.
+nnoremap ww ddko
 
 set scrolloff=5
 set incsearch

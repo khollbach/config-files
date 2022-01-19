@@ -25,3 +25,8 @@ if command -v xset >/dev/null; then
         xset r $scancode
     done
 fi
+
+# Disable numlock, to turn off the little blue light on my keyboard.
+if command -v numlockx >/dev/null; then
+    numlockx off
+fi
