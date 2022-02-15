@@ -6,6 +6,12 @@
     # Include delta configs.
     path = delta
 
+[merge]
+	conflictstyle = diff3
+
+[http]
+    cookiefile = /home/kevan/.gitcookies
+
 [alias]
     rec = !gitrecurse git
 
