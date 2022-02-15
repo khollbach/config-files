@@ -30,3 +30,7 @@ fi
 if command -v numlockx >/dev/null; then
     numlockx off
 fi
+
+if [[ -f ~/notes/configs/profile ]]; then
+    source ~/notes/configs/profile
+fi
