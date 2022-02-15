@@ -25,12 +25,15 @@ alias .......="cd ../../../../../.."
 # Spend less time typing.
 alias c=cd
 alias s=ls
+alias h=cs
+alias .s="cs .."
+alias -- -s="cs -"
 alias e=nvim
 alias er='nvim -MR'
 alias se=sudoedit
 alias l=less
 alias a=rg
-alias f='fd --hidden'
+alias f='command fd --hidden'
 alias p=python3
 alias o=cargo
 alias oc="cargo_less c"

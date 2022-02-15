@@ -756,9 +756,6 @@ endfunction
 " Mappings
 " -----------------------------------------------------------------------------
 
-" 123<CR> takes you to line 123.
-noremap <CR> gg
-
 if has('nvim')
     " Save.
     noremap <M-w> :w<CR>

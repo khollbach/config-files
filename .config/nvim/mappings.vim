@@ -4,6 +4,9 @@ noremap <M-a> :qall<CR>
 inoremap <M-s> <C-o>:w<CR>
 inoremap <M-a> <C-o>:qall<CR>
 
+" 123<CR> takes you to line 123.
+noremap <CR> gg
+
 " Start of line is first non-blank character.
 noremap <Home> ^
 inoremap <Home> <C-o>^
