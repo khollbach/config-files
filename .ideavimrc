@@ -1,6 +1,16 @@
 " Custom keymap.
 source ~/.config/nvim/mappings.vim
 
+" Switch between 'splits'.
+noremap <A-J> <C-w>h
+noremap <A-K> <C-w>j
+noremap <A-I> <C-w>k
+noremap <A-L> <C-w>l
+inoremap <A-J> <C-o><C-w>h
+inoremap <A-K> <C-o><C-w>j
+inoremap <A-I> <C-o><C-w>k
+inoremap <A-L> <C-o><C-w>l
+
 " Trims trailing whitespace, so that { and } motions work properly.
 " todo: find a better (ideally automatic) fix for trailing whitespace.
 noremap <Esc> :w<CR>
