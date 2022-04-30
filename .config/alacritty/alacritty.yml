@@ -7,7 +7,7 @@ font:
   normal:
     family: DejaVu Sans Mono
 
-  size: 14
+  size: 12
 
 mouse:
   hide_when_typing: true
