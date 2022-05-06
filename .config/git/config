@@ -2,6 +2,9 @@
 	email = khollbach@gmail.com
 	name = Kevan Hollbach
 
+[init]
+    defaultBranch = main
+
 [include]
     # Include delta configs.
     path = delta
