@@ -6,6 +6,13 @@ PROMPT_COMMAND=prompt_command
 prompt_contents='\w'
 prompt_color=9
 
+# Different prompt color, to tell my machines apart.
+regex='^khollbach-96.*$'
+if [[ $(hostname) =~ $regex ]]; then
+    prompt_color=14
+fi
+unset regex
+
 # This sets the prompt, $PS1.
 #
 # It automatically re-runs each time, just before the prompt is printed.
