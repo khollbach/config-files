@@ -1,7 +1,3 @@
-# fd-find: find filenames by regex
-https://github.com/sharkdp/fd/releases/latest/
-sudo apt install ~/Downloads/fd_X.Y.Z_amd64.deb
-
 # bat: syntax highlight a file from stdin to stdout
 https://github.com/sharkdp/bat/releases/latest/
 sudo apt install ~/Downloads/bat_X.Y.Z_amd64.deb

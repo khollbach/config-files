@@ -16,18 +16,18 @@ Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
 Run ./update_configs to copy dotfiles into $HOME.
 Log out and log back in to get PATH updates.
 
-# Install Neovim.
-wget https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage
+# Install Neovim: https://github.com/neovim/neovim/wiki/Installing-Neovim#linux
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod +x nvim.appimage
 mkdir -p ~/.local/bin
 mv nvim.appimage ~/.local/bin/nvim
-chmod +x ~/.local/bin/nvim
 
 # Install Rust, plus a few command-line utils.
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup component add rust-src
 rustup toolchain add nightly
 cargo +nightly install racer
-cargo install ripgrep hexyl cargo-watch
+cargo install ripgrep fd-find hexyl cargo-watch
 
 # Install Alacritty terminal emulator.
 sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
