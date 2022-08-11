@@ -15,7 +15,7 @@ bindsym $Win+p exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermen
 bindsym $Win+apostrophe exec --no-startup-id "pgrep xfce4-panel && xfce4-panel -q || xfce4-panel"
 
 # Misc system keybinds.
-bindsym Control+$Alt+Delete exec --no-startup-id xfce4-session-logout
+bindsym Control+$Alt+Delete exec --no-startup-id "xfce4-session-logout || i3-msg exit || sway-msg exit"
 bindsym Print exec xfce4-screenshooter
 
 
@@ -122,7 +122,7 @@ mode "resize" {
 
 
 # Don't show window titlebars by default. Still shows when stacked or tabbed.
-new_window pixel 3
+default_border pixel 3
 
 # Font for window titles.
 font pango:DejaVu Sans Mono 12
@@ -137,8 +137,10 @@ focus_wrapping no
 floating_modifier $Alt
 
 # Leave my mouse alone!
-focus_follows_mouse no  # Don't focus things on mouse-over.
-mouse_warping none  # Don't pull my mouse around when switching windows.
+# Don't focus things on mouse-over.
+focus_follows_mouse no
+# Don't pull my mouse around when switching windows.
+mouse_warping none
 
 # Notification manager.
 #exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
