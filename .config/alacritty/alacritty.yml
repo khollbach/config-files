@@ -1,4 +1,7 @@
 window:
+  dimensions:
+    columns: 80
+    lines: 24
   padding:
     x: 3
     y: 3
@@ -6,7 +9,6 @@ window:
 font:
   normal:
     family: DejaVu Sans Mono
-
   size: 12
 
 mouse:
