@@ -1,10 +1,17 @@
 #!/bin/bash
+# This file gets loaded when Bash is run as a "login" shell.
 
-# Ignore .profile if we're in a tmux pane. There's nothing really wrong with
-# loading it a second time, except that PATH will have a bunch of duplicates,
-# which can be annoying to read through.
+# Load `.profile`, unless this is a tmux pane.
+#
+# tmux opens every new pane as a login shell, but we don't need to load
+# `.profile` a second time.
 if [[ -z "$TMUX" ]]; then
     source ~/.profile
 fi
 
-source ~/.bashrc
+# If running in "interactive" mode, load my configs.
+#
+# E.g., this will be skipped if Bash is invoked as `bash -c some_command`.
+if [[ $- == *i* ]]; then
+    source ~/.bashrc
+fi
