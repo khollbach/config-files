@@ -57,9 +57,9 @@ function time_and_notify {
     # Trigger a "system notification", i.e. desktop pop-up.
     local command=$@  # Flatten arg array into string.
     if [[ "$rv" == 0 ]]; then
-        notify-send "Command finished" "$command" -i dialog-information
+        notify-send "Command finished" "$command" -i dialog-information 2>/dev/null
     else
-        notify-send "Command failed: error $rv" "$command" -i dialog-error
+        notify-send "Command failed: error $rv" "$command" -i dialog-error 2>/dev/null
     fi
 
     return $rv
