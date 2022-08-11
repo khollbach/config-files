@@ -1,0 +1,34 @@
+[alias]
+    rec = !gitrecurse git
+
+    s = rec status -sb
+    si = rec status -sb --ignored
+    p = rec pull --rebase
+    f = rec fetch
+    l = rec --no-pager log --oneline -n 10
+
+    lo = log --oneline
+    d = diff
+    ds = diff --staged
+    c = commit
+
+    h = show
+    a = add
+    aa = add --all
+    pu = push
+    cl = clone
+    co = checkout
+    ll = log
+    st = stash
+    sp = stash pop
+    sl = stash list
+    b = !git --no-pager branch
+    r = remote
+    cb = current-branch
+
+    unstage = reset HEAD --
+    last = !git --no-pager log -1 HEAD
+    clean-ignored = clean -X
+    current-branch = rev-parse --abbrev-ref HEAD
+
+# vi: syntax=gitconfig

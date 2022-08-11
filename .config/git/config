@@ -1,49 +1,21 @@
 [user]
-	email = khollbach@gmail.com
-	name = Kevan Hollbach
+    name = Kevan Hollbach
+
+# Use my personal email, except when at work.
+[include]
+    path = personal-email
+    path = ~/work-configs/gitconfig
+
+# Don't use my work email for this repo.
+[includeIf "gitdir:~/.config-files/.git"]
+    path = personal-email
+
+[include]
+    path = aliases
+    path = delta
 
 [init]
     defaultBranch = main
 
-[include]
-    # Include delta configs.
-    path = delta
-
 [merge]
 	conflictstyle = diff3
-
-[http]
-    cookiefile = /home/kevan/.gitcookies
-
-[alias]
-    rec = !gitrecurse git
-
-    s = rec status -sb
-    si = rec status -sb --ignored
-    p = rec pull --rebase
-    f = rec fetch
-    l = rec --no-pager log --oneline -n 10
-
-    lo = log --oneline
-    d = diff
-    ds = diff --staged
-    c = commit
-
-    h = show
-    a = add
-    aa = add --all
-    pu = push
-    cl = clone
-    co = checkout
-    ll = log
-    st = stash
-    sp = stash pop
-    sl = stash list
-    b = !git --no-pager branch
-    r = remote
-    cb = current-branch
-
-    unstage = reset HEAD --
-    last = !git --no-pager log -1 HEAD
-    clean-ignored = clean -X
-    current-branch = rev-parse --abbrev-ref HEAD
