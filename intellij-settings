@@ -1,0 +1,33 @@
+## IntelliJ (technically CLion) settings for Rust programming.
+(todo: figure out how to sync these *to the cloud* somehow)
+
+Can always get a fresh config with:
+    double-shift + "Restore default settings"
+
+Plugins
+- Rust
+- IdeaVim
+
+Keymap
+- Alt-Z  toggle Zen mode
+- Ctrl-Enter  Run
+- Ctrl+-  Descrease font size
+- Ctrl+=  Increase font size
+
+Misc
+- disable view main menu
+- disable show intention bulb
+- disable all inline hints (Settings > Editor > Inlay Hints)
+- bump up the editor font size from 13 to 15 or 16 (25 for parents' tv)
+- disable Editor > General > Gutter > Highlight modified lines in the gutter
+- Editor > General > Appearence > disable caret blinking
+
+Settings > Editor > Color Scheme > General > Errors and Warnings
+- disable effects for:
+    - Error
+    - Warning
+    - Weak warning
+    - Unused symbol
+    - Unknown symbol
+    - typo
+- and disable effects for General > Editor > caret row
