@@ -22,6 +22,8 @@
 ! model layout[2] = symbols
   *     *         = +%l[2]%(v[2]):2
 
+// Note that the symbols in `wqc(replica-qwerty-symbols)` must be loaded
+// after `inet(evdev)`, otherwise they will be overwritten.
 ! model = symbols
   *     = +inet(evdev)+wqc(replica-qwerty-symbols)
 
@@ -29,4 +31,4 @@
 ! option = symbols
   grp:shifts_toggle = +group(shifts_toggle)
   ctrl:nocaps = +ctrl(nocaps)
-  custom:ralt_escape = +ralt_escape
+  ralt_escape = +ralt_escape

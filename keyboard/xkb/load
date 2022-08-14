@@ -1,5 +1,10 @@
 #!/bin/bash
 
-script_dir=$(dirname "$0")
+set -e
 
-xkbcomp -I"$script_dir" "$script_dir/keymaps/wqc-us.xkb" "$DISPLAY"
+function main {
+    local script_dir=$(dirname "$0")
+    xkbcomp -w4 -I"$script_dir"/xkb "$script_dir"/example-keymaps/wqc-us.xkb "$DISPLAY"
+}
+
+main "$@"

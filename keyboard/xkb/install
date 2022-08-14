@@ -13,12 +13,15 @@ function log_cmd {
     "$@"
 }
 
-script_dir=$(dirname "$0")
+function main {
+    local script_dir=$(dirname "$0")
+    log_cmd rsync -rv "$script_dir"/xkb/ /usr/share/X11/xkb/
 
-xkb_dir=/usr/share/X11/xkb
-for d in rules symbols types; do
-    log_cmd cp "$script_dir/$d/"* "$xkb_dir/$d/"
-done
+    # TODO: this doesn't seem to be working on my glinux laptop.
+    #log_cmd mkdir -p /etc/X11/xorg.conf.d/
+    #log_cmd cp "$script_dir"/90-keyboard-wqc.conf /etc/X11/xorg.conf.d/
 
-log_cmd mkdir -p /etc/X11/xorg.conf.d/
-log_cmd cp "$script_dir/90-keyboard-wqc.conf" /etc/X11/xorg.conf.d/
+    #log_cmd cp "$script_dir"/90-keyboard-wqc.conf /usr/share/X11/xorg.conf.d/
+}
+
+main "$@"

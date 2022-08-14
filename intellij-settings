@@ -21,6 +21,7 @@ Misc
 - bump up the editor font size from 13 to 15 or 16 (25 for parents' tv)
 - disable Editor > General > Gutter > Highlight modified lines in the gutter
 - Editor > General > Appearence > disable caret blinking
+- Editor > General > Mouse Control: Change font size with Ctrl+Mouse Whele in: All editors
 
 Settings > Editor > Color Scheme > General > Errors and Warnings
 - disable effects for:
