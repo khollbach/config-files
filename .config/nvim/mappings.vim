@@ -111,6 +111,12 @@ noremap ze zt
 "
 " Note that my tmux keybindings shadow these ones, so typically these
 " keypresses will result in changing tmux panes instead.
+"
+" Note: it turns out that this doesn't work in VSCodeVim, since they don't
+" support mappings using Alt. I fixed this by putting these keybindings
+" directly in the vscode keybindings.json settings file. See this link for more
+" details:
+" https://github.com/VSCodeVim/Vim#remapping-more-complex-key-combinations
 noremap <A-J> <C-w>h
 noremap <A-K> <C-w>j
 noremap <A-I> <C-w>k
