@@ -106,3 +106,16 @@ noremap J N
 " Cursor to screen bottom / top.
 noremap zn zb
 noremap ze zt
+
+" Switch between splits.
+"
+" Note that my tmux keybindings shadow these ones, so typically these
+" keypresses will result in changing tmux panes instead.
+noremap <A-J> <C-w>h
+noremap <A-K> <C-w>j
+noremap <A-I> <C-w>k
+noremap <A-L> <C-w>l
+inoremap <A-J> <C-o><C-w>h
+inoremap <A-K> <C-o><C-w>j
+inoremap <A-I> <C-o><C-w>k
+inoremap <A-L> <C-o><C-w>l
