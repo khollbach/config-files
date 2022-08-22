@@ -6,7 +6,7 @@ set $Alt Mod1
 # Applications.
 bindsym $Win+space exec --no-startup-id "alacritty --command tmux_attach"
 bindsym $Win+Return exec --no-startup-id alacritty
-bindsym $Win+semicolon exec google-chrome
+bindsym $Win+semicolon exec --no-startup-id google-chrome
 bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c -n"
 bindsym $Win+p exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermenu || dmenu_run"
 
@@ -162,3 +162,8 @@ bar {
     # Displayed at the top edge of the screen, instead of the bottom.
     position top
 }
+
+
+
+# Work-specific stuff.
+include ~/work-configs/i3
