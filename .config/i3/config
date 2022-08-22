@@ -16,6 +16,7 @@ bindsym $Win+apostrophe exec --no-startup-id "pgrep xfce4-panel && xfce4-panel -
 
 # Misc system keybinds.
 bindsym Control+$Alt+Delete exec --no-startup-id "xfce4-session-logout || i3-msg exit || sway-msg exit"
+bindsym $Win+Escape exec --no-startup-id "i3lock -c 000000"
 bindsym Print exec xfce4-screenshooter
 
 
