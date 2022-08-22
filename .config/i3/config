@@ -144,3 +144,11 @@ mouse_warping none
 
 # Notification manager.
 #exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
+
+
+
+# Start i3bar to display a workspace bar.
+bar {
+    # Displayed at the top edge of the screen, instead of the bottom.
+    position top
+}
