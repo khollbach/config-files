@@ -360,6 +360,13 @@ set undodir=~/.vim/undo//
 " Don't flash the screen (or beep) in Windows
 set t_vb=
 
+" Enable mouse support.
+"
+" I don't actually want mouse support (besides the scroll wheel), but this
+" option seems like the easiest way to make the scroll wheel work both in tmux
+" and vim.
+set mouse=a
+
 " Reload file from disk if it changes (as long as there's no edit conflict).
 " https://unix.stackexchange.com/a/383044
 set autoread
