@@ -147,6 +147,16 @@ mouse_warping none
 
 
 
+# When running i3 on my work laptop, volume buttons didn't work out of the box.
+#
+# Copy-pasting from this reddit post got them to work as expected:
+# https://www.reddit.com/r/i3wm/comments/2wbv8x/question_how_to_manage_audio_with_i3/
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+
+
+
 # Start i3bar to display a workspace bar.
 bar {
     # Displayed at the top edge of the screen, instead of the bottom.
