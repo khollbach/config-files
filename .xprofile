@@ -12,3 +12,11 @@ fi
 if command -v numlockx >/dev/null; then
     numlockx off
 fi
+
+# Disable 4K resolution for my laptop screen.
+#
+# It wasn't working well with i3. Web pages (and the URL bar) in chrome were
+# too small to read.
+if [[ $(hostname) == khollbach ]]; then
+    xrandr --output eDP-1 --mode 1920x1200
+fi
