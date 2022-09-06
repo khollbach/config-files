@@ -162,6 +162,8 @@ bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 bar {
     # Displayed at the top edge of the screen, instead of the bottom.
     position top
+
+    status_command i3status
 }
 
 
