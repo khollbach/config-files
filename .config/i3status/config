@@ -6,5 +6,5 @@ general {
 order += "tztime local"
 
 tztime local {
-    format = "%-I:%M %p"
+    format = "%-I:%M %p "
 }

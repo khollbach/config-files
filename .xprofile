@@ -13,10 +13,43 @@ if command -v numlockx >/dev/null; then
     numlockx off
 fi
 
-# Disable 4K resolution for my laptop screen.
-#
-# It wasn't working well with i3. Web pages (and the URL bar) in chrome were
-# too small to read.
+# Work laptop.
 if [[ $(hostname) == khollbach ]]; then
-    xrandr --output eDP-1 --mode 1920x1200
+    # "Disable" 4K resolution.
+    #
+    # Web pages (and the URL bar) in chrome were too small to read.
+    #xrandr --output eDP-1 --mode 1920x1200
+
+    # My "third" monitor (after laptop + main external monitor):
+    # I use this one in "portrait" mode.
+    #xrandr --output DP-3-8 --mode 2560x1440 --rotate right
+
+    # Disable screen sleep, since whenever my screen goes to sleep, I can't
+    # use my external (usb-c) monitor until I log out and back in...
+    # (I wish I knew why!)
+    #
+    # https://askubuntu.com/questions/763994/screen-times-out-in-i3-wm
+    xset s off
+    xset -dpms
+
+    # Work-from-home setup:
+    if [[ $(xrandr | grep '\bconnected\b' | cut -d' ' -f1 | sort) =~ ^DP-2.eDP-1$ ]]; then
+        # Turn off laptop screen.
+        xrandr --output eDP-1 --off
+
+        # Split my huge monitor -- 5120x1440 (32:9) -- into three smaller ones:
+        # * 1280x1440 (8:9)
+        # * 2560x1440 (16:9)
+        # * 1280x1440 (8:9)
+        # These virtual monitors are laid out left-to-right in a row, perfectly
+        # filling the entire physical monitor.
+        #
+        # Note that the original monitor's real-world physical size is 1200mm x
+        # 340mm, and this gets split proportionally among the virtual monitors
+        # as well. (Not sure why xrandr needs to know this info, but it can't
+        # hurt to get it right.)
+        xrandr --setmonitor Virtual-1 1280/300x1440/340+0+0 DP-2
+        xrandr --setmonitor Virtual-2 2560/600x1440/340+1280+0 none
+        xrandr --setmonitor Virtual-3 1280/300x1440/340+3840+0 none
+    fi
 fi
