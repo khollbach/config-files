@@ -15,15 +15,6 @@ fi
 
 # Work laptop.
 if [[ $(hostname) == khollbach ]]; then
-    # "Disable" 4K resolution.
-    #
-    # Web pages (and the URL bar) in chrome were too small to read.
-    #xrandr --output eDP-1 --mode 1920x1200
-
-    # My "third" monitor (after laptop + main external monitor):
-    # I use this one in "portrait" mode.
-    #xrandr --output DP-3-8 --mode 2560x1440 --rotate right
-
     # Disable screen sleep, since whenever my screen goes to sleep, I can't
     # use my external (usb-c) monitor until I log out and back in...
     # (I wish I knew why!)
