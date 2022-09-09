@@ -67,3 +67,5 @@ alias gsl="g sl"
 alias gb="g b"
 alias gr="g r"
 alias gcb="g cb"
+
+alias gdni="g d --no-index"
