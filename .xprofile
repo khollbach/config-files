@@ -15,14 +15,6 @@ fi
 
 # Work laptop.
 if [[ $(hostname) == khollbach ]]; then
-    # Disable screen sleep, since whenever my screen goes to sleep, I can't
-    # use my external (usb-c) monitor until I log out and back in...
-    # (I wish I knew why!)
-    #
-    # https://askubuntu.com/questions/763994/screen-times-out-in-i3-wm
-    xset s off
-    xset -dpms
-
     # Work-from-home setup:
     if [[ $(xrandr | grep '\bconnected\b' | cut -d' ' -f1 | sort) =~ ^DP-2.eDP-1$ ]]; then
         # Turn off laptop screen.
