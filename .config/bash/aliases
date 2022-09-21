@@ -22,7 +22,7 @@ alias   .....="cd ../../../.."
 alias  ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
 
-# Spend less time typing.
+# Misc shorthands.
 alias c=cd
 alias s=ls
 alias h=cs
@@ -35,14 +35,6 @@ alias l=less
 alias a=rg
 alias f='command fd --hidden'
 alias p=python3
-alias o=cargo
-alias oc="cargo_less c"
-alias ob="cargo_less b"
-alias obr="cargo_less b --release"
-alias ot="cargo_less t"
-alias or="cargo r"
-alias odo="cargo d --open"
-alias ofc="cargo fmt --check"
 alias t="time_and_notify "
 alias uu="unbuffer "
 alias ta=tmux_attach
@@ -50,6 +42,17 @@ alias pag="ps aux | grep"
 alias ltmk="latexmk -pdf -pvc --shell-escape"
 alias jq-vim="jq . | nvim -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
 alias jv=jq-vim
+
+# Cargo
+alias o=cargo
+alias oc="cargo_less c"
+alias ob="cargo_less b"
+alias obr="cargo_less b --release"
+alias ot="cargo_less t"
+alias or="cargo r"
+alias odo="cargo d --open"
+alias of="cargo fmt"
+alias ofc="cargo fmt --check"
 
 # Vanilla vi; don't load vim configs.
 alias vi="vi -u NONE"
