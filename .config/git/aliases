@@ -19,6 +19,7 @@
     cl = clone
     co = checkout
     ll = log
+    rb = rebase
     st = stash
     sp = stash pop
     sl = stash list
