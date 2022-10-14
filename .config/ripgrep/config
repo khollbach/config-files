@@ -1,6 +1,3 @@
-# Always show colors and line numbers in the output.
---pretty
-
 # Sort output by file path.
 #
 # Slows down searching, but it's easier to find what you're looking for.
