@@ -1,0 +1,25 @@
+Switch layers with Fn + M,./  The first layer is always "default",
+and the other 3 are customizable. There's a red, green, or blue LED
+that shows when you're on customizable layer 1, 2, or 3.
+
+Swap Fn and Pn keys on all 3 customizable layers. To do this, first
+select a layer and then flip DIP switch 4. The backlights will guide
+you. Flip the DIP switch back after each layer.
+
+To map keys other than Fn and Pn, select a layer and then press Fn+RCtrl
+to toggle edit mode. When in edit mode, press a single "source" key (or
+Fn + a single key), and then press one or more "target" keys to map to;
+then press Pn. Repeat as needed, pressing Pn between each mapping.
+When you're done, exit edit mode with Fn+RCtrl.
+
+Layer 1 (red LED):
+Esc -> Fn Esc (which generates `)
+Caps -> Esc
+Fn Caps -> Esc
+
+Layer 3 (blue LED):
+Esc -> Fn Esc (which generates `)
+Caps -> LCtrl
+Fn Caps -> LCtrl
+LCtrl -> Esc
+Fn LCtrl -> Esc
