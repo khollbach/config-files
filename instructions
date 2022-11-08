@@ -4,9 +4,11 @@ sudoedit /etc/sudoers
 ALL ALL=(ALL) NOPASSWD: ALL
 
 # APT packages.
-sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang
+sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang rofi
 
 Install Neovim: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb
+
+Install VS Code: https://code.visualstudio.com
 
 Install google chrome. Log in to sync.
 
