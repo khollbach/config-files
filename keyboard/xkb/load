@@ -2,9 +2,15 @@
 
 set -e
 
+# Print a command, then run it.
+function log_cmd {
+    echo "$@"
+    "$@"
+}
+
 function main {
     local script_dir=$(dirname "$0")
-    xkbcomp -w4 -I"$script_dir"/xkb "$script_dir"/example-keymaps/wqc-us.xkb "$DISPLAY"
+    log_cmd setxkbmap -I "$script_dir"/xkb/ -rules wqc -layout wqc -option ctrl:nocaps,ralt_escape
 }
 
 main "$@"

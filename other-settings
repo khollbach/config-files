@@ -3,24 +3,20 @@ sudoedit /etc/sudoers
 # and append this line:
 ALL ALL=(ALL) NOPASSWD: ALL
 
-Install google chrome. Log in to sync.
-
 # APT packages.
 sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang
 
-Set up ssh keys; clone this repo.
+Install Neovim: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.deb
 
-Run ./keyboard/xkb/install to set the keyboard layout to workman.
-Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
+Install google chrome. Log in to sync.
+
+Set up ssh keys with github; clone this repo.
 
 Run ./update_configs to copy dotfiles into $HOME.
 Log out and log back in to get PATH updates.
 
-# Install Neovim: https://github.com/neovim/neovim/wiki/Installing-Neovim#linux
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod +x nvim.appimage
-mkdir -p ~/.local/bin
-mv nvim.appimage ~/.local/bin/nvim
+Run ./keyboard/xkb/install to set the keyboard layout to workman.
+Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
 
 # Install Rust, plus a few command-line utils.
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

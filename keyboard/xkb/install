@@ -16,12 +16,11 @@ function log_cmd {
 function main {
     local script_dir=$(dirname "$0")
     log_cmd rsync -rv "$script_dir"/xkb/ /usr/share/X11/xkb/
+    log_cmd cp "$script_dir"/99-keyboard-layout.conf /etc/X11/xorg.conf.d/
 
-    # TODO: this doesn't seem to be working on my glinux laptop.
-    #log_cmd mkdir -p /etc/X11/xorg.conf.d/
-    #log_cmd cp "$script_dir"/90-keyboard-wqc.conf /etc/X11/xorg.conf.d/
-
-    #log_cmd cp "$script_dir"/90-keyboard-wqc.conf /usr/share/X11/xorg.conf.d/
+    # TODO: the above *almost* works on my desktop -- but currently doesn't
+    # apply until I unplug and replug my keyboard. So after a reboot, it's
+    # set to the standard "US" keyboard for some reason. What gives?
 }
 
 main "$@"

@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-function main {
-    setxkbmap -I ./xkb -rules wqc -layout wqc
-}
-
-main "$@"
