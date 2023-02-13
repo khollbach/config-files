@@ -14,8 +14,8 @@ main() {
         popd >/dev/null
     fi
 
-    if [[ -f ~/work-configs/bashrc ]]; then
-        source ~/work-configs/bashrc
+    if [[ -f ~/.personal-configs/bashrc ]]; then
+        source ~/.personal-configs/bashrc
     fi
 }
 
