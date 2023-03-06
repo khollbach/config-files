@@ -38,7 +38,7 @@ alias p=python3
 alias t="time_and_notify "
 alias uu="unbuffer "
 alias ta=tmux_attach
-alias pag="ps aux | grep"
+alias pag="ps aux | a"
 alias ltmk="latexmk -pdf -pvc --shell-escape"
 alias jq-vim="jq . | nvim -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
 alias jv=jq-vim
