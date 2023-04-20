@@ -14,6 +14,6 @@ fi
 export VISUAL=$(command -v nvim || command -v vim || command -v vi)
 export EDITOR=$VISUAL
 
-if [[ -f ~/work-configs/profile ]]; then
-    source ~/work-configs/profile
+if [[ -f ~/.personal-configs/profile ]]; then
+    source ~/.personal-configs/profile
 fi
