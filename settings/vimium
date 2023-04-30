@@ -1,0 +1,38 @@
+# Custom key mappings for the Vimium chrome extension.
+#
+# Also, I have "Characters used for link hints" set to `ashtneoi`,
+# the home row for my keyboard layout.
+
+unmapAll
+map ? showHelp
+
+map l scrollLeft
+map n scrollDown
+map e scrollUp
+map u scrollRight
+
+map h scrollPageUp
+map t scrollPageDown
+map H scrollFullPageUp
+map T scrollFullPageDown
+map gg scrollToTop
+map G scrollToBottom
+
+map <space> LinkHints.activateMode
+map <s-space> LinkHints.activateModeToOpenInNewTab
+
+map L goBack
+map U goForward
+map N previousTab
+map E nextTab
+map , moveTabLeft
+map . moveTabRight
+
+map s createTab
+map a moveTabToNewWindow
+map x removeTab
+map X restoreTab
+
+map o enterInsertMode
+
+map ` Marks.activateGotoMode
