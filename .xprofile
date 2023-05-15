@@ -13,6 +13,11 @@ if command -v numlockx >/dev/null; then
     numlockx off
 fi
 
+# Start Redshift.
+if command -v redshift >/dev/null; then
+    redshift &
+fi
+
 if [[ -f ~/work-configs/xprofile ]]; then
     source ~/work-configs/xprofile
 fi
