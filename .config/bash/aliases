@@ -35,6 +35,7 @@ alias l=less
 alias a=rg
 alias f='command fd --hidden'
 alias p=python3
+alias bp=bpython
 alias t="time_and_notify "
 alias uu="unbuffer "
 alias ta=tmux_attach
