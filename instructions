@@ -13,7 +13,7 @@ Install VS Code: https://code.visualstudio.com
 
 Install google chrome. Log in to sync.
 
-Set up ssh keys with github; clone this repo.
+Set up ssh keys with github; clone this repo into ~/.config-files
 
 Run ./update_configs to copy dotfiles into $HOME.
 Log out and log back in to get PATH updates.
