@@ -5,7 +5,7 @@ ALL ALL=(ALL) NOPASSWD: ALL
 
 # APT packages.
 sudo apt update
-sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang rofi
+sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang rofi libfuse2
 
 Install Neovim: https://github.com/neovim/neovim/releases
 
