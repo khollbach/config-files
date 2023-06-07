@@ -18,6 +18,7 @@ Set up ssh keys with github; clone this repo into ~/.config-files
 Run ./update_configs to copy dotfiles into $HOME.
 Log out and log back in to get PATH updates.
 
+# TODO: neither of these are working for me :(
 Run ./keyboard/xkb/install to set the keyboard layout to workman.
 Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
 
@@ -25,8 +26,9 @@ Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup component add rust-src
 rustup toolchain add nightly
-cargo +nightly install racer
-cargo install ripgrep fd-find hexyl cargo-watch
+cargo install ripgrep
+# TODO: this is failing to build...
+cargo install fd-find
 
 # Install Alacritty terminal emulator.
 sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
