@@ -47,17 +47,17 @@ alias jv=jq-vim
 # Cargo
 alias o=cargo
 alias oc="cargo_less c"
-alias ob="cargo_less b"
-alias obr="cargo_less b --release"
+alias ob="cargo b"
+alias obr="cargo b --release"
 alias ot="cargo t"
-alias otn="cargo t -- --nocapture"
+alias ots="cargo t -- --show-output"
 alias or="cargo r"
 alias odo="cargo d --open"
 alias odp="cargo d --open --document-private-items"
 alias ol="cargo clean"
 alias of="cargo +nightly fmt"
 alias ofc="cargo +nightly fmt --check"
-alias ox="cargo_less fix --allow-staged --all-targets && of"
+alias ox="cargo fix --allow-staged --all-targets && of"
 alias oe="cargo embed"
 
 # Vanilla vi; don't load vim configs.
