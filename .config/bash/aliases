@@ -47,6 +47,7 @@ alias jv=jq-vim
 # Cargo
 alias o=cargo
 alias oc="cargo_less c"
+alias occ="cargo_less c --tests"
 alias ob="cargo b"
 alias obr="cargo b --release"
 alias ot="cargo t"
