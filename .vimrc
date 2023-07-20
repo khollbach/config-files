@@ -21,7 +21,7 @@ if PluginExists('NeoSolarized') && !empty($DISPLAY)
     set background=dark
     colorscheme NeoSolarized
 else
-    colorscheme desert
+    colorscheme default
 endif
 
 if PluginExists('vim-sneak')
