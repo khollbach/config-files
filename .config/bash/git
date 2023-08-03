@@ -54,7 +54,7 @@ alias gl="g l"
 #alias gds="g ds"
 #alias gc="g c"
 
-alias gh="g h"
+alias gsh="g sh"
 alias ga="g a"
 alias gaa="g aa"
 alias gpu="g pu"

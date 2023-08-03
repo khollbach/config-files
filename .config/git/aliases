@@ -12,7 +12,7 @@
     ds = diff --staged
     c = commit
 
-    h = show
+    sh = show
     a = add
     aa = add --all
     pu = push
