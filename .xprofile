@@ -14,7 +14,7 @@ if command -v numlockx >/dev/null; then
 fi
 
 # Start Redshift.
-if command -v redshift >/dev/null; then
+if command -v redshift >/dev/null && ! pgrep -x redshift >/dev/null; then
     redshift &
 fi
 
