@@ -166,8 +166,8 @@ bar {
     # Displayed at the top edge of the screen, instead of the bottom.
     position top
 
-    # Time of day (disabled, for now).
-    #status_command i3status
+    # Time of day.
+    status_command i3status
 }
 
 
