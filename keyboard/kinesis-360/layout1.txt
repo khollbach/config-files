@@ -56,3 +56,7 @@
 [spc]>[pgdn]
 [scol]>[pgup]
 [p]>[prnt]
+
+[up]>[vol-]
+[down]>[vol+]
+[obrk]>[mute]
