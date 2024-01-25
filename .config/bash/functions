@@ -43,8 +43,8 @@ function cargo_less {
 # Time a long command and ring a bell when done.
 function time_and_notify {
     # When did I start?
-    date
-    echo
+    date 1>&2
+    echo 1>&2
 
     # Run and preserve the return value.
     local rv
@@ -52,7 +52,7 @@ function time_and_notify {
     rv=$?
 
     # Ring a bell, which shows up visually in tmux.
-    echo -en '\a'
+    echo -en '\a' 1>&2
 
     # Trigger a "system notification", i.e. desktop pop-up.
     local command=$@  # Flatten arg array into string.
