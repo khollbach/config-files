@@ -79,5 +79,5 @@ if command -v rlwrap >/dev/null; then
 fi
 alias cc="clang -Wall -Wextra -Wpedantic -Werror"
 alias cx="clang++ -Wall -Wextra -Wpedantic -Werror"
-alias gcc="gcc -Wall -Wextra -Wpedantic -Werror -O"
-alias g++="g++ -Wall -Wextra -Wpedantic -Werror -O"
+alias gcc="gcc -Wall -Wextra -Wpedantic -Werror"
+alias g++="g++ -Wall -Wextra -Wpedantic -Werror"
