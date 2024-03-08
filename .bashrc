@@ -20,3 +20,6 @@ main() {
 }
 
 main "$@"
+
+# "Local" function.
+unset -f main
