@@ -4,11 +4,14 @@ PROMPT_COMMAND=prompt_command
 
 #prompt_contents='\u@\h:\w'
 prompt_contents='\w'
-prompt_color=9
 
-# Different prompt color, to tell my machines apart.
-regex='^khollbach-96.*$'
+# Different prompt colors on different machines, to tell them apart.
+regex='^kevan-.*$'
 if [[ $(hostname) =~ $regex ]]; then
+    # Local machine: red.
+    prompt_color=9
+else
+    # Remote machine: cyan.
     prompt_color=14
 fi
 unset regex
