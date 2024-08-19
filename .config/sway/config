@@ -1,32 +1,31 @@
-# Default config for sway
 #
-# Copy this to ~/.config/sway/config and edit it to your liking.
+# Sway config file, based on the default config file.
 #
-# Read `man 5 sway` for a complete reference.
 
 ### Variables
 #
 # Modifier keys.
 set $win Mod4
 set $alt Mod1
-# Home row direction keys.
+# Direction keys.
 set $left j
 set $down k
 set $up i
 set $right l
-# Your preferred terminal emulator
+# Your preferred terminal emulator and browser
 set $term alacritty
+set $browser firefox
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu dmenu_path | tofi | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Wallpaper
+output * bg /usr/share/backgrounds/Clouds_by_Tibor_Mokanszki.jpg fill
 #
 # Example configuration:
 #
@@ -67,19 +66,23 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
     # Start a terminal
     bindsym $win+Return exec $term
+    bindsym $win+Space exec $term
+
+    # Start a web browser
+    bindsym $win+Semicolon exec $browser
 
     # Kill focused window
     bindsym $win+$alt+q kill
 
     # Start your launcher
-    bindsym $win+d exec $menu
+    bindsym $win+p exec $menu
 
-    # Drag floating windows by holding down $win and left mouse button.
-    # Resize them with right mouse button + $win.
+    # Drag floating windows by holding down $alt and left mouse button.
+    # Resize them with right mouse button + $alt.
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
-    floating_modifier $win normal
+    floating_modifier $alt normal
 
     # Reload the configuration file
     bindsym $win+$alt+c reload
@@ -110,6 +113,12 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+$alt+Down move down
     bindsym $win+$alt+Up move up
     bindsym $win+$alt+Right move right
+
+    # Between screens
+    bindsym $win+Comma focus output left
+    bindsym $win+Period focus output right
+    bindsym $win+$alt+Comma move output left; focus output left
+    bindsym $win+$alt+Period move output right; focus output right
 #
 # Workspaces:
 #
@@ -124,30 +133,29 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+8 workspace number 8
     bindsym $win+9 workspace number 9
     bindsym $win+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $win+$alt+1 move container to workspace number 1
-    bindsym $win+$alt+2 move container to workspace number 2
-    bindsym $win+$alt+3 move container to workspace number 3
-    bindsym $win+$alt+4 move container to workspace number 4
-    bindsym $win+$alt+5 move container to workspace number 5
-    bindsym $win+$alt+6 move container to workspace number 6
-    bindsym $win+$alt+7 move container to workspace number 7
-    bindsym $win+$alt+8 move container to workspace number 8
-    bindsym $win+$alt+9 move container to workspace number 9
-    bindsym $win+$alt+0 move container to workspace number 10
+    # Move focused container to workspace, and go there.
+    bindsym $win+$alt+1 move container to workspace number 1; workspace number 1
+    bindsym $win+$alt+2 move container to workspace number 2; workspace number 2
+    bindsym $win+$alt+3 move container to workspace number 3; workspace number 3
+    bindsym $win+$alt+4 move container to workspace number 4; workspace number 4
+    bindsym $win+$alt+5 move container to workspace number 5; workspace number 5
+    bindsym $win+$alt+6 move container to workspace number 6; workspace number 6
+    bindsym $win+$alt+7 move container to workspace number 7; workspace number 7
+    bindsym $win+$alt+8 move container to workspace number 8; workspace number 8
+    bindsym $win+$alt+9 move container to workspace number 9; workspace number 9
+    bindsym $win+$alt+0 move container to workspace number 10; workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $win+b or $win+v, for horizontal and vertical splits
+    # $win+u or $win+o, for vertical and horizontal splits
     # respectively.
-    bindsym $win+b splith
-    bindsym $win+v splitv
+    bindsym $win+u splitv
+    bindsym $win+o splith
 
     # Switch the current container between different layout styles
-    bindsym $win+s layout stacking
     bindsym $win+w layout tabbed
     bindsym $win+e layout toggle split
 
@@ -155,13 +163,16 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $win+$alt+space floating toggle
+    bindsym $win+$alt+s floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $win+space focus mode_toggle
+    bindsym $win+s focus mode_toggle
 
     # Move focus to the parent container
     bindsym $win+a focus parent
+
+    # Move focus back to the child
+    bindsym $win+d focus child
 #
 # Scratchpad:
 #
@@ -182,20 +193,21 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym n resize shrink width 5ppt
+    bindsym e resize grow height 5ppt
+    bindsym u resize shrink height 5ppt
+    bindsym o resize grow width 5ppt
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 5ppt
+    bindsym Down resize grow height 5ppt
+    bindsym Up resize shrink height 5ppt
+    bindsym Right resize grow width 5ppt
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym Space mode "default"
 }
 bindsym $win+r mode "resize"
 
@@ -216,5 +228,10 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+### Visual tweaks
+#
+# Don't show borders when there is only one window on the screen.
+hide_edge_borders smart
 
 include /etc/sway/config.d/*
