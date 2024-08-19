@@ -18,6 +18,11 @@ if command -v redshift >/dev/null && ! pgrep -x redshift >/dev/null; then
     redshift &
 fi
 
+# Set desktop wallpaper.
+if [[ -f ~/.fehbg ]]; then
+    ~/.fehbg &
+fi
+
 if [[ -f ~/work-configs/xprofile ]]; then
     source ~/work-configs/xprofile
 fi
