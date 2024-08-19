@@ -74,6 +74,9 @@ bindsym $Win+equal scratchpad show
 # Restart i3 inplace to see updated configs, bar, etc.
 bindsym $Win+$Alt+r restart
 
+# Reload i3 config file.
+bindsym $Win+$Alt+c reload
+
 # Kill focused window.
 bindsym $Win+$Alt+q kill
 
