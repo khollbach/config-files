@@ -6,8 +6,9 @@
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Modifier keys.
 set $win Mod4
+set $alt Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -68,7 +69,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+Return exec $term
 
     # Kill focused window
-    bindsym $win+Shift+q kill
+    bindsym $win+$alt+q kill
 
     # Start your launcher
     bindsym $win+d exec $menu
@@ -81,10 +82,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     floating_modifier $win normal
 
     # Reload the configuration file
-    bindsym $win+Shift+c reload
+    bindsym $win+$alt+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $win+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $win+$alt+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -99,16 +100,16 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+Up focus up
     bindsym $win+Right focus right
 
-    # Move the focused window with the same, but add Shift
-    bindsym $win+Shift+$left move left
-    bindsym $win+Shift+$down move down
-    bindsym $win+Shift+$up move up
-    bindsym $win+Shift+$right move right
+    # Move the focused window with the same, but add $alt
+    bindsym $win+$alt+$left move left
+    bindsym $win+$alt+$down move down
+    bindsym $win+$alt+$up move up
+    bindsym $win+$alt+$right move right
     # Ditto, with arrow keys
-    bindsym $win+Shift+Left move left
-    bindsym $win+Shift+Down move down
-    bindsym $win+Shift+Up move up
-    bindsym $win+Shift+Right move right
+    bindsym $win+$alt+Left move left
+    bindsym $win+$alt+Down move down
+    bindsym $win+$alt+Up move up
+    bindsym $win+$alt+Right move right
 #
 # Workspaces:
 #
@@ -124,16 +125,16 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+9 workspace number 9
     bindsym $win+0 workspace number 10
     # Move focused container to workspace
-    bindsym $win+Shift+1 move container to workspace number 1
-    bindsym $win+Shift+2 move container to workspace number 2
-    bindsym $win+Shift+3 move container to workspace number 3
-    bindsym $win+Shift+4 move container to workspace number 4
-    bindsym $win+Shift+5 move container to workspace number 5
-    bindsym $win+Shift+6 move container to workspace number 6
-    bindsym $win+Shift+7 move container to workspace number 7
-    bindsym $win+Shift+8 move container to workspace number 8
-    bindsym $win+Shift+9 move container to workspace number 9
-    bindsym $win+Shift+0 move container to workspace number 10
+    bindsym $win+$alt+1 move container to workspace number 1
+    bindsym $win+$alt+2 move container to workspace number 2
+    bindsym $win+$alt+3 move container to workspace number 3
+    bindsym $win+$alt+4 move container to workspace number 4
+    bindsym $win+$alt+5 move container to workspace number 5
+    bindsym $win+$alt+6 move container to workspace number 6
+    bindsym $win+$alt+7 move container to workspace number 7
+    bindsym $win+$alt+8 move container to workspace number 8
+    bindsym $win+$alt+9 move container to workspace number 9
+    bindsym $win+$alt+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -154,7 +155,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $win+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $win+Shift+space floating toggle
+    bindsym $win+$alt+space floating toggle
 
     # Swap focus between the tiling area and the floating area
     bindsym $win+space focus mode_toggle
@@ -168,7 +169,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $win+Shift+minus move scratchpad
+    bindsym $win+$alt+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
