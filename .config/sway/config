@@ -66,7 +66,7 @@ output * bg /usr/share/backgrounds/Clouds_by_Tibor_Mokanszki.jpg fill
 #
     # Start a terminal
     bindsym $win+Return exec $term
-    bindsym $win+Space exec $term
+    bindsym $win+Space exec $term --command tmux_attach
 
     # Start a web browser
     bindsym $win+Semicolon exec $browser
