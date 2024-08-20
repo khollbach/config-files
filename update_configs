@@ -31,9 +31,6 @@ function main {
     if tmux info &>/dev/null; then
         log_cmd tmux source-file ~/.tmux.conf
     fi
-
-    # Generate `.less` config file.
-    log_cmd lesskey ~/.config/less/lesskey
 }
 
 function log_cmd {
