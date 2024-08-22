@@ -1,3 +1,0 @@
-partial default modifier_keys xkb_symbols "ralt_escape" {
-    key <RALT> { [ Escape, Escape ] };
-};
