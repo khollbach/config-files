@@ -17,7 +17,7 @@ steps
 * log out and back in
 
 * install keyd, copy configs, reload
-* apt install ripgrep git-delta fd-find
+* apt install ripgrep git-delta fd-find rofi
 * download & install vs code
 * install rust
 

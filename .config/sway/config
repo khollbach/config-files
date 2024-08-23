@@ -16,9 +16,7 @@ set $right l
 set $term alacritty
 set $browser google-chrome
 # Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu dmenu_path | tofi | xargs swaymsg exec --
+set $menu rofi -show run
 
 include /etc/sway/config-vars.d/*
 
