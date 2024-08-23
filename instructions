@@ -1,55 +1,24 @@
-# For passwordless `sudo`,
-sudoedit /etc/sudoers
-# and append this line:
-ALL ALL=(ALL) NOPASSWD: ALL
+steps
 
-# APT packages.
-sudo apt update
-sudo apt install git redshift tmux xclip i3 xfce4 xfce4-goodies blueman evince tldr expect rlwrap htop tree curl clang rofi libfuse2
+* install Ubuntu
+* append this to /etc/sudoers:
+    kevan ALL ALL=(ALL) NOPASSWD: ALL
+* apt install sway
+* download & install chrome
+    * download & install 1password
+    * log into 1password in chrome
+    * load blank new tab page extension
+* uninstall snap
 
-Install Neovim: https://github.com/neovim/neovim/releases
+* apt install git alacritty tmux neovim
+* set up ssh keys
+* clone this repo
+* run update_configs
+* log out and back in
 
-Install VS Code: https://code.visualstudio.com
+* install keyd, copy configs, reload
+* apt install ripgrep git-delta fd-find
 
-Install google chrome. Log in to sync.
-
-Set up ssh keys with github; clone this repo into ~/.config-files
-
-Run ./update_configs to copy dotfiles into $HOME.
-Log out and log back in to get PATH updates.
-
-# TODO: neither of these are working for me :(
-Run ./keyboard/xkb/install to set the keyboard layout to workman.
-Run ./keyboard/xkb/load to load it right away, so you don't have to reboot.
-
-# Install Rust, plus a few command-line utils.
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup component add rust-src
-rustup toolchain add nightly
-cargo install ripgrep
-# TODO: this is failing to build...
-cargo install fd-find
-
-# Install Alacritty terminal emulator.
-sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-cargo install alacritty
-
-# In xfce, swap out xfwm4 for i3. See steps VI, VII, and VIII of this guide.
-# (It's also nice to add a "Workspace Switcher" widget to the xfce panel.)
-https://feeblenerd.blogspot.com/2015/11/pretty-i3-with-xfce.html
-
-# If you're booting via grub,
-sudoedit /etc/default/grub
-# and change the timeout from 10 seconds to 2:
-GRUB_TIMEOUT=2
-# Then run the following to apply the changes:
-sudo update-grub
-
-# If you're dual-booting windows, run this to fix real-time clock conflicts:
-timedatectl set-local-rtc 1
-
-# Windows setup.
-See `./keyboard/windows` for keyboard setup.
-Install and configure `f.lux` to your liking.
-To make sure Emacs knows where to find your configs, set the
-system environment variable "HOME" to "C:\Users\$USERNAME".
+* change grub timeout to 2 seconds
+* if you're dual-booting windows:
+    timedatectl set-local-rtc 1
