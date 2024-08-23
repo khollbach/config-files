@@ -2,20 +2,6 @@
 size = 12
 #size = 9
 
-[font.normal]
-family = "DejaVu Sans Mono"
-
-[hints]
-# Disable clicking on URI links.
-enabled = []
-
-[mouse]
-hide_when_typing = true
-
-[window.dimensions]
-columns = 80
-lines = 24
-
 [window.padding]
 x = 3
 y = 3
