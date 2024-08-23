@@ -33,6 +33,11 @@ output * bg /usr/share/backgrounds/Clouds_by_Tibor_Mokanszki.jpg fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+### Startup programs
+#
+# Dim screen at night.
+exec redshift
+
 ### Idle configuration
 #
 # Example configuration:
