@@ -70,6 +70,10 @@ alias vi="vi -u NONE"
 alias emacs="emacsclient -a '' -c -n"
 alias remacs="killall emacs && pushd ~ >/dev/null && command emacs --daemon && popd >/dev/null"
 
+# Workaround for vscode not detecting which keyring to use.
+# https://code.visualstudio.com/docs/editor/settings-sync#_recommended-configure-the-keyring-to-use-with-vs-code
+alias code='code --password-store="gnome-libsecret"'
+
 # Make these easier to use.
 alias which="type -a"
 alias grep="grep --color=always"

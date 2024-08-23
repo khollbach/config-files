@@ -18,6 +18,8 @@ steps
 
 * install keyd, copy configs, reload
 * apt install ripgrep git-delta fd-find
+* download & install vs code
+* install rust
 
 * change grub timeout to 2 seconds
 * if you're dual-booting windows:
