@@ -80,6 +80,16 @@ exec redshift
     # Start your launcher
     bindsym $win+p exec $menu
 
+    # Take a screenshot.
+    #
+    # Specifically, writes a PNG of the entire screen into the user's home
+    # directory. It's not a perfect setup -- a "snipping tool" gui thing would
+    # be nice -- but this is good enough for now.
+    #
+    # Update: actually, this doesn't work at all: it produces an all-black
+    # 1920x1080 PNG instead of an actual screenshot... todo: debug.
+    bindsym Print exec scrot
+
     # Drag floating windows by holding down $alt and left mouse button.
     # Resize them with right mouse button + $alt.
     # Despite the name, also works for non-floating windows.
