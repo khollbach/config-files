@@ -237,4 +237,8 @@ bar {
 # Don't show borders when there is only one window on the screen.
 hide_edge_borders smart
 
+### Misc settings
+#
+focus_follows_mouse no
+
 include /etc/sway/config.d/*
