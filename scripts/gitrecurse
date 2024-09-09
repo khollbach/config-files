@@ -22,8 +22,8 @@ function main {
 
         # For every subdir.
         for dir in */ .*/; do
-            # (Weird edge case: empty glob.)
-            if [[ "$dir" == "*/" ]]; then break; fi
+            # (Weird edge case: empty globs.)
+            if [[ "$dir" == "*/" || "$dir" == ".*/" ]]; then break; fi
             if [[ "$dir" == . || "$dir" == .. ]]; then continue; fi
 
             pushd "$dir" >/dev/null || continue
