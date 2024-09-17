@@ -194,7 +194,7 @@ autocmd VimEnter * set laststatus=1
 " Status line shows current file path and whether the file was modified.
 function! StatusLine()
     if expand("%:t") !=# ""
-        return ' %f %#StatusLineTrailing#%( %h%w%r%m%)' . GitStatus()
+        return ' %f %#StatusLineTrailing#%( %h%w%r%m%)'
     else
         return '%#StatusLineTrailing#%=%(%h%w%r%m %)'
     endif
