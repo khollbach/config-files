@@ -592,6 +592,7 @@ inoremap <C-del> <C-\><C-o>de
 
 " Strip trailing whitespace.
 noremap <silent> <leader>s :%s/\s\+$//<CR>:noh<CR>
+command Trim %s/\s\+$// | noh
 
 " Change file permissions to be executable or not.
 noremap <leader>x :!chmod +x %<CR>
