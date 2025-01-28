@@ -2,7 +2,7 @@ steps
 
 * install Ubuntu
 * append this to /etc/sudoers:
-    kevan ALL ALL=(ALL) NOPASSWD: ALL
+    kevan ALL=(ALL) NOPASSWD: ALL
 * apt install sway
 * download & install chrome
     * download & install 1password
