@@ -6,7 +6,7 @@ PROMPT_COMMAND=prompt_command
 prompt_contents='\w'
 
 # Different prompt colors on different machines, to tell them apart.
-regex='^kevan-.*$|^mug.*$'
+regex='^kevan-.*$|^khollbach-.*$|^mug.*$'
 if [[ $(hostname) =~ $regex ]]; then
     # Local machine: red.
     prompt_color=9
