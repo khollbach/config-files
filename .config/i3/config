@@ -181,4 +181,4 @@ bar {
 
 
 # Work-specific stuff.
-include ~/work-configs/i3
+include ~/.work-configs/i3

@@ -23,6 +23,6 @@ if [[ -f ~/.fehbg ]]; then
     ~/.fehbg &
 fi
 
-if [[ -f ~/work-configs/xprofile ]]; then
-    source ~/work-configs/xprofile
+if [[ -f ~/.work-configs/xprofile ]]; then
+    source ~/.work-configs/xprofile
 fi

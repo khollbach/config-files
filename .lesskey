@@ -17,4 +17,4 @@ j repeat-search
 J reverse-search
 
 #env
-LESS = -i -j4 -R --tabs=4
+LESS = -i -j4 -R --tabs=4 --mouse --wheel-lines=3
