@@ -321,7 +321,8 @@ highlight def link LowercaseTodo Todo
 if has('nvim') || has('terminal')
     " Make escape key behave as expected.
     tnoremap <Esc> <C-\><C-n>
-
+endif
+if has('nvim')
     " No line numbers in terminals.
     autocmd TermOpen * setlocal nonumber
 
