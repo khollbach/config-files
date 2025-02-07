@@ -20,7 +20,8 @@ bindsym $Win+$Alt+Escape exec --no-startup-id "i3-msg exit"
 bindsym Control+$Alt+Delete exec --no-startup-id "xfce4-session-logout || i3-msg exit || sway-msg exit"
 
 # Print screen.
-bindsym Print exec xfce4-screenshooter
+#bindsym Print exec xfce4-screenshooter
+bindsym --release Print exec import ~/Downloads/screenshot.png
 
 
 
