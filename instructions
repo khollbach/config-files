@@ -1,25 +1,20 @@
-steps
+setup steps
 
 * install Ubuntu
 * append this to /etc/sudoers:
     kevan ALL=(ALL) NOPASSWD: ALL
-* apt install sway
-* download & install chrome
-    * download & install 1password
-    * log into 1password in chrome
-    * load blank new tab page extension
-* uninstall snap
+* apt install i3 alacritty tmux neovim ripgrep fd-find git git-delta make clang
+* install and configure keyd
 
-* apt install git alacritty tmux neovim
 * set up ssh keys
 * clone this repo
 * run update_configs
 * log out and back in
 
-* install keyd, copy configs, reload
-* apt install ripgrep git-delta fd-find rofi
+* uninstall snap
+* download & install chrome
+    * load blank new tab page extension
 * download & install vs code
-* install rust
 
 * change grub timeout to 2 seconds
 * if you're dual-booting windows:
