@@ -3,7 +3,7 @@ setup steps
 * install Ubuntu
 * append this to /etc/sudoers:
     kevan ALL=(ALL) NOPASSWD: ALL
-* apt install i3 rofi alacritty tmux neovim ripgrep fd-find git git-delta make clang
+* apt install i3 rofi alacritty tmux neovim ripgrep fd-find tldr git git-delta make clang
 * install and configure keyd
 
 * set up ssh keys
