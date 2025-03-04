@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# cd and ls.
-function cs {
-    cd "$@" && ls
-}
-
 # Run evince in the background and ignore stdout/stderr.
 function ev {
     evince "$@" &> /dev/null &

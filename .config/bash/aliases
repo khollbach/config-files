@@ -25,9 +25,6 @@ alias .......="cd ../../../../../.."
 # Misc shorthands.
 alias c=cd
 alias s=ls
-alias h=cs
-alias .s="cs .."
-alias -- -s="cs -"
 alias e=nvim
 alias er='nvim -MR'
 alias se=sudoedit
