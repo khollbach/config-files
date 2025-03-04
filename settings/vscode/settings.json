@@ -1,0 +1,37 @@
+{
+    "search.exclude": {
+        // TODO: exclude build dirs here.
+    },
+
+    "telemetry.telemetryLevel": "off",
+
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.showSlider": "always",
+
+    "editor.wordWrap": "on",
+    "editor.glyphMargin": false,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.guides.indentation": false,
+    "editor.cursorBlinking": "solid",
+    "editor.renderLineHighlight": "none",
+
+    "window.menuBarVisibility": "toggle",
+
+    // (What exactly does this do?)
+    //"workbench.editor.enablePreviewFromQuickOpen": false,
+
+    // Press C-s to format the current file.
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 100,
+
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "$HOME/.config/nvim/mappings.vim",
+    // This fixes "laggy" behaviour when using a remapped `c` key. See here for details:
+    // https://github.com/VSCodeVim/Vim/issues/6812#issuecomment-875880541
+    "vim.surround": false,
+    "workbench.colorTheme": "Darcula"
+}

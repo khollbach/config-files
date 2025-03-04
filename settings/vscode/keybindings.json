@@ -1,0 +1,135 @@
+[
+    //
+    // Frequently used hotkeys.
+    //
+
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpen",
+    },
+    {
+        "key": "ctrl+k",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "ctrl+;",
+        "command": "workbench.action.showCommands"
+    },
+
+    {
+        "key": "alt+a",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "alt+d",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+
+    {
+        "key": "ctrl+space",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+
+    //
+    // Switch editor panes.
+    //
+
+    {
+        "key": "alt+i",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Normal'",
+        "args": {
+            "after": [
+                "ctrl+w",
+                "k"
+            ],
+        },
+    },
+    {
+        "key": "alt+i",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Insert'",
+        "args": {
+            "after": [
+                "ctrl+o",
+                "ctrl+w",
+                "k"
+            ],
+        },
+    },
+
+    {
+        "key": "alt+j",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Normal'",
+        "args": {
+            "after": [
+                "ctrl+w",
+                "h"
+            ],
+        },
+    },
+    {
+        "key": "alt+j",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Insert'",
+        "args": {
+            "after": [
+                "ctrl+o",
+                "ctrl+w",
+                "h"
+            ],
+        },
+    },
+
+    {
+        "key": "alt+k",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Normal'",
+        "args": {
+            "after": [
+                "ctrl+w",
+                "j"
+            ],
+        },
+    },
+    {
+        "key": "alt+k",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Insert'",
+        "args": {
+            "after": [
+                "ctrl+o",
+                "ctrl+w",
+                "j"
+            ],
+        },
+    },
+
+    {
+        "key": "alt+l",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Normal'",
+        "args": {
+            "after": [
+                "ctrl+w",
+                "l"
+            ],
+        },
+    },
+    {
+        "key": "alt+l",
+        "command": "vim.remap",
+        "when": "inputFocus && vim.mode == 'Insert'",
+        "args": {
+            "after": [
+                "ctrl+o",
+                "ctrl+w",
+                "l"
+            ],
+        },
+    }
+]
