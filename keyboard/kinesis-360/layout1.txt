@@ -9,7 +9,7 @@
 [bspc]>[lshf]
 [del]>[lctr]
 [lctr]>[esc]
-[end]>[fn1s]
+[end]>[fn2s]
 [home]>[rwin]
 
 [ent]>[lalt]
@@ -18,9 +18,23 @@
 [pgup]>[del]
 [rwin]>[ins]
 
-
-
 <function1>
+
+[i]>[mouu]
+[j]>[moul]
+[k]>[moud]
+[l]>[mour]
+
+[spc]>[lmou]
+[scol]>[rmou]
+[u]>[4mou]
+[o][5mou]
+
+[m]>[sdmo]
+[comm]>[sumo]
+[perd]>[mmou]
+
+<function2>
 
 [up]>[down]
 [down]>[up]
