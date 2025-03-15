@@ -14,13 +14,16 @@ alias lta="lt -A"
 
 # `-`: change to previous directory.
 # `..`: change to parent directory.
-alias --    -="cd -"
-alias      ..="cd .."
-alias     ...="cd ../.."
-alias    ....="cd ../../.."
-alias   .....="cd ../../../.."
-alias  ......="cd ../../../../.."
-alias .......="cd ../../../../../.."
+alias --       -="cd -"
+alias         ..="cd .."
+alias        ...="cd ../.."
+alias       ....="cd ../../.."
+alias      .....="cd ../../../.."
+alias     ......="cd ../../../../.."
+alias    .......="cd ../../../../../.."
+alias   ........="cd ../../../../../../.."
+alias  .........="cd ../../../../../../../.."
+alias ..........="cd ../../../../../../../../.."
 
 # Misc shorthands.
 alias c=cd
