@@ -621,8 +621,8 @@ noremap <leader>c "+p
 noremap <leader>C "+P
 
 " Next/previous buffer.
-noremap - :bn<CR>
-noremap = :bp<CR>
+"noremap - :bn<CR>
+"noremap = :bp<CR>
 
 " Open file.
 nnoremap <leader>o :Files<CR>
