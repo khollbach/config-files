@@ -1,4 +1,21 @@
 {
+    // TODO
+    //"editor.inlineSuggest.enabled": true,
+    "editor.inlayHints.enabled": "off",
+    "editor.codeLens": false,
+
+    // // Disable intellisense.
+    // "editor.quickSuggestions": {
+    //     "other": "off",
+    //     "comments": "off",
+    //     "strings": "off"
+    // },
+    // "editor.suggestOnTriggerCharacters": false,
+    // "editor.parameterHints.enabled": false,
+
+    // // Disable Pylance.
+    // "python.languageServer": "None",
+
     "search.exclude": {
         // TODO: exclude build dirs here.
     },
