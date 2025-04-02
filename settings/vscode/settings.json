@@ -1,9 +1,4 @@
 {
-    // TODO
-    //"editor.inlineSuggest.enabled": true,
-    "editor.inlayHints.enabled": "off",
-    "editor.codeLens": false,
-
     // // Disable intellisense.
     // "editor.quickSuggestions": {
     //     "other": "off",
@@ -23,17 +18,17 @@
     "telemetry.telemetryLevel": "off",
 
     "diffEditor.ignoreTrimWhitespace": true,
-    "editor.minimap.renderCharacters": false,
+    "window.menuBarVisibility": "toggle",
     "editor.minimap.showSlider": "always",
-
+    "editor.minimap.renderCharacters": false,
     "editor.wordWrap": "on",
     "editor.glyphMargin": false,
     "editor.bracketPairColorization.enabled": false,
     "editor.guides.indentation": false,
     "editor.cursorBlinking": "solid",
     "editor.renderLineHighlight": "none",
-
-    "window.menuBarVisibility": "toggle",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.codeLens": false,
 
     // (What exactly does this do?)
     //"workbench.editor.enablePreviewFromQuickOpen": false,
@@ -50,5 +45,7 @@
     // This fixes "laggy" behaviour when using a remapped `c` key. See here for details:
     // https://github.com/VSCodeVim/Vim/issues/6812#issuecomment-875880541
     "vim.surround": false,
-    "workbench.colorTheme": "Darcula"
+
+    "workbench.colorTheme": "Darcula",
+    "editor.fontSize": 20
 }
