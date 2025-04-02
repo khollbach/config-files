@@ -5,12 +5,12 @@
 
     {
         "key": "ctrl+j",
-        "command": "workbench.action.quickOpen",
+        "command": "workbench.action.quickOpen"
     },
     {
         "key": "ctrl+k",
         "command": "editor.action.showHover",
-        "when": "editorTextFocus",
+        "when": "editorTextFocus"
     },
     {
         "key": "ctrl+;",
@@ -45,8 +45,8 @@
             "after": [
                 "ctrl+w",
                 "k"
-            ],
-        },
+            ]
+        }
     },
     {
         "key": "alt+i",
@@ -57,8 +57,8 @@
                 "ctrl+o",
                 "ctrl+w",
                 "k"
-            ],
-        },
+            ]
+        }
     },
 
     {
@@ -69,8 +69,8 @@
             "after": [
                 "ctrl+w",
                 "h"
-            ],
-        },
+            ]
+        }
     },
     {
         "key": "alt+j",
@@ -81,8 +81,8 @@
                 "ctrl+o",
                 "ctrl+w",
                 "h"
-            ],
-        },
+            ]
+        }
     },
 
     {
@@ -93,8 +93,8 @@
             "after": [
                 "ctrl+w",
                 "j"
-            ],
-        },
+            ]
+        }
     },
     {
         "key": "alt+k",
@@ -105,8 +105,8 @@
                 "ctrl+o",
                 "ctrl+w",
                 "j"
-            ],
-        },
+            ]
+        }
     },
 
     {
@@ -117,8 +117,8 @@
             "after": [
                 "ctrl+w",
                 "l"
-            ],
-        },
+            ]
+        }
     },
     {
         "key": "alt+l",
@@ -129,7 +129,7 @@
                 "ctrl+o",
                 "ctrl+w",
                 "l"
-            ],
-        },
+            ]
+        }
     }
 ]
