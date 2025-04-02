@@ -18,6 +18,7 @@
     "telemetry.telemetryLevel": "off",
 
     "diffEditor.ignoreTrimWhitespace": true,
+    "workbench.startupEditor": "none",
     "window.menuBarVisibility": "toggle",
     "editor.minimap.showSlider": "always",
     "editor.minimap.renderCharacters": false,
