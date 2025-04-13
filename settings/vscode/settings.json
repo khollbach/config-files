@@ -19,6 +19,7 @@
 
     "diffEditor.ignoreTrimWhitespace": true,
     "workbench.startupEditor": "none",
+    "update.showReleaseNotes": false,
     "window.menuBarVisibility": "toggle",
     "editor.minimap.showSlider": "always",
     "editor.minimap.renderCharacters": false,
