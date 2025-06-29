@@ -183,6 +183,6 @@
         "args": {
             "snippet": "`"
         },
-        "when": "editorTextFocus && !editorReadonly"
+        "when": "editorTextFocus && vim.mode == 'Insert'"
     }
 ]
