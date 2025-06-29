@@ -2,7 +2,6 @@
     //
     // Frequently used hotkeys.
     //
-
     {
         "key": "ctrl+j",
         "command": "workbench.action.quickOpen"
@@ -13,10 +12,19 @@
         "when": "editorTextFocus"
     },
     {
+        "key": "ctrl+l",
+        "command": "rust-analyzer.openDocs",
+        "when": "editorTextFocus && editorLangId == 'rust'"
+    },
+    {
         "key": "ctrl+;",
         "command": "workbench.action.showCommands"
     },
-
+    {
+        "key": "ctrl+s",
+        "command": "rust-analyzer.parentModule",
+        "when": "editorTextFocus && editorLangId == 'rust'"
+    },
     {
         "key": "alt+a",
         "command": "workbench.view.explorer",
@@ -26,17 +34,18 @@
         "key": "alt+d",
         "command": "workbench.action.toggleSidebarVisibility"
     },
-
+    {
+        "key": "ctrl+q",
+        "command": "editor.action.formatDocument"
+    },
     {
         "key": "ctrl+space",
         "command": "workbench.action.terminal.toggleTerminal",
         "when": "terminal.active"
     },
-
     //
     // Switch editor panes.
     //
-
     {
         "key": "alt+i",
         "command": "vim.remap",
@@ -60,7 +69,6 @@
             ]
         }
     },
-
     {
         "key": "alt+j",
         "command": "vim.remap",
@@ -84,7 +92,6 @@
             ]
         }
     },
-
     {
         "key": "alt+k",
         "command": "vim.remap",
@@ -108,7 +115,6 @@
             ]
         }
     },
-
     {
         "key": "alt+l",
         "command": "vim.remap",
@@ -131,5 +137,52 @@
                 "l"
             ]
         }
+    },
+    // Toggle red squigglies in rust-analyzer. Also toggle line numbers, which
+    // helps me remember if I have squigglies enabled or not.
+    //
+    // Mostly works pretty well. One quirk is that when turning diagnostics off,
+    // the squigglies for syntax errors don't go away. (But type errors do.)
+    {
+        "key": "ctrl+z",
+        "when": "editorTextFocus && vim.mode == 'Normal'",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                {
+                    "command": "toggle",
+                    "args": {
+                        "id": "toggle red squigglies in rust-analyzer",
+                        "value": [
+                            {
+                                "editor.lineNumbers": "off",
+                                "rust-analyzer.checkOnSave": false,
+                                "rust-analyzer.diagnostics.enable": false
+                            },
+                            {
+                                "editor.lineNumbers": "on",
+                                "rust-analyzer.checkOnSave": true,
+                                "rust-analyzer.diagnostics.enable": true
+                            }
+                        ]
+                    }
+                },
+                "rust-analyzer.cancelFlycheck",
+                "rust-analyzer.clearFlycheck",
+                "rust-analyzer.reloadWorkspace"
+            ]
+        }
+    },
+    //
+    // Hack: disable auto-closing backticks.
+    // Based on: https://stackoverflow.com/a/48714796/
+    //
+    {
+        "key": "`",
+        "command": "editor.action.insertSnippet",
+        "args": {
+            "snippet": "`"
+        },
+        "when": "editorTextFocus && !editorReadonly"
     }
 ]
