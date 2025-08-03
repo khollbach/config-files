@@ -45,6 +45,7 @@
     "update.showReleaseNotes": false,
     "window.menuBarVisibility": "toggle",
     "workbench.editor.empty.hint": "hidden",
+    "workbench.editor.showTabs": "none",
     "workbench.startupEditor": "none",
 
     "editor.semanticTokenColorCustomizations": {
