@@ -16,31 +16,10 @@
     },
 
     "telemetry.telemetryLevel": "off",
-
-    "diffEditor.ignoreTrimWhitespace": true,
-    "workbench.startupEditor": "none",
-    "update.showReleaseNotes": false,
-    "window.menuBarVisibility": "toggle",
-    "editor.minimap.showSlider": "always",
-    "editor.minimap.renderCharacters": false,
-    "editor.wordWrap": "on",
-    "editor.glyphMargin": false,
-    "editor.bracketPairColorization.enabled": false,
-    "editor.guides.indentation": false,
-    "editor.cursorBlinking": "solid",
-    "editor.renderLineHighlight": "none",
-    "editor.inlayHints.enabled": "offUnlessPressed",
-    "editor.codeLens": false,
-
-    // (What exactly does this do?)
-    //"workbench.editor.enablePreviewFromQuickOpen": false,
-
-    // Press C-s to format the current file.
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "modificationsIfAvailable",
-
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 100,
+    "workbench.colorTheme": "Darcula",
+    "editor.fontSize": 20,
 
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "$HOME/.config/nvim/mappings.vim",
@@ -48,6 +27,37 @@
     // https://github.com/VSCodeVim/Vim/issues/6812#issuecomment-875880541
     "vim.surround": false,
 
-    "workbench.colorTheme": "Darcula",
-    "editor.fontSize": 20
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.codeLens": false,
+    "editor.cursorBlinking": "solid",
+    "editor.glyphMargin": false,
+    "editor.guides.indentation": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.largeFileOptimizations": false,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.showSlider": "always",
+    "editor.renderLineHighlight": "none",
+    "editor.wordWrap": "on",
+    "git.openRepositoryInParentFolders": "always",
+    "lldb.suppressUpdateNotifications": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "update.showReleaseNotes": false,
+    "window.menuBarVisibility": "toggle",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.startupEditor": "none",
+
+    "editor.semanticTokenColorCustomizations": {
+        "[Darcula]": {
+            "enabled": true,
+            "rules": {
+                "operator.controlFlow": "#cc8242",
+                "property": "#cccccc"
+            }
+        }
+    },
+
+    "editor.lineNumbers": "on",
+    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.diagnostics.enable": true
 }
