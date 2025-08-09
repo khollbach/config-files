@@ -1,5 +1,11 @@
+# This makes it so that `tree -a` ignores the .git directory.
+/.git/
+
 .mypy_cache/
 __pycache__/
-tags
+
 .idea/
 .vscode/
+
+# ctags tag file
+tags
