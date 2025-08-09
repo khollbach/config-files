@@ -11,7 +11,15 @@
 
 # Ignore .git directories, ctags tagfiles, etc.
 --glob=!.git/
+--glob=!.jj/
 --glob=!.svn/
 --glob=!.hg/
 --glob=!tags
+--glob=!compile_commands.json
 --glob=!node_modules/
+
+# Heed .gitignore even when not in a git repo, so that ripgrep works with jj.
+#
+# Once the following gets merged, we won't need this workaround any more:
+# https://github.com/BurntSushi/ripgrep/pull/2842
+--no-require-git
