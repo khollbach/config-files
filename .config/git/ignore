@@ -1,6 +1,3 @@
-# This makes it so that `tree -a` ignores the .git directory.
-/.git/
-
 .mypy_cache/
 __pycache__/
 
