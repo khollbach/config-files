@@ -1,4 +1,10 @@
 .git/
+.jj/
 .svn/
 .hg/
 node_modules/
+
+# Workaround for fd not reading .gitignore files when there's no `.git`.
+# Once this gets merged, we won't need this workaround:
+# https://github.com/BurntSushi/ripgrep/pull/2842
+target/
