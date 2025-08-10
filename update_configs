@@ -14,7 +14,7 @@ function main {
 
         rsync -rpv $u_flag \
             "$script_dir"/.[!.]* ~ \
-            --exclude .git --exclude .gitignore
+            --exclude .git --exclude .gitignore --exclude .jj
     else
         cp -v "$script_dir"/.[!.]* ~ 2>/dev/null
         cp -rv "$script_dir"/{.Desktop,.config,.docker,.emacs.d,.vim} ~
