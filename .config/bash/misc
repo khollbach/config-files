@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Set LS_COLORS to not use any bold fonts.
-# The default is to have directory names in bold, which I don't like.
-eval $(dircolors | sed s,01,00,g)
-
-# Make other-writable directory names show as black text on a green background,
-# instead of blue text against green (which is unreadable).
-export LS_COLORS="${LS_COLORS}ow=30;42:"
-
 # Unmap C-s from freezing tty output, so that it can be used for i-search.
 stty -ixon
 

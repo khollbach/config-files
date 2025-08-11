@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Update configs.
 alias u="source ~/.config-files/update_configs"
 alias co='cd ~/.config-files'
 
-# ls aliases.
 alias ls="command ls -vh --color=auto"
 alias la="ls -A"
 alias ll="ls -lG"
@@ -12,9 +10,7 @@ alias lla="ll -lA"
 alias lt="ll -tr"
 alias lta="lt -A"
 
-# `-`: change to previous directory.
-# `..`: change to parent directory.
-alias --       -="cd -"
+alias -- -="cd -"
 alias         ..="cd .."
 alias        ...="cd ../.."
 alias       ....="cd ../../.."
@@ -35,54 +31,37 @@ alias l=less
 alias a=rg
 alias f='fd --hidden'
 alias p=python3
-alias bp=bpython
 alias t="time_and_notify "
-alias uu="unbuffer "
 alias ta=tmux_attach
 alias pag="ps aux | a"
 alias ltmk="latexmk -pdf -pvc --shell-escape"
-alias jq-vim="jq . | nvim -R - -c 'set syntax=json foldmethod=indent shiftwidth=2' -c 'normal zR'"
-alias jv=jq-vim
 
-# Cargo
+# Side-by-side diff format.
+alias 2jj="jj --config ui.pager='delta -s --pager less'"
+
 alias o=cargo
 alias oc="cargo_less c"
-alias occ="cargo_less c --tests"
 alias ob="cargo b"
 alias obr="cargo b --release"
-alias ot="cargo t"
-alias ots="cargo t -- --show-output"
 alias or="cargo r"
 alias orr="cargo r -r"
+alias ot="cargo t"
+alias ots="cargo t -- --show-output"
 alias od="cargo d"
 alias odo="cargo d --open"
 alias odp="cargo d --open --document-private-items"
-alias ol="cargo clean"
 alias of="cargo +nightly fmt"
-alias ofc="cargo +nightly fmt --check"
-alias ox="cargo fix --allow-staged --all-targets && of"
-alias oe="cargo embed"
 
-# Vanilla vi; don't load vim configs.
-alias vi="vi -u NONE"
-
-# Make Emacs startup only slow the first time you run it.
-alias emacs="emacsclient -a '' -c -n"
-alias remacs="killall emacs && pushd ~ >/dev/null && command emacs --daemon && popd >/dev/null"
-
-# Workaround for vscode not detecting which keyring to use.
-# https://code.visualstudio.com/docs/editor/settings-sync#_recommended-configure-the-keyring-to-use-with-vs-code
-alias code='code --password-store="gnome-libsecret"'
-
-# Make these easier to use.
+# Misc tweaks.
 alias which="type -a"
 alias grep="grep --color=always"
 alias tree="tree -C --gitignore"
-alias amm="amm --no-remote-logging"
-if command -v rlwrap >/dev/null; then
-    alias ocaml="rlwrap ocaml"
-fi
+alias vi="vi -u NONE"
 alias cc="clang -Wall -Wextra -Wpedantic"
 alias cx="clang++ -Wall -Wextra -Wpedantic"
 alias gcc="gcc -Wall -Wextra -Wpedantic"
 alias g++="g++ -Wall -Wextra -Wpedantic"
+
+# Workaround for vscode not detecting which keyring to use.
+# https://code.visualstudio.com/docs/editor/settings-sync#_recommended-configure-the-keyring-to-use-with-vs-code
+alias code='code --password-store="gnome-libsecret"'

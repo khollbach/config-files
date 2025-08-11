@@ -1,12 +1,7 @@
 #!/bin/bash
 
-main() {
-    # Only load configs if Bash is in "interactive" mode.
-    if [[ $- != *i* ]]; then
-        return
-    fi
-
-    # Customize the prompt; load functions and aliases; misc configs.
+# Only load configs if Bash is in "interactive" mode.
+if [[ $- == *i* ]]; then
     if pushd ~/.config/bash >/dev/null; then
         for file in $(find . -type f); do
             source "$file"
@@ -17,9 +12,4 @@ main() {
     if [[ -f ~/.work-configs/bashrc ]]; then
         source ~/.work-configs/bashrc
     fi
-}
-
-main "$@"
-
-# "Local" function.
-unset -f main
+fi

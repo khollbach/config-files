@@ -6,3 +6,5 @@ email = "khollbach@gmail.com"
 
 [ui]
 default-command = "log"
+diff-formatter = ":git"
+pager = "delta --pager less"

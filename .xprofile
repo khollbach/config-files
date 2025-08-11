@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Work around a bug in xkb; enable autorepeat for alphabetic keys.
 # This gets reset when I unplug and replug my usb keyboard though.
