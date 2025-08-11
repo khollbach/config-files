@@ -36,9 +36,6 @@ alias ta=tmux_attach
 alias pag="ps aux | a"
 alias ltmk="latexmk -pdf -pvc --shell-escape"
 
-# Side-by-side diff format.
-alias 2jj="jj --config ui.pager='delta -s --pager less'"
-
 alias o=cargo
 alias oc="cargo_less c"
 alias ob="cargo b"
@@ -51,6 +48,15 @@ alias od="cargo d"
 alias odo="cargo d --open"
 alias odp="cargo d --open --document-private-items"
 alias of="cargo +nightly fmt"
+
+alias n=jj; complete -F _clap_complete_jj n
+alias ns="jj st"
+alias nd="jj show"
+alias np="jj git fetch"
+alias nu="jj b s main -r@; jj git push"
+# Side-by-side diff format.
+alias 2n="jj --config ui.pager='delta -s --pager less'"; complete -F _clap_complete_jj 2jj
+alias 2nd="2n show"
 
 # Misc tweaks.
 alias which="type -a"

@@ -36,15 +36,17 @@ function gcap {
 # Usage: `2 git diff`
 alias 2='GIT_PAGER="delta -s"'
 
-# Note: this breaks command-line auto-completion.
+# Note that this breaks bash completion, and I haven't been able to get the
+# following to work for me:
+# https://stackoverflow.com/questions/9869227
 alias g="git"
 
 alias gs="g s"
+alias gd="g d"
+alias gds="g ds"
 alias gp="g p"
 alias gpu="g pu"
 alias gl="g l"
 alias gll="g ll"
-alias gd="g d"
-alias gds="g ds"
 
 alias gdni="g d --no-index"
