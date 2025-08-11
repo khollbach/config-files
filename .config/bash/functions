@@ -73,11 +73,6 @@ function get_latest_release {
     sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
 
-function jj_push {
-    jj b s main -r@
-    jj git push
-}
-
 function jj_desc {
     # Flatten arguments into a single string
     local message=$@
@@ -87,6 +82,11 @@ function jj_desc {
     else
         jj desc
     fi
+}
+
+function jj_push {
+    jj b s main -r@
+    jj git push
 }
 
 function jj_desc_push {
