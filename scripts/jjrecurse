@@ -1,21 +1,23 @@
 #!/bin/bash
 
-# If the current directory is a git repo, run the given shell command.
-# Otherwise, run it in *each* direct sub-directory that is a git repo.
+# NOTE: this is copied from gitrecurse.
+
+# If the current directory is a jj repo, run the given shell command.
+# Otherwise, run it in *each* direct sub-directory that is a jj repo.
 #
-# This script is called `gitrecurse` for historical reasons, it doesn't recurse
+# This script is called `jjrecurse` for historical reasons, it doesn't recurse
 # into sub-sub-dirs anymore.
 #
 # Example usage:
 # $ cd ~
-# $ gitrecurse git status -s
+# $ jjrecurse jj st
 # ...
-# $ gitrecurse git pull
+# $ jjrecurse jj git fetch
 # ...
 function main {
     local shell_command=("$@")
 
-    if git rev-parse --is-inside-work-tree &>/dev/null; then
+    if jj workspace root &>/dev/null; then
         "${shell_command[@]}"
     else
         local any_successes
@@ -28,9 +30,9 @@ function main {
 
             pushd "$dir" >/dev/null || continue
 
-            # If this is the root of a git repo, print the repo name (in blue)
+            # If this is the root of a jj repo, print the repo name (in blue)
             # and then run the command.
-            if [[ -d .git ]]; then
+            if [[ -d .jj ]]; then
                 if [[ -n "$any_successes" ]]; then
                     echo
                 fi
@@ -45,7 +47,7 @@ function main {
         done
 
         if [[ -z "$any_successes" ]]; then
-            echo "$PWD isn't a git repository, and neither are any immediate sub-directories."
+            echo "$PWD isn't a jj repository, and neither are any immediate sub-directories."
             exit 1
         fi
     fi
