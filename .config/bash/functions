@@ -5,33 +5,9 @@ function ev {
     evince "$@" &> /dev/null &
 }
 
-# Ignore hidden directories in home. Also ignore ~/snap.
-function rg {
-    if [[ "$PWD" == "$HOME" ]]; then
-        command rg -g '!/.*' -g '!/snap/' "$@"
-    else
-        command rg "$@"
-    fi
-}
-
-# Ignore hidden directories in home. Also ignore ~/snap.
-function fd {
-    if [[ "$PWD" == "$HOME" ]]; then
-        command fd --exclude '/.*' --exclude '/snap/' "$@"
-    else
-        command fd "$@"
-    fi
-}
-
-# Invoke rust compiler. Pipe colorful stdout/err to less.
-function rc {
-    rustc --color always "$@" |& less -F
-    return ${PIPESTATUS[0]}
-}
-
-# Invoke rust build tool. Pipe colorful stdout/err to less.
+# Run cargo and view output with less.
 function cargo_less {
-    command cargo --color always "$@" |& less -F
+    cargo --color always "$@" |& less -F
     return ${PIPESTATUS[0]}
 }
 
