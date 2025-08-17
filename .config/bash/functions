@@ -86,7 +86,7 @@ function jj_desc {
 
 function jj_push {
     jj b s main -r@
-    jj git push
+    jj git push --allow-new --remote origin
 }
 
 function jj_desc_push {
