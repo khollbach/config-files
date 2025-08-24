@@ -52,9 +52,10 @@ alias of="cargo +nightly fmt"
 alias n="jjrecurse jj"; complete -F _clap_complete_jj n
 alias ns="jjrecurse jj st"
 alias nh="jj show"
-alias nd="jj_desc"
 alias nf="jjrecurse jj git fetch"
-alias np="jj b s main -r@; jj git push"
+alias np="jj_push"
+alias nd="jj_desc"
+alias ndu="jj_desc_push"
 # Side-by-side diff format.
 alias 2n="jj --config ui.pager='delta -s --pager less'"; complete -F _clap_complete_jj 2n
 alias 2nh="2n show"
