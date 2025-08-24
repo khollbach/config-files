@@ -72,3 +72,14 @@ function get_latest_release {
     grep '"tag_name":' |                                            # Get tag line
     sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
+
+function jj_desc {
+    # Flatten arguments into a single string
+    local message=$@
+
+    if [[ -n "$message" ]]; then
+        jj desc -m "$message"
+    else
+        jj desc
+    fi
+}
