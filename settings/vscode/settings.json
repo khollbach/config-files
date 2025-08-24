@@ -23,6 +23,7 @@
 
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "$HOME/.config/nvim/mappings.vim",
+    "vim.joinspaces": false,
     // This fixes "laggy" behaviour when using a remapped `c` key. See here for details:
     // https://github.com/VSCodeVim/Vim/issues/6812#issuecomment-875880541
     "vim.surround": false,
@@ -40,6 +41,7 @@
     "editor.renderLineHighlight": "none",
     "editor.wordWrap": "on",
     "git.openRepositoryInParentFolders": "always",
+    "jjk.enableAnnotations": false,
     "lldb.suppressUpdateNotifications": true,
     "python.analysis.typeCheckingMode": "basic",
     "update.showReleaseNotes": false,
