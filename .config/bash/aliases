@@ -48,6 +48,7 @@ alias od="cargo d"
 alias odo="cargo d --open"
 alias odp="cargo d --open --document-private-items"
 alias of="cargo +nightly fmt"
+alias ox="cargo clean"
 
 alias n="jj"; complete -F _clap_complete_jj n
 alias nh="jj show"
