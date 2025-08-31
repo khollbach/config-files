@@ -12,7 +12,8 @@
     // "python.languageServer": "None",
 
     "search.exclude": {
-        // TODO: exclude build dirs here.
+        "/.jj/": true,
+        "/.cache/clangd/": true
     },
 
     "telemetry.telemetryLevel": "off",
