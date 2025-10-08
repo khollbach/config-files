@@ -24,9 +24,9 @@
 
 # Left thumb cluster: different mapping than normal
 [bspc]>[spc]
-[del]>[lctr]
+[del]>[lshf]
 [lctr]>[lalt]
-[end]>[lshf]
+[end]>[lctr]
 [home]>[end]
 [lalt]>[esc]
 
