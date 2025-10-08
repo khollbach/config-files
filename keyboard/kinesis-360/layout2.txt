@@ -1,4 +1,52 @@
+# LOL
+
 <base>
+
+[up]>[down]
+[down]>[up]
+[lshf]>[home]
+[rshf]>[end]
+[esc]>[bspc]
+
+[bspc]>[lshf]
+[del]>[lctr]
+[lctr]>[esc]
+[end]>[fn2s]
+[home]>[rwin]
+[lalt]>[lalt]
+
+[spc]>[spc]
+[ent]>[lalt]
+[rctr]>[ent]
+[pgdn]>[rshf]
+[pgup]>[del]
+[rwin]>[ins]
+
+# Left thumb cluster: different mapping than normal
+[bspc]>[spc]
+[del]>[lctr]
+[lctr]>[lalt]
+[end]>[lshf]
+[home]>[end]
+[lalt]>[esc]
+
+<function1>
+
+[i]>[mouu]
+[j]>[moul]
+[k]>[moud]
+[l]>[mour]
+
+[spc]>[lmou]
+[scol]>[rmou]
+[u]>[4mou]
+[o][5mou]
+
+[m]>[sdmo]
+[comm]>[sumo]
+[perd]>[mmou]
+
+<function2>
 
 [up]>[down]
 [down]>[up]
@@ -18,13 +66,23 @@
 [pgup]>[del]
 [rwin]>[ins]
 
+[m]>[f1]
+[comm]>[f2]
+[perd]>[f3]
+[j]>[f4]
+[k]>[f5]
+[l]>[f6]
+[u]>[f7]
+[i]>[f8]
+[o]>[f9]
+[7]>[f10]
+[8]>[f11]
+[9]>[f12]
 
+[spc]>[pgdn]
+[scol]>[pgup]
+[p]>[prnt]
 
-[lshf]>[perd]
-[tab]>[bsls]
-
-[bspc]>[spc]
-[lctr]>[lshf]
-[end]>[end]
-
-[rwin]>[esc]
+[up]>[vol-]
+[down]>[vol+]
+[obrk]>[mute]

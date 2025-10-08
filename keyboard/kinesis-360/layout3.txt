@@ -8,12 +8,14 @@
 [rshf]>[end]
 [esc]>[bspc]
 
-#[bspc]>[lshf]
+[bspc]>[lshf]
 [del]>[lctr]
 [lctr]>[esc]
-[end]>[fn1s]
+[end]>[fn2s]
 [home]>[rwin]
+[lalt]>[lalt]
 
+[spc]>[spc]
 [ent]>[lalt]
 [rctr]>[ent]
 [pgdn]>[rshf]

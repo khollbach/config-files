@@ -11,7 +11,9 @@
 [lctr]>[esc]
 [end]>[fn2s]
 [home]>[rwin]
+[lalt]>[lalt]
 
+[spc]>[spc]
 [ent]>[lalt]
 [rctr]>[ent]
 [pgdn]>[rshf]
