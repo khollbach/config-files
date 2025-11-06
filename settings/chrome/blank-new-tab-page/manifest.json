@@ -1,6 +1,6 @@
 // https://superuser.com/questions/907234/change-chrome-new-tab-page-to-local-file
 {
-  "name": "⠀My custom new tab page",
+  "name": " ",
   "description": "Overrides the new tab page",
   "version": "0.1",
   "incognito": "split",
