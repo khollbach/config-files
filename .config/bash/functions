@@ -61,34 +61,3 @@ function title_wrapper {
 
     command "$cmd" "${args[@]}"
 }
-
-# Usage example:
-# $ get_latest_release neovim/neovim
-# v0.5.0
-#
-# https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
-function get_latest_release {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-    grep '"tag_name":' |                                            # Get tag line
-    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
-}
-
-function jj_desc {
-    # Flatten arguments into a single string
-    local message=$@
-
-    if [[ -n "$message" ]]; then
-        jj desc -m "$message"
-    else
-        jj desc
-    fi
-}
-
-function jj_push {
-    jj b s main -r@
-    jj git push --allow-new --remote origin
-}
-
-function jj_desc_push {
-    jj_desc "$@" && jj_push
-}
