@@ -1,0 +1,5 @@
+command unalias b
+command alias bsn breakpoint set --name %1
+
+# Don't automatically load .lldbinit files in the current directory.
+settings set target.load-cwd-lldbinit false
