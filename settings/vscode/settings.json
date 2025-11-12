@@ -63,5 +63,6 @@
 
     "editor.lineNumbers": "on",
     "rust-analyzer.checkOnSave": true,
-    "rust-analyzer.diagnostics.enable": true
+    "rust-analyzer.diagnostics.enable": true,
+    "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
