@@ -78,8 +78,8 @@ endif
 
 
 
-" No line numbers.
-set nonumber
+" Line numbers.
+set number
 
 " No signs in the gutter.
 set signcolumn=no

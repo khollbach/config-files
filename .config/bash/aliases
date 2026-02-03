@@ -47,6 +47,7 @@ alias ots="cargo t -- --show-output"
 alias od="cargo d"
 alias odo="cargo d --open"
 alias odp="cargo d --open --document-private-items"
+alias oe="cargo embed"
 alias of="cargo +nightly fmt"
 alias ox="cargo clean"
 

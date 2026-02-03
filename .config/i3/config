@@ -4,8 +4,8 @@ set $Alt Mod1
 
 
 # Applications.
-bindsym $Win+space exec --no-startup-id "alacritty --command tmux_attach"
-bindsym $Win+Return exec --no-startup-id alacritty
+bindsym $Win+space exec --no-startup-id "spwan-alacritty-cwd --command tmux_attach"
+bindsym $Win+Return exec --no-startup-id spawn-alacritty-cwd
 bindsym $Win+semicolon exec --no-startup-id google-chrome
 bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c -n"
 bindsym $Win+p exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermenu || rofi -show run -m -1 || dmenu_run"
