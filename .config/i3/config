@@ -4,7 +4,7 @@ set $Alt Mod1
 
 
 # Applications.
-bindsym $Win+space exec --no-startup-id "spwan-alacritty-cwd --command tmux_attach"
+bindsym $Win+space exec --no-startup-id "spawn-alacritty-cwd --command tmux_attach"
 bindsym $Win+Return exec --no-startup-id spawn-alacritty-cwd
 bindsym $Win+semicolon exec --no-startup-id google-chrome
 bindsym $Win+m exec --no-startup-id "emacsclient -a '' -c -n"
