@@ -8,6 +8,6 @@ fi
 
 mkdir -p /etc/keyd
 python3 generate_config.py > /etc/keyd/generic-config
-cp laptop.conf other.conf /etc/keyd/
+cp default.conf /etc/keyd/
 
 keyd reload
