@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# 'jj desc', but optionally accepts a message for the '-m' option.
+function nd {
+    # Flatten arguments into a single string.
+    local message=$@
+    local msg_len=${#message}
+
+    if [[ "$msg_len" -eq 0 ]]; then
+        command jj desc
+    else
+        command jj desc -m "$message"
+    fi
+}
+
+# 'jj desc' and push.
+function ndp {
+    nd "$@" && jj b s main -r@ && jj git push
+}
