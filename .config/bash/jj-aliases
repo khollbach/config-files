@@ -15,5 +15,5 @@ function nd {
 
 # 'jj desc' and push.
 function ndp {
-    nd "$@" && jj b s main -r@ && jj git push
+    nd "$@" && jj b s main -r@ && jj git push --allow-new
 }
