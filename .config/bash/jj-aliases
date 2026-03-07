@@ -17,3 +17,5 @@ function nd {
 function ndp {
     nd "$@" && jj b s main -r@ && jj git push --allow-new
 }
+
+alias nf='jj git fetch'

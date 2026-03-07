@@ -1,0 +1,8 @@
+#!/bin/bash
+
+main() {
+    local d=~/code/apple-ii/tools/Merlin32_v1.2_b2
+    "$d"/Linux/Merlin32 "$d"/Library "$@"
+}
+
+main "$@"
