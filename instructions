@@ -3,7 +3,7 @@ setup steps
 * install Ubuntu
 * append this to /etc/sudoers:
     kevan ALL=(ALL) NOPASSWD: ALL
-* apt install redshift i3 rofi tmux neovim tldr git git-delta build-essential clang
+* apt install redshift i3 rofi tmux neovim tldr git git-delta build-essential clang curl
 * curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 * cargo install alacritty ripgrep fd-find jj-cli
 * install and configure keyd
