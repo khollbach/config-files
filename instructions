@@ -5,6 +5,7 @@ setup steps
     kevan ALL=(ALL) NOPASSWD: ALL
 * apt install redshift i3 rofi tmux neovim tldr git git-delta build-essential clang curl
 * curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+* apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
 * cargo install alacritty ripgrep fd-find jj-cli
 * install and configure keyd
 
