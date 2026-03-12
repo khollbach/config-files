@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -jar ~/code/apple-ii/tools/AppleCommander/AppleCommander-ac-13.0.jar "$@"

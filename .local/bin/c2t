@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+~/code/apple-ii/tools/c2t/bin/c2t "$@"
