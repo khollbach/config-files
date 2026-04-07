@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+#
+# Simple pomodoro timer script.
+#
+# E.g.:
+# $ timer 25
+
+import sys
+import time
+
+def main():
+    assert len(sys.argv) == 2, 'expected one argument: number of minutes'
+    mins = int(sys.argv[1])
+    assert mins >= 0
+    secs = 60 * mins
+
+    while True:
+        m = str(secs // 60)
+        if len(m) < 2:
+            m = ' ' + m
+        s = str(secs % 60)
+        if len(s) < 2:
+            s = '0' + s
+
+        clear()
+        print(f'{m}:{s}')
+
+        time.sleep(1)
+
+        if secs >= 0:
+            secs -= 1
+
+def clear():
+    for _ in range(200):
+        print()
+
+if __name__ == '__main__':
+    main()
