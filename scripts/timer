@@ -27,7 +27,7 @@ def main():
 
         time.sleep(1)
 
-        if secs >= 0:
+        if secs > 0:
             secs -= 1
 
 def clear():
