@@ -24,7 +24,6 @@
 
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "$HOME/.config/nvim/mappings.vim",
-    "vim.joinspaces": false,
     // This fixes "laggy" behaviour when using a remapped `c` key. See here for details:
     // https://github.com/VSCodeVim/Vim/issues/6812#issuecomment-875880541
     "vim.surround": false,
@@ -33,12 +32,12 @@
     "editor.bracketPairColorization.enabled": false,
     "editor.codeLens": false,
     "editor.cursorBlinking": "solid",
-    "editor.glyphMargin": false,
     "editor.guides.indentation": false,
     "editor.inlayHints.enabled": "offUnlessPressed",
     "editor.largeFileOptimizations": false,
     "editor.minimap.renderCharacters": false,
     "editor.minimap.showSlider": "always",
+    "editor.minimap.enabled": false,
     "editor.renderLineHighlight": "none",
     "editor.wordWrap": "on",
     "git.openRepositoryInParentFolders": "always",
@@ -64,5 +63,21 @@
     "editor.lineNumbers": "on",
     "rust-analyzer.checkOnSave": true,
     "rust-analyzer.diagnostics.enable": true,
-    "workbench.secondarySideBar.defaultVisibility": "hidden"
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "git.blame.editorDecoration.enabled": false,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "git.enabled": false,
+    "terminal.integrated.initialHint": false,
+    "chat.disableAIFeatures": true,
+    "calva.paredit.defaultKeyMap": "original",
+    "calva.myCljAliases": [
+        "flowstorm"
+    ],
+    "calva.myLeinProfiles": [
+        "flowstorm"
+    ],
+    "clangd.path": "/home/kevan/.config/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/21.1.8/clangd_21.1.8/bin/clangd",
+    "zig.zls.enabled": "on"
 }

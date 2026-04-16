@@ -70,6 +70,10 @@ bindsym $Win+$Alt+0 move workspace 10; workspace 10
 bindsym $Win+minus move scratchpad
 bindsym $Win+equal scratchpad show
 
+# Move workspace to other monitor.
+bindsym $Win+Home move workspace to output left
+bindsym $Win+End move workspace to output right
+
 
 
 # Restart i3 inplace to see updated configs, bar, etc.

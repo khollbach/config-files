@@ -14,7 +14,7 @@ def main():
     assert mins >= 0
     secs = 60 * mins
 
-    while True:
+    while secs >= 0:
         m = str(secs // 60)
         if len(m) < 2:
             m = ' ' + m
@@ -27,8 +27,7 @@ def main():
 
         time.sleep(1)
 
-        if secs > 0:
-            secs -= 1
+        secs -= 1
 
 def clear():
     for _ in range(200):

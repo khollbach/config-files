@@ -51,7 +51,10 @@ alias oe="cargo embed"
 alias of="cargo +nightly fmt"
 alias ox="cargo clean"
 
-alias n=jj
+alias n="jj"
+alias ns="jj st"
+alias np="jj prev"
+alias nn="jj next"
 # Side-by-side diff format.
 alias 2n="jj --config ui.pager='delta -s --pager less'"
 
