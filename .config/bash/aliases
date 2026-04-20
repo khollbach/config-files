@@ -58,6 +58,8 @@ alias nn="jj next"
 # Side-by-side diff format.
 alias 2n="jj --config ui.pager='delta -s --pager less'"
 
+alias gsi="git status -sb --ignored"
+
 # Misc tweaks.
 alias which="type -a"
 alias grep="grep --color=always"
