@@ -5,6 +5,7 @@
 # E.g.:
 # $ timer 25
 
+import datetime
 import sys
 import time
 
@@ -28,6 +29,9 @@ def main():
         time.sleep(1)
 
         secs -= 1
+
+    now = datetime.datetime.now()
+    print(f'finished at {now}')
 
 def clear():
     for _ in range(200):

@@ -55,6 +55,7 @@ alias n="jj"
 alias ns="jj st"
 alias np="jj prev"
 alias nn="jj next"
+alias ne="jj new"
 # Side-by-side diff format.
 alias 2n="jj --config ui.pager='delta -s --pager less'"
 
