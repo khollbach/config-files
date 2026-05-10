@@ -1,24 +1,27 @@
 setup steps
+===========
 
 * install Ubuntu
 * append this to /etc/sudoers:
-    kevan ALL=(ALL) NOPASSWD: ALL
-* apt install redshift i3 rofi tmux neovim tldr git git-delta build-essential clang curl
+kevan ALL=(ALL) NOPASSWD: ALL
+* sudo apt install redshift i3 rofi tmux neovim tldr git git-delta build-essential clang curl
 * curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-* apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+* sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
 * cargo install alacritty ripgrep fd-find jj-cli
-* install and configure keyd
 
-* set up ssh keys
+* install and configure keyd -- https://github.com/rvaiya/keyd
+* install 1password: https://1password.com/downloads/linux
+* set up ssh keys -- create new ones, and tell github to trust them
 * clone this repo
 * run update_configs
 * log out and back in
 
-* uninstall snap
-* download & install chrome
+* download & install chrome -- https://www.google.com/chrome/
     * load blank new tab page extension
-* download & install vs code
+* download & install vs code -- https://code.visualstudio.com/
+* uninstall snap -- sudo apt purge snapd
 
+situational:
 * change grub timeout to 2 seconds
 * if you're dual-booting windows:
     timedatectl set-local-rtc 1
