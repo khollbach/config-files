@@ -4,7 +4,8 @@ setup steps
 * install Ubuntu
 * append this to /etc/sudoers:
 kevan ALL=(ALL) NOPASSWD: ALL
-* sudo apt install redshift i3 rofi tmux neovim tldr git git-delta build-essential clang curl
+* sudo apt install redshift i3 rofi tmux neovim git git-delta build-essential clang curl pipx
+* pipx install tldr
 * curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 * sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
 * cargo install alacritty ripgrep fd-find jj-cli
