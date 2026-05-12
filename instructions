@@ -4,7 +4,7 @@ setup steps
 * install Ubuntu
 * append this to /etc/sudoers:
 kevan ALL=(ALL) NOPASSWD: ALL
-* sudo apt install redshift i3 sway rofi tmux neovim git git-delta build-essential clang curl pipx
+* sudo apt install redshift i3 sway wl-clipboard rofi tmux neovim git git-delta build-essential clang curl pipx
 * pipx install tldr
 * curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 * sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
@@ -22,7 +22,6 @@ kevan ALL=(ALL) NOPASSWD: ALL
 * download & install vs code -- https://code.visualstudio.com/
 * uninstall snap -- sudo apt purge snapd
 
-situational:
 * change grub timeout to 2 seconds
 * if you're dual-booting windows:
     timedatectl set-local-rtc 1
