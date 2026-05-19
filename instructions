@@ -4,11 +4,11 @@ setup steps
 * install Ubuntu
 * append this to /etc/sudoers:
 kevan ALL=(ALL) NOPASSWD: ALL
-* sudo apt install redshift i3 sway wl-clipboard rofi tmux neovim git git-delta tree build-essential clang curl pipx
+* sudo apt install redshift i3 sway wl-clipboard rofi tmux neovim git git-delta tree htop build-essential clang curl pipx
 * pipx install tldr
 * curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 * sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-* cargo install alacritty ripgrep fd-find jj-cli tokei
+* cargo install alacritty ripgrep fd-find jj-cli tokei hexyl
 
 * install and configure keyd -- https://github.com/rvaiya/keyd
 * install 1password: https://1password.com/downloads/linux

@@ -15,7 +15,7 @@ bindsym $Win+p exec --no-startup-id "pgrep xfce4-panel && xfce4-popup-whiskermen
 bindsym $Win+apostrophe exec --no-startup-id "pgrep xfce4-panel && xfce4-panel -q || xfce4-panel"
 
 # Lock the screen / log out.
-bindsym $Win+Escape exec --no-startup-id "i3lock -c 000000"
+bindsym $Win+Escape exec --no-startup-id "i3lock -c 000000 || swaylock -c 000000"
 bindsym $Win+$Alt+Escape exec --no-startup-id "i3-msg exit"
 bindsym Control+$Alt+Delete exec --no-startup-id "xfce4-session-logout || i3-msg exit || sway-msg exit"
 
