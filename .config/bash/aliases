@@ -59,6 +59,8 @@ alias ne="jj new"
 # Side-by-side diff format.
 alias 2n="jj --config ui.pager='delta -s --pager less'"
 
+alias get="jj git clone --depth 1"
+
 alias gsi="git status -sb --ignored"
 
 # Misc tweaks.
