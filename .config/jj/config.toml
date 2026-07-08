@@ -9,3 +9,9 @@ default-command = "log"
 movement.edit = true
 diff-formatter = ":git"
 pager = "delta --pager less"
+
+[templates]
+log = 'builtin_log_oneline'
+
+[template-aliases]
+"format_short_id(id)" = "id.shortest(4)"
