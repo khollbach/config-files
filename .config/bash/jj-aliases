@@ -18,4 +18,9 @@ function ndp {
     nd "$@" && jj b s main -r@ && jj git push
 }
 
+# 'jj desc' and 'jj new'
+function nde {
+    nd "$@" && jj new
+}
+
 alias nf='jj git fetch'

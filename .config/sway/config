@@ -1,6 +1,15 @@
+output eDP-1 pos 0 0 mode 1920x1080
+output HDMI-A-1 pos 1920 0
+
+workspace 1 output eDP-1
+workspace 2 output HDMI-A-1
+
+
+
 # These are just aliases.
 set $Win Mod4
 set $Alt Mod1
+
 
 
 # Applications.
