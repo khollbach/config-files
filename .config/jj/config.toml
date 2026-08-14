@@ -14,4 +14,4 @@ pager = "delta --pager less"
 log = 'builtin_log_oneline'
 
 [template-aliases]
-"format_short_id(id)" = "id.shortest(4)"
+"format_short_id(id)" = "id.shortest(5)"
