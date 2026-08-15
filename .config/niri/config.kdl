@@ -16,25 +16,14 @@ output "eDP-1" {
 }
 
 layout {
-    gaps 16
-
-    default-column-width { proportion 0.5; }
-
     preset-column-widths {
         proportion 0.5
         proportion 1.0
     }
-
-    focus-ring {
-        width 4
-
-        // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
-
-        // Color of the ring on inactive monitors.
-        inactive-color "#505050"
-    }
 }
+
+// Ask clients to omit their client-side decorations if possible.
+prefer-no-csd
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // TODO: figure out a way to toggle this! it's useful for wifi and battery life and stuff
@@ -45,9 +34,6 @@ hotkey-overlay {
 }
 
 screenshot-path "~/Downloads/Screenshots/Screenshot %Y-%m-%d %H:%M:%S.png"
-
-// Ask clients to omit their client-side decorations if possible.
-prefer-no-csd
 
 binds {
     Super+Delete    { spawn-sh "swaylock -c 202020"; }
@@ -126,10 +112,10 @@ binds {
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
@@ -155,5 +141,13 @@ XXX |XXX ...|
     +-------+
 Where the box is the screen, the Xs are the open windows, and the .s are the recently closed window.
 It would be nice if it automatically snapped back to fit the screen properly! I was surprised when it didn't.
+
+Disable mouse warping when switching monitors:
+-- looks like there's a PR up for this! see:
+        https://github.com/niri-wm/niri/discussions/2704
+        https://github.com/niri-wm/niri/pull/2712
+-- note: I'm guessing this setting should be _on_ by default and disabled by something like 'warp-mouse-to-output'
+    to line up with:
+        https://github.com/niri-wm/niri/wiki/Configuration:-Input#warp-mouse-to-focus
 
 */
