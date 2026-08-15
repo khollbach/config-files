@@ -27,6 +27,7 @@ prefer-no-csd
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // TODO: figure out a way to toggle this! it's useful for wifi and battery life and stuff
+// * maybe map to 'Super+P'
 //spawn-at-startup "waybar"
 
 hotkey-overlay {
@@ -36,16 +37,13 @@ hotkey-overlay {
 screenshot-path "~/Downloads/Screenshots/Screenshot %Y-%m-%d %H:%M:%S.png"
 
 binds {
-    Super+Delete    { spawn-sh "swaylock -c 202020"; }
-    Super+Alt+P     { power-off-monitors; }
-    Super+Alt+E     { quit; }
+    Super+Escape { spawn-sh "swaylock -c 202020"; }
+    Super+Alt+P  { power-off-monitors; }
+    Super+Alt+E  { quit; }
 
-    // TODO: tmux is so much slower ! -- why??
-    //Super+T hotkey-overlay-title="alacritty, no tmux" { spawn "alacritty"; }
-    //Super+Space hotkey-overlay-title="Terminal: alacritty" { spawn-sh "alacritty --command tmux_attach"; }
+    // TODO: tmux is so slow to start up! -- why?
 
     Super+E         { spawn "fuzzel"; }
-    Super+T         { spawn "alacritty"; }
     Super+Space     { spawn "alacritty"; }
     Super+Semicolon { spawn "google-chrome"; }
 
@@ -56,8 +54,9 @@ binds {
     Super+V     { toggle-window-floating; }
     Super+Alt+V { switch-focus-between-floating-and-tiling; }
 
-    Super+F { maximize-window-to-edges; }
-    Super+R { switch-preset-column-width; }
+    Super+F     { maximize-window-to-edges; }
+    Super+Alt+F { toggle-windowed-fullscreen; }
+    Super+R     { switch-preset-column-width; }
 
     Super+Minus     { set-column-width "-10%"; }
     Super+Equal     { set-column-width "+10%"; }

@@ -31,35 +31,9 @@ alias l=less
 alias a=rg
 alias f='fd --hidden'
 alias p=python3
-alias t="time_and_notify "
 alias ta=tmux_attach
 alias pag="ps aux | a"
 alias ltmk="latexmk -pdf -pvc --shell-escape"
-
-alias o=cargo
-alias oc="cargo_less c"
-alias ob="cargo b"
-alias obr="cargo b --release"
-alias or="cargo r"
-alias orr="cargo r -r"
-alias ot="cargo t"
-alias ots="cargo t -- --show-output"
-alias od="cargo d"
-alias odo="cargo d --open"
-alias odp="cargo d --open --document-private-items"
-alias oe="cargo embed"
-alias of="cargo +nightly fmt"
-alias ox="cargo clean"
-
-alias n="jj"
-alias ns="jj st"
-alias np="jj prev"
-alias nn="jj next"
-alias ne="jj new"
-# Side-by-side diff format.
-alias 2n="jj --config ui.pager='delta -s --pager less'"
-
-alias get="jj git clone --depth 1"
 
 alias gsi="git status -sb --ignored"
 

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Run cargo and view output with less.
+function cargo_less {
+    cargo --color always "$@" |& less -F
+    return ${PIPESTATUS[0]}
+}
+
+alias o=cargo
+alias oc="cargo_less c"
+alias ob="cargo b"
+alias obr="cargo b --release"
+alias or="cargo r"
+alias orr="cargo r -r"
+alias ot="cargo t"
+alias ots="cargo t -- --show-output"
+alias od="cargo d"
+alias odo="cargo d --open"
+alias odp="cargo d --open --document-private-items"
+alias oe="cargo embed"
+alias of="cargo +nightly fmt"
+alias ox="cargo clean"

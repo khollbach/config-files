@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# Run evince in the background and ignore stdout/stderr.
-function ev {
-    evince "$@" &> /dev/null &
-}
-
-# Run cargo and view output with less.
-function cargo_less {
-    cargo --color always "$@" |& less -F
-    return ${PIPESTATUS[0]}
-}
-
 # Time a long command and ring a bell when done.
 function time_and_notify {
     # When did I start?
@@ -39,6 +28,8 @@ function time_and_notify {
     return $rv
 }
 
+alias t="time_and_notify "
+
 # Run a command, but set the terminal title to the first non-flag argument.
 function title_wrapper {
     local cmd=$1
@@ -64,3 +55,6 @@ function title_wrapper {
 
     command "$cmd" "${args[@]}"
 }
+
+# Set the terminal title when opening man pages.
+alias man="title_wrapper man"

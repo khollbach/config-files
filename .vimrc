@@ -147,8 +147,7 @@ set tabstop=4
 " Show hard tabs and trailing spaces.
 " Also show indicators for text that extends past the edge of the screen.
 set list
-" TODO: Get tabs to show visually, but only in languages other than go.
-set listchars=tab:\ \ ,extends:▶,precedes:◀,trail:·
+set listchars=tab:»\ ,extends:▶,precedes:◀,trail:·
 
 " Don't show trailing spaces when typing.
 autocmd InsertEnter * set listchars-=trail:·

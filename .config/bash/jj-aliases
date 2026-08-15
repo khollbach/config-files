@@ -1,5 +1,17 @@
 #!/bin/bash
 
+alias get="jj git clone --depth 1"
+
+alias n="jj"
+alias ns="jj st"
+alias ne="jj new"
+alias np="jj prev"
+alias nn="jj next"
+alias nf='jj git fetch'
+
+# Side-by-side diff format.
+alias 2n="jj --config ui.pager='delta -s --pager less'"
+
 # 'jj desc', but optionally accepts a message for the '-m' option.
 function nd {
     # Flatten arguments into a single string.
@@ -22,5 +34,3 @@ function ndp {
 function nde {
     nd "$@" && jj new
 }
-
-alias nf='jj git fetch'
