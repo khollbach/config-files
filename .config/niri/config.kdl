@@ -8,6 +8,11 @@ input {
 output "eDP-1" {
     // Sort laptop screen to the left of any external monitor(s).
     position x=0 y=0
+
+    layout {
+        // Use the full width, since it's a small screen.
+        default-column-width { proportion 1.0; }
+    }
 }
 
 layout {
@@ -16,9 +21,8 @@ layout {
     default-column-width { proportion 0.5; }
 
     preset-column-widths {
-        proportion 0.33333
         proportion 0.5
-        proportion 0.66667
+        proportion 1.0
     }
 
     focus-ring {
@@ -46,159 +50,70 @@ screenshot-path "~/Downloads/Screenshots/Screenshot %Y-%m-%d %H:%M:%S.png"
 prefer-no-csd
 
 binds {
-    Super+Slash { show-hotkey-overlay; }
-
-    Super+Escape { spawn-sh "swaylock -c 202020"; }
-    Super+Alt+P { power-off-monitors; }
-    Super+Alt+E { quit; }
-    Ctrl+Alt+Delete { quit; }
+    Super+Delete    { spawn-sh "swaylock -c 202020"; }
+    Super+Alt+P     { power-off-monitors; }
+    Super+Alt+E     { quit; }
 
     // TODO: tmux is so much slower ! -- why??
     //Super+T hotkey-overlay-title="alacritty, no tmux" { spawn "alacritty"; }
     //Super+Space hotkey-overlay-title="Terminal: alacritty" { spawn-sh "alacritty --command tmux_attach"; }
 
-    Super+Space { spawn-sh "alacritty"; }
-    Super+D { spawn "fuzzel"; }
+    Super+E         { spawn "fuzzel"; }
+    Super+T         { spawn "alacritty"; }
+    Super+Space     { spawn "alacritty"; }
     Super+Semicolon { spawn "google-chrome"; }
 
-    Super+O repeat=false { toggle-overview; }
     Super+Q repeat=false { close-window; }
-
-    // IJKL 'arrow keys' -- not HJKL vi keys
-    Super+J     { focus-column-left; }
-    Super+K     { focus-window-down; }
-    Super+I     { focus-window-up; }
-    Super+L     { focus-column-right; }
-    Super+Left  { focus-column-left; }
-    Super+Down  { focus-window-down; }
-    Super+Up    { focus-window-up; }
-    Super+Right { focus-column-right; }
-
-    Super+Alt+J     { move-column-left; }
-    Super+Alt+K     { move-window-down; }
-    Super+Alt+I     { move-window-up; }
-    Super+Alt+L     { move-column-right; }
-    Super+Alt+Left  { move-column-left; }
-    Super+Alt+Down  { move-window-down; }
-    Super+Alt+Up    { move-window-up; }
-    Super+Alt+Right { move-column-right; }
-
-    Super+Home { focus-column-first; }
-    Super+End  { focus-column-last; }
-    Super+Alt+Home { move-column-to-first; }
-    Super+Alt+End  { move-column-to-last; }
-
-// Workspaces and monitors ... (todo get a sense of using these...)
-/*
-    // TODO -- better keys = ?
-    Super+Shift+Left  { focus-monitor-left; }
-    Super+Shift+Down  { focus-monitor-down; }
-    Super+Shift+Up    { focus-monitor-up; }
-    Super+Shift+Right { focus-monitor-right; }
-    Super+Shift+H     { focus-monitor-left; }
-    Super+Shift+J     { focus-monitor-down; }
-    Super+Shift+K     { focus-monitor-up; }
-    Super+Shift+L     { focus-monitor-right; }
-
-    // (TODO same)
-    Super+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-    Super+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-    Super+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    Super+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    Super+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    Super+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    Super+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    Super+Shift+Ctrl+L     { move-column-to-monitor-right; }
-
-    // And you can also move a whole workspace to another monitor:
-    // Super+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
-
-    // TODO: keybinds for this ..?
-    Super+Page_Down      { focus-workspace-down; }
-    Super+Page_Up        { focus-workspace-up; }
-    Super+U              { focus-workspace-down; }
-    //Super+O              { focus-workspace-up; }
-    Super+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Super+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Super+Ctrl+U         { move-column-to-workspace-down; }
-    //Super+Ctrl+O         { move-column-to-workspace-up; }
-
-    // Alternatively, there are commands to move just a single window:
-    // Super+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
-
-    Super+Shift+Page_Down { move-workspace-down; }
-    Super+Shift+Page_Up   { move-workspace-up; }
-    Super+Shift+U         { move-workspace-down; }
-    Super+Shift+I         { move-workspace-up; }
-
-    Super+1 { focus-workspace 1; }
-    Super+2 { focus-workspace 2; }
-    Super+3 { focus-workspace 3; }
-    Super+4 { focus-workspace 4; }
-    Super+5 { focus-workspace 5; }
-    Super+6 { focus-workspace 6; }
-    Super+7 { focus-workspace 7; }
-    Super+8 { focus-workspace 8; }
-    Super+9 { focus-workspace 9; }
-    Super+Alt+1 { move-column-to-workspace 1; }
-    Super+Alt+2 { move-column-to-workspace 2; }
-    Super+Alt+3 { move-column-to-workspace 3; }
-    Super+Alt+4 { move-column-to-workspace 4; }
-    Super+Alt+5 { move-column-to-workspace 5; }
-    Super+Alt+6 { move-column-to-workspace 6; }
-    Super+Alt+7 { move-column-to-workspace 7; }
-    Super+Alt+8 { move-column-to-workspace 8; }
-    Super+Alt+9 { move-column-to-workspace 9; }
-
-    Super+WheelScrollDown     cooldown-ms=150 { focus-workspace-down; }
-    Super+WheelScrollUp       cooldown-ms=150 { focus-workspace-up; }
-    Super+Alt+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Super+Alt+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-    Super+WheelScrollRight     { focus-column-right; }
-    Super+WheelScrollLeft      { focus-column-left; }
-    Super+Alt+WheelScrollRight { move-column-right; }
-    Super+Alt+WheelScrollLeft  { move-column-left; }
-
-    Super+Shift+WheelScrollDown     { focus-column-right; }
-    Super+Shift+WheelScrollUp       { focus-column-left; }
-    Super+Alt+Shift+WheelScrollDown { move-column-right; }
-    Super+Alt+Shift+WheelScrollUp   { move-column-left; }
-*/
-
-// Columns (todo) -- tbh I'm not really sure how much I'd use these ?
-/*
-    // Move the currently focused window into or out of a column.
-    Super+BracketLeft  { consume-or-expel-window-left; }
-    Super+BracketRight { consume-or-expel-window-right; }
-
-    // Splurp or spit a window to/from the current column.
-    Super+Comma  { consume-window-into-column; }
-    Super+Period { expel-window-from-column; }
-*/
-
-    Super+F { maximize-window-to-edges; }
-    Super+Alt+F { fullscreen-window; }
-
-    Super+R     { switch-preset-column-width; }
-    Super+Alt+R { switch-preset-window-height; }
-
-    Super+Minus { set-column-width "-10%"; }
-    Super+Equal { set-column-width "+10%"; }
-
-    Super+Alt+Minus { set-window-height "-10%"; }
-    Super+Alt+Equal { set-window-height "+10%"; }
-
     Super+W { toggle-column-tabbed-display; }
+    Super+A { toggle-overview; }
 
     Super+V     { toggle-window-floating; }
     Super+Alt+V { switch-focus-between-floating-and-tiling; }
 
-    Print { screenshot; }
+    Super+F { maximize-window-to-edges; }
+    Super+R { switch-preset-column-width; }
+
+    Super+Minus     { set-column-width "-10%"; }
+    Super+Equal     { set-column-width "+10%"; }
+    Super+Alt+Minus { set-window-height "-10%"; }
+    Super+Alt+Equal { set-window-height "+10%"; }
+
+    // IJKL 'arrow keys' -- not HJKL vi keys
+    Super+I     { focus-window-up; }
+    Super+J     { focus-column-left; }
+    Super+K     { focus-window-down; }
+    Super+L     { focus-column-right; }
+    Super+Alt+I { move-window-up; }
+    Super+Alt+J { move-column-left; }
+    Super+Alt+K { move-window-down; }
+    Super+Alt+L { move-column-right; }
+
+    Super+Home     { focus-column-first; }
+    Super+End      { focus-column-last; }
+    Super+Alt+Home { move-column-to-first; }
+    Super+Alt+End  { move-column-to-last; }
+
+    Super+S       { focus-workspace-up; }
+    Super+D       { focus-workspace-down; }
+    Super+Alt+S   { move-column-to-workspace-up; }
+    Super+Alt+D   { move-column-to-workspace-down; }
+    Super+Shift+S { move-workspace-up; }
+    Super+Shift+D { move-workspace-down; }
+
+    // Move the currently focused window into or out of a column.
+    Super+U { consume-or-expel-window-left; }
+    Super+O { consume-or-expel-window-right; }
+
+    Super+Comma        { focus-monitor-left; }
+    Super+Period       { focus-monitor-right; }
+    Super+Alt+Comma    { move-column-to-monitor-left; }
+    Super+Alt+Period   { move-column-to-monitor-right; }
+    Super+Shift+Comma  { move-workspace-to-monitor-left; }
+    Super+Shift+Period { move-workspace-to-monitor-right; }
+
+    Print      { screenshot; }
     Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Alt+Print  { screenshot-window; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -219,7 +134,7 @@ binds {
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
@@ -229,3 +144,16 @@ binds {
     // so a buggy application can't hold your session hostage.
     Super+Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 }
+
+/*
+
+small thing:
+[ ] sometimes I end up in this situation after closing the right-most window:
+    +-------+
+XXX |XXX ...|
+XXX |XXX ...|
+    +-------+
+Where the box is the screen, the Xs are the open windows, and the .s are the recently closed window.
+It would be nice if it automatically snapped back to fit the screen properly! I was surprised when it didn't.
+
+*/
