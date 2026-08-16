@@ -140,8 +140,14 @@ XXX |XXX ...|
     +-------+
 Where the box is the screen, the Xs are the open windows, and the .s are the recently closed window.
 It would be nice if it automatically snapped back to fit the screen properly! I was surprised when it didn't.
+-- Update: sometimes it does, and sometimes it doesn't. I'm not sure what the preconditions are for this...
+-- looks like this has come up before:
+    https://github.com/niri-wm/niri/discussions/2815
+    https://github.com/niri-wm/niri/discussions/1642
+    https://www.reddit.com/r/niri/comments/1qyon0r
+    (and possibly more...)
 
-Disable mouse warping when switching monitors:
+[ ] Disable mouse warping when switching monitors:
 -- looks like there's a PR up for this! see:
         https://github.com/niri-wm/niri/discussions/2704
         https://github.com/niri-wm/niri/pull/2712
