@@ -52,6 +52,7 @@ bindings = [
     { mode = " Vi|~Search",                   key = "W",      action = "ToggleBlockSelection" },
     { mode = " Vi|~Search",                   key = "W",      action = "ToggleBlockSelection" },
     { mode = " Vi|~Search",                   key = "W",      action = "ToggleNormalSelection" },
+    { mode = " Vi|~Search",                   key = "W",      action = "Left" },
     { mode = " Vi|~Search",                   key = "W",      action = "Last" },
     { mode = " Vi|~Search",                   key = "W",      action = "Copy" },
     { mode = " Vi|~Search",                   key = "W",      action = "ClearSelection" },
