@@ -8,21 +8,6 @@ if command -v xset >/dev/null; then
     done
 fi
 
-# Disable numlock, to turn off the little blue light on my keyboard.
-if command -v numlockx >/dev/null; then
-    numlockx off
-fi
-
-# Start Redshift.
-if command -v redshift >/dev/null && ! pgrep -x redshift >/dev/null; then
-    redshift &
-fi
-
-# Set desktop wallpaper.
-if [[ -f ~/.fehbg ]]; then
-    ~/.fehbg &
-fi
-
-if [[ -f ~/.work-configs/xprofile ]]; then
+if [ -f ~/.work-configs/xprofile ]; then
     source ~/.work-configs/xprofile
 fi

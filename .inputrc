@@ -1,9 +1,7 @@
 ## Configs for GNU Readline (applies to Bash, etc)
 
-
 # Emacs-style keybinds.
 set editing-mode emacs
-
 
 # Show suggestions after pressing tab once, instead of twice.
 set show-all-if-ambiguous on
@@ -17,7 +15,6 @@ set colored-stats on
 
 # Colorize the common prefix of entries in tab completion lists.
 set colored-completion-prefix on
-
 
 # Bind alt-semicolon to ctrl-p, enter; i.e. run previous command.
 "\e;": "\C-p\n"
