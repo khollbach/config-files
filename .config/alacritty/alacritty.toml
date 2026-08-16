@@ -5,6 +5,9 @@ size = 18
 x = 3
 y = 3
 
+[selection]
+semantic_escape_chars = " !\"#$%&'()*+,-./:;<=>?[\\]^`{|}~\t│"
+
 [keyboard]
 bindings = [
     # Copy/paste.
