@@ -44,7 +44,7 @@ binds {
     // TODO: tmux is so slow to start up! -- why?
 
     Super+E         { spawn "fuzzel"; }
-    Super+Space     { spawn "alacritty"; }
+    Super+Space     { spawn-sh "alacritty --working-directory $(niri-alacritty-recent-cwd)"; }
     Super+Semicolon { spawn "google-chrome"; }
 
     Super+Q repeat=false { close-window; }

@@ -7,6 +7,8 @@ alias ns="jj st"
 alias ne="jj new"
 alias np="jj prev"
 alias nn="jj next"
+alias ni='jj git init'
+alias no='jj git remote add origin'
 alias nf='jj git fetch'
 
 # Side-by-side diff format.
