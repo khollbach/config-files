@@ -25,11 +25,6 @@ layout {
 // Ask clients to omit their client-side decorations if possible.
 prefer-no-csd
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-// TODO: figure out a way to toggle this! it's useful for wifi and battery life and stuff
-// * maybe map to 'Super+P'
-//spawn-at-startup "waybar"
-
 hotkey-overlay {
     skip-at-startup
 }
@@ -40,8 +35,6 @@ binds {
     Super+Escape { spawn-sh "swaylock -c 202020"; }
     Super+Alt+P  { power-off-monitors; }
     Super+Alt+E  { quit; }
-
-    // TODO: tmux is so slow to start up! -- why?
 
     Super+E         { spawn "fuzzel"; }
     Super+Space     { spawn-sh "alacritty --working-directory $(niri-alacritty-recent-cwd)"; }
