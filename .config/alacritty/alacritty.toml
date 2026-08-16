@@ -4,3 +4,127 @@ size = 18
 [window.padding]
 x = 3
 y = 3
+
+[keyboard]
+bindings = [
+    # Copy/paste.
+    { mode = "~Vi|~Search", mods = "Alt",     key = "C",      action = "ToggleViMode" },
+    { mode = "~Vi|~Search", mods = "Alt",     key = "V",      action = "Paste" },
+    { mode = "~Vi| Search", mods = "Alt",     key = "V",      action = "Paste" },
+    { mode = " Vi| Search", mods = "Alt",     key = "V",      action = "Paste" },
+
+    # Cancel.
+    { mode = " Vi|~Search",                   key = "Escape", action = "ClearSelection" },
+    { mode = " Vi|~Search",                   key = "Escape", action = "ToggleViMode" },
+    { mode = " Vi|~Search",                   key = "Escape", action = "ScrollToBottom" },
+    { mode = " Vi|~Search",                   key = "A",      action = "ClearSelection" },
+    { mode = " Vi|~Search",                   key = "A",      action = "ToggleViMode" },
+    { mode = " Vi|~Search",                   key = "A",      action = "ScrollToBottom" },
+
+    # Visual mode.
+    { mode = " Vi|~Search",                   key = "M",      action = "ToggleLineSelection" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "M",      action = "ToggleNormalSelection" },
+    { mode = " Vi|~Search", mods = "Control", key = "C",      action = "ToggleBlockSelection" },
+
+    # Yank selection and stay in vi-mode.
+    { mode = " Vi|~Search",                   key = "D",      action = "Copy" },
+    { mode = " Vi|~Search",                   key = "D",      action = "ClearSelection" },
+
+    # Yank selection and exit.
+    { mode = " Vi|~Search",                   key = "Enter",  action = "Copy" },
+    { mode = " Vi|~Search",                   key = "Enter",  action = "ClearSelection" },
+    { mode = " Vi|~Search",                   key = "Enter",  action = "ToggleViMode" },
+    { mode = " Vi|~Search",                   key = "Enter",  action = "ScrollToBottom" },
+
+    # Yank current line and exit.
+    { mode = " Vi|~Search",                   key = "R",      action = "ToggleBlockSelection" },
+    { mode = " Vi|~Search",                   key = "R",      action = "ToggleBlockSelection" },
+    { mode = " Vi|~Search",                   key = "R",      action = "ToggleLineSelection" },
+    { mode = " Vi|~Search",                   key = "R",      action = "Copy" },
+    { mode = " Vi|~Search",                   key = "R",      action = "ClearSelection" },
+    { mode = " Vi|~Search",                   key = "R",      action = "ToggleViMode" },
+    { mode = " Vi|~Search",                   key = "R",      action = "ScrollToBottom" },
+
+    # Yank to end of line and exit.
+    { mode = " Vi|~Search",                   key = "W",      action = "ToggleBlockSelection" },
+    { mode = " Vi|~Search",                   key = "W",      action = "ToggleBlockSelection" },
+    { mode = " Vi|~Search",                   key = "W",      action = "ToggleNormalSelection" },
+    { mode = " Vi|~Search",                   key = "W",      action = "Last" },
+    { mode = " Vi|~Search",                   key = "W",      action = "Copy" },
+    { mode = " Vi|~Search",                   key = "W",      action = "ClearSelection" },
+    { mode = " Vi|~Search",                   key = "W",      action = "ToggleViMode" },
+    { mode = " Vi|~Search",                   key = "W",      action = "ScrollToBottom" },
+
+    # "HJKL"
+    { mode = " Vi|~Search",                   key = "N",      action = "Down" },
+    { mode = " Vi|~Search",                   key = "E",      action = "Up" },
+    { mode = " Vi|~Search",                   key = "L",      action = "Left" },
+    { mode = " Vi|~Search",                   key = "U",      action = "Right" },
+
+    # Words.
+    { mode = " Vi|~Search",                   key = "F",      action = "SemanticLeft" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "F",      action = "WordLeft" },
+    { mode = " Vi|~Search",                   key = "P",      action = "SemanticRight" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "P",      action = "WordRight" },
+    { mode = " Vi|~Search",                   key = "I",      action = "SemanticRightEnd" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "I",      action = "WordRightEnd" },
+
+    # Paragraphs.
+    { mode = " Vi|~Search",                   key = ",",      action = "ParagraphUp" },
+    { mode = " Vi|~Search",                   key = ".",      action = "ParagraphDown" },
+
+    # Start/end of line.
+    { mode = " Vi|~Search",                   key = "Q",      action = "FirstOccupied" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "Q",      action = "First" },
+    { mode = " Vi|~Search",                   key = ";",      action = "Last" },
+
+    # Page up/down.
+    { mode = " Vi|~Search",                   key = "H",      action = "ScrollHalfPageUp" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "H",      action = "ScrollPageUp" },
+    { mode = " Vi|~Search",                   key = "T",      action = "ScrollHalfPageDown" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "T",      action = "ScrollPageDown" },
+
+    # Scroll by 5 lines.
+    { mode = " Vi|~Search", mods = "Shift",   key = "N",      action = "ScrollLineDown" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "N",      action = "ScrollLineDown" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "N",      action = "ScrollLineDown" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "N",      action = "ScrollLineDown" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "N",      action = "ScrollLineDown" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "E",      action = "ScrollLineUp" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "E",      action = "ScrollLineUp" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "E",      action = "ScrollLineUp" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "E",      action = "ScrollLineUp" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "E",      action = "ScrollLineUp" },
+
+    # Cursor high/middle/low.
+    { mode = " Vi|~Search", mods = "Shift",   key = "D",      action = "High" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "R",      action = "Middle" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "W",      action = "Low" },
+
+    # Find character.
+    { mode = " Vi|~Search",                   key = "Space",  action = "InlineSearchForward" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "Space",  action = "InlineSearchBackward" },
+
+    # Cancel search (note the mode).
+    { mode = "     Search", mods = "Control", key = "G",      action = "SearchCancel" },
+
+    # Next/previous search result.
+    { mode = " Vi|~Search",                   key = "J",      action = "SearchNext" },
+    { mode = " Vi|~Search", mods = "Shift",   key = "J",      action = "SearchPrevious" },
+
+    # Clear selection.
+    { mode = " Vi|~Search",                   key = "S",      action = "ToggleBlockSelection" },
+    { mode = " Vi|~Search",                   key = "S",      action = "ToggleBlockSelection" },
+    { mode = " Vi|~Search",                   key = "S",      action = "ToggleNormalSelection" },
+    { mode = " Vi|~Search",                   key = "S",      action = "ToggleNormalSelection" },
+
+    # Click links.
+    { mode = " Vi|~Search", mods = "Control", key = "F",      action = "Open" },
+
+    # Fix wonky behaviour when scrolling to blank lines (defaults to "first
+    # non-blank char", which means *end* of line...)
+    { mode = " Vi|~Search",                  key = "G",       action = "ScrollToTop" },
+    { mode = " Vi|~Search",                  key = "G",       action = "First" },
+    { mode = " Vi|~Search", mods = "Shift",  key = "G",       action = "ScrollToBottom" },
+    { mode = " Vi|~Search", mods = "Shift",  key = "G",       action = "First" },
+]
