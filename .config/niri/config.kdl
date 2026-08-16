@@ -25,11 +25,17 @@ layout {
 // Ask clients to omit their client-side decorations if possible.
 prefer-no-csd
 
+screenshot-path "~/Downloads/Screenshots/Screenshot %Y-%m-%d %H:%M:%S.png"
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 hotkey-overlay {
     skip-at-startup
 }
-
-screenshot-path "~/Downloads/Screenshots/Screenshot %Y-%m-%d %H:%M:%S.png"
 
 binds {
     Super+Escape { spawn-sh "swaylock -c 202020"; }
@@ -44,8 +50,8 @@ binds {
     Super+W { toggle-column-tabbed-display; }
     Super+A { toggle-overview; }
 
-    Super+V     { toggle-window-floating; }
-    Super+Alt+V { switch-focus-between-floating-and-tiling; }
+    Super+V     { switch-focus-between-floating-and-tiling; }
+    Super+Alt+V { toggle-window-floating; }
 
     Super+F     { maximize-window-to-edges; }
     Super+Alt+F { toggle-windowed-fullscreen; }
