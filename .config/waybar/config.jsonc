@@ -4,6 +4,9 @@
     "start_hidden": true,
     "modules-right": ["clock"],
     "clock": {
-        "format": "{:%OI:%M %p}"
+        // E.g. "05:23 PM".
+        // Note that there's no support for removing the leading zero -- see:
+        // https://github.com/Alexays/Waybar/issues/1469
+        "format": "{:%I:%M %p}"
     }
 }
