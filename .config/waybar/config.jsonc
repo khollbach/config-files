@@ -3,6 +3,6 @@
     "output": "eDP-1",
     "modules-right": ["clock"],
     "clock": {
-        "format-alt": "{%OI:%M %p}"
+        "format": "{:%OI:%M %p}"
     }
 }
