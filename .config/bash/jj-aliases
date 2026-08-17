@@ -10,6 +10,7 @@ alias nn="jj next"
 alias ni='jj git init'
 alias no='jj git remote add origin'
 alias nf='jj git fetch'
+alias nu='jj git push'
 
 # Side-by-side diff format.
 alias 2n="jj --config ui.pager='delta -s --pager less'"
