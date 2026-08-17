@@ -43,8 +43,11 @@ binds {
     Super+Alt+E  { quit; }
 
     Super+E         { spawn "fuzzel"; }
-    Super+Space     { spawn-sh "alacritty --working-directory $(niri-alacritty-recent-cwd)"; }
+    Super+Space     { spawn-sh "alacritty --working-directory \"$(niri-alacritty-recent-cwd)\""; }
     Super+Semicolon { spawn "google-chrome"; }
+
+    // Show/hide waybar.
+    Super+P { spawn-sh "killall -SIGUSR1 waybar"; }
 
     Super+Q repeat=false { close-window; }
     Super+W { toggle-column-tabbed-display; }

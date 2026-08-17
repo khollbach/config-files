@@ -1,6 +1,7 @@
 {
     "layer": "top",
     "output": "eDP-1",
+    "start_hidden": true,
     "modules-right": ["clock"],
     "clock": {
         "format": "{:%OI:%M %p}"

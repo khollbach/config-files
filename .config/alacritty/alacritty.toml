@@ -74,10 +74,10 @@ bindings = [
     { mode = " Vi|~Search", mods = "Shift",   key = "I",      action = "WordRightEnd" },
 
     # Paragraphs.
-    # TODO: there's an ~off-by-one bug in the ParagraphUp action (but not ParagraphDown):
-    # - when you're at the top-most line of a paragraph, 'Up' takes you past the _next_
-    #   paragraph, instead of past the current one, like it's supposed to
-    # - might not be too hard to submit a bugfix for -- see https://github.com/alacritty/alacritty
+    # TODO: there's an off-by-one in the ParagraphUp action (but not ParagraphDown)
+    # - this is a fine workaround for now, but if https://github.com/alacritty/alacritty/pull/9027
+    #   gets merged, we can revert this
+    { mode = " Vi|~Search",                   key = ",",      action = "Down" },
     { mode = " Vi|~Search",                   key = ",",      action = "ParagraphUp" },
     { mode = " Vi|~Search",                   key = ".",      action = "ParagraphDown" },
 
