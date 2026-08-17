@@ -72,6 +72,15 @@ binds {
     Super+Alt+K { move-window-down; }
     Super+Alt+L { move-column-right; }
 
+    Super+Up        { focus-window-up; }
+    Super+Left      { focus-column-left; }
+    Super+Down      { focus-window-down; }
+    Super+Right     { focus-column-right; }
+    Super+Alt+Up    { move-window-up; }
+    Super+Alt+Left  { move-column-left; }
+    Super+Alt+Down  { move-window-down; }
+    Super+Alt+Right { move-column-right; }
+
     Super+Home     { focus-column-first; }
     Super+End      { focus-column-last; }
     Super+Alt+Home { move-column-to-first; }
