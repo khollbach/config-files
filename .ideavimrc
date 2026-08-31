@@ -44,3 +44,6 @@ set ideajoin
 "    </macro>
 "  </component>
 "</application>
+
+" todo at some point, maybe:
+" - figure out keybind for swapping panes, as in tmux
