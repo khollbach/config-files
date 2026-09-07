@@ -7,7 +7,7 @@ input {
 
 output "eDP-1" {
     // Sort laptop screen to the left of any external monitor(s).
-    position x=0 y=0
+    //position x=0 y=0
 
     layout {
         // Use the full width, since it's a small screen.
@@ -23,6 +23,8 @@ layout {
         proportion 1.0
     }
 }
+
+spawn-sh-at-startup "wlclock --layer background --output eDP-1"
 
 // Ask clients to omit their client-side decorations if possible.
 prefer-no-csd
