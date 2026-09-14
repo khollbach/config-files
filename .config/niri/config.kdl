@@ -24,7 +24,7 @@ layout {
     }
 }
 
-spawn-sh-at-startup "wlclock --layer background --output eDP-1"
+spawn-sh-at-startup "wlclock --layer background --output eDP-1 --background-colour 0x404040 --border-colour 0x404040 --clock-colour 0xffffff"
 
 // Ask clients to omit their client-side decorations if possible.
 prefer-no-csd
