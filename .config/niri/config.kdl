@@ -47,7 +47,7 @@ binds {
     Super+Alt+E  { quit; }
 
     Super+E         { spawn "fuzzel"; }
-    Super+Space     { spawn-sh "alacritty --working-directory \"$(niri-alacritty-recent-cwd)\""; }
+    Super+Space     { spawn-sh "alacritty --working-directory \"$(niri-alacritty-recent-cwd --visible-workspaces-only)\""; }
     Super+Semicolon { spawn "google-chrome"; }
 
     // Show/hide waybar.
